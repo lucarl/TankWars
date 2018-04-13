@@ -45,7 +45,7 @@ public class Demo extends ApplicationAdapter {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 
 
