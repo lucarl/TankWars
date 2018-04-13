@@ -20,11 +20,6 @@ import sun.jvm.hotspot.HelloWorld;
 public class Demo extends ApplicationAdapter {
     Stage stage;
 
-
-    public int add(int a, int b) {
-        int c =a+b;
-        return c;
-    }
     @Override
     public void create() {
         ScreenViewport viewport = new ScreenViewport();
