@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.ScaleByAction;
 
 public class MyActor extends Actor{
         Sprite sprite = new Sprite(new Texture(Gdx.files.internal("TankWars.png")));
@@ -25,7 +26,9 @@ public class MyActor extends Actor{
                         MoveByAction mba = new MoveByAction();
                         mba.setAmount(100f, 0f);
                         mba.setDuration(5f);
-
+                        ScaleByAction sca = new ScaleByAction();
+                        sca.setAmount(100f, 20);
+                        sca.setDuration(1f);
                         MyActor.this.addAction(mba);
                     }
                     return true;

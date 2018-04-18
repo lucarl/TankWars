@@ -27,6 +27,5 @@ public class TestDemo {
     @Test
     public void testAdd() {
         Demo demo = new Demo();
-        assertTrue(demo.add(1,2) == 3);
     }
 }
