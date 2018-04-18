@@ -4,18 +4,27 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class GroupDemo extends ApplicationAdapter implements InputProcessor {
 
     Stage stage;
+    boolean movingRight = false;
+    boolean movingLeft = false;
+    Sprite sprite;
+
+    //sound variables
+    Sound soundShoot, soundMove, soundBoom,soundAim;
 
     @Override
     public void create() {
@@ -42,6 +51,12 @@ public class GroupDemo extends ApplicationAdapter implements InputProcessor {
 
         Gdx.input.setInputProcessor(this);
 
+        //sound files
+        soundShoot =  Gdx.audio.newSound(Gdx.files.internal("cannon.mp3"));
+        soundMove =  Gdx.audio.newSound(Gdx.files.internal("tanker.mp3"));
+        soundBoom =  Gdx.audio.newSound(Gdx.files.internal("boom.mp3"));
+        soundAim =  Gdx.audio.newSound(Gdx.files.internal("badaim.mp3"));
+
     }
 
     @Override
@@ -49,6 +64,7 @@ public class GroupDemo extends ApplicationAdapter implements InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+
     }
 
     @Override
@@ -56,7 +72,22 @@ public class GroupDemo extends ApplicationAdapter implements InputProcessor {
         Group group = (Group) stage.getActors().first();
         Image ace = (Image) group.findActor("ace");
 
+        final long soundMoveID = soundMove.loop(0.3f,1.0f,0.0f);
+        final long soundShootID = soundShoot.loop(0.1f,1.0f,0.0f);
+        final long soundAimID = soundAim.loop(0.8f,1.0f,0.0f);
+
         if (keycode == Input.Keys.RIGHT) {
+
+            Timer.schedule((new Timer.Task() {
+                @Override
+                public void run() {
+                    soundMove.pause(soundMoveID);
+                }
+            }),1);
+
+            soundShoot.stop();
+            soundAim.stop();
+
             if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
                 ace.setRotation(ace.getRotation() - 1f);
             } else {
@@ -65,6 +96,17 @@ public class GroupDemo extends ApplicationAdapter implements InputProcessor {
         }
 
         if (keycode == Input.Keys.LEFT) {
+
+            Timer.schedule((new Timer.Task() {
+                @Override
+                public void run() {
+                    soundMove.pause(soundMoveID);
+                }
+            }),1);
+
+            soundShoot.stop();
+            soundAim.stop();
+
             if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
                 ace.setRotation(ace.getRotation() + 1f);
             } else {
@@ -73,22 +115,66 @@ public class GroupDemo extends ApplicationAdapter implements InputProcessor {
         }
 
         if (keycode == Input.Keys.UP) {
+
+            Timer.schedule((new Timer.Task() {
+                @Override
+                public void run() {
+                    soundMove.pause(soundAimID);
+                }
+            }),1);
+
+            soundShoot.stop();
+            soundMove.stop();
+
             group.setColor(group.getColor().r, group.getColor().g,
                     group.getColor().b, group.getColor().a + 0.1f);
         }
 
         if (keycode == Input.Keys.DOWN) {
+
+            Timer.schedule((new Timer.Task() {
+                @Override
+                public void run() {
+                    soundMove.pause(soundAimID);
+                }
+            }),1);
+
+            soundShoot.stop();
+            soundMove.stop();
+
             group.setColor(group.getColor().r, group.getColor().g,
                     group.getColor().b, group.getColor().a - 0.1f);
         }
 
         if(keycode == Input.Keys.NUM_1){
+
+            Timer.schedule((new Timer.Task() {
+                @Override
+                public void run() {
+                    soundMove.pause(soundShootID);
+                }
+            }),1);
+
+            soundMove.stop();
+            soundAim.stop();
+
             if(ace.getZIndex() > 0) {
                 ace.setZIndex(ace.getZIndex() - 1);
             }
         }
 
         if(keycode == Input.Keys.NUM_2){
+
+            Timer.schedule((new Timer.Task() {
+                @Override
+                public void run() {
+                    soundMove.pause(soundShootID);
+                }
+            }),1);
+
+            soundMove.stop();
+            soundAim.stop();
+
             ace.setZIndex(ace.getZIndex() + 1);
         }
 
@@ -97,6 +183,14 @@ public class GroupDemo extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
+
+        if(keycode==Input.Keys.RIGHT){
+            movingRight=false;
+        }
+        if(keycode==Input.Keys.LEFT){
+            movingLeft=false;
+        }
+
         return false;
     }
 
