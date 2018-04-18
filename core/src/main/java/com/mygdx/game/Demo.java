@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-//import sun.jvm.hotspot.HelloWorld;
 
 
 public class Demo extends ApplicationAdapter {
