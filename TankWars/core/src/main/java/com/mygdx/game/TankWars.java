@@ -7,7 +7,7 @@ public class TankWars {
     Player player = new Player();
 
 
-    
+
     public boolean shoot() {
         Tank tank = player.getTank();
         TankGun tankGun = tank.tankGun;

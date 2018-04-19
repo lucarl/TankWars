@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import javafx.scene.shape.MoveTo;
 
-public class MyActor extends Actor{
+public class MyActor extends Actor {
     Sprite sprite = new Sprite(new Texture(Gdx.files.internal("badlogic.jpg")));
 
     public MyActor() {
@@ -79,7 +79,7 @@ public class MyActor extends Actor{
 
     @Override
     protected void positionChanged() { //Link Sprite and Actors position data together
-        sprite.setPosition(getX(),getY());
+        sprite.setPosition(getX(), getY());
         super.positionChanged();
     }
 
@@ -87,9 +87,10 @@ public class MyActor extends Actor{
     public void draw(Batch batch, float parentAlpha) { //Actors responsibility to draw itself
         sprite.draw(batch);
     }
+}
 
-    @Override
+    /*@Override
     public void act(float delta) {
         super.act(delta);
     }
-}
+}*/
