@@ -18,7 +18,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 
 public class Demo extends ApplicationAdapter {
-	Stage stage;
+	Stage stage; //container for the world
 
 	@Override
 	public void create() {
