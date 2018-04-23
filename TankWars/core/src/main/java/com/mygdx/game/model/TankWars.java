@@ -10,8 +10,9 @@ public class TankWars {
 
     public boolean shoot() {
         Tank tank = player.getTank();
-        TankGun tankGun = tank.tankGun;
-        Weapon weapon = tank.weapon;
+        TankGun tankGun = tank.getTankGun();
+
+        //Weapon weapon = tank.weapon;
 
         return true;
     }

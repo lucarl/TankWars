@@ -1,14 +1,20 @@
 package com.mygdx.game.model;
 
-/**
- * Created by Carl on 2018-04-19.
- */
 public class Tank {
-    TankGun tankGun;
-    Weapon weapon;
+    private TankGun tankGun;
+    private Weapon weapon;
 
     public Tank() {
+
+    }
+
+    public void shoot() {
+
+    }
+
+
+    public TankGun getTankGun() {
         tankGun = new TankGun();
-        weapon = new Weapon();
+        return tankGun;
     }
 }
