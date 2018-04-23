@@ -1,5 +1,6 @@
 package com.mygdx.game;
-import static org.junit.Assert.*;
+
+import com.mygdx.game.model.Demo;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
