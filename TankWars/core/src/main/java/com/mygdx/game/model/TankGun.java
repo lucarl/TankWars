@@ -1,7 +1,19 @@
 package com.mygdx.game.model;
 
-/**
- * Created by Carl on 2018-04-19.
- */
 public class TankGun {
+    private int angle;
+    private int power;
+
+
+
+    public void setAngle(int a) {
+        angle = a;
+    }
+
+    public int getAngle(int angle) {
+        return angle;
+    }
+
+
+
 }

@@ -8,7 +8,7 @@ public class Player {
 
 
     public Player() {
-        tank = new Tank();
+
     }
 
     public Tank getTank() {

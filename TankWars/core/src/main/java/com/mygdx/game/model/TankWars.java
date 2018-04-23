@@ -1,20 +1,17 @@
 package com.mygdx.game.model;
 
-/**
- * Created by Carl on 2018-04-19.
- */
+
 public class TankWars {
     Player player = new Player();
 
 
 
-    public boolean shoot() {
+    public Shot shoot(int power, int angle) {
         Tank tank = player.getTank();
-        TankGun tankGun = tank.getTankGun();
+        Shot shot = tank.shootTank(power, angle);
+        
 
-        //Weapon weapon = tank.weapon;
-
-        return true;
+        return shot;
     }
 
 
