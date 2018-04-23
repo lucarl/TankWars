@@ -28,6 +28,11 @@ public class Demo extends ApplicationAdapter {
         stage.draw();
     }
 
+    public int add(int a, int b) {
+        int c = a + b;
+        return c;
+    }
+
     @Override
     public void dispose() {
         stage.dispose();

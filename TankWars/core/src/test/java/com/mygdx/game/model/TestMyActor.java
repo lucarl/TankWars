@@ -1,13 +1,11 @@
-package com.mygdx.game;
-
-import com.mygdx.game.model.Demo;
+package com.mygdx.game.model;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestDemo {
+public class TestMyActor {
     @BeforeClass
     public static void beforeClass(){ //First of all
         System.out.println("Before class");
@@ -23,11 +21,5 @@ public class TestDemo {
     @After
     public void after(){ //After each test method
         System.out.println("After");
-    }
-
-    @Test
-    public void testAdd() {
-        Demo demo = new Demo();
-        //assertTrue(demo.add(1,2) == 3);
     }
 }
