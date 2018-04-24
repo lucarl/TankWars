@@ -16,4 +16,15 @@ public class TestMoveTank {
         assertEquals(expectedPos, result);
     }
 
+    @Test
+    public void testMoveTankLeft(){
+        //test2 - checks change in x-coordinate to the left...
+        Tank tank = new Tank(new Position(30, 0), 50, 50, 90);
+        int expectedPos = 29;
+        tank.moveTankLeft();
+        int result = tank.positionTank.x;
+
+        assertEquals(expectedPos, result);
+    }
+
 }
