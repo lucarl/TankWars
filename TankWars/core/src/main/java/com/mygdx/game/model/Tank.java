@@ -29,4 +29,13 @@ public class Tank {
         return new Shot();
     }
 
+    public Position moveTank(){
+
+        this.positionTank.x += 1;
+
+        return positionTank;
+
+    }
+
+
 }

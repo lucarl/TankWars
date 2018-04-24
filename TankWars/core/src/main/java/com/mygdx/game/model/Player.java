@@ -6,9 +6,8 @@ package com.mygdx.game.model;
 public class Player {
     private Tank tank;
 
-
-    public Player() {
-
+    public Player(Tank tank) {
+        this.tank = tank;
     }
 
     public Tank getTank() {
