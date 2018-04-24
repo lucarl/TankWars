@@ -1,7 +1,44 @@
 package com.mygdx.game.view;
 
-/**
- * Created by Carl on 2018-04-24.
- */
-public class BaseScreen {
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.ctrl.Controller;
+import com.mygdx.game.model.TankWars;
+
+public abstract class BaseScreen extends ApplicationAdapter{
+        SpriteBatch batch;
+        Texture img;
+        Sprite sprite;
+        protected TankWars tankWars;
+        protected Controller controller;
+        protected Stage ui;
+        Menu menu;
+
+        public BaseScreen(Controller controller, TankWars tankWars) {
+            this.controller = controller;
+            this.tankWars = tankWars;
+
+        }
+
+        public void create() {
+
+        }
+
+    // === Lifecycle Methods === //
+
+    public abstract void show();
+
+
+
+
+
+
 }
