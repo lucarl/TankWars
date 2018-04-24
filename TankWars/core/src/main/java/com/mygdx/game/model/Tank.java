@@ -5,7 +5,7 @@ public class Tank {
     //private TankGun tankGun;
     private Weapon weapon;
 
-    int x,y;
+    Position positionTank;
     int directionShot;
 
     int fuel;
@@ -13,9 +13,8 @@ public class Tank {
     int healthPoints;
 
 
-    public Tank(int x, int y, int healthPoints, int fuel, int angle) {
-        this.x = x;
-        this.y = y;
+    public Tank(Position position, int healthPoints, int fuel, int angle) {
+        this.positionTank = position;
         //this.tankGun = new TankGun();
         this.weapon = new Weapon();
 
