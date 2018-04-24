@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 
 public class MyActor extends Actor{
-        Sprite sprite = new Sprite(new Texture(Gdx.files.internal("TankWars.png")));
+        Sprite sprite = new Sprite(new Texture(Gdx.files.internal("TankWars.pg")));
 
         public MyActor() {
             setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());

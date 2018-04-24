@@ -22,19 +22,26 @@ public abstract class BaseScreen extends ApplicationAdapter{
         protected Stage ui;
         Menu menu;
 
+
         public BaseScreen(Controller controller, TankWars tankWars) {
             this.controller = controller;
             this.tankWars = tankWars;
 
         }
 
+        @Override
         public void create() {
-
+            batch = new SpriteBatch();
+            img = new Texture("TankWars.png");
+            sprite = new Sprite(img);
+            sprite.setPosition(Gdx.graphics.getWidth()/2 - sprite.getWidth()/2,
+                    Gdx.graphics.getHeight()/2 - sprite.getHeight()/2);
         }
 
-    // === Lifecycle Methods === //
+        public void render() {
+            Gdx.
+        }
 
-    public abstract void show();
 
 
 
