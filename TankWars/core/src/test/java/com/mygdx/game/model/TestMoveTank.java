@@ -8,10 +8,10 @@ public class TestMoveTank {
     @Test
     public void testMove(){
         //test1 - checks change in x-coordinate
-        TankWars tankwars = new TankWars();
-        tankwars.move();
+        Tank tank = new Tank(new Position(30, 0), 50, 50, 90);
         int expectedPos = 31;
-        int result = tankwars.player.getTank().positionTank.x;
+        tank.moveTank();
+        int result = tank.positionTank.x;
 
         assertEquals(expectedPos, result);
     }

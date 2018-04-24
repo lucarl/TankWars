@@ -13,9 +13,9 @@ public class TankWars {
         return shot;
     }
 
-    public Position move(){
-       return player.getTank().moveTank();
-    }
+   /*public Position move(){
+        return player.getTank().moveTank();
+    }*/
 
 
 

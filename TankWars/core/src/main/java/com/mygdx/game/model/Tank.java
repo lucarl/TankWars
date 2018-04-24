@@ -1,6 +1,8 @@
 package com.mygdx.game.model;
 
 
+import java.awt.event.KeyEvent;
+
 public class Tank {
     //private TankGun tankGun;
     private Weapon weapon;
@@ -29,9 +31,17 @@ public class Tank {
         return new Shot();
     }
 
-    public Position moveTank(){
+    public Position moveTankRight(){
 
         this.positionTank.x += 1;
+
+        return positionTank;
+
+    }
+
+    public Position moveTankLeft(){
+
+        this.positionTank.x -= 1;
 
         return positionTank;
 
