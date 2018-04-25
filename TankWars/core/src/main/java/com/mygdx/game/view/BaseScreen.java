@@ -1,26 +1,32 @@
 package com.mygdx.game.view;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.ctrl.Controller;
 import com.mygdx.game.model.TankWars;
 
-public abstract class BaseScreen extends ApplicationAdapter{
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class BaseScreen extends ApplicationAdapter {
         SpriteBatch batch;
         Texture img;
         Sprite sprite;
         protected TankWars tankWars;
         protected Controller controller;
         protected Stage ui;
-        Menu menu;
+        InputListener ip = new InputListener();
+        public JFrame f = new JFrame();
 
 
         public BaseScreen(Controller controller, TankWars tankWars) {
@@ -38,8 +44,31 @@ public abstract class BaseScreen extends ApplicationAdapter{
                     Gdx.graphics.getHeight()/2 - sprite.getHeight()/2);
         }
 
+
+
+
+        public void addKeyboardListener(KeyEvent listenForKeyEvent) {
+            f.addKeyListener((KeyListener) listenForKeyEvent);
+        }
+
+
         public void render() {
-            Gdx.
+            if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                sprite.translateX(1f);
+            }
+            if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                sprite.translateX(-1f);
+            }
+            Gdx.gl.glClearColor(0, 0, 0, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            batch.begin();
+            batch.draw(sprite, sprite.getX(), sprite.getY());
+            batch.end();
+        }
+
+        @Override
+        public void dispose() {
+            img.dispose();
         }
 
 

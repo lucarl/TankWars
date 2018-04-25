@@ -18,7 +18,7 @@ public class GameScreenManager {
 
     public GameScreenManager(Application app) {
         this.app = app;
-        this.screens = new Stack<>();
+        //this.screens = new Stack<>();
         setScreen(STATE.PLAY);
     }
 
