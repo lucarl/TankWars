@@ -30,7 +30,8 @@ public class Tank {
     }
 
    public Shot shootTank(int power, int angle) {
-       return new Shot (positionTank.x, positionTank.y, angle, power, weapon.getDamage(),
+
+        return new Shot(positionTank.x, positionTank.y, angle, power, weapon.getDamage(),
                     weapon.getRadius(), weapon.getWeight());
     }
 
@@ -60,7 +61,7 @@ public class Tank {
     }
 
     public int decreaseFuel(){
-        return fuel--;
+        return fuel --;
     }
 
 
