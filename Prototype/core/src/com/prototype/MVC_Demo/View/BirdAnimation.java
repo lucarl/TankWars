@@ -1,7 +1,7 @@
 package com.prototype.MVC_Demo.View;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+        import com.badlogic.gdx.graphics.Texture;
+        import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class BirdAnimation {
 
