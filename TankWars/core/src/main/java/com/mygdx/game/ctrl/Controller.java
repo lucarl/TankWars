@@ -1,5 +1,6 @@
 package com.mygdx.game.ctrl;
 
+import com.badlogic.gdx.ApplicationAdapter;
 import com.mygdx.game.model.TankWars;
 import com.mygdx.game.view.BaseScreen;
 
@@ -8,7 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
-public class Controller {
+public class Controller extends ApplicationAdapter {
 
     private BaseScreen baseScreen;
     private TankWars tankWars;

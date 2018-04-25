@@ -16,7 +16,7 @@ public class Menu extends BaseScreen{
     Sprite sprite;
 
     public Menu(TankWars tankWars, Controller controller) {
-        super(controller, tankWars);
+        //super(controller, tankWars);
     }
 
 

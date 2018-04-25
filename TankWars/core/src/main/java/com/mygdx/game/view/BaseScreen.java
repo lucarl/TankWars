@@ -29,11 +29,11 @@ public class BaseScreen extends ApplicationAdapter {
         public JFrame f = new JFrame();
 
 
-        public BaseScreen(Controller controller, TankWars tankWars) {
+        /*public BaseScreen(Controller controller, TankWars tankWars) {
             this.controller = controller;
             this.tankWars = tankWars;
 
-        }
+        }*/
 
         @Override
         public void create() {
