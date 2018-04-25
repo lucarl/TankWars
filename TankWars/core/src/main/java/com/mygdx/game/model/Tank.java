@@ -61,7 +61,7 @@ public class Tank {
     }
 
     public int decreaseFuel(){
-
+        return fuel --;
     }
 
 
