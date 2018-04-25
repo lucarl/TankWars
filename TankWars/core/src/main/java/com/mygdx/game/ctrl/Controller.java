@@ -18,22 +18,24 @@ public class Controller extends ApplicationAdapter {
         this.baseScreen = baseScreen;
         this.tankWars = tankWars;
 
-        this.baseScreen.f.addKeyListener(new KeyboardListener());
+        this.baseScreen.addKeyboardListener(new KeyboardListener());
     }
 
-    class KeyboardListener implements KeyListener {
+    public class KeyboardListener implements KeyListener {
 
         public void keyTyped(KeyEvent e) {
 
         }
 
         public void keyPressed(KeyEvent e) {
-            System.out.print("key pressed");
+
         }
 
         public void keyReleased(KeyEvent e) {
 
         }
     }
+
+
 
 }
