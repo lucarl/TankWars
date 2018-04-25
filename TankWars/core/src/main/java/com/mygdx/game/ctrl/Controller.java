@@ -4,7 +4,6 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.mygdx.game.model.TankWars;
 import com.mygdx.game.view.BaseScreen;
 
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -34,6 +33,8 @@ public class Controller extends ApplicationAdapter {
         public void keyReleased(KeyEvent e) {
 
         }
+
+
     }
 
 

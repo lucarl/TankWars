@@ -60,7 +60,10 @@ public class Tank {
     }
 
     public int decreaseFuel(){
-        return fuel--;
+        if(leftMove){
+            this.fuel--;
+        }
+        return this.fuel;
     }
 
 
