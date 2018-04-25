@@ -39,10 +39,12 @@ public class Tank {
 
         if (rightMove){
             this.positionTank.x += 5 * System.nanoTime();
+            decreaseFuel();
         }
 
         if (leftMove){
             this.positionTank.x -= 5 * System.nanoTime();
+            decreaseFuel();
         }
 
         return positionTank;
@@ -56,6 +58,10 @@ public class Tank {
     public void setRightMove(boolean b){
         if(leftMove && b){leftMove = false;}
         rightMove = b;
+    }
+
+    public int decreaseFuel(){
+
     }
 
 
