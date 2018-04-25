@@ -20,9 +20,9 @@ public class TankWars {
         return angle;
     }
 
-   /*public Position move(){
+   public Position move(){
         return player.getTank().moveTank();
-    }*/
+    }
 
 
 

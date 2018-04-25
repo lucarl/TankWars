@@ -13,6 +13,9 @@ public class Tank {
     int fuel;
     int angle;
     int healthPoints;
+    boolean rightMove;
+    boolean leftMove;
+
 
 
     public Tank(Position position, int healthPoints, int fuel, int angle) {
@@ -31,20 +34,27 @@ public class Tank {
         return new Shot();
     }
 
-    public Position moveTankRight(){
+    public Position moveTank() {
 
-        this.positionTank.x += 1;
+        if (rightMove){
+            this.positionTank.x += 5 * System.nanoTime();
+        }
+
+        if (leftMove){
+            this.positionTank.x -= 5 * System.nanoTime();
+        }
 
         return positionTank;
-
     }
 
-    public Position moveTankLeft(){
+    public void setLeftMove(boolean b){
+        if(rightMove && b){rightMove = false;}
+        leftMove = b;
+    }
 
-        this.positionTank.x -= 1;
-
-        return positionTank;
-
+    public void setRightMove(boolean b){
+        if(leftMove && b){leftMove = false;}
+        rightMove = b;
     }
 
 
