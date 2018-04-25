@@ -44,11 +44,10 @@ public class BaseScreen extends ApplicationAdapter {
                     Gdx.graphics.getHeight()/2 - sprite.getHeight()/2);
         }
 
+        public void addKeyboardListener(KeyListener listenForKeyEvent) {
 
+                f.addKeyListener(listenForKeyEvent);
 
-
-        public void addKeyboardListener(KeyEvent listenForKeyEvent) {
-            f.addKeyListener((KeyListener) listenForKeyEvent);
         }
 
 
