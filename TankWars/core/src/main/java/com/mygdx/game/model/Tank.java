@@ -30,8 +30,7 @@ public class Tank {
     }
 
    public Shot shootTank(int power, int angle) {
-
-        return new Shot(positionTank.x, positionTank.y, angle, power, weapon.getDamage(),
+       return new Shot (positionTank.x, positionTank.y, angle, power, weapon.getDamage(),
                     weapon.getRadius(), weapon.getWeight());
     }
 
@@ -39,13 +38,13 @@ public class Tank {
 
         if (rightMove){
             this.positionTank.x += 5 * System.nanoTime();
+            decreaseFuel();
         }
 
         if (leftMove){
             this.positionTank.x -= 5 * System.nanoTime();
+            decreaseFuel();
         }
-
-        decreaseFuel();
 
         return positionTank;
     }
@@ -61,10 +60,7 @@ public class Tank {
     }
 
     public int decreaseFuel(){
-        if(leftMove || rightMove) {
-            this.fuel--;
-        }
-        return this.fuel;
+        return fuel--;
     }
 
 
