@@ -1,0 +1,59 @@
+﻿Meeting Agenda
+
+
+Date: 2018-04-24
+
+
+Participants:  Patricia Zabecka, Carl Lundborg, Thomas Jinton, Leyla Arale, Adam kjäll.
+
+
+1. Dagens mål:
+
+
+-  Fortsätta koda..
+
+
+2. Under mötet:
+
+
+Leyla, Patricia:
+* ändrat moveTank(), lagt till en boolean flagga som känner av om man har rört sig vänster eller höger. 
+* vi har utökat denna metod så att den tar hänsyn till tankens fuel, detta med hjälp av 
+Adam
+* har skapat en update() i Shot klassen, denna metod ändrar positionen för skottet.
+* lägger till en vector array som innehåller en riktning och en hastighet.
+Carl
+* skapat klasser i view och controller och kodat där.
+Thomas
+* har skapat en en prototyp där man får ett objekt att rotera automatiskt, denna logiken ska senare användas till TankGun. 
+
+
+3. Tills nästa möte:
+
+
+Vi måste bli bättre på att dokumentera vad vi gör, till exempel skriva kommentarer i koden så att andra förstår vad man har gjort och hur man har tänkt...eller? :( 
+
+
+* Ska vi ha TankGun klassen eller ej?
+* Gå tillbaka till design modellen, det känns som att vi har ändrat massor men inte dokumenterat det?
+* Ska vi ha en Position klass för x och y värden? Om ja måste vi vara konsekventa med det, Shot klassen använder tex int x,y istället för Position…
+* Om vi vill utvidga och ha olika vapen, är det inte bättre att göra Shot klassen abstrakt  istället för Weapon klassen?
+* Vi borde dock sikta på att ha ett vapen till och börja med och få det att funka först innan vi implementerar fler vapentyper.
+* Kan vi flytta shot metod (som nu finns i Tank) till Weapon klassen? 
+   * Det är ju weapon som skjuter?
+
+
+Fler funderingar kring Shot klassen…
+* Ett shot har en radius och en weight, därför tycker Patricia och Leyla att det är något man inte ska skicka in i konstruktorn, istället borde det vara fasta värden (hårdkodade).
+   * De kommer väl alltid vara samma?
+* Ska Damage vara en variabel? Är det inte bättre att ha den som en metod som tar in/beror på weight och radius?
+Patricia, Leyla och Carl måste ta reda på hur move() från modellen ska funka ihop med controller så att vi kan få en tank som rör på sig för vår prototyp??
+
+
+Varför har TankWars en angle variabel? Den ska ju finnas i Weapon?
+
+
+Vi borde diskutera aim(), vad ska den göra? 
+* både shoot() och aim() i Weapon?
+* aim() påverkas ju av vapnets vinkel
+* det är vapnet som skjuter så shoot() borde finnas här istället för Tank?
