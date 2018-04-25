@@ -5,7 +5,7 @@ package com.mygdx.game.model;
  */
 public class Shot {
     private static final float GRAVITY = -9.8f;
-    private int[] vector = new int[2];
+    private double[] vector = new double[2];
     private int x, y;
     private int damage;
     private float radius;
@@ -13,10 +13,11 @@ public class Shot {
 
 
 
-    public Shot(int x, int y, int[] vector, int damage, int radius, int weight){
+    public Shot(int x, int y, int angle, int damage, int radius, int weight){
         this.x = x;
         this.y = y;
-        this.vector = vector;
+        this.vector[0] = Math.cos(angle); // x
+        this.vector[1] = Math.sin(angle); // y
         this.damage = damage;
         this.radius = radius;
         this.weight = weight;
@@ -25,7 +26,8 @@ public class Shot {
     public void update(float delta) {
         x += vector[0] * delta;
         if(y >= 0){
-            y += vector[1] * GRAVITY * delta;
+            y += GRAVITY;
+
         }
     }
 }
