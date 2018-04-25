@@ -72,8 +72,4 @@ public class BaseScreen extends ApplicationAdapter {
 
 
 
-
-
-
-
 }

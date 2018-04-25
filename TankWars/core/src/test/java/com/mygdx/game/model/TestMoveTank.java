@@ -11,7 +11,6 @@ public class TestMoveTank {
     public void testMoveRight(){
         //TankWars tankWars = new TankWars();
         Tank tank = new Tank(new Position(30, 0), 50, 50, 90);
-        int expectedPos= 31;
         tank.setRightMove(true);
         tank.moveTank();
 
@@ -22,11 +21,12 @@ public class TestMoveTank {
     public void testMoveTankLeft(){
         //test2 - checks change in x-coordinate to the left...
         Tank tank = new Tank(new Position(30, 0), 50, 50, 90);
-        int expectedPos = 29;
-        //tank.moveTankLeft();
-        int result = tank.positionTank.x;
+        tank.setLeftMove(true);
+        tank.moveTank();
 
-        assertEquals(expectedPos, result);
+        assertTrue(  30 > tank.positionTank.x);
     }
+
+
 
 }
