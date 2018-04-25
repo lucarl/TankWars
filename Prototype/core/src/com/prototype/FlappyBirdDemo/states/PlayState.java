@@ -1,6 +1,7 @@
 package com.prototype.FlappyBirdDemo.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
@@ -36,10 +37,15 @@ public class PlayState extends State {
 
     }
 
+
+
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
             bird.jump();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            gsm.set(new MenuState(gsm));
         }
     }
 
