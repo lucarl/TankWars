@@ -13,11 +13,8 @@ public class Shot {
 
 
 
-    public Shot(int x, int y, int angle, int damage, int radius, int weight){
         this.x = x;
         this.y = y;
-        this.vector[0] = Math.cos(angle); // x
-        this.vector[1] = Math.sin(angle); // y
         this.damage = damage;
         this.radius = radius;
         this.weight = weight;
@@ -26,7 +23,6 @@ public class Shot {
     public void update(float delta) {
         x += vector[0] * delta;
         if(y >= 0){
-            y += GRAVITY;
 
         }
     }

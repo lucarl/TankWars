@@ -31,7 +31,8 @@ public class Tank {
 
    public Shot shootTank(int power, int angle) {
 
-        return new Shot();
+        return new Shot(positionTank.x, positionTank.y, angle, power, weapon.getDamage(),
+                    weapon.getRadius(), weapon.getWeight());
     }
 
     public Position moveTank() {
