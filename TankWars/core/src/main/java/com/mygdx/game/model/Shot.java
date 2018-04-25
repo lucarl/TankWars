@@ -5,7 +5,7 @@ package com.mygdx.game.model;
  */
 public class Shot {
     private static final float GRAVITY = -9.8f;
-    private double[] vector = new double[2];
+    private double[] vector = new double[2]; // speed
     private int x, y;
     private int damage;
     private float radius;
