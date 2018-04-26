@@ -41,7 +41,8 @@ public class BaseScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(sprite, sprite.getX(), sprite.getY());
+        batch.draw(sprite,(float) tankWars.getPlayer().getTank().getPositionTank().getX(),
+                (float) tankWars.getPlayer().getTank().getPositionTank().getY());
         batch.end();
 
         stage.act(delta);
@@ -50,7 +51,7 @@ public class BaseScreen implements Screen {
 
     public void show() {
         batch = new SpriteBatch();
-        img = new Texture("TankWars.png");
+        img = new Texture("tank14.png");
         sprite = new Sprite(img);
         sprite.setPosition(Gdx.graphics.getWidth() / 2 - sprite.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - sprite.getHeight() / 2);

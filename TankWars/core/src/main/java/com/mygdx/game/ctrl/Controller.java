@@ -29,13 +29,24 @@ public class Controller extends Game implements InputProcessor {
 
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.LEFT) {
-            //tankWars.getPlayer().getTank().moveTank(1, true, Gdx.graphics.getDeltaTime());
+            tankWars.getPlayer().getTank().moveTank(Gdx.graphics.getDeltaTime());
+            tankWars.getPlayer().getTank().setLeftMove(true);
         }
-        return false;
+        if (keycode == Input.Keys.RIGHT) {
+            tankWars.getPlayer().getTank().moveTank(Gdx.graphics.getDeltaTime());
+            tankWars.getPlayer().getTank().setRightMove(true);
+        }
+        return true;
     }
 
     public boolean keyUp(int keycode) {
-        return false;
+        if(keycode == Input.Keys.LEFT){
+            tankWars.getPlayer().getTank().setLeftMove(false);
+        }
+        if(keycode == Input.Keys.RIGHT){
+            tankWars.getPlayer().getTank().setLeftMove(false);
+        }
+        return true;
     }
 
     public boolean keyTyped(char character) {
