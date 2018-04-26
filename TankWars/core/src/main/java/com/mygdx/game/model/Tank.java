@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 
 public class Tank {
 
-<<<<<<< HEAD
     private Position positionTank;
     private int healthPoints;
     private int fuel;
@@ -14,25 +13,11 @@ public class Tank {
     private boolean rightMove;
     private boolean leftMove;
 
-
-
-=======
-    Position positionTank;
-    int directionShot; // ?
-    int healthPoints;
-
-    int fuel;
-    int angle;
-    //
-    boolean rightMove;
-    boolean leftMove;
-
     //konstant för vår hastighet
     private final int speed = 10;
 
 
 
->>>>>>> 625ca5b39780ebea0dbb1dbef26940ed40b4af7e
     public Tank(Position position, int healthPoints, int fuel, int angle) {
         this.positionTank = position;
         this.healthPoints = healthPoints;
@@ -63,12 +48,10 @@ public class Tank {
     public Position moveTank(float delta) {
 
         if (rightMove){
-            this.positionTank.x += speed * delta;
             decreaseFuel();
         }
 
         if (leftMove){
-            this.positionTank.x -= speed * System.nanoTime();
             decreaseFuel();
         }
         return this.positionTank;
