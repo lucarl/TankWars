@@ -5,9 +5,17 @@ import java.awt.event.KeyEvent;
 
 public class Tank {
 
+    private Position positionTank;
+    private int healthPoints;
+    private int fuel;
+    private int angle;
+
+    private boolean rightMove;
+    private boolean leftMove;
 
 
 
+    public Tank(Position position, int healthPoints, int fuel, int angle) {
         this.positionTank = position;
         this.healthPoints = healthPoints;
         this.fuel = fuel;

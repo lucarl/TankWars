@@ -70,6 +70,7 @@ public class PlayScreen implements Screen {
             controller.setScreen(new PlayScreen(controller));
         }
     }
+
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
             bird.jump();
