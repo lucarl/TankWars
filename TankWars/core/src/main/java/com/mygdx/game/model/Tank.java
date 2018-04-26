@@ -8,9 +8,8 @@ public class Tank {
 
     private Position positionTank;
     private int healthPoints;
-    private int fuel;
-    private int angle;
-    private String imgSource = "tank14.png";
+    private double fuel;
+    private float angle;
 
     private boolean rightMove;
     private boolean leftMove;
@@ -70,9 +69,19 @@ public class Tank {
         rightMove = b;
     }
 
-    public int decreaseFuel(){
+    public void setLeftAim(boolean b){
+        if(rightAim && b){rightAim = false;}
+        leftAim = b;
+    }
+
+    public void setRightAim(boolean b){
+        if(leftAim && b){leftAim = false;}
+        rightAim = b;
+    }
+
+    public double decreaseFuel(){
         if(leftMove || rightMove){
-            this.fuel--;
+            this.fuel -= 0.003;
         }
         return this.fuel;
     }
@@ -86,11 +95,11 @@ public class Tank {
         return healthPoints;
     }
 
-    public int getFuel() {
+    public double getFuel() {
         return fuel;
     }
 
-    public int getAngle() {
+    public float getAngle() {
         return angle;
     }
 }
