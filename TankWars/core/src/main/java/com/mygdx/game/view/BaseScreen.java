@@ -34,12 +34,7 @@ public class BaseScreen implements Screen {
         this.tankWars = tankWars;
 
     }
-
-    public void addKeyboardListener(KeyListener listenForKeyEvent) {
-
-        f.addKeyListener(listenForKeyEvent);
-
-    }
+    
 
 
     public void render(float delta) {
