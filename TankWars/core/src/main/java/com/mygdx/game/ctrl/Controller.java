@@ -1,8 +1,6 @@
 package com.mygdx.game.ctrl;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.mygdx.game.model.TankWars;
 import com.mygdx.game.view.BaseScreen;
@@ -30,6 +28,9 @@ public class Controller extends Game implements InputProcessor {
     }
 
     public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.LEFT) {
+            //tankWars.getPlayer().getTank().moveTank(1, true, Gdx.graphics.getDeltaTime());
+        }
         return false;
     }
 

@@ -22,10 +22,12 @@ public class TankWars {
         return angle;
     }
 
-   public Position move(float delta){
-        return player.getTank().moveTank(delta);
+    public Player getPlayer() {
+        return player;
     }
 
-
+    public Position move(float delta){
+        return player.getTank().moveTank(delta);
+    }
 
 }
