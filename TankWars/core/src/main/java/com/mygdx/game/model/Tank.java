@@ -11,7 +11,6 @@ public class Tank {
     int directionShot;
 
     int fuel;
-    int angle;
     int healthPoints;
     boolean rightMove;
     boolean leftMove;

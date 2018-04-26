@@ -7,21 +7,17 @@ import java.util.Vector;
  * Created by Carl on 2018-04-19.
  */
 public class Weapon {
-    private int damage;
-    private float radius;
-    private float weight;
-    private volatile int ammo;
-    private Vector vector;
 
-    public float getWeight() {
-        return weight;
+    //A list of shots with different attributes that define the shot
+    private volatile Shot [] ammo;
+
+    //the angle of the gun
+    private int angle;
+
+    public void createShot(){
+
     }
 
-    public int getDamage() {
-        return damage;
-    }
 
-    public float getRadius() {
-        return radius;
-    }
+
 }
