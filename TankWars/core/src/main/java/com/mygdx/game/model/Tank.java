@@ -10,6 +10,9 @@ public class Tank {
     private int healthPoints;
     private double fuel;
     private float angle;
+    private Shot shot;
+    private String tankImgSrc = "tank14.png";
+    private String gunImgSrc = "toptube.png";
 
     private boolean rightMove;
     private boolean leftMove;
@@ -27,19 +30,20 @@ public class Tank {
         this.healthPoints = healthPoints;
         this.fuel = fuel;
         this.angle = angle;
+        this.shot = new Shot(position, angle, 0);
     }
 
-   public Shot fireTank(int power) {// döper om till fire för att inte blanda ihop med Shot klassen
-       return new Shot (positionTank, angle, power);
+   public void fireTank(int power) {// döper om till fire för att inte blanda ihop med Shot klassen
+       shot = new Shot (positionTank, angle, power);
     }
 
     public float aimTank(float delta){
             if (rightAim) {
-                this.angle = angle < 180 ? angle + speed * delta : 180;
+                this.angle = angle < 100 ? angle + speed * delta : 100;
             }
 
             if (leftAim) {
-                this.angle = angle > 0 ? angle - speed * delta : 0;
+                this.angle = angle > -100 ? angle - speed * delta : -100;
             }
         return angle;
     }
@@ -85,6 +89,14 @@ public class Tank {
         return this.fuel;
     }
 
+    public String getGunImgSrc() {
+        return gunImgSrc;
+    }
+
+    public String getTankImgSrc() {
+        return tankImgSrc;
+    }
+
     public Position getPositionTank() {
         return positionTank;
     }
@@ -92,6 +104,10 @@ public class Tank {
 
     public int getHealthPoints() {
         return healthPoints;
+    }
+
+    public Shot getShot() {
+        return shot;
     }
 
     public double getFuel() {
