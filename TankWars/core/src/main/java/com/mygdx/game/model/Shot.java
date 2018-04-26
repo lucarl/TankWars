@@ -13,7 +13,7 @@ public class Shot {
     // private int damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
 
 
-    public Shot(Position p, int angle, int power){
+    public Shot(Position p, float angle, int power){
         this.position = p;
         this.vector[0] = Math.cos(angle) * power; // x speed
         this.vector[1] = Math.sin(angle) * power; // y speed

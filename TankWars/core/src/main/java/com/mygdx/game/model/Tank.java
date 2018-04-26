@@ -8,12 +8,14 @@ public class Tank {
 
     private Position positionTank;
     private int healthPoints;
-    private int fuel;
-    private int angle;
-    private String imgSource = "tank14.png";
+    private double fuel;
+    private float angle;
 
     private boolean rightMove;
     private boolean leftMove;
+
+    private boolean rightAim;
+    private boolean leftAim;
 
     //konstant för vår hastighet
     private final int speed = 100;
@@ -31,18 +33,14 @@ public class Tank {
        return new Shot (positionTank, angle, power);
     }
 
-    public int aim(int i, boolean keyPressed, float delta){
-        // skicka in 0 för att öka vinkel (vänster), skicka in 1 för att minska vinkeln.
-        // keyPressed = true när användaren håller ned en knapp
-        while (keyPressed) {
-            if (i == 0) {
-                this.angle += delta;
+    public float aim(float delta){
+            if (rightAim) {
+                this.angle = angle < 180 ? angle + speed * delta : 180;
             }
 
-            if (i == 1) {
-                this.angle -= delta;
+            if (leftAim) {
+                this.angle = angle > 0 ? angle - speed * delta : 0;
             }
-        }
         return angle;
 
     }
@@ -71,9 +69,19 @@ public class Tank {
         rightMove = b;
     }
 
-    public int decreaseFuel(){
+    public void setLeftAim(boolean b){
+        if(rightAim && b){rightAim = false;}
+        leftAim = b;
+    }
+
+    public void setRightAim(boolean b){
+        if(leftAim && b){leftAim = false;}
+        rightAim = b;
+    }
+
+    public double decreaseFuel(){
         if(leftMove || rightMove){
-            this.fuel--;
+            this.fuel -= 0.003;
         }
         return this.fuel;
     }
@@ -87,11 +95,11 @@ public class Tank {
         return healthPoints;
     }
 
-    public int getFuel() {
+    public double getFuel() {
         return fuel;
     }
 
-    public int getAngle() {
+    public float getAngle() {
         return angle;
     }
 }
