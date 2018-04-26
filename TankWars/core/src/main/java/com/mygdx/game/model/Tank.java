@@ -4,27 +4,14 @@ package com.mygdx.game.model;
 import java.awt.event.KeyEvent;
 
 public class Tank {
-    //private TankGun tankGun;
-    // private Weapon weapon;
-
-    Position positionTank;
-    int directionShot; // ?
-    int healthPoints;
-    int fuel;
-    int angle;
-    int power;
-    //
-    boolean rightMove;
-    boolean leftMove;
 
 
 
-    public Tank(Position position, int healthPoints, int fuel, int angle, int power) {
+
         this.positionTank = position;
         this.healthPoints = healthPoints;
         this.fuel = fuel;
         this.angle = angle;
-        this.power = power;
     }
 
    public Shot fire(int power, int angle) {// döper om till fire för att inte blanda ihop med Shot klassen

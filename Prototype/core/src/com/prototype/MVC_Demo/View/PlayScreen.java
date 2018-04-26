@@ -69,7 +69,6 @@ public class PlayScreen implements Screen {
         if(bird.getPos().y < 0){
             controller.setScreen(new PlayScreen(controller));
         }
-
     }
     protected void handleInput() {
         if (Gdx.input.justTouched()) {

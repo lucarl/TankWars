@@ -21,9 +21,6 @@ public class Shot {
     }
 
     public void updatePostion(float delta) {
-        position.x += vector[0] * delta;
-        if(position.y >= 0){
-            position.y += vector[1];
             vector[1] += GRAVITY;
 
         }
