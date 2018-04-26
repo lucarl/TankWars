@@ -16,7 +16,7 @@ public class Tank {
     private boolean leftMove;
 
     //konstant för vår hastighet
-    private final int speed = 10;
+    private final int speed = 100;
 
 
 
@@ -55,7 +55,7 @@ public class Tank {
         }
 
         if (leftMove){
-            positionTank.setX(speed * delta);
+            positionTank.setX(positionTank.getX() -speed * delta);
             decreaseFuel();
         }
         return this.positionTank;

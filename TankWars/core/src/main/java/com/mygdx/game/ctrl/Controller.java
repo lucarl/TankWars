@@ -22,6 +22,12 @@ public class Controller extends Game implements InputProcessor {
         //this.baseScreen.addKeyboardListener(new KeyboardListener());
     }
 
+    @Override
+    public void render() {
+        super.render();
+        tankWars.getPlayer().getTank().moveTank(Gdx.graphics.getDeltaTime());
+    }
+
     public void create() {
         this.baseScreen = new BaseScreen(this, tankWars);
         this.setScreen(baseScreen);
@@ -29,11 +35,10 @@ public class Controller extends Game implements InputProcessor {
 
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.LEFT) {
-            tankWars.getPlayer().getTank().moveTank(Gdx.graphics.getDeltaTime());
             tankWars.getPlayer().getTank().setLeftMove(true);
         }
+
         if (keycode == Input.Keys.RIGHT) {
-            tankWars.getPlayer().getTank().moveTank(Gdx.graphics.getDeltaTime());
             tankWars.getPlayer().getTank().setRightMove(true);
         }
         return true;
@@ -44,7 +49,7 @@ public class Controller extends Game implements InputProcessor {
             tankWars.getPlayer().getTank().setLeftMove(false);
         }
         if(keycode == Input.Keys.RIGHT){
-            tankWars.getPlayer().getTank().setLeftMove(false);
+            tankWars.getPlayer().getTank().setRightMove(false);
         }
         return true;
     }

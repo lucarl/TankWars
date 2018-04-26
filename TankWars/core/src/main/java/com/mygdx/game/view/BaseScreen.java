@@ -55,6 +55,8 @@ public class BaseScreen implements Screen {
         sprite = new Sprite(img);
         sprite.setPosition(Gdx.graphics.getWidth() / 2 - sprite.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - sprite.getHeight() / 2);
+
+        Gdx.input.setInputProcessor(controller);
     }
 
 
