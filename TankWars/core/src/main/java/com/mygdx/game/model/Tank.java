@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 
 public class Tank {
 
+
     private Position positionTank;
     private int healthPoints;
     private int fuel;
@@ -48,10 +49,12 @@ public class Tank {
     public Position moveTank(float delta) {
 
         if (rightMove){
+            positionTank.setX(positionTank.getX() + speed * delta);
             decreaseFuel();
         }
 
         if (leftMove){
+            positionTank.setX(speed * delta);
             decreaseFuel();
         }
         return this.positionTank;
