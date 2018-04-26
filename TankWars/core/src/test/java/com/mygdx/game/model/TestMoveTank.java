@@ -10,9 +10,7 @@ public class TestMoveTank {
     @Test
     public void testMoveRight(){
         //TankWars tankWars = new TankWars();
-        Tank tank = new Tank(new Position(30, 0), 50, 50, 90);
         tank.setRightMove(true);
-        tank.moveTank();
 
         assertTrue(  30 < tank.positionTank.x);
     }
@@ -22,7 +20,6 @@ public class TestMoveTank {
         //test2 - checks change in x-coordinate to the left...
         Tank tank = new Tank(new Position(30, 0), 50, 50, 90);
         tank.setLeftMove(true);
-        tank.moveTank();
 
         assertTrue(  30 > tank.positionTank.x);
     }

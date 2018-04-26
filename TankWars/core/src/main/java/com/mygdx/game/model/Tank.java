@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 
 public class Tank {
 
+<<<<<<< HEAD
     private Position positionTank;
     private int healthPoints;
     private int fuel;
@@ -15,6 +16,23 @@ public class Tank {
 
 
 
+=======
+    Position positionTank;
+    int directionShot; // ?
+    int healthPoints;
+
+    int fuel;
+    int angle;
+    //
+    boolean rightMove;
+    boolean leftMove;
+
+    //konstant för vår hastighet
+    private final int speed = 10;
+
+
+
+>>>>>>> 625ca5b39780ebea0dbb1dbef26940ed40b4af7e
     public Tank(Position position, int healthPoints, int fuel, int angle) {
         this.positionTank = position;
         this.healthPoints = healthPoints;
@@ -22,35 +40,28 @@ public class Tank {
         this.angle = angle;
     }
 
-   public Shot fire(int power, int angle) {// döper om till fire för att inte blanda ihop med Shot klassen
        return new Shot (positionTank, angle, power);
     }
 
-    public int aim(int i, boolean keyPressed){
         // skicka in 0 för att öka vinkel (vänster), skicka in 1 för att minska vinkeln.
         // keyPressed = true när användaren håller ned en knapp
         while (keyPressed) {
             if (i == 0) {
-                this.angle += System.nanoTime();
             }
 
             if (i == 1) {
-                this.angle -= System.nanoTime();
             }
         }
         return angle;
 
     }
 
-    public Position moveTank() {
 
         if (rightMove){
-            this.positionTank.x += 5 * System.nanoTime();
             decreaseFuel();
         }
 
         if (leftMove){
-            this.positionTank.x -= 5 * System.nanoTime();
             decreaseFuel();
         }
         return this.positionTank;
