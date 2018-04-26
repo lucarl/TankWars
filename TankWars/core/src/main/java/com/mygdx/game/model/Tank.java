@@ -40,28 +40,35 @@ public class Tank {
         this.angle = angle;
     }
 
+   public Shot fireTank(int power) {// döper om till fire för att inte blanda ihop med Shot klassen
        return new Shot (positionTank, angle, power);
     }
 
+    public int aim(int i, boolean keyPressed, float delta){
         // skicka in 0 för att öka vinkel (vänster), skicka in 1 för att minska vinkeln.
         // keyPressed = true när användaren håller ned en knapp
         while (keyPressed) {
             if (i == 0) {
+                this.angle += delta;
             }
 
             if (i == 1) {
+                this.angle -= delta;
             }
         }
         return angle;
 
     }
 
+    public Position moveTank(float delta) {
 
         if (rightMove){
+            this.positionTank.x += speed * delta;
             decreaseFuel();
         }
 
         if (leftMove){
+            this.positionTank.x -= speed * System.nanoTime();
             decreaseFuel();
         }
         return this.positionTank;
@@ -84,5 +91,20 @@ public class Tank {
         return this.fuel;
     }
 
+    public Position getPositionTank() {
+        return positionTank;
+    }
 
+
+    public int getHealthPoints() {
+        return healthPoints;
+    }
+
+    public int getFuel() {
+        return fuel;
+    }
+
+    public int getAngle() {
+        return angle;
+    }
 }
