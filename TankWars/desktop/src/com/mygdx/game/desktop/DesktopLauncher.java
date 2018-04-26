@@ -10,8 +10,12 @@ import com.mygdx.game.view.*;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		TankWars tankWars = new TankWars();
-		BaseScreen baseScreen = new BaseScreen();
-		Controller controller = new Controller(baseScreen, tankWars);
+		Controller controller = new Controller(tankWars);
+		//BaseScreen baseScreen = new BaseScreen(controller, tankWars);
+		
+
+
+
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(controller, config);

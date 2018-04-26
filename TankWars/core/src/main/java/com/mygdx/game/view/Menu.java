@@ -10,7 +10,7 @@ import com.mygdx.game.model.TankWars;
 /**
  * Created by Carl on 2018-04-24.
  */
-public class Menu extends BaseScreen{
+/*public class Menu extends BaseScreen{
     SpriteBatch batch;
     Texture img;
     Sprite sprite;
@@ -34,4 +34,4 @@ public class Menu extends BaseScreen{
 
 
 
-}
+}*/
