@@ -11,11 +11,9 @@ public class TankWars {
         return shot;
     }
 
-    public int aim(int i, boolean keyPressed, float delta) {
-        // skicka in 0 för att öka vinkel (vänster), skicka in 1 för att minska vinkeln.
-        // keyPressed = true när användaren håller ned en knapp
+    public float aim(float delta) {
         Tank tank = player.getTank();
-        return tank.aim(i, keyPressed, delta);
+        return tank.aimTank(delta);
     }
 
     public int getAngle() {

@@ -33,7 +33,7 @@ public class Tank {
        return new Shot (positionTank, angle, power);
     }
 
-    public float aim(float delta){
+    public float aimTank(float delta){
             if (rightAim) {
                 this.angle = angle < 180 ? angle + speed * delta : 180;
             }
@@ -42,7 +42,6 @@ public class Tank {
                 this.angle = angle > 0 ? angle - speed * delta : 0;
             }
         return angle;
-
     }
 
     public Position moveTank(float delta) {
