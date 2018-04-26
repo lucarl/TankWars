@@ -10,6 +10,7 @@ public class Tank {
     private int healthPoints;
     private int fuel;
     private int angle;
+    private String imgSource = "tank14.png";
 
     private boolean rightMove;
     private boolean leftMove;
