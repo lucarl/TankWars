@@ -26,6 +26,7 @@ public class Controller extends Game implements InputProcessor {
     public void render() {
         super.render();
         tankWars.getPlayer().getTank().moveTank(Gdx.graphics.getDeltaTime());
+        tankWars.getPlayer().getTank().aimTank(Gdx.graphics.getDeltaTime());
     }
 
     public void create() {
@@ -41,16 +42,38 @@ public class Controller extends Game implements InputProcessor {
         if (keycode == Input.Keys.RIGHT) {
             tankWars.getPlayer().getTank().setRightMove(true);
         }
+
+        if (keycode == Input.Keys.UP) {
+            tankWars.getPlayer().getTank().setLeftAim(true);
+        }
+
+        if (keycode == Input.Keys.DOWN) {
+            tankWars.getPlayer().getTank().setRightMove(true);
+        }
+
+        if (keycode == Input.Keys.SPACE) {
+
+            tankWars.getPlayer().getTank().fireTank(100);
+        }
         return true;
     }
 
     public boolean keyUp(int keycode) {
-        if(keycode == Input.Keys.LEFT){
+        if (keycode == Input.Keys.LEFT) {
             tankWars.getPlayer().getTank().setLeftMove(false);
         }
-        if(keycode == Input.Keys.RIGHT){
+        if (keycode == Input.Keys.RIGHT) {
             tankWars.getPlayer().getTank().setRightMove(false);
         }
+
+        if (keycode == Input.Keys.UP) {
+            tankWars.getPlayer().getTank().setRightMove(true);
+        }
+
+        if (keycode == Input.Keys.DOWN) {
+            tankWars.getPlayer().getTank().setRightMove(true);
+        }
+
         return true;
     }
 
