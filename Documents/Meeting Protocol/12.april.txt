@@ -1,0 +1,67 @@
+﻿Meeting Agenda
+
+
+Date: 2018-04-12
+
+
+Participants:  Patricia Zabecka, Carl Lundborg, Thomas Jinton, Adam Kjäll, Leyla Arale.
+
+
+1. Objectives (5 min). Resolve any issues preventing the team to continue. 
+
+
+* Klona projektet, få det att funka på allas datorer.
+* Börja med design modell.
+* Skriv klart RAD för iteration 1.
+
+
+Hur ska vi göra terrängen?
+* Kommer fram till att bitmap kan användas.
+‘
+
+
+5. TODO 
+
+
+* dela alla tutorials (som vi har gjort på egen hand med libgdx) på github! 
+   * minst 15 rader kod per person
+* ha en 3D kamera för skotten?
+* ändra spelet till 3D om vi har tid i slutet.
+* FIXA USE CASES
+   * Lägg till use cases som fattas - varje ring representeras av ett use case?
+   * Ska kunna koda utifrån ett use case - beskriv tydligt!
+   * Lägg till use case för select weapon - hur väljer man vapen? 
+
+
+Tanks - hur ska de placeras på marken? 
+* relativt till varandra? 
+
+
+Default - vem som ska 
+
+
+Lägg till skott-objekt! - shot klass...ska ha position m.m.
+
+
+Use case sequence diagram (2-3 stycken) - gör några → koda sedan utifrån dem, skriv test först! 
+
+
+Tills nästa möte:
+
+
+USE CASES
+
+
+Adam - Back, välj namn på spelare, välj färg.                
+
+
+Thomas - start game, move, aim
+
+
+Carl - Game over, play again
+
+
+Leyla - shoot, main menu
+
+
+Patricia - round over.

@@ -1,0 +1,69 @@
+﻿Meeting Agenda
+
+
+Date: 2018-03-28
+
+
+Chair:
+
+
+Participants: Patricia Zabecka, Carl Lundborg, Thomas Jinton, Adam Kjäll.
+
+
+1. Objectives (5 min). Resolve any issues preventing the team to continue. 
+
+
+Vilka klasser behöver vi ta med i domänmodellen?
+Vilka metoder och attribut ska de ha?
+Hur ska klasserna bete sig och hur ska de vara relaterade till varandra?
+
+
+2. Reports (15 min) from previous meeting - Each group member reports outcome of assigned issues, see also 4) 
+
+
+Använder oss av de klasser vi tog ut från våra use cases. 
+
+
+Carl - har hittat bra information om hur terrängen för vårt spel kan programmeras.
+
+
+
+
+3. Discussion items (35 min) - Discuss issues from 1 and 2, possibly new or more general issues (very short notes and/or keywords) 
+
+
+Skissar ett enkelt UML diagram som ska representera vår domänmodell. 
+
+
+Diskuterar om spelet ska vara i 3D, vi bestämmer oss att hålla det öppet.
+
+
+Bestämmer att libgdx ska användas. 
+
+
+Vi tänker att terrängen är det första som ska programmeras och testas. 
+* Kolla om den beter sig så som den ska genom att kasta bomber på den?
+När vi har skapat en fungerande terräng kan man dela upp arbetet mer. 
+
+
+4. Outcomes and assignments (5 min)
+
+
+Läsa på om libgdx under påsklovet.
+Hitta mer information om hur terrängen ska kodas. 
+
+
+
+
+5. Wrap up
+
+
+Alla läser in sig på sådant som kan vara användbart för spelet.
+Testa lite själv - till exempel koda egna landskap.
+Sätta sig in i libgdx!
+
+
+Patricia - ta igen workshopen...
+
+
+Nästa möte: någon gång efter påsk.

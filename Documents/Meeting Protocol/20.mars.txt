@@ -1,0 +1,255 @@
+﻿Meeting Agenda
+
+
+Date: 2018-03-20
+
+
+Chair:
+
+
+Participants: Patricia Zabecka, Carl Lundborg, Thomas Jinton, Adam Kjäll.
+
+
+1. Objectives (5 min). Resolve any issues preventing the team to continue. 
+
+
+Bestämma vilket spel vi ska programmera.
+
+
+2. Reports (15 min) from previous meeting - Each group member reports outcome of assigned issues, see also 4) 
+
+
+Det här var vårt första möte.
+
+
+3. Discussion items (35 min) - Discuss issues from 1 and 2, possibly new or more general issues (very short notes and/or keywords) 
+
+
+Olika spel ideér diskuterades...
+
+
+4. Outcomes and assignments (5 min)
+
+
+Vi valde Tank Wars.
+Bra spel att utveckla med ett objektorienterat tänk. 
+Lätt att utöka.
+
+
+Alla i gruppen ska fundera på användarkrav tills nästa möte. 
+
+
+5. Wrap up
+
+
+* Nästa möte: 2018-02-21 kl 9:00
+* Bestämma krav för vårt spel.’
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Meeting Agenda
+
+
+Date: 2018-03-21
+
+
+Chair: ?
+
+
+Participants:  Patricia Zabecka, Carl Lundborg, Thomas Jinton, Adam Kjäll
+
+
+1. Objectives (5 min). Resolve any issues preventing the team to continue. 
+
+
+* Decide use requirements.
+* Sketch a prototype.
+* Make Use Case Tables for each action in the game.
+* Make a Use Case Diagram.
+
+
+2. Reports (15 min) from previous meeting - Each group member reports outcome of assigned issues, see also 4) 
+
+
+As discussed during the previous meeting, each member had to think about some requirements for the game as well as some appropriate use cases.
+
+
+3. Discussion items (35 min) - Discuss issues from 1 and 2, possibly new or more general issues (very short notes and/or keywords) 
+
+
+During the meeting the group only had time to come up with some functional requirements for the game. Also a use case diagram was made where functions and actions were included. The complete diagram can be found here: https://drive.google.com/drive/folders/1vHwz__SVo_bkRlw234u33EMXGRtzbiIF 
+
+
+4. Outcomes and assignments (5 min)
+
+
+Since the group didn’t have time to create the prototype and the use case tables, following assignments were made between the group members:
+
+
+Thomas
+* use case för start → set options
+Carl
+* Table for the move action.
+Adam 
+* Table for the aim action. 
+
+
+Patricia/Leyla
+* Table for the shoot action.
+* Sketch the prototype - interface for start menu and gameplay. 
+
+
+
+
+5. Wrap up
+
+
+The assignments should be finished until the next meeting.
+
+
+Next meeting: The mandatory meeting with Joachim 2018-03-22.
+
+
+Tankar/frågor till nästa möte:
+* Vad får man power ifrån?
+   * Bensin som ramlar ner, power ups efter att man samlat x antal poäng?
+* AI - hur strategisk ska datorn vara?
+* Poängsystem - hur ska vi lösa det?
+   * Scoreboard när game over.  
+* Olika styrkor på skotten? → också en box eller automatisk uppgradering baserad på antalet poäng? 
+* Hur byter vi spelare?
+   * Ska man byta för varje skott?
+* Help menu?
+* Wind direction?
+* Health rate - ska man dö så snabbt man träffas?
+* Hur ska man kunna röra sig (ta sig upp/ner för ojämnheter)
+* Antalet player-rutor i game options ändras baserat på valt antal spelare
+   * om man väljer 5 spelare genereras 5 rutor i game options gränssnittet (se prototyp). 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Meeting Agenda
+
+
+Date: 2018-03-26
+
+
+Chair:
+
+
+Participants: Patricia Zabecka, Carl Lundborg, Thomas Jinton.
+
+
+1. Objectives (5 min). Resolve any issues preventing the team to continue. 
+
+
+* Diskutera tankar och frågor som dök upp på förra mötet.
+* Förtydliga use cases med tydliga förklaringar om vad användaren ser.
+* Börja med domänmodellen.
+* Börja skriva RAD.
+
+
+2. Reports (15 min) from previous meeting - Each group member reports outcome of assigned issues, see also 4) 
+
+
+Alla gruppmedlemmar blev klara med utvalda use cases, dessa måste dock skrivas om efter feedback från Joachim. 
+
+
+Under dagens möte samarbetade gruppen med RAD dokumentationen samt med att förbättra varje use case. 
+
+
+
+
+3. Discussion items (35 min) - Discuss issues from 1 and 2, possibly new or more general issues (very short notes and/or keywords) 
+
+
+Vilket program ska användas för domänmodellen?
+Hur ska UML diagrammen göras? 
+* Vilka klasser och metoder behövs?
+* Vilka beroenden och arv ska de olika klasserna ha?
+
+
+4. Outcomes and assignments (5 min)
+
+
+Första versionen av RAD dokumentationen är nästan klar, det är bara domänmodellen som saknas. Några frågor dök upp under mötets gång, dessa listas i nästa punkt (se 5.)
+
+
+
+
+5. Wrap up
+
+
+Questions: 
+-Hur mycket dokumentation krävs för att vår RAD ska vara bra nog? Behövs vissa delar vara mer tydliga eller räcker det med generella svar? 
+-Domain model program samt UML?
+-GitHub desktop?
+
+
+Nästa möte: 2018-03-28 kl 08:00 (Göra klart och maila domänmodellen)
