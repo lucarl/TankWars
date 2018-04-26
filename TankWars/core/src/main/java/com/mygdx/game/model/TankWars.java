@@ -2,17 +2,20 @@ package com.mygdx.game.model;
 
 
 public class TankWars {
-    private int angle;
-    Player player = new Player(new Tank(new Position(30, 0), 50, 50, 90));
+    private int angle; // Behövs denna?
+    Player player = new Player(new Tank(new Position(1,1), 100, 1000, 90, 0));
 
     public Shot shoot(int power, int angle) {
         Tank tank = player.getTank();
-        Shot shot = tank.shootTank(power, angle);
+        Shot shot = tank.fire(power, angle);
         return shot;
     }
 
-    public void aim(int a) {
-        angle = a;
+    public int aim(int i, boolean keyPressed) {
+        // skicka in 0 för att öka vinkel (vänster), skicka in 1 för att minska vinkeln.
+        // keyPressed = true när användaren håller ned en knapp
+        Tank tank = player.getTank();
+        return tank.aim(i, keyPressed);
     }
 
     public int getAngle() {

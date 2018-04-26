@@ -6,27 +6,24 @@ package com.mygdx.game.model;
 public class Shot {
     private static final float GRAVITY = -9.8f;
     private double[] vector = new double[2]; // speed
-    private int x, y;
-    private int damage;
-    private float radius;
-    private float weight;
+    private Position position;
+    private static float radius = 10;
+    private static float weight = 100;
+
+    // private int damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
 
 
-
-    public Shot(int x, int y, int angle, int power, int damage, float radius, float weight){
-        this.x = x;
-        this.y = y;
+    public Shot(Position p, int angle, int power){
+        this.position = p;
         this.vector[0] = Math.cos(angle) * power; // x speed
         this.vector[1] = Math.sin(angle) * power; // y speed
-        this.damage = damage;
-        this.radius = radius;
-        this.weight = weight;
+        //this.damage = damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
     }
 
-    public void update(float delta) {
-        x += vector[0] * delta;
-        if(y >= 0){
-            y += vector[1];
+    public void updatePostion(float delta) {
+        position.x += vector[0] * delta;
+        if(position.y >= 0){
+            position.y += vector[1];
             vector[1] += GRAVITY;
 
         }
