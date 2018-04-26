@@ -15,6 +15,9 @@ public class Tank {
     private boolean rightMove;
     private boolean leftMove;
 
+    private boolean rightAim;
+    private boolean leftAim;
+
     //konstant för vår hastighet
     private final int speed = 10;
 
@@ -31,18 +34,14 @@ public class Tank {
        return new Shot (positionTank, angle, power);
     }
 
-    public int aim(int i, boolean keyPressed, float delta){
-        // skicka in 0 för att öka vinkel (vänster), skicka in 1 för att minska vinkeln.
-        // keyPressed = true när användaren håller ned en knapp
-        while (keyPressed) {
-            if (i == 0) {
-                this.angle += delta;
+    public float aim(float delta){
+            if (rightAim) {
+                this.angle = angle < 180 ? angle + speed * delta : 180;
             }
 
-            if (i == 1) {
-                this.angle -= delta;
+            if (leftAim) {
+                this.angle = angle > 0 ? angle - speed * delta : 0;
             }
-        }
         return angle;
 
     }
