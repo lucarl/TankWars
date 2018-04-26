@@ -20,6 +20,14 @@ public class Shot {
         //this.damage = damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
     }
 
+    public double[] getVector() {
+        return vector;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
     public void updatePostion(float delta) {
         position.x += vector[0] * delta;
         if(position.y >= 0){
@@ -27,5 +35,6 @@ public class Shot {
             vector[1] += GRAVITY;
 
         }
+
     }
 }
