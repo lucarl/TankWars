@@ -11,6 +11,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = FlappyBird.WIDTH;
 		config.height = FlappyBird.HEIGHT;
+		config.title = FlappyBird.TITLE;
 		new LwjglApplication(new Controller(), config);
 	}
 }

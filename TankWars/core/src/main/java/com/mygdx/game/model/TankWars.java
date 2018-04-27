@@ -5,8 +5,8 @@ public class TankWars {
     Player player = new Player(new Tank(new Position(100,50), 100, 1000, 90));
 
     public void fire(int power) {
-        Tank tank = player.getTank();
-        tank.fireTank(power);
+        player.getTank().fireTank(power);
+
 
     }
 

@@ -14,6 +14,7 @@ public class Tank {
     private String tankImgSrc = "tank14.png";
     private String gunImgSrc = "toptube.png";
 
+
     private boolean rightMove;
     private boolean leftMove;
 

@@ -57,14 +57,15 @@ public class Controller extends Game implements InputProcessor {
             tankWars.getPlayer().getTank().setRightAim(true);
         }
 
+        if (keycode == Input.Keys.SPACE) {
+            tankWars.fire(20);
+        }
 
         return true;
     }
 
     public boolean keyUp(int keycode) {
-        if (keycode == Input.Keys.SPACE) {
-            tankWars.fire(50);
-        }
+
         if (keycode == Input.Keys.LEFT) {
             tankWars.getPlayer().getTank().setLeftMove(false);
         }

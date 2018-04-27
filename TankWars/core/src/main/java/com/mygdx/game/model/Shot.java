@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
  * Created by Carl on 2018-04-23.
  */
 public class Shot {
-    private static final float GRAVITY = -9.8f;
+    private static final float GRAVITY = -0.05f;
     private double[] vector = new double[2]; // speed
     private Position position;
     private static float radius = 10;
@@ -17,8 +17,8 @@ public class Shot {
 
 
     public Shot(Position p, float angle, int power){
-        this.position = p;
-        this.vector[0] = Math.cos(angle) * power; // x speed
+        this.position = new Position(p.getX(), p.getY());
+        this.vector[0] = Math.cos(angle) * 10 * power; // x speed
         this.vector[1] = Math.sin(angle) * power; // y speed
         //this.damage = damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
     }
