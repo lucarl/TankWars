@@ -2,22 +2,17 @@ package com.mygdx.game.model;
 
 
 public class TankWars {
-    private int angle; // Behövs denna?
-    Player player = new Player(new Tank(new Position(100,200), 100, 1000, 90));
+    Player player = new Player(new Tank(new Position(100,50), 100, 1000, 90));
 
-    public Shot fire(int power) {
+    public void fire(int power) {
         Tank tank = player.getTank();
-        Shot shot = tank.fireTank(power);
-        return shot;
+        tank.fireTank(power);
+
     }
 
     public float aim(float delta) {
         Tank tank = player.getTank();
         return tank.aimTank(delta);
-    }
-
-    public int getAngle() {
-        return angle;
     }
 
     public Player getPlayer() {
