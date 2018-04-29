@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.ctrl.Controller;
@@ -20,7 +21,6 @@ public class PlayScreen implements Screen {
     private TankWars tankWars;
     private Controller controller;
 
-    private OrthographicCamera gameCam;
     private Viewport gamePort;
     private Hud hud;
 
@@ -38,8 +38,8 @@ public class PlayScreen implements Screen {
         this.controller = controller;
         this.tankWars = tankWars;
 
-        gameCam = new OrthographicCamera();
-        gamePort = new ScreenViewport();
+
+        gamePort = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         hud = new Hud(controller.batch, tankWars);
 
     }
@@ -77,9 +77,6 @@ public class PlayScreen implements Screen {
 
         //controller.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 
-        hud.update(delta);
-        hud.stage.draw();
-
         controller.batch.begin();
 
 
@@ -104,8 +101,10 @@ public class PlayScreen implements Screen {
             shotSprite.draw(controller.batch);
          }
 
-
         controller.batch.end();
+
+        hud.update(delta);
+        hud.stage.draw();
 
         //stage.act(delta);
         //stage.draw();

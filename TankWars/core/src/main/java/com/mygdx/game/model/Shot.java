@@ -35,10 +35,10 @@ public class Shot {
     }
 
     public void updatePostion(float delta) {
-        if(position.getX() > 0 && position.getX() < 1000){
+        if(position.getX() > 0 && position.getX() < 965){
             position.setX(position.getX() + vector[0] * delta * speed);
         }
-        if(position.getY() > 0 && position.getY() < 1000){
+        if(position.getY() > 0){
             position.setY(position.getY() + vector[1] * delta * speed);
             vector[1] += GRAVITY;
 

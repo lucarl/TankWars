@@ -8,11 +8,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.model.TankWars;
 
-public class Hud {
+public class Hud implements Disposable{
     private TankWars tankWars;
     public Stage stage;
     private Viewport viewport;
@@ -43,7 +44,7 @@ public class Hud {
         hp = tankWars.getPlayer().getTank().getHealthPoints();
         wind = 10;
 
-        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
+        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage = new Stage(viewport, batch);
 
         Table table = new Table();
@@ -58,7 +59,7 @@ public class Hud {
         angleLabel = new Label(String.format("Angle: %.0f", angle), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         powerLabel = new Label(String.format("Power: %03f", power), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         fuelLabel = new Label(String.format("Fuel: %03f", fuel), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        windLabel = new Label(String.format("Wind: %03d <-", wind), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        windLabel = new Label(String.format("Wind: %03d <--", wind), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(nameLabel).expandX().padTop(5);
         table.add(scoreLabel).expandX().padTop(5);
@@ -87,5 +88,11 @@ public class Hud {
         powerLabel.setText(String.format("Power: %.0f", power));
         fuelLabel.setText(String.format("Fuel: %.0f", fuel));
         windLabel.setText(String.format("Wind: %02d <-", wind));
+    }
+
+
+    @Override
+    public void dispose() {
+        stage.dispose();
     }
 }
