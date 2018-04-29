@@ -2,12 +2,15 @@ package com.mygdx.game.model;
 
 
 public class TankWars {
-    Player player = new Player(new Tank(new Position(100,50), 100, 1000, 90));
+    private Player currentPlayer;
+    Player player = new Player(new Tank(new Position(500,300), 100, 100, 90));
 
-    public void fire(int power) {
-        player.getTank().fireTank(power);
+    public TankWars() {
+        currentPlayer = player;
+    }
 
-
+    public void fire() {
+        player.getTank().fireTank();
     }
 
     public float aim(float delta) {
@@ -16,11 +19,12 @@ public class TankWars {
     }
 
     public Player getPlayer() {
-        return player;
+        return currentPlayer;
     }
 
     public Position move(float delta){
         return player.getTank().moveTank(delta);
     }
+
 
 }

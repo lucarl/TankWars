@@ -1,6 +1,7 @@
 package com.mygdx.game.ctrl;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.model.Shot;
 import com.mygdx.game.model.TankWars;
 import com.mygdx.game.view.PlayScreen;
@@ -15,12 +16,14 @@ public class Controller extends Game implements InputProcessor {
 
     private Screen screen;
     private TankWars tankWars;
+    public SpriteBatch batch;
 
     public Controller(TankWars tankWars) {
         this.tankWars = tankWars;
     }
 
     public void create() {
+        batch = new SpriteBatch();
         screen = new StartScreen(this);
         setScreen(screen);
     }
@@ -58,7 +61,14 @@ public class Controller extends Game implements InputProcessor {
         }
 
         if (keycode == Input.Keys.SPACE) {
-            tankWars.fire(20);
+            tankWars.fire();
+        }
+
+        if(keycode == Input.Keys.A){
+            tankWars.getPlayer().getTank().increasePower();
+        }
+        if(keycode == Input.Keys.Z){
+            tankWars.getPlayer().getTank().decreasePower();
         }
 
         return true;
