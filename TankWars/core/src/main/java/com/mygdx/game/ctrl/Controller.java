@@ -4,6 +4,7 @@ import com.badlogic.gdx.*;
 import com.mygdx.game.model.Shot;
 import com.mygdx.game.model.TankWars;
 import com.mygdx.game.view.PlayScreen;
+import com.mygdx.game.view.PlayScreenTest;
 import com.mygdx.game.view.StartScreen;
 
 
@@ -20,13 +21,17 @@ public class Controller extends Game implements InputProcessor {
         this.tankWars = tankWars;
     }
 
+    @Override
     public void create() {
+        setStartScreen();
+    }
+
+    public void setStartScreen() {
         screen = new StartScreen(this);
         setScreen(screen);
     }
 
-    public void setBaseScreen() {
-        screen.dispose();
+    public void setPlayScreen() {
         screen = new PlayScreen(this, tankWars);
         setScreen(screen);
     }
@@ -34,9 +39,8 @@ public class Controller extends Game implements InputProcessor {
     @Override
     public void render() {
         super.render();
-        tankWars.move(Gdx.graphics.getDeltaTime());
-        tankWars.aim(Gdx.graphics.getDeltaTime());
-        tankWars.getPlayer().getTank().getShot().updatePostion(Gdx.graphics.getDeltaTime());
+        float delta = Gdx.graphics.getDeltaTime();
+        tankWars.update(delta);
 
     }
 
@@ -50,11 +54,11 @@ public class Controller extends Game implements InputProcessor {
         }
 
         if (keycode == Input.Keys.UP) {
-            tankWars.getPlayer().getTank().setLeftAim(true);
+            tankWars.getPlayer().getTank().getGun().setLeftAim(true);
         }
 
         if (keycode == Input.Keys.DOWN) {
-            tankWars.getPlayer().getTank().setRightAim(true);
+            tankWars.getPlayer().getTank().getGun().setRightAim(true);
         }
 
         if (keycode == Input.Keys.SPACE) {
@@ -74,11 +78,11 @@ public class Controller extends Game implements InputProcessor {
         }
 
         if (keycode == Input.Keys.UP) {
-            tankWars.getPlayer().getTank().setLeftAim(false);
+            tankWars.getPlayer().getTank().getGun().setLeftAim(false);
         }
 
         if (keycode == Input.Keys.DOWN) {
-            tankWars.getPlayer().getTank().setRightAim(false);
+            tankWars.getPlayer().getTank().getGun().setRightAim(false);
         }
 
         return true;
@@ -106,23 +110,6 @@ public class Controller extends Game implements InputProcessor {
 
     public boolean scrolled(int amount) {
         return false;
-    }
-
-    public class KeyboardListener implements KeyListener {
-
-        public void keyTyped(KeyEvent e) {
-
-        }
-
-        public void keyPressed(KeyEvent e) {
-
-        }
-
-        public void keyReleased(KeyEvent e) {
-
-        }
-
-
     }
 
 

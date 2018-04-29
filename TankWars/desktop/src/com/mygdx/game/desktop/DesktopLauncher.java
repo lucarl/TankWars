@@ -9,7 +9,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		TankWars tankWars = new TankWars();
 		Controller controller = new Controller(tankWars);
-		
+
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.foregroundFPS = 60;
 		config.width = 1000;

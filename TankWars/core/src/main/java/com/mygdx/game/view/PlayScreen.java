@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.ctrl.Controller;
-import com.mygdx.game.model.Shot;
 import com.mygdx.game.model.TankWars;
 
 public class PlayScreen implements Screen {
@@ -21,19 +20,21 @@ public class PlayScreen implements Screen {
     private Sprite shotSprite;
     private TankWars tankWars;
     private Controller controller;
-    private Stage stage = new Stage();
+
+    private Stage stage;
 
 
     public PlayScreen(Controller controller, TankWars tankWars) {
         this.controller = controller;
+        stage = new Stage();
         this.tankWars = tankWars;
-
+        this.controller = controller;
     }
 
     public void show() {
-        String tank = tankWars.getPlayer().getTank().getTankImgSrc();
-        String gun = tankWars.getPlayer().getTank().getGunImgSrc();
-        String shot = tankWars.getPlayer().getTank().getShot().getShotImgSrc();
+        String tank = tankWars.getPlayer().getTank().getImgSrc();
+        String gun = tankWars.getPlayer().getTank().getGun().getImgSrc();
+        String shot = tankWars.getPlayer().getTank().getShot().getImgSrc();
 
         batch = new SpriteBatch();
 
@@ -45,12 +46,20 @@ public class PlayScreen implements Screen {
         gunSprite = new Sprite(gunImg);
         shotSprite = new Sprite(shotImg);
 
-        tankSprite.setPosition(Gdx.graphics.getWidth() / 2 - tankSprite.getWidth() / 2,
-                Gdx.graphics.getHeight() / 2 - tankSprite.getHeight() / 2);
+        tankSprite.setPosition(tankWars.getPlayer().getTank().getPos().getX(),
+                tankWars.getPlayer().getTank().getPos().getY());
+        gunSprite.setPosition(tankWars.getPlayer().getTank().getGun().getPos().getX(),
+                tankWars.getPlayer().getTank().getGun().getPos().getY());
+        shotSprite.setPosition(tankWars.getPlayer().getTank().getShot().getPos().getX(),
+                tankWars.getPlayer().getTank().getShot().getPos().getY());
 
-        gunSprite.setPosition(tankSprite.getX() - gunImg.getWidth()/2,
-                              tankSprite.getY() + gunImg.getHeight() / 2);
-        shotSprite.setPosition(gunSprite.getX(), gunSprite.getY());
+        tankSprite.setSize(tankWars.getPlayer().getTank().getWidth(),
+                tankWars.getPlayer().getTank().getHeight());
+        gunSprite.setSize(tankWars.getPlayer().getTank().getGun().getWidth(),
+                tankWars.getPlayer().getTank().getGun().getHeight());
+        shotSprite.setSize(tankWars.getPlayer().getTank().getShot().getWidth(),
+                tankWars.getPlayer().getTank().getShot().getHeight());
+
 
         Gdx.input.setInputProcessor(controller);
     }
@@ -60,23 +69,20 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
 
-        double x = tankWars.getPlayer().getTank().getPositionTank().getX();
-        double y = tankWars.getPlayer().getTank().getPositionTank().getY();
-
-        tankSprite.setPosition((float)x, (float)y);
+        tankSprite.setPosition(tankWars.getPlayer().getTank().getPos().getX(),
+                tankWars.getPlayer().getTank().getPos().getY());
         tankSprite.draw(batch);
 
         gunSprite.draw(batch);
-        gunSprite.setPosition((float)(x + tankSprite.getWidth()/2 + gunSprite.getWidth() / 2),
-                (float)(y + tankSprite.getHeight() * 0.8f));
-        gunSprite.setScale(0.5f);
+        gunSprite.setPosition(tankWars.getPlayer().getTank().getGun().getPos().getX(),
+                tankWars.getPlayer().getTank().getGun().getPos().getY());
         // Todo placera ut tankguns origo korrekt
-        gunSprite.setOrigin((float)x-50, (float)y - 50);
-        gunSprite.setRotation(tankWars.getPlayer().getTank().getAngle());
+        gunSprite.setOrigin(tankWars.getPlayer().getTank().getGun().getPos().getX(),
+                tankWars.getPlayer().getTank().getGun().getPos().getY());
+        gunSprite.setRotation(tankWars.getPlayer().getTank().getGun().getAngle());
 
-
-        shotSprite.setPosition((float)tankWars.getPlayer().getTank().getShot().getPosition().getX(),
-                               (float)tankWars.getPlayer().getTank().getShot().getPosition().getY());
+        shotSprite.setPosition( tankWars.getPlayer().getTank().getShot().getPosition().getX(),
+                    tankWars.getPlayer().getTank().getShot().getPosition().getY());
         shotSprite.draw(batch);
 
         batch.end();
@@ -85,15 +91,12 @@ public class PlayScreen implements Screen {
         stage.draw();
 
         System.out.println("Angle: " + tankWars.getPlayer().getTank().getAngle() +
-                        "\n Tankpos: (" + tankWars.getPlayer().getTank().getPositionTank().getX() +
-                                ", " + tankWars.getPlayer().getTank().getPositionTank().getX() + ")" +
-                        "\n Shotpos: (" + tankWars.getPlayer().getTank().getShot().getPosition().getX() +
-                        ", " + tankWars.getPlayer().getTank().getShot().getPosition().getY() + ")");
+                "\n Tankpos: (" + tankWars.getPlayer().getTank().getPos().getX() +
+                ", " + tankWars.getPlayer().getTank().getPos().getX() + ")" +
+                "\n Shotpos: (" + tankWars.getPlayer().getTank().getShot().getPosition().getX() +
+                ", " + tankWars.getPlayer().getTank().getShot().getPosition().getY() + ")");
 
     }
-
-
-
 
     public void resize(int width, int height) {
 
