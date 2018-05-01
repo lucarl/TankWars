@@ -1,70 +1,65 @@
 package com.mygdx.game.model;
 
 
-import java.awt.event.KeyEvent;
+public class Tank implements IDrawable {
+    private static String tankImgSrc = "tank14.png";
+    private static int width = 80;
+    private static int height = 45;
+    private static int originX = width / 2;
+    private static int originY = height / 2;
+    private static final int speed = 150;
+    private static int positionOffset = 100;
 
-public class Tank {
-
-
-    private Position positionTank;
+    private Position pos;
+    private float angle;
     private int healthPoints;
     private float fuel;
-    private float angle;
-    private Shot shot;
-    private float power;
-    private String tankImgSrc = "tank14.png";
-    private String gunImgSrc = "toptube.png";
+    private TankGun gun;
 
-
+    private boolean isVisible;
     private boolean rightMove;
     private boolean leftMove;
 
-    private boolean rightAim;
-    private boolean leftAim;
+    private CollisionRect rect;
 
-    //konstant för vår hastighet
-    private final int speed = 80;
-    private final int aimSpeed = 50;
+    public Tank() {
+        this.pos = new Position(positionOffset, 0);
+        this.angle = 0;
+        this.healthPoints = 100;
+        this.fuel = 100;
+        // Place the gun on the tank
+        this.gun = new TankGun(new Position(pos.getX() + width / 2, pos.getY() + height));
 
+        isVisible = true;
+        rightMove = false;
+        leftMove = false;
+        positionOffset += 200;
 
-
-    public Tank(Position position, int healthPoints, int fuel, int angle) {
-        this.positionTank = position;
-        this.healthPoints = healthPoints;
-        this.fuel = fuel;
-        this.angle = angle;
-        power = 0.5f;
-        this.shot = new Shot(position, angle, power);
+        rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
     }
 
-    public void fireTank() {// döper om till fire för att inte blanda ihop med Shot klassen
-        shot = new Shot(positionTank, angle, power);
-        shot.setVisible(true);
-    }
-
-    public float aimTank(float delta) {
-        if (rightAim) {
-            this.angle = angle < 110 ? angle + aimSpeed * delta : 110;
+    public Shot fire(){
+        if(isVisible){
+            return gun.fire();
         }
-
-        if (leftAim) {
-            this.angle = angle > -110 ? angle - aimSpeed * delta : -110;
-        }
-        return angle;
+        return gun.getShot();
     }
 
     public Position moveTank(float delta) {
 
-        if (rightMove && fuel > 0) {
-            positionTank.setX(positionTank.getX() + speed * delta);
+        if (rightMove && fuel > 0 && isVisible) {
+            pos.setX(pos.getX() + speed * delta);
+            rect.move(pos.getX(), pos.getY());
             decreaseFuel();
         }
 
-        if (leftMove && fuel > 0) {
-            positionTank.setX(positionTank.getX() - speed * delta);
+        if (leftMove && fuel > 0 && isVisible) {
+            pos.setX(pos.getX() - speed * delta);
+            rect.move(pos.getX(), pos.getY());
             decreaseFuel();
         }
-        return this.positionTank;
+        gun.setPos(pos, width, height);
+        return this.pos;
     }
 
     public void setLeftMove(boolean b) {
@@ -81,19 +76,6 @@ public class Tank {
         rightMove = b;
     }
 
-    public void setLeftAim(boolean b) {
-        if (rightAim && b) {
-            rightAim = false;
-        }
-        leftAim = b;
-    }
-
-    public void setRightAim(boolean b) {
-        if (leftAim && b) {
-            leftAim = false;
-        }
-        rightAim = b;
-    }
 
     private double decreaseFuel() {
         if (leftMove || rightMove) {
@@ -102,44 +84,63 @@ public class Tank {
         return this.fuel;
     }
 
-    public float getPower() {
-        return power;
+    public TankGun getGun(){
+        return gun;
     }
-
-    public void increasePower() {
-        power = power >= 0 && power <= 1 ? power + 0.05f : this.power;
-    }
-
-    public void decreasePower() {
-        power = power >= 0 && power <= 1 ? power - 0.05f : this.power;
-    }
-
-    public String getGunImgSrc() {
-        return gunImgSrc;
-    }
-
-    public String getTankImgSrc() {
+    @Override
+    public String getImgSrc() {
         return tankImgSrc;
     }
 
-    public Position getPositionTank() {
-        return positionTank;
+    @Override
+    public Position getPos() {
+        return pos;
     }
-
 
     public int getHealthPoints() {
         return healthPoints;
     }
 
-    public Shot getShot() {
-        return shot;
-    }
 
     public float getFuel() {
         return fuel;
     }
 
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
     public float getAngle() {
         return angle;
     }
+
+    @Override
+    public int getOriginX() {
+        return 0;
+    }
+
+    @Override
+    public int getOriginY() {
+        return 0;
+    }
+
+    @Override
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisibility(boolean bool) {
+        isVisible = bool;
+    }
+
+    public CollisionRect getRect() {
+        return rect;
+    }
+
 }

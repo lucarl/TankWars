@@ -7,14 +7,14 @@ import com.mygdx.game.model.TankWars;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		TankWars tankWars = new TankWars();
+		TankWars tankWars = new TankWars(3, 3);
 		Controller controller = new Controller(tankWars);
 		
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Tank Wars";
 		config.foregroundFPS = 60;
-		config.width = 1000;
-		config.height = 600;
+		config.width = Controller.GAME_WIDTH;
+		config.height = Controller.GAME_HEIGHT;
 		new LwjglApplication(controller, config);
 	}
 }
