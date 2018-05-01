@@ -41,11 +41,7 @@ public class Controller extends Game implements InputProcessor {
     public void render() {
         super.render();
         float delta = Gdx.graphics.getDeltaTime();
-        tankWars.move(delta);
-        tankWars.aim(delta);
-        tankWars.getPlayer().getTank().getGun().getShot().updatePostion(delta);
-
-
+        tankWars.gameLoop(delta);
     }
 
     public boolean keyDown(int keycode) {

@@ -2,8 +2,8 @@ package com.mygdx.game.model;
 
 public class TankGun implements IDrawable {
     private static String imgSrc = "toptube.png";
-    private static int width = 20;
-    private static int height = 80;
+    private static int width = 10;
+    private static int height = 40;
     private static int originX = width / 2;
     private static int originY = 0;
     private static final int speed = 50;
@@ -19,10 +19,10 @@ public class TankGun implements IDrawable {
     private Shot shot;
 
     public TankGun(Position pos) {
-        this.pos = new Position(pos.getX(), pos.getY());
+        this.pos = pos;
         angle = 0;
         power = 0.5f;
-        shot = new Shot(new Position(pos.getX() + width / 2, pos.getY() + height), angle, 0);
+        shot = new Shot(new Position(pos.getX(), pos.getY() + height * 0.8f), angle, 0);
         specialShot = false;
         isVisible = true;
         rightAim = false;

@@ -3,11 +3,11 @@ package com.mygdx.game.model;
 
 public class Tank implements IDrawable {
     private static String tankImgSrc = "tank14.png";
-    private static int width = 120;
-    private static int height = 85;
+    private static int width = 80;
+    private static int height = 45;
     private static int originX = 0;
     private static int originY = 0;
-    private static final int speed = 80;
+    private static final int speed = 150;
     private static int positionOffset = 100;
 
     private Position pos;
@@ -20,6 +20,8 @@ public class Tank implements IDrawable {
     private boolean isVisible;
     private boolean rightMove;
     private boolean leftMove;
+
+    private CollisionRect rect;
 
     public Tank() {
         this.pos = new Position(positionOffset, 100);
@@ -34,17 +36,21 @@ public class Tank implements IDrawable {
         rightMove = false;
         leftMove = false;
         positionOffset += 200;
+
+        rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
     }
 
     public Position moveTank(float delta) {
 
         if (rightMove && fuel > 0) {
             pos.setX(pos.getX() + speed * delta);
+            rect.move(pos.getX(), pos.getY());
             decreaseFuel();
         }
 
         if (leftMove && fuel > 0) {
             pos.setX(pos.getX() - speed * delta);
+            rect.move(pos.getX(), pos.getY());
             decreaseFuel();
         }
         gun.setPos(pos, width, height);

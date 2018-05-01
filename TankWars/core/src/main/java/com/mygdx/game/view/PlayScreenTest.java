@@ -61,10 +61,11 @@ public class PlayScreenTest implements Screen {
 
         // For each object update it's corresponding sprite with the objects state
         sprites.forEach((obj, sprite) -> {
-            sprite.setPosition(obj.getPos().getX(), obj.getPos().getY());
             sprite.setRotation(obj.getAngle());
+            sprite.setPosition(obj.getPos().getX(), obj.getPos().getY());
 
-                sprite.draw(controller.batch);
+            // If visible -> draw
+            sprite.draw(controller.batch);
 
         });
         controller.batch.end();
