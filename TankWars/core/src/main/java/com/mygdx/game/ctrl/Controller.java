@@ -17,6 +17,8 @@ public class Controller extends Game implements InputProcessor {
     private Screen screen;
     private TankWars tankWars;
     public SpriteBatch batch;
+    public static final int GAME_WIDTH = 1000;
+    public static final int GAME_HEIGHT = 600;
 
     public Controller(TankWars tankWars) {
         this.tankWars = tankWars;

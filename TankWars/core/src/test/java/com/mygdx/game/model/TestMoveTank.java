@@ -15,7 +15,7 @@ public class TestMoveTank {
         tank.setRightMove(true);
         tank.moveTank(Gdx.graphics.getDeltaTime());
 
-        assertTrue(  30 < tank.getPositionTank().getX());
+        assertTrue(  30 < tank.getPos().getX());
     }
 
     @Test
@@ -25,7 +25,7 @@ public class TestMoveTank {
         tank.setLeftMove(true);
         tank.moveTank(Gdx.graphics.getDeltaTime());
 
-        assertTrue(  30 > tank.getPositionTank().getX());
+        assertTrue(  30 > tank.getPos().getX());
     }
 
 

@@ -1,70 +1,51 @@
 package com.mygdx.game.model;
 
 
-import java.awt.event.KeyEvent;
+public class Tank implements IDrawable {
+    private static String tankImgSrc = "tank14.png";
+    private static int width = 120;
+    private static int height = 85;
+    private static int originX = 0;
+    private static int originY = 0;
+    private static final int speed = 80;
 
-public class Tank {
-
-
-    private Position positionTank;
+    private Position pos;
+    private float angle;
     private int healthPoints;
     private float fuel;
-    private float angle;
-    private Shot shot;
     private float power;
-    private String tankImgSrc = "tank14.png";
-    private String gunImgSrc = "toptube.png";
 
+    private TankGun gun;
 
     private boolean rightMove;
     private boolean leftMove;
 
-    private boolean rightAim;
-    private boolean leftAim;
-
-    //konstant för vår hastighet
-    private final int speed = 80;
-    private final int aimSpeed = 50;
-
-
-
     public Tank(Position position, int healthPoints, int fuel, int angle) {
-        this.positionTank = position;
+        this.pos = position;
         this.healthPoints = healthPoints;
         this.fuel = fuel;
-        this.angle = angle;
+
+        // Place the gun on the tank
+        this.gun = new TankGun(new Position(pos.getX() + width / 2, pos.getY() + height));
+
+        // Default values
+        angle = 90;
         power = 0.5f;
-        this.shot = new Shot(position, angle, power);
-    }
 
-    public void fireTank() {// döper om till fire för att inte blanda ihop med Shot klassen
-        shot = new Shot(positionTank, angle, power);
-        shot.setVisible(true);
-    }
-
-    public float aimTank(float delta) {
-        if (rightAim) {
-            this.angle = angle < 110 ? angle + aimSpeed * delta : 110;
-        }
-
-        if (leftAim) {
-            this.angle = angle > -110 ? angle - aimSpeed * delta : -110;
-        }
-        return angle;
     }
 
     public Position moveTank(float delta) {
 
         if (rightMove && fuel > 0) {
-            positionTank.setX(positionTank.getX() + speed * delta);
+            pos.setX(pos.getX() + speed * delta);
             decreaseFuel();
         }
 
         if (leftMove && fuel > 0) {
-            positionTank.setX(positionTank.getX() - speed * delta);
+            pos.setX(pos.getX() - speed * delta);
             decreaseFuel();
         }
-        return this.positionTank;
+        return this.pos;
     }
 
     public void setLeftMove(boolean b) {
@@ -81,19 +62,6 @@ public class Tank {
         rightMove = b;
     }
 
-    public void setLeftAim(boolean b) {
-        if (rightAim && b) {
-            rightAim = false;
-        }
-        leftAim = b;
-    }
-
-    public void setRightAim(boolean b) {
-        if (leftAim && b) {
-            leftAim = false;
-        }
-        rightAim = b;
-    }
 
     private double decreaseFuel() {
         if (leftMove || rightMove) {
@@ -102,44 +70,49 @@ public class Tank {
         return this.fuel;
     }
 
-    public float getPower() {
-        return power;
+    public TankGun getGun(){
+        return gun;
     }
-
-    public void increasePower() {
-        power = power >= 0 && power <= 1 ? power + 0.05f : this.power;
-    }
-
-    public void decreasePower() {
-        power = power >= 0 && power <= 1 ? power - 0.05f : this.power;
-    }
-
-    public String getGunImgSrc() {
-        return gunImgSrc;
-    }
-
-    public String getTankImgSrc() {
+    @Override
+    public String getImgSrc() {
         return tankImgSrc;
     }
 
-    public Position getPositionTank() {
-        return positionTank;
+    @Override
+    public Position getPos() {
+        return pos;
     }
-
 
     public int getHealthPoints() {
         return healthPoints;
     }
 
-    public Shot getShot() {
-        return shot;
-    }
 
     public float getFuel() {
         return fuel;
     }
 
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
     public float getAngle() {
         return angle;
+    }
+
+    @Override
+    public int getOriginX() {
+        return 0;
+    }
+
+    @Override
+    public int getOriginY() {
+        return 0;
     }
 }
