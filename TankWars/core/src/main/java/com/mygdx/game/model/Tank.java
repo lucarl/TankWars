@@ -5,8 +5,8 @@ public class Tank implements IDrawable {
     private static String tankImgSrc = "tank14.png";
     private static int width = 80;
     private static int height = 45;
-    private static int originX = 0;
-    private static int originY = 0;
+    private static int originX = width / 2;
+    private static int originY = height / 2;
     private static final int speed = 150;
     private static int positionOffset = 100;
 
@@ -14,7 +14,6 @@ public class Tank implements IDrawable {
     private float angle;
     private int healthPoints;
     private float fuel;
-
     private TankGun gun;
 
     private boolean isVisible;
@@ -28,7 +27,6 @@ public class Tank implements IDrawable {
         this.angle = 0;
         this.healthPoints = 100;
         this.fuel = 100;
-
         // Place the gun on the tank
         this.gun = new TankGun(new Position(pos.getX() + width / 2, pos.getY() + height));
 
@@ -40,15 +38,22 @@ public class Tank implements IDrawable {
         rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
     }
 
+    public Shot fire(){
+        if(isVisible){
+            return gun.fire();
+        }
+        return gun.getShot();
+    }
+
     public Position moveTank(float delta) {
 
-        if (rightMove && fuel > 0) {
+        if (rightMove && fuel > 0 && isVisible) {
             pos.setX(pos.getX() + speed * delta);
             rect.move(pos.getX(), pos.getY());
             decreaseFuel();
         }
 
-        if (leftMove && fuel > 0) {
+        if (leftMove && fuel > 0 && isVisible) {
             pos.setX(pos.getX() - speed * delta);
             rect.move(pos.getX(), pos.getY());
             decreaseFuel();
@@ -125,13 +130,17 @@ public class Tank implements IDrawable {
         return 0;
     }
 
+    @Override
+    public boolean isVisible() {
+        return isVisible;
+    }
 
     public void setVisibility(boolean bool) {
         isVisible = bool;
     }
 
-    public boolean isVisible() {
-        return isVisible;
+    public CollisionRect getRect() {
+        return rect;
     }
 
 }

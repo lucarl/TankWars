@@ -76,9 +76,6 @@ public class Controller extends Game implements InputProcessor {
             tankWars.getPlayer().getTank().getGun().changeWeapon();
         }
 
-        if(keycode == Input.Keys.N){
-            tankWars.nextPlayer();
-        }
 
         return true;
     }

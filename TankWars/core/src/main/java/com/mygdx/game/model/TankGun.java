@@ -22,7 +22,7 @@ public class TankGun implements IDrawable {
         this.pos = pos;
         angle = 0;
         power = 0.5f;
-        shot = new Shot(new Position(pos.getX(), pos.getY() + height * 0.8f), angle, 0);
+        shot = new Shot(new Position(-100, -100), angle, 0);
         specialShot = false;
         isVisible = true;
         rightAim = false;
@@ -30,14 +30,17 @@ public class TankGun implements IDrawable {
     }
 
     // fires a new shot at the end of the gun
-    public void fire() {
+    public Shot fire() {
         if (specialShot) {
-            shot = new AngryShot(new Position(pos.getX() + width / 2, pos.getY() + height), angle, power);
-            shot.setVisibility(true);
+            shot.setVisibility(false);
+            shot = new AngryShot(new Position(pos.getX(), pos.getY() + height * 0.8f), angle, power);
             specialShot = false;
+            return shot;
         } else {
-            shot = new Shot(new Position(pos.getX() + width / 2, pos.getY() + height), angle, power);
-            shot.setVisibility(true);
+            shot.setVisibility(false);
+            shot = new Shot(new Position(pos.getX(), pos.getY() + height * 0.8f), angle, power);
+
+            return shot;
         }
     }
 
@@ -130,13 +133,12 @@ public class TankGun implements IDrawable {
         return originY;
     }
 
-
-    public void setVisibility(boolean bool) {
-        isVisible = bool;
-    }
-
+    @Override
     public boolean isVisible() {
         return isVisible;
     }
 
+    public void setVisibility(boolean bool) {
+        isVisible = bool;
+    }
 }

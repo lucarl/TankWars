@@ -5,16 +5,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankWars {
-    private int currentPlayer;
+    private int playerIndex;
+    private Player currentPlayer;
     private List<Player> players;
     private List<IDrawable> objects;
 
-    public TankWars(int nPlayers) {
+    private int round;
+    private int nRounds;
+
+    public TankWars(int nPlayers, int nRounds) {
         players = new ArrayList<>();
         objects = new ArrayList<>();
-        currentPlayer = 0;
 
+        setupObjects(nPlayers);
 
+        round = 0;
+        this.nRounds = nRounds;
+        playerIndex = 0;
+        currentPlayer = players.get(playerIndex);
+    }
+
+    public void gameLoop(float delta) {
+        /* TODO Check for collisions, update score, change player, check round over
+         */
+        update(delta);
+        // Check if shot hits any tank
+        for (Player playersShot : players) {
+            CollisionRect shotRect = playersShot.getTank().getGun().getShot().getRect();
+            for (Player player : players) {
+                CollisionRect tankRect = player.getTank().getRect();
+                Tank tank = player.getTank();
+                if (shotRect.collidesWith(tankRect) && tank.isVisible()) {
+                    playersShot.addScore();
+                    tank.setVisibility(false);
+                    tank.getGun().setVisibility(false);
+                    tank.setVisibility(false);
+                }
+            }
+        }
+        if(isRoundOver()){
+            System.out.println("ROUND OVER");
+        }
+    }
+
+    private void setupObjects(int nPlayers){
         for (int i = 0; i < nPlayers; i++) {
             players.add(new Player());
             objects.add(players.get(i).getTank());
@@ -23,42 +57,61 @@ public class TankWars {
         }
     }
 
-    public void gameLoop(float delta) {
-        /* TODO Check for collisions, update score, change player, check round over
-         */
-        update(delta);
-    }
-
     public void update(float delta) {
         aim(delta);
         move(delta);
-        players.get(currentPlayer).getTank().getGun().getShot().updatePostion(delta);
 
+        players.forEach(player -> {
+            player.getTank().getGun().getShot().updatePostion(delta);
+        });
     }
 
-    public void nextPlayer() {
-        currentPlayer++;
-        currentPlayer %= players.size();
+    private boolean isRoundOver() {
+        int nTanks = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if(players.get(i).getTank().isVisible()){
+                nTanks++;
+            }
+        }
+        return nTanks <= 1;
+    }
+
+    private void nextPlayer() {
+        if(currentPlayer.getTank().isVisible()){
+            playerIndex++;
+            currentPlayer = players.get(playerIndex % players.size());
+        }
+        else {
+            while(!currentPlayer.getTank().isVisible()){
+                playerIndex++;
+                currentPlayer = players.get(playerIndex % players.size());
+            }
+        }
     }
 
     public void fire() {
-        players.get(currentPlayer).getTank().getGun().fire();
+        objects.add(currentPlayer.getTank().fire());
+        nextPlayer();
     }
 
     public float aim(float delta) {
-        Tank tank = players.get(currentPlayer).getTank();
+        Tank tank = currentPlayer.getTank();
         return tank.getGun().aimTank(delta);
     }
 
-    public Player getPlayer() {
-        return players.get(currentPlayer);
+    public Position move(float delta) {
+        return currentPlayer.getTank().moveTank(delta);
     }
 
-    public Position move(float delta) {
-        return players.get(currentPlayer).getTank().moveTank(delta);
+    public Player getPlayer() {
+        return currentPlayer;
     }
+
+
 
     public List<IDrawable> getObjects() {
         return objects;
     }
+
+
 }

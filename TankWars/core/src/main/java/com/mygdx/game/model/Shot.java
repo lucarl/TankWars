@@ -1,6 +1,5 @@
 package com.mygdx.game.model;
 
-import com.badlogic.gdx.Gdx;
 import com.mygdx.game.ctrl.Controller;
 
 /**
@@ -11,6 +10,8 @@ public class Shot implements IDrawable {
     private static String imgSrc = "bird.png";
     private static int width = 15;
     private static int height = 15;
+    private static int originX = width / 2;
+    private static int originY = height / 2;
 
     private float angle = 0;
     private float radius = 10;
@@ -30,7 +31,7 @@ public class Shot implements IDrawable {
         this.pos = p;
         this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -speed; // x speed
         this.vector[1] = (float) Math.cos(Math.toRadians(angle)) * power * speed; // y speed
-        isVisible = false;
+        isVisible = true;
         rect = new CollisionRect(p.getX(), p.getY(), width, height);
         //this.damage = damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
     }
@@ -71,21 +72,24 @@ public class Shot implements IDrawable {
 
     @Override
     public int getOriginX() {
-        return 0;
+        return originX;
     }
 
     @Override
     public int getOriginY() {
-        return 0;
+        return originY;
     }
 
+    @Override
+    public boolean isVisible() {
+        return isVisible;
+    }
 
     public void setVisibility(boolean bool) {
         isVisible = bool;
     }
 
-    public boolean isVisible() {
-        return isVisible;
+    public CollisionRect getRect() {
+        return rect;
     }
-
 }
