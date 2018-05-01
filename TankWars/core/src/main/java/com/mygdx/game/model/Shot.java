@@ -42,6 +42,8 @@ public class Shot implements IDrawable {
             pos.setY(pos.getY() + vector[1] * delta * speed);
             vector[1] += GRAVITY;
             rect.move(pos.getX(), pos.getY());
+        } else {
+            setVisibility(false);
         }
     }
 

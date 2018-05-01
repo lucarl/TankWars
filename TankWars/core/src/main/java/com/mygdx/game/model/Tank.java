@@ -23,7 +23,7 @@ public class Tank implements IDrawable {
     private CollisionRect rect;
 
     public Tank() {
-        this.pos = new Position(positionOffset, 100);
+        this.pos = new Position(positionOffset, 0);
         this.angle = 0;
         this.healthPoints = 100;
         this.fuel = 100;

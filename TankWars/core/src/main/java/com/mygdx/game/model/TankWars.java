@@ -39,12 +39,13 @@ public class TankWars {
                     playersShot.addScore();
                     tank.setVisibility(false);
                     tank.getGun().setVisibility(false);
-                    tank.setVisibility(false);
+                    tank.getGun().getShot().setVisibility(false);
                 }
             }
         }
         if(isRoundOver()){
             System.out.println("ROUND OVER");
+            // TODO Display who won the round and some action to continue to next round
         }
     }
 
@@ -76,22 +77,20 @@ public class TankWars {
         return nTanks <= 1;
     }
 
-    private void nextPlayer() {
-        if(currentPlayer.getTank().isVisible()){
-            playerIndex++;
-            currentPlayer = players.get(playerIndex % players.size());
-        }
-        else {
-            while(!currentPlayer.getTank().isVisible()){
+    public void nextPlayer() {
+        playerIndex++;
+        currentPlayer = players.get(playerIndex % players.size());
+
+        while(!currentPlayer.getTank().isVisible()){
                 playerIndex++;
                 currentPlayer = players.get(playerIndex % players.size());
-            }
         }
     }
 
     public void fire() {
-        objects.add(currentPlayer.getTank().fire());
-        nextPlayer();
+        Shot shot = currentPlayer.getTank().fire();
+        objects.add(shot);
+
     }
 
     public float aim(float delta) {

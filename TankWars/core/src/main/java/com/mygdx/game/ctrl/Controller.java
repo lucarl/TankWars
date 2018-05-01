@@ -1,6 +1,8 @@
 package com.mygdx.game.ctrl;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.model.Shot;
 import com.mygdx.game.model.TankWars;
@@ -14,12 +16,12 @@ import java.awt.event.KeyListener;
 
 
 public class Controller extends Game implements InputProcessor {
-
+    public static final int GAME_WIDTH = 1000;
+    public static final int GAME_HEIGHT = 600;
     private Screen screen;
     private TankWars tankWars;
     public SpriteBatch batch;
-    public static final int GAME_WIDTH = 1000;
-    public static final int GAME_HEIGHT = 600;
+
 
     public Controller(TankWars tankWars) {
         this.tankWars = tankWars;
@@ -42,6 +44,7 @@ public class Controller extends Game implements InputProcessor {
         super.render();
         float delta = Gdx.graphics.getDeltaTime();
         tankWars.gameLoop(delta);
+
     }
 
     public boolean keyDown(int keycode) {
@@ -65,15 +68,19 @@ public class Controller extends Game implements InputProcessor {
             tankWars.fire();
         }
 
-        if(keycode == Input.Keys.A){
+        if (keycode == Input.Keys.A) {
             tankWars.getPlayer().getTank().getGun().increasePower();
         }
-        if(keycode == Input.Keys.Z){
+        if (keycode == Input.Keys.Z) {
             tankWars.getPlayer().getTank().getGun().decreasePower();
         }
 
-        if(keycode == Input.Keys.X){
+        if (keycode == Input.Keys.X) {
             tankWars.getPlayer().getTank().getGun().changeWeapon();
+        }
+
+        if (keycode == Input.Keys.N) {
+            tankWars.nextPlayer();
         }
 
 

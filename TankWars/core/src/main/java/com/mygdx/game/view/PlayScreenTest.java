@@ -2,8 +2,11 @@ package com.mygdx.game.view;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.*;
 import com.mygdx.game.ctrl.Controller;
 import com.mygdx.game.model.IDrawable;
 import com.mygdx.game.model.TankWars;
@@ -16,8 +19,12 @@ public class PlayScreenTest implements Screen {
 
     private Map<IDrawable, Sprite> sprites;
 
+    private Sprite background;
+
     private TankWars tankWars;
     private Controller controller;
+    private Viewport viewport;
+    private OrthographicCamera camera;
 
     private Hud hud;
 
@@ -27,7 +34,9 @@ public class PlayScreenTest implements Screen {
         this.tankWars = tankWars;
         sprites = new HashMap<>();
 
+
         hud = new Hud(controller.batch, tankWars);
+        background = new Sprite(new Texture("background.jpg"));
 
     }
 
@@ -40,8 +49,9 @@ public class PlayScreenTest implements Screen {
             // Sets position of sprite and its width and height
             sprite.setBounds(obj.getPos().getX(), obj.getPos().getY(),
                     obj.getWidth(), obj.getHeight());
-
         });
+
+        background.setSize(Controller.GAME_WIDTH, Controller.GAME_HEIGHT);
 
         Gdx.input.setInputProcessor(controller);
     }
@@ -51,15 +61,15 @@ public class PlayScreenTest implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         show();
-        //controller.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         controller.batch.begin();
 
+        background.draw(controller.batch);
         // For each object update it's corresponding sprite with the objects state
         sprites.forEach((obj, sprite) -> {
             sprite.setRotation(obj.getAngle());
             sprite.setPosition(obj.getPos().getX(), obj.getPos().getY());
 
-            if (obj.isVisible()){
+            if (obj.isVisible()) {
                 sprite.draw(controller.batch);
             }
         });
