@@ -80,7 +80,7 @@ public class StartScreen implements Screen {
         // Click on start button
         if (xRange && yRange && Gdx.input.justTouched()
                 || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            controller.setBaseScreen();
+            controller.setPlayScreen();
         }
     }
 

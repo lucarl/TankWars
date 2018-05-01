@@ -40,7 +40,7 @@ public class PlayScreen implements Screen {
     public void show() {
         String tank = tankWars.getPlayer().getTank().getImgSrc();
         String gun = tankWars.getPlayer().getTank().getGun().getImgSrc();
-        String shot = tankWars.getPlayer().getTank().getGun().getShot().getShotImgSrc();
+        String shot = tankWars.getPlayer().getTank().getGun().getShot().getImgSrc();
 
         //batch = new SpriteBatch();
 
@@ -53,18 +53,21 @@ public class PlayScreen implements Screen {
         shotSprite = new Sprite(shotImg);
 
 
-        tankSprite.setPosition((float) tankWars.getPlayer().getTank().getPos().getX(),
-                (float) tankWars.getPlayer().getTank().getPos().getY());
-        tankSprite.setSize(128, 88);
-        gunSprite.setPosition(tankSprite.getX(),
-                tankSprite.getY());
-        gunSprite.setSize(20, 80);
+        tankSprite.setPosition( tankWars.getPlayer().getTank().getPos().getX(),
+                 tankWars.getPlayer().getTank().getPos().getY());
+        tankSprite.setSize(tankWars.getPlayer().getTank().getWidth(), tankWars.getPlayer().getTank().getHeight());
+        gunSprite.setPosition(tankWars.getPlayer().getTank().getGun().getPos().getX(),
+                tankWars.getPlayer().getTank().getGun().getPos().getY());
+        gunSprite.setSize(tankWars.getPlayer().getTank().getGun().getWidth(),
+                tankWars.getPlayer().getTank().getGun().getHeight());
 
 
         Gdx.input.setInputProcessor(controller);
     }
 
     public void render(float delta) {
+
+
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -76,23 +79,30 @@ public class PlayScreen implements Screen {
         double x = tankWars.getPlayer().getTank().getPos().getX();
         double y = tankWars.getPlayer().getTank().getPos().getY();
 
-        tankSprite.setPosition((float) x - tankSprite.getWidth() / 2,
-                (float) y - tankSprite.getHeight() / 2);
+        tankSprite.setPosition((float) x,
+                (float) y );
         tankSprite.draw(controller.batch);
 
 
-        gunSprite.setPosition((float) (x) + gunSprite.getWidth() / 2,
-                (float) (y) + gunSprite.getHeight() / 3f);
-        gunSprite.setOrigin(gunSprite.getWidth() / 2, 0 );
-        gunSprite.setRotation(tankWars.getPlayer().getTank().getAngle());
+        gunSprite.setPosition((float)tankWars.getPlayer().getTank().getGun().getPos().getX(),
+                (float)tankWars.getPlayer().getTank().getGun().getPos().getY());
+        gunSprite.setOrigin(tankWars.getPlayer().getTank().getGun().getOriginX(), tankWars.getPlayer().getTank().getGun().getOriginY());
+        gunSprite.setRotation(tankWars.getPlayer().getTank().getGun().getAngle());
         gunSprite.draw(controller.batch);
 
 
-        if(tankWars.getPlayer().getTank().getGun().getShot().isVisible()){
-            shotSprite.setPosition((float) tankWars.getPlayer().getTank().getGun().getShot().getPosition().getX() ,
-                                    (float) tankWars.getPlayer().getTank().getGun().getShot().getPosition().getY());
+        if (tankWars.getPlayer().getTank().getGun().getShot().isVisible()) {
+            if (tankWars.getPlayer().getTank().getGun().hasSpecialShot()) {
+                String shot = tankWars.getPlayer().getTank().getGun().getShot().getImgSrc();
+                shotImg = new Texture(shot);
+                shotSprite = new Sprite(shotImg);
+                shotSprite.setSize(tankWars.getPlayer().getTank().getGun().getShot().getWidth(),
+                        tankWars.getPlayer().getTank().getGun().getShot().getWidth());
+            }
+            shotSprite.setPosition( tankWars.getPlayer().getTank().getGun().getShot().getPos().getX(),
+                     tankWars.getPlayer().getTank().getGun().getShot().getPos().getY());
             shotSprite.draw(controller.batch);
-         }
+        }
 
         controller.batch.end();
 
@@ -105,8 +115,8 @@ public class PlayScreen implements Screen {
         System.out.println("Angle: " + tankWars.getPlayer().getTank().getAngle() +
                 "\n Tankpos: (" + tankWars.getPlayer().getTank().getPos().getX() +
                 ", " + tankWars.getPlayer().getTank().getPos().getY() + ")" +
-                "\n Shotpos: (" + tankWars.getPlayer().getTank().getGun().getShot().getPosition().getX() +
-                ", " + tankWars.getPlayer().getTank().getGun().getShot().getPosition().getY() + ")");
+                "\n Shotpos: (" + tankWars.getPlayer().getTank().getGun().getShot().getPos().getX() +
+                ", " + tankWars.getPlayer().getTank().getGun().getShot().getPos().getY() + ")");
 
     }
 

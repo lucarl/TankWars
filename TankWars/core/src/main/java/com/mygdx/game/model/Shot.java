@@ -1,37 +1,39 @@
 package com.mygdx.game.model;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.ctrl.Controller;
 
 /**
  * Created by Carl on 2018-04-23.
  */
-public abstract class Shot implements IDrawable {
+public class Shot implements IDrawable {
     private static final float GRAVITY = -0.1f;
-    private String imgSrc;
-    private int width;
-    private int height;
-    private float radius;
-    private float weight;
-    private float angle;
+    private static String imgSrc = "bird.png";
+    private static int width = 34;
+    private static int height = 24;
 
-    private double[] vector = new double[2]; // speed
+    private float angle = 0;
+    private float radius = 10;
+    private float weight = 100;
+
+    private float[] vector = new float[2]; // speed
     private Position pos;
-    private final float speed = 25;
+    private final int speed = 25;
     private boolean isVisible;
 
     // private int damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
 
     // power should be a float between [0,1]
     public Shot(Position p, float angle, float power){
-        this.pos = new Position(p.getX(), p.getY());
-        this.vector[0] = Math.sin(Math.toRadians(angle)) * power * -speed; // x speed
-        this.vector[1] = Math.cos(Math.toRadians(angle)) * power * speed ; // y speed
-        isVisible = false;
+        this.pos = p;
+        this.vector[0] = (float)Math.sin(Math.toRadians(angle)) * power * -speed; // x speed
+        this.vector[1] = (float)Math.cos(Math.toRadians(angle)) * power * speed ; // y speed
+        isVisible = true;
         //this.damage = damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
     }
 
     public void updatePostion(float delta) {
-        if(pos.getX() > 0 && pos.getX() < 965){
+        if(pos.getX() > 0 && pos.getX() < Controller.GAME_WIDTH){
             pos.setX(pos.getX() + vector[0] * delta * speed);
         }
         if(pos.getY() > 0){
@@ -39,14 +41,6 @@ public abstract class Shot implements IDrawable {
             vector[1] += GRAVITY;
 
         }
-    }
-
-    public boolean isVisible() {
-        return isVisible;
-    }
-
-    public void setVisible(boolean visible) {
-        isVisible = visible;
     }
 
     @Override
@@ -83,4 +77,14 @@ public abstract class Shot implements IDrawable {
     public int getOriginY() {
         return 0;
     }
+
+
+    public void setVisibility(boolean bool) {
+        isVisible = bool;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
 }

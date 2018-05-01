@@ -8,30 +8,32 @@ public class Tank implements IDrawable {
     private static int originX = 0;
     private static int originY = 0;
     private static final int speed = 80;
+    private static int positionOffset = 100;
 
     private Position pos;
     private float angle;
     private int healthPoints;
     private float fuel;
-    private float power;
 
     private TankGun gun;
 
+    private boolean isVisible;
     private boolean rightMove;
     private boolean leftMove;
 
-    public Tank(Position position, int healthPoints, int fuel, int angle) {
-        this.pos = position;
-        this.healthPoints = healthPoints;
-        this.fuel = fuel;
+    public Tank() {
+        this.pos = new Position(positionOffset, 100);
+        this.angle = 0;
+        this.healthPoints = 100;
+        this.fuel = 100;
 
         // Place the gun on the tank
         this.gun = new TankGun(new Position(pos.getX() + width / 2, pos.getY() + height));
 
-        // Default values
-        angle = 90;
-        power = 0.5f;
-
+        isVisible = true;
+        rightMove = false;
+        leftMove = false;
+        positionOffset += 200;
     }
 
     public Position moveTank(float delta) {
@@ -45,6 +47,7 @@ public class Tank implements IDrawable {
             pos.setX(pos.getX() - speed * delta);
             decreaseFuel();
         }
+        gun.setPos(pos, width, height);
         return this.pos;
     }
 
@@ -115,4 +118,14 @@ public class Tank implements IDrawable {
     public int getOriginY() {
         return 0;
     }
+
+
+    public void setVisibility(boolean bool) {
+        isVisible = bool;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
 }

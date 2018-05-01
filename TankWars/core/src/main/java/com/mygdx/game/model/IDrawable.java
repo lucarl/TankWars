@@ -9,4 +9,5 @@ public interface IDrawable {
     public float getAngle();
     public int getOriginX();
     public int getOriginY();
+    public boolean isVisible();
 }
