@@ -16,11 +16,9 @@ import java.util.Map;
 
 
 public class PlayScreenTest implements Screen {
-
     private Map<IDrawable, Sprite> sprites;
 
     private Sprite background;
-
     private TankWars tankWars;
     private Controller controller;
     private Viewport viewport;
@@ -28,12 +26,10 @@ public class PlayScreenTest implements Screen {
 
     private Hud hud;
 
-
     public PlayScreenTest(Controller controller, TankWars tankWars) {
         this.controller = controller;
         this.tankWars = tankWars;
         sprites = new HashMap<>();
-
 
         hud = new Hud(controller.batch, tankWars);
         background = new Sprite(new Texture("background.jpg"));
@@ -43,12 +39,16 @@ public class PlayScreenTest implements Screen {
     public void show() {
         // For each obj in tankWars, load its image and set it according to the objects state
         tankWars.getObjects().forEach(obj -> {
-            Sprite sprite = new Sprite(new Texture(obj.getImgSrc()));
-            sprites.put(obj, sprite);
-            sprite.setOrigin(obj.getOriginX(), obj.getOriginY());
-            // Sets position of sprite and its width and height
-            sprite.setBounds(obj.getPos().getX(), obj.getPos().getY(),
-                    obj.getWidth(), obj.getHeight());
+            if (!obj.isVisible()) {
+                sprites.remove(obj);
+            } else {
+                Sprite sprite = new Sprite(new Texture(obj.getImgSrc()));
+                sprites.put(obj, sprite);
+                sprite.setOrigin(obj.getOriginX(), obj.getOriginY());
+                // Sets position of sprite and its width and height
+                sprite.setBounds(obj.getPos().getX(), obj.getPos().getY(),
+                        obj.getWidth(), obj.getHeight());
+            }
         });
 
         background.setSize(Controller.GAME_WIDTH, Controller.GAME_HEIGHT);
@@ -77,27 +77,29 @@ public class PlayScreenTest implements Screen {
 
         hud.update(delta);
         hud.stage.draw();
-
-
     }
 
-
+    @Override
     public void resize(int width, int height) {
 
     }
 
+    @Override
     public void pause() {
 
     }
 
+    @Override
     public void resume() {
 
     }
 
+    @Override
     public void hide() {
 
     }
 
+    @Override
     public void dispose() {
         controller.dispose();
         hud.dispose();

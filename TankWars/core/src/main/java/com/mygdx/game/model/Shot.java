@@ -36,7 +36,7 @@ public class Shot implements IDrawable {
         //this.damage = damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
     }
 
-    public void updatePostion(float delta) {
+    public void update(float delta) {
         if (pos.getX() > 0 && pos.getX() < Controller.GAME_WIDTH && pos.getY() > 0) {
             pos.setX(pos.getX() + vector[0] * delta * speed);
             pos.setY(pos.getY() + vector[1] * delta * speed);
