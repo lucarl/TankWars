@@ -29,6 +29,7 @@ public class Shot implements IDrawable {
     // power should be a float between [0,1]
     public Shot(Position p, float angle, float power) {
         this.pos = p;
+        this.angle = angle;
         this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -speed; // x speed
         this.vector[1] = (float) Math.cos(Math.toRadians(angle)) * power * speed; // y speed
         isVisible = true;
