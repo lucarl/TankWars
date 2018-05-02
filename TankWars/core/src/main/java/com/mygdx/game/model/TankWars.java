@@ -50,14 +50,13 @@ public class TankWars {
             }
         }
 
-        if(isRoundOver()){
             System.out.println("ROUND OVER");
 
             // TODO Display who won the round and some action to continue to next round
         }
     }
 
-    private void setupObjects(int nPlayers){
+    private void setupObjects(int nPlayers) {
         for (int i = 0; i < nPlayers; i++) {
             players.add(new Player());
             objects.add(players.get(i).getTank().getGun().getShot());
@@ -78,7 +77,7 @@ public class TankWars {
     private boolean isRoundOver() {
         int nTanks = 0;
         for (int i = 0; i < players.size(); i++) {
-            if(players.get(i).getTank().isVisible()){
+            if (players.get(i).getTank().isVisible()) {
                 nTanks++;
             }
         }
@@ -113,7 +112,6 @@ public class TankWars {
     public Player getPlayer() {
         return currentPlayer;
     }
-
 
 
     public List<IDrawable> getObjects() {
