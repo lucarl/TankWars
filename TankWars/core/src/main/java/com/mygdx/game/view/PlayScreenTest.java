@@ -18,14 +18,12 @@ import java.util.Map;
 public class PlayScreenTest implements Screen {
 
     private Map<IDrawable, Sprite> sprites;
-
     private Sprite background;
-
+    private Sprite terrain;
     private TankWars tankWars;
     private Controller controller;
     private Viewport viewport;
     private OrthographicCamera camera;
-
     private Hud hud;
 
 
@@ -37,7 +35,7 @@ public class PlayScreenTest implements Screen {
 
         hud = new Hud(controller.batch, tankWars);
         background = new Sprite(new Texture("background.jpg"));
-
+        terrain = new Sprite(new Texture("terrain.png"));
     }
 
     public void show() {
@@ -52,7 +50,7 @@ public class PlayScreenTest implements Screen {
         });
 
         background.setSize(Controller.GAME_WIDTH, Controller.GAME_HEIGHT);
-
+        terrain.setSize(Controller.GAME_WIDTH, Controller.GAME_HEIGHT);
         Gdx.input.setInputProcessor(controller);
     }
 
@@ -64,6 +62,7 @@ public class PlayScreenTest implements Screen {
         controller.batch.begin();
 
         background.draw(controller.batch);
+        terrain.draw(controller.batch);
         // For each object update it's corresponding sprite with the objects state
         sprites.forEach((obj, sprite) -> {
             sprite.setRotation(obj.getAngle());
