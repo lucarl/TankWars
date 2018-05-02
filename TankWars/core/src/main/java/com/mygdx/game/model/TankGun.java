@@ -86,6 +86,8 @@ public class TankGun implements IDrawable {
         return specialShot;
     }
 
+    public void setSpecialShot(boolean special){this.specialShot = special;}
+
     public float getPower() {
         return power;
     }
@@ -120,7 +122,7 @@ public class TankGun implements IDrawable {
 
     @Override
     public float getAngle() {
-        return angle;
+        return this.angle;
     }
 
     @Override

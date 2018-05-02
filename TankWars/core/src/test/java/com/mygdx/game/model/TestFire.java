@@ -6,7 +6,6 @@ import static org.junit.Assert.assertEquals;
 public class TestFire {
 
     @Test
-
     public void testFireTank(){
         //Tank tank = new Tank(new Position(30, 0), 50, 100, 90);
         //Shot shotTest = tank.fireTank(100);

@@ -17,13 +17,11 @@ import java.util.Map;
 
 public class PlayScreenTest implements Screen {
     private Map<IDrawable, Sprite> sprites;
-
     private Sprite background;
     private TankWars tankWars;
     private Controller controller;
     private Viewport viewport;
     private OrthographicCamera camera;
-
     private Hud hud;
 
     public PlayScreenTest(Controller controller, TankWars tankWars) {
@@ -33,7 +31,6 @@ public class PlayScreenTest implements Screen {
 
         hud = new Hud(controller.batch, tankWars);
         background = new Sprite(new Texture("background.jpg"));
-
     }
 
     public void show() {
@@ -52,7 +49,6 @@ public class PlayScreenTest implements Screen {
         });
 
         background.setSize(Controller.GAME_WIDTH, Controller.GAME_HEIGHT);
-
         Gdx.input.setInputProcessor(controller);
     }
 
