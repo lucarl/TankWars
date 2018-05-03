@@ -33,12 +33,10 @@ public class TankGun implements IDrawable {
     public Shot fire() {
         if (specialShot) {
             shot.setVisibility(false);
-            shot = new AngryShot(new Position(pos.getX(), pos.getY() + height * 0.8f), angle, power);
             specialShot = false;
             return shot;
         } else {
             shot.setVisibility(false);
-            shot = new Shot(new Position(pos.getX(), pos.getY() + height * 0.8f), angle, power);
 
             return shot;
         }
@@ -55,11 +53,9 @@ public class TankGun implements IDrawable {
 
     public float aimTank(float delta) {
         if (rightAim) {
-            this.angle = angle < 110 ? angle + speed * delta : 110;
         }
 
         if (leftAim) {
-            this.angle = angle > -110 ? angle - speed * delta : -110;
         }
         return angle;
     }

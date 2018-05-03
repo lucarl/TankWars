@@ -8,12 +8,9 @@ import com.mygdx.game.ctrl.Controller;
 public class Shot implements IDrawable {
     private static final float GRAVITY = -0.1f;
     private static String imgSrc = "bird.png";
-    private static int width = 15;
-    private static int height = 15;
     private static int originX = width / 2;
     private static int originY = height / 2;
 
-    private float angle = 0;
     private float radius = 10;
     private float weight = 100;
 
@@ -27,22 +24,20 @@ public class Shot implements IDrawable {
     // private int damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
 
     // power should be a float between [0,1]
-    public Shot(Position p, float angle, float power) {
-        this.pos = p;
-        this.angle = angle;
         this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -speed; // x speed
         this.vector[1] = (float) Math.cos(Math.toRadians(angle)) * power * speed; // y speed
         isVisible = true;
-        rect = new CollisionRect(p.getX(), p.getY(), width, height);
         //this.damage = damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
     }
 
-    public void updatePostion(float delta) {
+    public void update(float delta) {
         if (pos.getX() > 0 && pos.getX() < Controller.GAME_WIDTH && pos.getY() > 0) {
             pos.setX(pos.getX() + vector[0] * delta * speed);
             pos.setY(pos.getY() + vector[1] * delta * speed);
             vector[1] += GRAVITY;
             rect.move(pos.getX(), pos.getY());
+            // Skott som roterar? Vill egentligen ha skott som roterar efter vektorn
+            // angle = Math.atan( vector[1] / vector[0] ); men funkar ej
         } else {
             setVisibility(false);
         }

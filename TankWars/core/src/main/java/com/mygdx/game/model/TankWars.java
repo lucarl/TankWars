@@ -25,6 +25,7 @@ public class TankWars {
         currentPlayer = players.get(playerIndex);
     }
 
+    // Game loop gets called every frame by the controller
     public void gameLoop(float delta) {
         /* TODO Check for collisions, update score, change player, check round over
          */
@@ -32,29 +33,41 @@ public class TankWars {
         // Check if shot hits any tank
         for (Player playersShot : players) {
             CollisionRect shotRect = playersShot.getTank().getGun().getShot().getRect();
+            Shot shot = playersShot.getTank().getGun().getShot();
+            // If some shot is not visible remove it
+            if (!shot.isVisible()) {
+                objects.remove(shot);
+            }
             for (Player player : players) {
                 CollisionRect tankRect = player.getTank().getRect();
                 Tank tank = player.getTank();
-                if (shotRect.collidesWith(tankRect) && tank.isVisible()) {
+                if (shotRect.collidesWith(tankRect) && tank.isVisible() && shot.isVisible()) {
+                    // TODO förbättra bortagandet av obj här och i renderer
                     playersShot.addScore();
                     tank.setVisibility(false);
                     tank.getGun().setVisibility(false);
                     tank.getGun().getShot().setVisibility(false);
+                    objects.remove(tank);
+                    objects.remove(tank.getGun());
+                    objects.remove(shot);
                 }
+
             }
         }
-        if(isRoundOver()){
+
+        if (isRoundOver()) {
             System.out.println("ROUND OVER");
+
             // TODO Display who won the round and some action to continue to next round
         }
     }
 
-    private void setupObjects(int nPlayers){
+    private void setupObjects(int nPlayers) {
         for (int i = 0; i < nPlayers; i++) {
             players.add(new Player());
-            objects.add(players.get(i).getTank());
-            objects.add(players.get(i).getTank().getGun());
             objects.add(players.get(i).getTank().getGun().getShot());
+            objects.add(players.get(i).getTank().getGun());
+            objects.add(players.get(i).getTank());
         }
     }
 
@@ -63,28 +76,28 @@ public class TankWars {
         move(delta);
 
         players.forEach(player -> {
-            player.getTank().getGun().getShot().updatePostion(delta);
+            player.getTank().getGun().getShot().update(delta);
         });
     }
 
     private boolean isRoundOver() {
         int nTanks = 0;
         for (int i = 0; i < players.size(); i++) {
-            if(players.get(i).getTank().isVisible()){
+            if (players.get(i).getTank().isVisible()) {
                 nTanks++;
             }
         }
         return nTanks <= 1;
     }
 
+    // TODO se till att vänta med nextPlayer tills currentplayers skott skjutits färdigt
     public void nextPlayer() {
         playerIndex++;
         currentPlayer = players.get(playerIndex % players.size());
 
-        while(!currentPlayer.getTank().isVisible()){
-                playerIndex++;
-                currentPlayer = players.get(playerIndex % players.size());
-        }
+        //while(!currentPlayer.getTank().isVisible()){
+        //        nextPlayer();
+        //}
     }
 
     public void fire() {
@@ -105,7 +118,6 @@ public class TankWars {
     public Player getPlayer() {
         return currentPlayer;
     }
-
 
 
     public List<IDrawable> getObjects() {
