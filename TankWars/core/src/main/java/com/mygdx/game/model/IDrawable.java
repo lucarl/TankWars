@@ -1,5 +1,8 @@
 package com.mygdx.game.model;
 
+//implementeras av alla objekt som måste ritas ut
+//isVisible - lever objektet?
+
 public interface IDrawable {
 
     public Position getPos();

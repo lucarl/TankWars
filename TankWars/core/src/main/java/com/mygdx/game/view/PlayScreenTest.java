@@ -58,6 +58,7 @@ public class PlayScreenTest implements Screen {
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        //måste hela tiden läsa in bilderna
         show();
         controller.batch.begin();
 
@@ -68,6 +69,7 @@ public class PlayScreenTest implements Screen {
             sprite.setRotation(obj.getAngle());
             sprite.setPosition(obj.getPos().getX(), obj.getPos().getY());
 
+            //om objektet syns vill vi hela tiden rita ut dem
             if (obj.isVisible()) {
                 sprite.draw(controller.batch);
             }
