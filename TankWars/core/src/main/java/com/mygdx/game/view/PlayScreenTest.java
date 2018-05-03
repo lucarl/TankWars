@@ -16,26 +16,27 @@ import java.util.Map;
 
 
 public class PlayScreenTest implements Screen {
-    private Map<IDrawable, Sprite> sprites;
+    //private Map<IDrawable, Sprite> sprites;
     private Sprite background;
     private TankWars tankWars;
     private Controller controller;
     private Viewport viewport;
     private OrthographicCamera camera;
     private Hud hud;
+    private Renderer renderer;
 
     public PlayScreenTest(Controller controller, TankWars tankWars) {
         this.controller = controller;
         this.tankWars = tankWars;
-        sprites = new HashMap<>();
-
+      //  sprites = new HashMap<>();
+        renderer = new Renderer(controller.batch);
         hud = new Hud(controller.batch, tankWars);
         background = new Sprite(new Texture("background.jpg"));
     }
 
     public void show() {
         // For each obj in tankWars, load its image and set it according to the objects state
-        tankWars.getObjects().forEach(obj -> {
+        /*tankWars.getObjects().forEach(obj -> {
             if (!obj.isVisible()) {
                 sprites.remove(obj);
             } else {
@@ -47,7 +48,7 @@ public class PlayScreenTest implements Screen {
                         obj.getWidth(), obj.getHeight());
             }
         });
-
+*/
         background.setSize(Controller.GAME_WIDTH, Controller.GAME_HEIGHT);
         Gdx.input.setInputProcessor(controller);
     }
@@ -60,7 +61,8 @@ public class PlayScreenTest implements Screen {
         controller.batch.begin();
 
         background.draw(controller.batch);
-        // For each object update it's corresponding sprite with the objects state
+        renderer.render(tankWars.getObjects());
+        /*      // For each object update it's corresponding sprite with the objects state
         sprites.forEach((obj, sprite) -> {
             sprite.setRotation(obj.getAngle());
             sprite.setPosition(obj.getPos().getX(), obj.getPos().getY());
@@ -68,7 +70,7 @@ public class PlayScreenTest implements Screen {
             if (obj.isVisible()) {
                 sprite.draw(controller.batch);
             }
-        });
+        });*/
         controller.batch.end();
 
         hud.update(delta);
