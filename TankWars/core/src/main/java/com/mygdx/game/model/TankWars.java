@@ -34,10 +34,6 @@ public class TankWars {
         for (Player playersShot : players) {
             CollisionRect shotRect = playersShot.getTank().getGun().getShot().getRect();
             Shot shot = playersShot.getTank().getGun().getShot();
-            // If some shot is not visible remove it
-            if (!shot.isVisible()) {
-                objects.remove(shot);
-            }
             for (Player player : players) {
                 CollisionRect tankRect = player.getTank().getRect();
                 Tank tank = player.getTank();
@@ -51,18 +47,17 @@ public class TankWars {
                     objects.remove(tank.getGun());
                     objects.remove(shot);
                 }
-
             }
         }
 
-        if (isRoundOver()) {
+        if(isRoundOver()){
             System.out.println("ROUND OVER");
 
             // TODO Display who won the round and some action to continue to next round
         }
     }
 
-    private void setupObjects(int nPlayers) {
+    private void setupObjects(int nPlayers){
         for (int i = 0; i < nPlayers; i++) {
             players.add(new Player());
             objects.add(players.get(i).getTank().getGun().getShot());
@@ -83,7 +78,7 @@ public class TankWars {
     private boolean isRoundOver() {
         int nTanks = 0;
         for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getTank().isVisible()) {
+            if(players.get(i).getTank().isVisible()){
                 nTanks++;
             }
         }
@@ -118,6 +113,7 @@ public class TankWars {
     public Player getPlayer() {
         return currentPlayer;
     }
+
 
 
     public List<IDrawable> getObjects() {
