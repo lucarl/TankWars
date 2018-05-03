@@ -7,7 +7,7 @@ import com.mygdx.game.model.TankWars;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		TankWars tankWars = new TankWars(6, 3);
+		TankWars tankWars = new TankWars(5, 3);
 		Controller controller = new Controller(tankWars);
 		
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();

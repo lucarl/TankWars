@@ -64,6 +64,8 @@ public class TankWars {
         if(isRoundOver()){
             isTurnOver = true;
         }
+
+        System.out.println("nObjects: " + objects.size());
     }
         // TODO Display who won the round and some action to continue to next round
 
