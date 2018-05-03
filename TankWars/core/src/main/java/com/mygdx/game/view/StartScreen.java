@@ -66,8 +66,6 @@ public class StartScreen implements Screen {
 
         // Take input from ui
         Gdx.input.setInputProcessor(stage);
-
-
     }
 
     @Override
