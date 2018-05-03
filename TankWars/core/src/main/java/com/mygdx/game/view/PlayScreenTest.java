@@ -11,17 +11,13 @@ import com.mygdx.game.ctrl.Controller;
 import com.mygdx.game.model.IDrawable;
 import com.mygdx.game.model.TankWars;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
 public class PlayScreenTest implements Screen {
     private Map<IDrawable, Sprite> sprites;
     private Sprite background;
-
-    private Sprite terrain;
     private TankWars tankWars;
     private Controller controller;
     private Viewport viewport;
@@ -35,43 +31,9 @@ public class PlayScreenTest implements Screen {
 
         hud = new Hud(controller.batch, tankWars);
         background = new Sprite(new Texture("background.jpg"));
-        terrain = new Sprite(new Texture("terrain.png"));
     }
 
     public void show() {
-
-        background.setSize(Controller.GAME_WIDTH, Controller.GAME_HEIGHT);
-        terrain.setSize(Controller.GAME_WIDTH, Controller.GAME_HEIGHT);
-        Gdx.input.setInputProcessor(controller);
-    }
-
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        loadResources();
-
-        controller.batch.begin();
-
-        background.draw(controller.batch);
-        terrain.draw(controller.batch);
-        // For each object update it's corresponding sprite with the objects state
-        sprites.forEach((obj, sprite) -> {
-            sprite.setRotation(obj.getAngle());
-            sprite.setPosition(obj.getPos().getX(), obj.getPos().getY());
-
-            if (obj.isVisible()) {
-                sprite.draw(controller.batch);
-            }
-        });
-
-        controller.batch.end();
-
-        hud.update(delta);
-        hud.stage.draw();
-    }
-
-    private void loadResources(){
         // For each obj in tankWars, load its image and set it according to the objects state
         tankWars.getObjects().forEach(obj -> {
             if (!obj.isVisible()) {
@@ -86,6 +48,31 @@ public class PlayScreenTest implements Screen {
             }
         });
 
+        background.setSize(Controller.GAME_WIDTH, Controller.GAME_HEIGHT);
+        Gdx.input.setInputProcessor(controller);
+    }
+
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        show();
+        controller.batch.begin();
+
+        background.draw(controller.batch);
+        // For each object update it's corresponding sprite with the objects state
+        sprites.forEach((obj, sprite) -> {
+            sprite.setRotation(obj.getAngle());
+            sprite.setPosition(obj.getPos().getX(), obj.getPos().getY());
+
+            if (obj.isVisible()) {
+                sprite.draw(controller.batch);
+            }
+        });
+        controller.batch.end();
+
+        hud.update(delta);
+        hud.stage.draw();
     }
 
     @Override
