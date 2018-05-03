@@ -27,13 +27,13 @@ public class Shot implements IDrawable {
     // private int damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
 
     // power should be a float between [0,1]
-    public Shot(Position p, float angle, float power) {
-        this.pos = p;
+    public Shot(Position pos, float angle, float power) {
+        this.pos = pos;
         this.angle = angle;
         this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -speed; // x speed
         this.vector[1] = (float) Math.cos(Math.toRadians(angle)) * power * speed; // y speed
         isVisible = true;
-        rect = new CollisionRect(p.getX(), p.getY(), width, height);
+        rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
         //this.damage = damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
     }
 
@@ -43,6 +43,8 @@ public class Shot implements IDrawable {
             pos.setY(pos.getY() + vector[1] * delta * speed);
             vector[1] += GRAVITY;
             rect.move(pos.getX(), pos.getY());
+            // TODO not working, want shot to rotate according to vector direction
+            //angle = (float) Math.atan(vector[1] / vector[0]);
         } else {
             setVisibility(false);
         }

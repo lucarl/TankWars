@@ -38,7 +38,7 @@ public class Hud implements Disposable{
         this.tankWars = tankWars;
         score = tankWars.getPlayer().getScore();
         name = tankWars.getPlayer().getName();
-        angle = tankWars.getPlayer().getTank().getAngle();
+        angle = tankWars.getPlayer().getTank().getAngle() + 90;
         power = tankWars.getPlayer().getTank().getGun().getPower() * 100;
         fuel = tankWars.getPlayer().getTank().getGun().getPower();
         hp = tankWars.getPlayer().getTank().getHealthPoints();
@@ -78,7 +78,7 @@ public class Hud implements Disposable{
     public void update(float delta) {
         score = tankWars.getPlayer().getScore();
         name = tankWars.getPlayer().getName();
-        angle = tankWars.getPlayer().getTank().getGun().getAngle();
+        angle = tankWars.getPlayer().getTank().getGun().getAngle() + 90;
         power = tankWars.getPlayer().getTank().getGun().getPower() * 100;
         fuel = tankWars.getPlayer().getTank().getFuel();
         scoreLabel.setText(String.format("Score: %03d", score));

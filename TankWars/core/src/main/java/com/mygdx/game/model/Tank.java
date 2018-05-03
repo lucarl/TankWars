@@ -58,8 +58,9 @@ public class Tank implements IDrawable {
             rect.move(pos.getX(), pos.getY());
             decreaseFuel();
         }
+        // Gör så tankGun följer med tanken
         gun.setPos(pos, width, height);
-        return this.pos;
+        return pos;
     }
 
     public void setLeftMove(boolean b) {
@@ -79,7 +80,7 @@ public class Tank implements IDrawable {
 
     private double decreaseFuel() {
         if (leftMove || rightMove) {
-            this.fuel -= 0.1;
+            this.fuel -= 5;
         }
         return this.fuel;
     }

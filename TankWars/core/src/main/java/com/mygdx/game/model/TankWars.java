@@ -50,7 +50,7 @@ public class TankWars {
             Tank tank = player.getTank();
             if (shotRect.collidesWith(tankRect) && tank.isVisible()
                     && shot.isVisible() && !(player == currentPlayer)) {
-                // TODO förbättra bortagandet av obj här och i renderer
+                // TODO förbättra bortagandet av obj här
                 currentPlayer.addScore();
                 tank.setVisibility(false);
                 tank.getGun().setVisibility(false);

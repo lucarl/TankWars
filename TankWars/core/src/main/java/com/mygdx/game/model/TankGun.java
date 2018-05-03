@@ -33,12 +33,12 @@ public class TankGun implements IDrawable {
     public Shot fire() {
         if (specialShot) {
             shot.setVisibility(false);
-            shot = new AngryShot(new Position(pos.getX(), pos.getY() + height * 0.8f), angle, power);
+            shot = new AngryShot(new Position(pos.getX(), pos.getY()), angle, power);
             specialShot = false;
             return shot;
         } else {
             shot.setVisibility(false);
-            shot = new Shot(new Position(pos.getX(), pos.getY() + height * 0.8f), angle, power);
+            shot = new Shot(new Position(pos.getX(), pos.getY()), angle, power);
 
             return shot;
         }
