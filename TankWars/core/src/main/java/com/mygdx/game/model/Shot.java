@@ -11,7 +11,6 @@ public class Shot implements IDrawable {
     private static int originX = width / 2;
     private static int originY = height / 2;
 
-    private float angle = 0;
     private float radius = 10;
     private float weight = 100;
 
@@ -39,7 +38,6 @@ public class Shot implements IDrawable {
             rect.move(pos.getX(), pos.getY());
             // Skott som roterar? Vill egentligen ha skott som roterar efter vektorn
             // angle = Math.atan( vector[1] / vector[0] ); men funkar ej
-            angle += 20;
         } else {
             setVisibility(false);
         }

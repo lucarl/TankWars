@@ -34,6 +34,10 @@ public class TankWars {
         for (Player playersShot : players) {
             CollisionRect shotRect = playersShot.getTank().getGun().getShot().getRect();
             Shot shot = playersShot.getTank().getGun().getShot();
+            // If some shot is not visible remove it
+            if (!shot.isVisible()) {
+                objects.remove(shot);
+            }
             for (Player player : players) {
                 CollisionRect tankRect = player.getTank().getRect();
                 Tank tank = player.getTank();
@@ -47,9 +51,11 @@ public class TankWars {
                     objects.remove(tank.getGun());
                     objects.remove(shot);
                 }
+
             }
         }
 
+        if (isRoundOver()) {
             System.out.println("ROUND OVER");
 
             // TODO Display who won the round and some action to continue to next round

@@ -53,11 +53,9 @@ public class TankGun implements IDrawable {
 
     public float aimTank(float delta) {
         if (rightAim) {
-            this.angle = angle < 110 ? angle + speed * delta : 110;
         }
 
         if (leftAim) {
-            this.angle = angle > -110 ? angle - speed * delta : -110;
         }
         return angle;
     }

@@ -11,13 +11,17 @@ import com.mygdx.game.ctrl.Controller;
 import com.mygdx.game.model.IDrawable;
 import com.mygdx.game.model.TankWars;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 public class PlayScreenTest implements Screen {
     private Map<IDrawable, Sprite> sprites;
     private Sprite background;
+
+    private Sprite terrain;
     private TankWars tankWars;
     private Controller controller;
     private Viewport viewport;
@@ -31,6 +35,7 @@ public class PlayScreenTest implements Screen {
 
         hud = new Hud(controller.batch, tankWars);
         background = new Sprite(new Texture("background.jpg"));
+        terrain = new Sprite(new Texture("terrain.png"));
     }
 
     public void show() {
