@@ -20,9 +20,12 @@ import com.mygdx.game.ctrl.Controller;
 
 public class StartScreen implements Screen {
 
-    //width and height constants for the next button
-    private static final int NEXT_BUTTON_WIDTH = 333;
+    //Constants for the next button
+    private static final int NEXT_BUTTON_WIDTH = 200;
     private static final int NEXT_BUTTON_HEIGHT = 75;
+    private static final int NEXT_BUTTON_Y = 75;
+    private static final int NEXT_BUTTON_X = 400;
+
 
     private Stage stage;
     private SpriteBatch batch;
@@ -30,7 +33,8 @@ public class StartScreen implements Screen {
     private Controller controller;
     private Texture img;
 
-    private ArrowButton arrowButton1;
+    private ArrowButton arrowButtonRight1;
+    private ArrowButton arrowButtonRight2;
 
     private Texture nextButton;
 
@@ -49,13 +53,16 @@ public class StartScreen implements Screen {
         img = new Texture("rightArrow.png");
 
         //Create right arrow buttons
-        arrowButton1 = new ArrowButton(img,Controller.GAME_WIDTH/3, (int)(Controller.GAME_HEIGHT * 0.6875),
+        arrowButtonRight1 = new ArrowButton(img,Controller.GAME_WIDTH/3, (int)(Controller.GAME_HEIGHT * 0.6875),
+                img.getWidth()/8,img.getHeight()/8);
+
+        arrowButtonRight2 = new ArrowButton(img,Controller.GAME_WIDTH/3, (int)(Controller.GAME_HEIGHT * 0.6875),
                 img.getWidth()/8,img.getHeight()/8);
 
         //Create left arrow buttons
 
         //Create next-button
-       nextButton = new Texture();
+       nextButton = new Texture("next.png");
 
         // Take input from ui
         Gdx.input.setInputProcessor(stage);
@@ -69,14 +76,22 @@ public class StartScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        arrowButton1.update(batch,Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH / 2,
+
+        //Draw right arrow buttons
+        arrowButtonRight1.update(batch,Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH / 2,
                 Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2);
 
-       /* batch.draw(start_button, Gdx.graphics.getWidth() / 2 - START_BUTTON_WIDTH / 2,
-                Gdx.graphics.getHeight() / 2 - START_BUTTON_HEIGHT / 2,
-                START_BUTTON_WIDTH,
-                START_BUTTON_HEIGHT);
-                */
+
+
+        //Draw next button
+        batch.draw(nextButton,NEXT_BUTTON_X, NEXT_BUTTON_Y ,
+                NEXT_BUTTON_WIDTH,
+                NEXT_BUTTON_HEIGHT);
+
+
+
+       //Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH / 2,
+        //                Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2
 
         handleButton();
         batch.end();
@@ -87,19 +102,47 @@ public class StartScreen implements Screen {
     }
 
     private void handleButton() {
-        int x = Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH / 2;
+
+        boolean xRange = false;
+        boolean yRange = false;
+
+        int x = Gdx.graphics.getWidth()/2 - NEXT_BUTTON_WIDTH/2;
+        int y = Gdx.graphics.getHeight()/2  - NEXT_BUTTON_HEIGHT / 2 + NEXT_BUTTON_HEIGHT;
+
+        if(Gdx.input.getX() > x &&  Gdx.input.getX() < x + NEXT_BUTTON_WIDTH ){
+            xRange = true;
+        }
+
+        if(Gdx.graphics.getHeight() - Gdx.input.getY() < y && Gdx.graphics.getHeight()
+                - Gdx.input.getY() > Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2) {
+            yRange = true;
+        }
+
+            if (xRange && yRange && Gdx.input.justTouched()
+                    || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                controller.setPlayScreen();
+            }
+        }
+
+
+
+            /*
+        int x = Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH/2;
         // TODO gör dessa booleans mer förståliga
         boolean xRange = Gdx.input.getX() > x && Gdx.input.getX() < x + NEXT_BUTTON_WIDTH;
         boolean yRange = Gdx.graphics.getHeight() - Gdx.input.getY()
                 < Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2 + NEXT_BUTTON_HEIGHT
                 && Gdx.graphics.getHeight() - Gdx.input.getY() > Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2;
 
+
         // Click on start button
         if (xRange && yRange && Gdx.input.justTouched()
                 || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
             controller.setPlayScreen();
         }
-    }
+
+            */
+
 
     @Override
     public void resize(int width, int height) {
