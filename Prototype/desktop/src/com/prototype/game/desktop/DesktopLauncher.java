@@ -5,6 +5,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.prototype.FlappyBirdDemo.FlappyBird;
 import com.prototype.MVC_Demo.Controller.Controller;
 import com.prototype.screenManagerDemo.Application;
+import main.java.com.mygdx.game.view.MenuDemo;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -12,6 +13,6 @@ public class DesktopLauncher {
 		config.width = FlappyBird.WIDTH;
 		config.height = FlappyBird.HEIGHT;
 		config.title = FlappyBird.TITLE;
-		new LwjglApplication(new Controller(), config);
+		new LwjglApplication(new MenuDemo(), config);
 	}
 }

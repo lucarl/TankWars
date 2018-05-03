@@ -22,7 +22,6 @@ public class Controller extends Game implements InputProcessor {
     private TankWars tankWars;
     public SpriteBatch batch;
 
-
     public Controller(TankWars tankWars) {
         this.tankWars = tankWars;
     }
