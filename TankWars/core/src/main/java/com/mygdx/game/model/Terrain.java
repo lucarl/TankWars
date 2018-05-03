@@ -1,29 +1,29 @@
 package com.mygdx.game.model;
-import java.util.Random;
 
+/**
+ * Created by Carl on 2018-05-03.
+ */
 public class Terrain {
-    public static final int WIDTH = 512;
-    public static final int HEIGHT = 250;
-    public static final String imageSource = "Terrain";
-    private int displace;
-    private int roughness;
+    private TerrainTile[][] terrainMatrix;
 
-    public Terrain(int displace, int roughness) {
-        this.displace = displace;
-        this.roughness = roughness;
+    public void drawTerrain(String imageSource, float x, float y, float width, float height) {
     }
 
+    public Terrain() {
+        terrainMatrix = new TerrainTile[1000][200];
+        for (int i = 0; i < terrainMatrix.length; i++) {
+            for (int j = 0; j < terrainMatrix[i].length; j++) {
+                terrainMatrix[i][j] = new TerrainTile(i * 5, j * 5);
+            }
+        }
+    }
 
-
-    /*int[] drawTerrain(int displace, int roughness) {
-            int[] point;
-
-
-
-
-
-
-    }*/
-
-
+    public void draw() {
+        for (int i = 0; i < terrainMatrix.length; i++) {
+            for (int j = 0; j < terrainMatrix[i].length; j++) {
+                TerrainTile t = terrainMatrix[i][j];
+                
+            }
+        }
+    }
 }
