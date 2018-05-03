@@ -22,7 +22,7 @@ public class TankGun implements IDrawable {
         this.pos = pos;
         angle = 0;
         power = 0.5f;
-        shot = new Shot(new Position(-100, -100), angle, 0);
+        shot = new Shot(new Position(-100, -100), angle, 0, 0);
         specialShot = false;
         isVisible = true;
         rightAim = false;
@@ -30,15 +30,15 @@ public class TankGun implements IDrawable {
     }
 
     // fires a new shot at the end of the gun
-    public Shot fire() {
+    public Shot fire(int windSpeed) {
         if (specialShot) {
             shot.setVisibility(false);
-            shot = new AngryShot(new Position(pos.getX(), pos.getY()), angle, power);
+            shot = new AngryShot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
             specialShot = false;
             return shot;
         } else {
             shot.setVisibility(false);
-            shot = new Shot(new Position(pos.getX(), pos.getY()), angle, power);
+            shot = new Shot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
 
             return shot;
         }

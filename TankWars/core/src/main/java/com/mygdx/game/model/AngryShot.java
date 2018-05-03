@@ -6,8 +6,8 @@ public class AngryShot extends Shot {
     private static int width = 50;
     private static int height = 50;
 
-    public AngryShot(Position p, float angle, float power) {
-        super(p, angle, power);
+    public AngryShot(Position p, float angle, float power, int windSpeed) {
+        super(p, angle, power, windSpeed);
     }
 
     @Override

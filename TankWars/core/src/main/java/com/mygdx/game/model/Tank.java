@@ -1,6 +1,8 @@
 package com.mygdx.game.model;
 
 
+import com.mygdx.game.ctrl.Controller;
+
 public class Tank implements IDrawable {
     private static String tankImgSrc = "tank14.png";
     private static int width = 80;
@@ -38,25 +40,27 @@ public class Tank implements IDrawable {
         rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
     }
 
-    public Shot fire(){
-        if(isVisible){
-            return gun.fire();
-        }
-        return gun.getShot();
+    public Shot fire(int windSpeed) {
+        //if (isVisible) {
+            return gun.fire(windSpeed);
+        //}
+        //return gun.getShot();
     }
 
     public Position moveTank(float delta) {
 
-        if (rightMove && fuel > 0 && isVisible) {
-            pos.setX(pos.getX() + speed * delta);
-            rect.move(pos.getX(), pos.getY());
-            decreaseFuel();
-        }
+        if (isVisible && fuel > 0 && pos.getX() > 0 && pos.getX() + width < Controller.GAME_WIDTH) {
+            if (rightMove && fuel > 0 && isVisible) {
+                pos.setX(pos.getX() + speed * delta);
+                rect.move(pos.getX(), pos.getY());
+                decreaseFuel();
+            }
 
-        if (leftMove && fuel > 0 && isVisible) {
-            pos.setX(pos.getX() - speed * delta);
-            rect.move(pos.getX(), pos.getY());
-            decreaseFuel();
+            if (leftMove && fuel > 0 && isVisible) {
+                pos.setX(pos.getX() - speed * delta);
+                rect.move(pos.getX(), pos.getY());
+                decreaseFuel();
+            }
         }
         // Gör så tankGun följer med tanken
         gun.setPos(pos, width, height);
@@ -85,9 +89,10 @@ public class Tank implements IDrawable {
         return this.fuel;
     }
 
-    public TankGun getGun(){
+    public TankGun getGun() {
         return gun;
     }
+
     @Override
     public String getImgSrc() {
         return tankImgSrc;

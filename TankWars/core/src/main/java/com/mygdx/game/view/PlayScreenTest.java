@@ -73,7 +73,7 @@ public class PlayScreenTest implements Screen {
         });*/
         controller.batch.end();
 
-        hud.update(delta);
+        hud.update();
         hud.stage.draw();
     }
 

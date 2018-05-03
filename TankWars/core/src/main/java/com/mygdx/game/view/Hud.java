@@ -13,7 +13,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.model.TankWars;
 
-public class Hud implements Disposable{
+// Heads on display, is used for showing information about the game during gameplay.
+// It polls the model for data
+public class Hud implements Disposable {
     private TankWars tankWars;
     public Stage stage;
     private Viewport viewport;
@@ -42,7 +44,7 @@ public class Hud implements Disposable{
         power = tankWars.getPlayer().getTank().getGun().getPower() * 100;
         fuel = tankWars.getPlayer().getTank().getGun().getPower();
         hp = tankWars.getPlayer().getTank().getHealthPoints();
-        wind = 10;
+        wind = tankWars.getWind().getWindSpeed();
 
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage = new Stage(viewport, batch);
@@ -75,19 +77,26 @@ public class Hud implements Disposable{
 
     }
 
-    public void update(float delta) {
+    public void update() {
         score = tankWars.getPlayer().getScore();
         name = tankWars.getPlayer().getName();
         angle = tankWars.getPlayer().getTank().getGun().getAngle() + 90;
         power = tankWars.getPlayer().getTank().getGun().getPower() * 100;
         fuel = tankWars.getPlayer().getTank().getFuel();
-        scoreLabel.setText(String.format("Score: %03d", score));
+        wind = tankWars.getWind().getWindSpeed();
+        scoreLabel.setText(String.format("Score: %02d", score));
         nameLabel.setText("Player: " + name);
         hpLabel.setText(String.format("HP: %03d", hp));
         angleLabel.setText(String.format("Angle: %.0f", angle));
         powerLabel.setText(String.format("Power: %.0f", power));
         fuelLabel.setText(String.format("Fuel: %.0f", fuel));
-        windLabel.setText(String.format("Wind: %02d <-", wind));
+        if (wind < 0) {
+            windLabel.setText(String.format("Wind: %02d <--", Math.abs(wind)));
+        } else if (wind == 0) {
+            windLabel.setText(String.format("Wind: %02d ", wind));
+        } else {
+            windLabel.setText(String.format("Wind: %02d -->", wind));
+        }
     }
 
 

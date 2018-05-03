@@ -6,7 +6,7 @@ import com.mygdx.game.ctrl.Controller;
  * Created by Carl on 2018-04-23.
  */
 public class Shot implements IDrawable {
-    private static final float GRAVITY = -0.1f;
+    private static final float GRAVITY = -9.8f;
     private static String imgSrc = "bird.png";
     private static int width = 15;
     private static int height = 15;
@@ -19,20 +19,22 @@ public class Shot implements IDrawable {
 
     private float[] vector = new float[2]; // speed
     private Position pos;
-    private final int speed = 25;
+    private final int speed = 20;
     private boolean isVisible;
+    private int windSpeed;
 
     private CollisionRect rect;
 
     // private int damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
 
     // power should be a float between [0,1]
-    public Shot(Position pos, float angle, float power) {
+    public Shot(Position pos, float angle, float power, int windSpeed) {
         this.pos = pos;
         this.angle = angle;
         this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -speed; // x speed
         this.vector[1] = (float) Math.cos(Math.toRadians(angle)) * power * speed; // y speed
         isVisible = true;
+        this.windSpeed = windSpeed;
         rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
         //this.damage = damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
     }
@@ -41,7 +43,8 @@ public class Shot implements IDrawable {
         if (pos.getX() > 0 && pos.getX() < Controller.GAME_WIDTH && pos.getY() > 0) {
             pos.setX(pos.getX() + vector[0] * delta * speed);
             pos.setY(pos.getY() + vector[1] * delta * speed);
-            vector[1] += GRAVITY;
+            vector[0] += windSpeed * delta;
+            vector[1] += GRAVITY * delta;
             rect.move(pos.getX(), pos.getY());
             // TODO not working, want shot to rotate according to vector direction
             //angle = (float) Math.atan(vector[1] / vector[0]);

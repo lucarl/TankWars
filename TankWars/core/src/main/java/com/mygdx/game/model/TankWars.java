@@ -10,13 +10,15 @@ public class TankWars {
     private List<Player> players;
     private List<IDrawable> objects;
     private boolean isTurnOver = false;
+    private Wind wind;
 
     private int round;
     private int nRounds;
 
-    public TankWars(int nPlayers, int nRounds) {
+    public TankWars(int nPlayers, int nRounds, Difficulty difficulty) {
         players = new ArrayList<>();
         objects = new ArrayList<>();
+        wind = new Wind(difficulty);
 
         setupObjects(nPlayers);
 
@@ -110,7 +112,7 @@ public class TankWars {
     }
 
     public void fire() {
-        Shot shot = currentPlayer.getTank().fire();
+        Shot shot = currentPlayer.getTank().fire(wind.getWindSpeed());
         objects.add(shot);
         isTurnOver = true;
     }
@@ -135,5 +137,7 @@ public class TankWars {
         return objects;
     }
 
-
+    public Wind getWind() {
+        return wind;
+    }
 }

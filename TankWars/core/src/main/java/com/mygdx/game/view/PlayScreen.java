@@ -106,7 +106,7 @@ public class PlayScreen implements Screen {
 
         controller.batch.end();
 
-        hud.update(delta);
+        hud.update();
         hud.stage.draw();
 
         //stage.act(delta);
