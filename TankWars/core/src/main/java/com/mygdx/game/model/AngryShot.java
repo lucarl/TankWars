@@ -5,6 +5,7 @@ public class AngryShot extends Shot {
     private static String imgSrc = "angrybird.png";
     private static int width = 50;
     private static int height = 50;
+    private static int damage = 1;
 
     public AngryShot(Position p, float angle, float power, int windSpeed) {
         super(p, angle, power, windSpeed);
@@ -24,4 +25,7 @@ public class AngryShot extends Shot {
     public int getHeight() {
         return height;
     }
+
+    @Override
+    public int getDamage() { return damage; }
 }

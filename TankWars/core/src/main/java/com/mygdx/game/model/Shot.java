@@ -16,6 +16,7 @@ public class Shot implements IDrawable {
     private float angle = 0;
     private float radius = 10;
     private float weight = 100;
+    private int damage = 1;
 
     private float[] vector = new float[2]; // speed
     private Position pos;
@@ -25,7 +26,7 @@ public class Shot implements IDrawable {
 
     private CollisionRect rect;
 
-    // private int damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
+
 
     // power should be a float between [0,1]
     public Shot(Position pos, float angle, float power, int windSpeed) {
@@ -99,5 +100,9 @@ public class Shot implements IDrawable {
 
     public CollisionRect getRect() {
         return rect;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 }

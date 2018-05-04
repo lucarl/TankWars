@@ -54,12 +54,16 @@ public class TankWars {
                     && shot.isVisible() && !(player == currentPlayer)) {
                 // TODO förbättra bortagandet av obj här
                 currentPlayer.addScore();
-                tank.setVisibility(false);
-                tank.getGun().setVisibility(false);
-                tank.getGun().getShot().setVisibility(false);
-                objects.remove(tank);
-                objects.remove(tank.getGun());
-                objects.remove(shot);
+                //tank.decreaseHealth(shot.getDamage());
+                tank.decreaseHealth(shot.getDamage());
+                if(tank.getHealthPoints() < 0) {
+                    tank.setVisibility(false);
+                    tank.getGun().setVisibility(false);
+                    tank.getGun().getShot().setVisibility(false);
+                    objects.remove(tank);
+                    objects.remove(tank.getGun());
+                    objects.remove(shot);
+                }
             }
         }
 

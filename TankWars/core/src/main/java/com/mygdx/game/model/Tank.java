@@ -89,6 +89,11 @@ public class Tank implements IDrawable {
         return this.fuel;
     }
 
+    public int decreaseHealth(int damage) {
+        this.healthPoints -= damage;
+        return this.healthPoints;
+    }
+
     public TankGun getGun() {
         return gun;
     }
@@ -106,6 +111,7 @@ public class Tank implements IDrawable {
     public int getHealthPoints() {
         return healthPoints;
     }
+
 
 
     public float getFuel() {
