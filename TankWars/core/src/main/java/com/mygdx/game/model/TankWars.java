@@ -15,6 +15,7 @@ public class TankWars {
     private int round;
     private int nRounds;
 
+
     public TankWars(int nPlayers, int nRounds, Difficulty difficulty) {
         players = new ArrayList<>();
         objects = new ArrayList<>();
@@ -53,9 +54,8 @@ public class TankWars {
             if (shotRect.collidesWith(tankRect) && tank.isVisible()
                     && shot.isVisible() && !(player == currentPlayer)) {
                 // TODO förbättra bortagandet av obj här
-                currentPlayer.addScore();
-                //tank.decreaseHealth(shot.getDamage());
-                tank.decreaseHealth(shot.getDamage());
+                    currentPlayer.addScore();
+                    tank.decreaseHealth(shot.getDamage());
                 if(tank.getHealthPoints() < 0) {
                     tank.setVisibility(false);
                     tank.getGun().setVisibility(false);
@@ -135,7 +135,6 @@ public class TankWars {
     public Player getPlayer() {
         return currentPlayer;
     }
-
 
     public List<IDrawable> getObjects() {
         return objects;

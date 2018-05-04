@@ -44,6 +44,7 @@ public class Hud implements Disposable {
         power = tankWars.getPlayer().getTank().getGun().getPower() * 100;
         fuel = tankWars.getPlayer().getTank().getGun().getPower();
         hp = tankWars.getPlayer().getTank().getHealthPoints();
+
         wind = tankWars.getWind().getWindSpeed();
 
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
