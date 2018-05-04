@@ -11,12 +11,15 @@ public class TankWars {
     private List<IDrawable> objects;
     private boolean isTurnOver = false;
     private Wind wind;
+    private List<Terrain> terrain;
+
 
     private int round;
     private int nRounds;
 
 
     public TankWars(int nPlayers, int nRounds, Difficulty difficulty) {
+        terrain = new ArrayList<>();
         players = new ArrayList<>();
         objects = new ArrayList<>();
         wind = new Wind(difficulty);
@@ -37,6 +40,7 @@ public class TankWars {
 
         CollisionRect shotRect = currentPlayer.getTank().getGun().getShot().getRect();
         Shot shot = currentPlayer.getTank().getGun().getShot();
+
 
         // If shot's not visible anymore remove it and change player
         if (!shot.isVisible()) {

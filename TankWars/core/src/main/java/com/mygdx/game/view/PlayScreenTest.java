@@ -25,6 +25,8 @@ public class PlayScreenTest implements Screen {
     private Hud hud;
     private Renderer renderer;
 
+
+
     public PlayScreenTest(Controller controller, TankWars tankWars) {
         this.controller = controller;
         this.tankWars = tankWars;
@@ -32,6 +34,7 @@ public class PlayScreenTest implements Screen {
         renderer = new Renderer(controller.batch);
         hud = new Hud(controller.batch, tankWars);
         background = new Sprite(new Texture("background.jpg"));
+
     }
 
     public void show() {
@@ -59,9 +62,10 @@ public class PlayScreenTest implements Screen {
 
         show();
         controller.batch.begin();
-
         background.draw(controller.batch);
         renderer.render(tankWars.getObjects());
+
+
         /*      // For each object update it's corresponding sprite with the objects state
         sprites.forEach((obj, sprite) -> {
             sprite.setRotation(obj.getAngle());

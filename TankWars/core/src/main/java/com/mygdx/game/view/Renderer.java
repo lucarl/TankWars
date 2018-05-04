@@ -3,7 +3,8 @@ package com.mygdx.game.view;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.model.IDrawable;
+import com.mygdx.game.model.*;
+import com.mygdx.game.model.Terrain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Renderer {
-
+    private com.mygdx.game.model.Terrain terrain = new Terrain();
     private Map<IDrawable, Sprite> sprites;
     private SpriteBatch batch;
 

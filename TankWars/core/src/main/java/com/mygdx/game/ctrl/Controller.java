@@ -43,8 +43,9 @@ public class Controller extends Game implements InputProcessor {
         super.render();
         float delta = Gdx.graphics.getDeltaTime();
         tankWars.gameLoop(delta);
-
     }
+
+
 
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.LEFT) {

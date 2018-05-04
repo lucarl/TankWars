@@ -3,17 +3,14 @@ import java.util.Random;
 
 public class TerrainTile {
     private float x, y, width, height;
-    public static final String imageSource = "terrainTile.png";
+    private boolean alive;
 
-    public TerrainTile(int posX, int posY) {
+    public TerrainTile(int posX, int posY, boolean alive) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-    }
-
-    public String getImgSrc() {
-        return imageSource;
+        this.alive = alive;
     }
 
     public float getX() {
