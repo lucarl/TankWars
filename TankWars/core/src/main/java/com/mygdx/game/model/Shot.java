@@ -50,6 +50,7 @@ public class Shot implements IDrawable {
             // TODO not working, want shot to rotate according to vector direction
             //angle = (float) Math.atan(vector[1] / vector[0]);
         } else {
+            //if the shot object is outside the screen x-wise it's unvisible
             setVisibility(false);
         }
     }
@@ -90,13 +91,9 @@ public class Shot implements IDrawable {
     }
 
     @Override
-    public boolean isVisible() {
-        return isVisible;
-    }
+    public boolean isVisible() { return this.isVisible == true; }
 
-    public void setVisibility(boolean bool) {
-        isVisible = bool;
-    }
+    public void setVisibility(boolean bool) { this.isVisible = bool; }
 
     public CollisionRect getRect() {
         return rect;

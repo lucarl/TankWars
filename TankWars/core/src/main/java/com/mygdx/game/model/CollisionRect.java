@@ -21,4 +21,19 @@ public class CollisionRect {
                 && x + width > rect.x && y + height > rect.y;
     }
 
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }
