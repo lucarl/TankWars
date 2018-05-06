@@ -1,33 +1,55 @@
 package com.mygdx.game.model;
 import java.util.Random;
 
-public class TerrainTile {
-    private int x, y;
-    private int width, height = 5;
+public class TerrainTile implements IDrawable{
+    private static final String imageSource = "terrain.png";
+    private static int width, height;
     private boolean alive;
+    private Position position;
 
     public TerrainTile(int y, int x, boolean alive) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        this.position = new Position(x, y);
+        this.width = 5;
+        this.height = 5;
         this.alive = alive;
     }
 
-    public float getX() {
-        return x;
+    @Override
+    public Position getPos() {
+        return position;
     }
 
-    public float getY() {
-        return y;
+    @Override
+    public String getImgSrc() {
+        return imageSource;
     }
 
-    public float getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return height;
+    }
+
+    @Override
+    public float getAngle() {
+        return 0;
+    }
+
+    @Override
+    public int getOriginX() {
+        return 0;
+    }
+
+    @Override
+    public int getOriginY() {
+        return 0;
+    }
+
+    @Override
+    public boolean isVisible() {
+        return isVisible();
     }
 
     public boolean isAlive() {

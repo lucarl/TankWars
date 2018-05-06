@@ -11,7 +11,7 @@ public class TankWars {
     private List<IDrawable> objects;
     private boolean isTurnOver = false;
     private Wind wind;
-    private List<Terrain> terrain;
+    //private List<TerrainTile> terrainTiles;
 
 
     private int round;
@@ -19,12 +19,13 @@ public class TankWars {
 
 
     public TankWars(int nPlayers, int nRounds, Difficulty difficulty) {
-        terrain = new ArrayList<>();
+        //terrainTiles = new ArrayList<>();
         players = new ArrayList<>();
         objects = new ArrayList<>();
         wind = new Wind(difficulty);
 
         setupObjects(nPlayers);
+        setupTerrainTiles();
 
         round = 0;
         this.nRounds = nRounds;
@@ -78,6 +79,16 @@ public class TankWars {
         System.out.println("nObjects: " + objects.size());
     }
         // TODO Display who won the round and some action to continue to next round
+
+    private void setupTerrainTiles() {
+        Terrain terrain = new Terrain();
+        TerrainTile[][] terrainMatrix = terrain.getTerrainMatrix();
+        for (int i = 0; i < terrainMatrix.length; i++) {
+            for (int j = 0; j < terrainMatrix[i].length; j++) {
+                objects.add(terrainMatrix[i][j]);
+            }
+        }
+    }
 
     private void setupObjects(int nPlayers) {
         for (int i = 0; i < nPlayers; i++) {
@@ -139,6 +150,10 @@ public class TankWars {
     public Player getPlayer() {
         return currentPlayer;
     }
+
+    /*public List<TerrainTile> getTerrainTiles() {
+        return terrainTiles;
+    }*/
 
     public List<IDrawable> getObjects() {
         return objects;

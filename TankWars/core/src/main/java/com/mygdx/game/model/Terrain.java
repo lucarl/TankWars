@@ -2,7 +2,6 @@ package com.mygdx.game.model;
 
 public class Terrain {
     private TerrainTile[][] terrainMatrix;
-    private static final String imageSource = "terrain.png";
     int yPositionOffset;
     int xPositionOffset;
 

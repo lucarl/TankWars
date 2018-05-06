@@ -24,6 +24,7 @@ public class PlayScreenTest implements Screen {
     private OrthographicCamera camera;
     private Hud hud;
     private Renderer renderer;
+    private Sprite terrain;
 
 
 
