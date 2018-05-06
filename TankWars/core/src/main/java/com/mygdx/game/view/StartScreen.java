@@ -27,14 +27,24 @@ public class StartScreen implements Screen {
     private static final int NEXT_BUTTON_X = 400;
 
 
+    private static final int ARROW_BUTTON_X = 450;
+
     private Stage stage;
     private SpriteBatch batch;
     private Viewport viewport;
     private Controller controller;
-    private Texture img;
+
+    private Texture imgRight;
+    private Texture imgLeft;
+
 
     private ArrowButton arrowButtonRight1;
     private ArrowButton arrowButtonRight2;
+    private ArrowButton arrowButtonRight3;
+
+    private ArrowButton arrowButtonLeft1;
+    private ArrowButton arrowButtonLeft2;
+    private ArrowButton arrowButtonLeft3;
 
     private Texture nextButton;
 
@@ -50,16 +60,35 @@ public class StartScreen implements Screen {
         viewport = new ScreenViewport();
         stage = new Stage(viewport);
         batch = new SpriteBatch();
-        img = new Texture("rightArrow.png");
 
-        //Create right arrow buttons
-        arrowButtonRight1 = new ArrowButton(img,Controller.GAME_WIDTH/3, (int)(Controller.GAME_HEIGHT * 0.6875),
-                img.getWidth()/8,img.getHeight()/8);
-
-        arrowButtonRight2 = new ArrowButton(img,Controller.GAME_WIDTH/3, (int)(Controller.GAME_HEIGHT * 0.6875),
-                img.getWidth()/8,img.getHeight()/8);
+        imgRight = new Texture("rightarrow.png");
+        imgLeft = new Texture("leftarrow.png");
 
         //Create left arrow buttons
+        arrowButtonLeft1 = new ArrowButton(imgLeft,Controller.GAME_WIDTH/3, (int)(Controller.GAME_HEIGHT * 0.78),
+          imgLeft.getWidth()/15,imgLeft.getHeight()/15);
+
+        /*
+        arrowButtonLeft2 = new ArrowButton(imgLeft,Controller.GAME_WIDTH/3, (int)(Controller.GAME_HEIGHT * 0.58),
+                imgLeft.getWidth()/15,imgLeft.getHeight()/15);
+
+        arrowButtonLeft3 = new ArrowButton(imgLeft,Controller.GAME_WIDTH/3, (int)(Controller.GAME_HEIGHT * 0.38),
+                imgLeft.getWidth()/15,imgLeft.getHeight()/15);
+
+                */
+
+        //Create right arrow buttons
+
+       arrowButtonRight1 = new ArrowButton(imgRight,Controller.GAME_WIDTH/9, (int)(Controller.GAME_HEIGHT * 0.78),
+                imgLeft.getWidth()/15,imgLeft.getHeight()/15);
+             /*
+        arrowButtonRight2 = new ArrowButton(imgRight,Controller.GAME_WIDTH/6, (int)(Controller.GAME_HEIGHT * 0.58),
+                imgLeft.getWidth()/15,imgLeft.getHeight()/15);
+
+        arrowButtonRight3 = new ArrowButton(imgRight,Controller.GAME_WIDTH/6, (int)(Controller.GAME_HEIGHT * 0.38),
+                imgLeft.getWidth()/15,imgLeft.getHeight()/15);
+
+                */
 
         //Create next-button
        nextButton = new Texture("next.png");
@@ -75,11 +104,19 @@ public class StartScreen implements Screen {
 
         batch.begin();
 
+        //Draw left arrow buttons
+        arrowButtonLeft1.update(batch,Gdx.input.getX(), Gdx.input.getY());
+
+       // arrowButtonLeft2.update(batch, Gdx.input.getX(), Gdx.input.getY());
+
+       // arrowButtonLeft3.update(batch, Gdx.input.getX(), Gdx.input.getY());
+
         //Draw right arrow buttons
-        arrowButtonRight1.update(batch,Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH / 2,
-                Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2);
+        arrowButtonRight1.update(batch, Gdx.input.getX(), Gdx.input.getY());
 
+      //  arrowButtonRight2.update(batch, Gdx.input.getX(), Gdx.input.getY());
 
+       // arrowButtonRight3.update(batch, Gdx.input.getX(), Gdx.input.getY());
 
         //Draw next button
         batch.draw(nextButton,NEXT_BUTTON_X, NEXT_BUTTON_Y ,
@@ -88,10 +125,13 @@ public class StartScreen implements Screen {
 
 
 
+
+
        //Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH / 2,
         //                Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2
 
-        handleButton();
+        handleNextButton();
+
         batch.end();
 
         stage.act(delta);
@@ -99,7 +139,7 @@ public class StartScreen implements Screen {
 
     }
 
-    private void handleButton() {
+    private void handleNextButton() {
 
         boolean xRange = false;
         boolean yRange = false;
@@ -116,30 +156,11 @@ public class StartScreen implements Screen {
             yRange = true;
         }
 
-            if (xRange && yRange && Gdx.input.justTouched()
-                    || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-                controller.setPlayScreen();
-            }
-        }
-
-
-
-            /*
-        int x = Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH/2;
-        // TODO gör dessa booleans mer förståliga
-        boolean xRange = Gdx.input.getX() > x && Gdx.input.getX() < x + NEXT_BUTTON_WIDTH;
-        boolean yRange = Gdx.graphics.getHeight() - Gdx.input.getY()
-                < Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2 + NEXT_BUTTON_HEIGHT
-                && Gdx.graphics.getHeight() - Gdx.input.getY() > Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2;
-
-
-        // Click on start button
         if (xRange && yRange && Gdx.input.justTouched()
                 || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            controller.setPlayScreen();
+                controller.setPlayScreen();
         }
-
-            */
+    }
 
 
     @Override
@@ -164,7 +185,9 @@ public class StartScreen implements Screen {
 
     @Override
     public void dispose() {
+
         stage.dispose();
+        nextButton.dispose();
     }
 }
 

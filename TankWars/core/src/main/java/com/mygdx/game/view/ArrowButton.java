@@ -17,6 +17,7 @@ public class ArrowButton {
     public void update (SpriteBatch batch, float input_x, float input_y) {
         checkIfClicked(input_x, input_y);
         skin.draw(batch); // draw the button
+        //batch.dispose();
     }
 
     private void checkIfClicked (float ix, float iy) {

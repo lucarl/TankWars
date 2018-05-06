@@ -81,8 +81,8 @@ public class Tank implements IDrawable {
         rightMove = b;
     }
 
-
-    private double decreaseFuel() {
+    //sätter till public för att göra ett test!!!
+    public double decreaseFuel() {
         if (leftMove || rightMove) {
             this.fuel -= 5;
         }
@@ -111,7 +111,6 @@ public class Tank implements IDrawable {
     public int getHealthPoints() {
         return healthPoints;
     }
-
 
 
     public float getFuel() {
@@ -154,5 +153,9 @@ public class Tank implements IDrawable {
     public CollisionRect getRect() {
         return rect;
     }
+
+    public boolean isRightMove() { return rightMove; }
+
+    public boolean isLeftMove() { return leftMove; }
 
 }
