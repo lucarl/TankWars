@@ -7,6 +7,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -27,6 +28,10 @@ public class SplashScreen2 implements Screen{
     SpriteBatch batch;
     //new Texture(Gdx.files.internal("loadbg.png"));
     //new Texture(Gdx.files.internal("loadbar.png"));
+    TextureRegion loadingBarStart;
+    TextureRegion loadingBarBody;
+    TextureRegion loadingBarEnd;
+
 
     public SplashScreen2(){
 
@@ -37,6 +42,29 @@ public class SplashScreen2 implements Screen{
         assetManager.load("loadbg.png",Texture.class);
         assetManager.load("loadbar.png",Texture.class);
         assetManager.finishLoading();
+
+        //Assets Manager loading
+        assetManager.load("assetMan1.jpeg",Texture.class);
+        assetManager.load("assetMan2.jpeg",Texture.class);
+        assetManager.load("assetMan6.jpeg",Texture.class);
+        assetManager.load("assetMan7.jpeg",Texture.class);
+        assetManager.load("assetMan11.jpeg",Texture.class);
+        assetManager.load("assetMan12.jpeg",Texture.class);
+        assetManager.load("assetMan13.jpeg",Texture.class);
+        assetManager.load("assetMan14.jpeg",Texture.class);
+        assetManager.load("assetMan3.jpg",Texture.class);
+        assetManager.load("assetMan4.jpg",Texture.class);
+        assetManager.load("assetMan5.jpg",Texture.class);
+        assetManager.load("assetMan8.jpg",Texture.class);
+        assetManager.load("assetMan9.jpg",Texture.class);
+        assetManager.load("assetMan10.jpg",Texture.class);
+        assetManager.load("assetMan15.jpg",Texture.class);
+        assetManager.load("assetMan16.jpg",Texture.class);
+        assetManager.load("assetMan17.jpg",Texture.class);
+        assetManager.load("assetMan18.jpg",Texture.class);
+        assetManager.load("assetMan19.jpg",Texture.class);
+        assetManager.load("assetMan20.jpg",Texture.class);
+
 
     }
 
@@ -51,6 +79,10 @@ public class SplashScreen2 implements Screen{
         this.loadAssets();
         loadingBackground = assetManager.get("loadbg.png", Texture.class);
         loadingBar = assetManager.get("loadbar.png", Texture.class);
+        loadingBarStart = new TextureRegion(loadingBar,0,0,20,loadingBar.getHeight());
+        loadingBarBody = new TextureRegion(loadingBar,20,0,50,loadingBar.getHeight());
+        loadingBarEnd = new TextureRegion(loadingBar,20+50,0,20,loadingBar.getHeight());
+
 
         stage.addActor(splashImage);
         splashImage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(4.0f),Actions.delay(1),Actions.run(new Runnable() {
@@ -69,8 +101,16 @@ public class SplashScreen2 implements Screen{
         stage.act();
         stage.draw();
         batch.begin();
-        batch.draw(loadingBackground,0,0);
-        batch.draw(loadingBar,0,0);
+
+        if(assetManager.update()){
+
+        }
+
+        batch.draw(loadingBackground,20,20,200,50);
+        //batch.draw(loadingBar,20,20);
+        batch.draw(loadingBarStart,0,0);
+        batch.draw(loadingBarBody,0+loadingBarStart.getRegionWidth(),0,loadingBarBody.getRegionWidth()*assetManager.getProgress(),loadingBarBody.getRegionWidth());
+        batch.draw(loadingBarEnd,0+loadingBarStart.getRegionWidth()+loadingBarBody.getRegionWidth()*assetManager.getProgress(),0);
         batch.end();
     }
 
