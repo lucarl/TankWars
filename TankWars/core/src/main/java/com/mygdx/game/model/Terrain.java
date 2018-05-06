@@ -13,4 +13,8 @@ public class Terrain {
         }
     }
 
+    public TerrainTile[][] getTerrainMatrix() {
+        return terrainMatrix;
+    }
+
 }

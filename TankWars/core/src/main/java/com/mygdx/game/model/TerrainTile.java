@@ -2,10 +2,11 @@ package com.mygdx.game.model;
 import java.util.Random;
 
 public class TerrainTile {
-    private float x, y, width, height;
+    private float x, y;
+    private int width, height = 5;
     private boolean alive;
 
-    public TerrainTile(int posX, int posY, boolean alive) {
+    public TerrainTile(int x, int y, boolean alive) {
         this.x = x;
         this.y = y;
         this.width = width;
