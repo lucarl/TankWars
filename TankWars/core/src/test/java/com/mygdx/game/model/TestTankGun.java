@@ -5,14 +5,16 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class TestTankGun {
+
+    private TankGun tankGun = new TankGun(new Position(0.1f, 0.1f));
 
     //A test for the fire() method in TankGun
     //Checks if the fire method creates a shot of type AngryShot
     @Test
     public void testFireAngryShot() {
-        TankGun tankGun = new TankGun(new Position(0.1f, 0.1f));
         //Set to true in order to test if fire returns AngryShot
         tankGun.setSpecialShot(true);
         //The shot created by the method
@@ -25,8 +27,7 @@ public class TestTankGun {
 
     //Checks if the fire method creates a shot of type AngryShot
     @Test
-    public void testFireShot() {
-        TankGun tankGun = new TankGun(new Position(0.1f, 0.1f));
+    public void testFire() {
         //Set to false in order to test if fire method returns Shot object
         tankGun.setSpecialShot(false);
         //The shot created by the method
@@ -38,8 +39,7 @@ public class TestTankGun {
     }
 
     @Test
-    public void testAimRight(){
-        TankGun tankGun = new TankGun(new Position(0.1f,0.1f));
+    public void testAimTankRight(){
         float startAngle = tankGun.getAngle(); // 0
         //setRightAim to true and call aim method
         tankGun.setRightAim(true);
@@ -49,8 +49,7 @@ public class TestTankGun {
         assertTrue(startAngle < endAngle);
     }
     @Test
-    public void testAimLeft(){
-        TankGun tankGun = new TankGun(new Position(0.1f,0.1f));
+    public void testAimTankLeft(){
         float startAngle = tankGun.getAngle(); // 0
         //setLeftAim to true and call aim method
         tankGun.setLeftAim(true);
@@ -62,23 +61,33 @@ public class TestTankGun {
 
     @Test
     public void testIncreasePower(){
-        TankGun tankGun = new TankGun(new Position(0.1f,0.1f));
-        float startPower = tankGun.getPower();
+        float actualPower = tankGun.getPower();
         // call increasePower and set endPower to the value of power after the call has been made
         tankGun.increasePower();
-        float endPower = tankGun.getPower();
-
-        assertTrue(startPower < endPower);
+        float increasedPower = tankGun.getPower();
+        assertTrue(actualPower < increasedPower);
     }
     @Test
     public void testDecreasePower(){
-        TankGun tankGun = new TankGun(new Position(0.1f,0.1f));
-        float startPower = tankGun.getPower();
+        float actualPower = tankGun.getPower();
         // call decreasePower and set endPower to the value of power after the call has been made
         tankGun.decreasePower();
-        float endPower = tankGun.getPower();
+        float decreasedPower = tankGun.getPower();
+        assertTrue(actualPower > decreasedPower);
+    }
 
-        assertTrue(startPower > endPower);
+    @Test
+    public void testSetAimLeft(){
+        tankGun.setLeftAim(true);
+        assertTrue(tankGun.isLeftAim());
+        assertFalse(tankGun.isRightAim());
+    }
+
+    @Test
+    public void testSetAimRight(){
+        tankGun.setRightAim(true);
+        assertTrue(tankGun.isRightAim());
+        assertFalse(tankGun.isLeftAim());
     }
 
 }

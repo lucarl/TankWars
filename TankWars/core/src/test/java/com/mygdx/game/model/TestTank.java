@@ -4,10 +4,11 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class TestTank {
 
-    Tank tank = new Tank();
+    private Tank tank = new Tank();
 
     @Test
     public void testSetLeftMove(){
@@ -46,12 +47,31 @@ public class TestTank {
     }
 
     @Test
-    public void testMoveTank(){
+    public void testMoveTankRight(){
+        tank.setVisibility(true);
+        tank.setRightMove(true);
+        float actualPosX = tank.getPos().getX();
+        Position newPos = tank.moveTank(System.nanoTime());
+        assertTrue(newPos.getX() > 0 && newPos.getX() > actualPosX && tank.isRightMove());
+    }
 
+    @Test
+    public void testMoveTankLeft(){
+        tank.setVisibility(true);
+        tank.setLeftMove(true);
+        float actualPosX = tank.getPos().getX();
+        Position newPos = tank.moveTank(System.nanoTime());
+        assertTrue(newPos.getX() < 0 && newPos.getX() < actualPosX && tank.isLeftMove());
     }
 
     @Test
     public void testFire(){
-
+        Shot shot = new Shot(new Position(10,10), 10, 10,10);
+        int newWindspeed = 40;
+        Shot fireShot = tank.fire(newWindspeed);
+        //When a shot is fired the visibility is set to false
+        assertFalse(fireShot.isVisible()); //BLIR INTE FALSE!! VARFÖR???
+        //A new shot with the windspeed parameter is created
+        assertTrue(fireShot.getWindSpeed() == newWindspeed);
     }
 }

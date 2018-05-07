@@ -54,7 +54,6 @@ public class StartScreen implements Screen {
 
     }
 
-
     @Override
     public void show() {
         viewport = new ScreenViewport();

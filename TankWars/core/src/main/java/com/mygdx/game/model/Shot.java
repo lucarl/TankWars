@@ -102,4 +102,8 @@ public class Shot implements IDrawable {
     public int getDamage() {
         return damage;
     }
+
+    public int getWindSpeed() {
+        return windSpeed;
+    }
 }
