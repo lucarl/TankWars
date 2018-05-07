@@ -34,7 +34,7 @@ public class TankGun implements IDrawable {
         if (specialShot) {
             shot.setVisibility(false);
             shot = new AngryShot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
-            specialShot = false;
+            specialShot = false; //VARFÖR SÄTTER VI DEN HÄR TILL FALSE? //Patricia
             return shot;
         } else {
             shot.setVisibility(false);
@@ -143,4 +143,8 @@ public class TankGun implements IDrawable {
     public void setVisibility(boolean bool) {
         isVisible = bool;
     }
+
+    public boolean isRightAim() { return rightAim; }
+
+    public boolean isLeftAim() { return leftAim; }
 }
