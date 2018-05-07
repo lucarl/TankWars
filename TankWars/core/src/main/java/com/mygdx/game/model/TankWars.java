@@ -11,6 +11,7 @@ public class TankWars {
     private List<IDrawable> objects;
     private boolean isTurnOver = false;
     private Wind wind;
+    private TankWarsFactory tankWarsFactory = new TankWarsFactory();
     //private List<TerrainTile> terrainTiles;
 
 
@@ -24,8 +25,8 @@ public class TankWars {
         objects = new ArrayList<>();
         wind = new Wind(difficulty);
 
-        setupObjects(nPlayers);
-        setupTerrainTiles();
+        tankWarsFactory.setupObjects(nPlayers, players, objects);
+        tankWarsFactory.setupTerrainTiles(objects);
 
         round = 0;
         this.nRounds = nRounds;
@@ -80,7 +81,7 @@ public class TankWars {
     }
         // TODO Display who won the round and some action to continue to next round
 
-    private void setupTerrainTiles() {
+    /*private void setupTerrainTiles() {
         Terrain terrain = new Terrain();
         TerrainTile[][] terrainMatrix = terrain.getTerrainMatrix();
         for (int i = 0; i < terrainMatrix.length; i++) {
@@ -88,16 +89,16 @@ public class TankWars {
                 objects.add(terrainMatrix[i][j]);
             }
         }
-    }
+    }*/
 
-    private void setupObjects(int nPlayers) {
+    /*private void setupObjects(int nPlayers) {
         for (int i = 0; i < nPlayers; i++) {
             players.add(new Player());
             objects.add(players.get(i).getTank().getGun().getShot());
             objects.add(players.get(i).getTank().getGun());
             objects.add(players.get(i).getTank());
         }
-    }
+    }*/
 
     public void update(float delta) {
         aim(delta);
