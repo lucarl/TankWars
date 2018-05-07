@@ -106,5 +106,6 @@ public class PlayScreenTest implements Screen {
     public void dispose() {
         controller.dispose();
         hud.dispose();
+
     }
 }
