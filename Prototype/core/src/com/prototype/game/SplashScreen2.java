@@ -26,11 +26,11 @@ public class SplashScreen2 implements Screen{
     private Stage stage = new Stage();
     AssetManager assetManager;
     SpriteBatch batch;
-    //new Texture(Gdx.files.internal("loadbg.png"));
-    //new Texture(Gdx.files.internal("loadbar.png"));
     TextureRegion loadingBarStart;
     TextureRegion loadingBarBody;
     TextureRegion loadingBarEnd;
+    //new Texture(Gdx.files.internal("loadbg.png"));
+    //new Texture(Gdx.files.internal("loadbar.png"));
 
 
     public SplashScreen2(){
@@ -80,8 +80,8 @@ public class SplashScreen2 implements Screen{
         loadingBackground = assetManager.get("loadbg.png", Texture.class);
         loadingBar = assetManager.get("loadbar.png", Texture.class);
         loadingBarStart = new TextureRegion(loadingBar,0,0,20,loadingBar.getHeight());
-        loadingBarBody = new TextureRegion(loadingBar,20,0,50,loadingBar.getHeight());
-        loadingBarEnd = new TextureRegion(loadingBar,20+50,0,20,loadingBar.getHeight());
+        loadingBarBody = new TextureRegion(loadingBar,20,0,449,loadingBar.getHeight());
+        loadingBarEnd = new TextureRegion(loadingBar,20+449,0,20,loadingBar.getHeight());
 
 
         stage.addActor(splashImage);
@@ -101,15 +101,12 @@ public class SplashScreen2 implements Screen{
         stage.act();
         stage.draw();
         batch.begin();
-
-        if(assetManager.update()){
-
-        }
+        assetManager.update();
 
         batch.draw(loadingBackground,20,20,200,50);
         //batch.draw(loadingBar,20,20);
         batch.draw(loadingBarStart,0,0);
-        batch.draw(loadingBarBody,0+loadingBarStart.getRegionWidth(),0,loadingBarBody.getRegionWidth()*assetManager.getProgress(),loadingBarBody.getRegionWidth());
+        batch.draw(loadingBarBody,0+loadingBarStart.getRegionWidth(),0,loadingBarBody.getRegionWidth()*assetManager.getProgress(),loadingBarBody.getRegionHeight());
         batch.draw(loadingBarEnd,0+loadingBarStart.getRegionWidth()+loadingBarBody.getRegionWidth()*assetManager.getProgress(),0);
         batch.end();
     }
@@ -134,6 +131,7 @@ public class SplashScreen2 implements Screen{
     public void dispose(){
         texture.dispose();
         batch.dispose();
+        assetManager.dispose();
     }
 
 }
