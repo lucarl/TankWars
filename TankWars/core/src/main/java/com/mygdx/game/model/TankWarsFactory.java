@@ -10,9 +10,9 @@ public class TankWarsFactory {
         for (int i = 0; i < nPlayers; i++) {
             // Just nu sätts tanksen en bit ovanför marken å faller ner på marken,
             // Vill få dom att spawna på marken
-            Tank tank = new Tank(xPos,400);
-            //int yPos = terrain.getHeightOfCol((int) tank.getPos().getX() / terrain.getTileWidth());
-            //tank.setPos(new Position(tank.getPos().getX(), yPos));
+            Tank tank = new Tank(xPos,0);
+            int yPos = terrain.getHeightOfCol((int) tank.getPos().getX() / terrain.getTileWidth());
+            tank.setPos(new Position(tank.getPos().getX(), yPos));
             players.add(new Player(tank));
             objects.add(players.get(i).getTank().getGun().getShot());
             objects.add(players.get(i).getTank().getGun());

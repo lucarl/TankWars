@@ -171,5 +171,6 @@ public class Tank implements IDrawable {
 
     public void setPos(Position pos) {
         this.pos = pos;
+        gun.setPos(new Position(pos.getX() + width/2, pos.getY()));
     }
 }
