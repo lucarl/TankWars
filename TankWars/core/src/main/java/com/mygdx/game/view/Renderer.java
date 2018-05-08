@@ -19,6 +19,9 @@ public class Renderer {
     public Renderer(SpriteBatch batch) {
         this.batch = batch;
         sprites = new HashMap<>();
+
+        //assetsManager = new Assets();
+       // assetsManager.load();
     }
 
     public void render(List<IDrawable> objects) {
