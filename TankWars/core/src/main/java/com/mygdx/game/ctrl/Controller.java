@@ -69,6 +69,7 @@ public class Controller extends Game implements InputProcessor {
 
 
     public boolean keyDown(int keycode) {
+
         if (keycode == Input.Keys.LEFT) {
             tankWars.getPlayer().getTank().setLeftMove(true);
         }

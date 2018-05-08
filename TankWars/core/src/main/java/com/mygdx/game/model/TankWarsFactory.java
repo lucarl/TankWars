@@ -4,23 +4,33 @@ import java.util.List;
 
 public class TankWarsFactory {
 
-    public void setupObjects(int nPlayers, List<Player> players, List<IDrawable> objects) {
+    public void setupObjects(int nPlayers, List<Player> players, List<IDrawable> objects, Terrain terrain) {
 
+        int xPos = 100;
         for (int i = 0; i < nPlayers; i++) {
-            players.add(new Player());
+            // Just nu sätts tanksen en bit ovanför marken å faller ner på marken,
+            // Vill få dom att spawna på marken
+            Tank tank = new Tank(xPos,400);
+            //int yPos = terrain.getHeightOfCol((int) tank.getPos().getX() / terrain.getTileWidth());
+            //tank.setPos(new Position(tank.getPos().getX(), yPos));
+            players.add(new Player(tank));
             objects.add(players.get(i).getTank().getGun().getShot());
             objects.add(players.get(i).getTank().getGun());
             objects.add(players.get(i).getTank());
+            xPos += 150;
         }
     }
 
-    public void setupTerrainTiles(List<IDrawable> objects) {
+    public Terrain setupTerrainTiles(List<IDrawable> objects) {
         Terrain terrain = new Terrain();
         TerrainTile[][] terrainMatrix = terrain.getTerrainMatrix();
         for (int i = 0; i < terrainMatrix.length; i++) {
             for (int j = 0; j < terrainMatrix[i].length; j++) {
-                objects.add(terrainMatrix[i][j]);
+                if(terrainMatrix[i][j] != null){
+                    objects.add(terrainMatrix[i][j]);
+                }
             }
         }
+        return terrain;
     }
 }

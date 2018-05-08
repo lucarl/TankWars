@@ -10,8 +10,8 @@ public class Player {
     private String name;
 
 
-    public Player() {
-        tank = new Tank();
+    public Player(Tank tank) {
+        this.tank = tank;
         score = 0;
         name = "Player" + nPlayers;
         nPlayers++;

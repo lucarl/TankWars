@@ -32,8 +32,25 @@ public class Terrain {
 
     }
 
+    public int getHeightOfCol(int col){
+        int colHeight = 0;
+        for(int row = 0; row < rows; row++){
+            if(terrainMatrix[row][col] != null){
+                colHeight += tileHeight;
+            }
+        }
+        return colHeight;
+    }
+
     public TerrainTile[][] getTerrainMatrix() {
         return terrainMatrix;
     }
 
+    public int getTileWidth() {
+        return tileWidth;
+    }
+
+    public int getTileHeight() {
+        return tileHeight;
+    }
 }

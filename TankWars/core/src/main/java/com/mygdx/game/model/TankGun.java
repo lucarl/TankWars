@@ -96,7 +96,7 @@ public class TankGun implements IDrawable {
         return shot;
     }
 
-    public void setPos(Position pos, int width, int height) {
+    public void setPos(Position pos) {
         this.pos = new Position(pos.getX() + width/2, pos.getY() + height);
     }
 

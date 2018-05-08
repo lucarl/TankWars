@@ -12,6 +12,7 @@ public class TankWars {
     private List<IDrawable> tiles;
     private boolean isTurnOver = false;
     private Wind wind;
+    private Terrain terrain;
     private TankWarsFactory tankWarsFactory = new TankWarsFactory();
     //private List<TerrainTile> terrainTiles;
 
@@ -27,9 +28,9 @@ public class TankWars {
         wind = new Wind(difficulty);
         tiles = new ArrayList<>();
 
-        tankWarsFactory.setupObjects(nPlayers, players, objects);
-        tankWarsFactory.setupTerrainTiles(objects);
 
+        terrain = tankWarsFactory.setupTerrainTiles(objects);
+        tankWarsFactory.setupObjects(nPlayers, players, objects, terrain);
         round = 0;
         this.nRounds = nRounds;
         playerIndex = 0;
@@ -147,7 +148,7 @@ public class TankWars {
 
     public void move(float delta) {
         if(!isTurnOver)
-            currentPlayer.getTank().moveTank(delta);
+           currentPlayer.getTank().moveTank(delta, terrain);
     }
 
     public Player getPlayer() {
