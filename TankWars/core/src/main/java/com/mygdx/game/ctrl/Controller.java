@@ -1,9 +1,11 @@
 package com.mygdx.game.ctrl;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.Shot;
 import com.mygdx.game.model.TankWars;
 import com.mygdx.game.view.PlayScreen;
@@ -21,6 +23,10 @@ public class Controller extends Game implements InputProcessor {
     private Screen screen;
     private TankWars tankWars;
     public SpriteBatch batch;
+    private AssetManager manager;
+    private Assets assets;
+
+
 
     public Controller(TankWars tankWars) {
         this.tankWars = tankWars;
@@ -29,6 +35,15 @@ public class Controller extends Game implements InputProcessor {
     public void create() {
         batch = new SpriteBatch();
         screen = new StartScreen(this);
+
+        manager = new AssetManager();
+        assets = new Assets();
+        //starts loading assets
+        assets.loadAssets();
+        //Continues when done loading.
+        //it won't continue until all assets are finished loading.
+        assets.manager.finishLoading();
+
         setScreen(screen);
     }
 
@@ -36,6 +51,12 @@ public class Controller extends Game implements InputProcessor {
         screen.dispose();
         screen = new PlayScreenTest(this, tankWars);
         setScreen(screen);
+    }
+
+    @Override
+    public void dispose() {
+        //assets.manager.dispose();
+        assets.disposeAssets();
     }
 
     @Override
@@ -147,6 +168,8 @@ public class Controller extends Game implements InputProcessor {
 
 
     }
+
+
 
 
 }
