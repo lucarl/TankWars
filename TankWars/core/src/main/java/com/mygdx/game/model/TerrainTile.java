@@ -2,15 +2,15 @@ package com.mygdx.game.model;
 import java.util.Random;
 
 public class TerrainTile implements IDrawable{
-    private static final String imageSource = "terrain.png";
+    private static final String imageSource = "terrainTile.png";
     private static int width, height;
     private boolean alive;
     private Position position;
 
-    public TerrainTile(int y, int x, boolean alive) {
+    public TerrainTile(int x, int y, boolean alive) {
         this.position = new Position(x, y);
-        this.width = 5;
-        this.height = 5;
+        width = 5;
+        height = 5;
         this.alive = alive;
     }
 
@@ -49,7 +49,7 @@ public class TerrainTile implements IDrawable{
 
     @Override
     public boolean isVisible() {
-        return isVisible();
+        return alive;
     }
 
     public boolean isAlive() {

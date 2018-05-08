@@ -84,7 +84,7 @@ public class Tank implements IDrawable {
     //sätter till public för att göra ett test!!!
     public double decreaseFuel() {
         if (leftMove || rightMove) {
-            this.fuel -= 5;
+            this.fuel -= 0.1f;
         }
         return this.fuel;
     }

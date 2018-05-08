@@ -52,7 +52,10 @@ public class PlayScreenTest implements Screen {
                         obj.getWidth(), obj.getHeight());
             }
         });
+
 */
+
+        renderer.loadResources(tankWars.getObjects());
         background.setSize(Controller.GAME_WIDTH, Controller.GAME_HEIGHT);
         Gdx.input.setInputProcessor(controller);
     }
@@ -61,7 +64,7 @@ public class PlayScreenTest implements Screen {
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        show();
+
         controller.batch.begin();
         background.draw(controller.batch);
         renderer.render(tankWars.getObjects());
