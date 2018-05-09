@@ -4,14 +4,14 @@ import java.util.Random;
 public class TerrainTile implements IDrawable{
     private static final String imageSource = "terrainTile.png";
     private static int width, height;
-    private boolean alive;
+    private boolean isAlive;
     private Position position;
 
     public TerrainTile(int x, int y, boolean alive) {
         this.position = new Position(x, y);
         width = 5;
         height = 5;
-        this.alive = alive;
+        this.isAlive = alive;
     }
 
     @Override
@@ -48,12 +48,9 @@ public class TerrainTile implements IDrawable{
     }
 
     @Override
-    public boolean isVisible() {
-        return alive;
+    public boolean isAlive() {
+        return isAlive;
     }
 
-    public boolean isAlive() {
-        return alive;
-    }
 
 }

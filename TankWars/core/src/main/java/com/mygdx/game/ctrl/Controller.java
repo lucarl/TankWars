@@ -2,14 +2,10 @@ package com.mygdx.game.ctrl;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.model.Assets;
-import com.mygdx.game.model.Shot;
 import com.mygdx.game.model.TankWars;
 import com.mygdx.game.view.PlayScreen;
-import com.mygdx.game.view.PlayScreenTest;
 import com.mygdx.game.view.StartScreen;
 
 
@@ -49,7 +45,7 @@ public class Controller extends Game implements InputProcessor {
 
     public void setPlayScreen() {
         screen.dispose();
-        screen = new PlayScreenTest(this, tankWars);
+        screen = new PlayScreen(this, tankWars);
         setScreen(screen);
     }
 
@@ -88,6 +84,7 @@ public class Controller extends Game implements InputProcessor {
 
         if (keycode == Input.Keys.SPACE) {
             tankWars.fire();
+
         }
 
         if (keycode == Input.Keys.A) {

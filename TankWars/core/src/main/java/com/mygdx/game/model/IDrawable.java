@@ -1,7 +1,7 @@
 package com.mygdx.game.model;
 
 //implementeras av alla objekt som måste ritas ut
-//isVisible - lever objektet?
+//isAlive - lever objektet?
 
 public interface IDrawable {
 
@@ -12,5 +12,5 @@ public interface IDrawable {
     public float getAngle();
     public int getOriginX();
     public int getOriginY();
-    public boolean isVisible();
+    public boolean isAlive();
 }

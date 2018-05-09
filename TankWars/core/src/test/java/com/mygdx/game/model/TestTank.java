@@ -48,7 +48,7 @@ public class TestTank {
 
     @Test
     public void testMoveTankRight(){
-        tank.setVisibility(true);
+        tank.setAlive(true);
         tank.setRightMove(true);
         float actualPosX = tank.getPos().getX();
         //Position newPos = tank.moveTank(System.nanoTime());
@@ -57,7 +57,7 @@ public class TestTank {
 
     @Test
     public void testMoveTankLeft(){
-        tank.setVisibility(true);
+        tank.setAlive(true);
         tank.setLeftMove(true);
         float actualPosX = tank.getPos().getX();
         //Position newPos = tank.moveTank(System.nanoTime());
@@ -70,7 +70,7 @@ public class TestTank {
         int newWindspeed = 40;
         Shot fireShot = tank.fire(newWindspeed);
         //When a shot is fired the visibility is set to false
-        assertFalse(fireShot.isVisible()); //BLIR INTE FALSE!! VARFÖR???
+        assertFalse(fireShot.isAlive()); //BLIR INTE FALSE!! VARFÖR???
         //A new shot with the windspeed parameter is created
         assertTrue(fireShot.getWindSpeed() == newWindspeed);
     }

@@ -3,7 +3,6 @@ package com.mygdx.game.model;
 
 import com.mygdx.game.ctrl.Controller;
 
-
 public class Tank implements IDrawable {
     private static String tankImgSrc = "tank14.png";
     private static int width = 80;
@@ -26,7 +25,7 @@ public class Tank implements IDrawable {
     private CollisionRect rect;
 
     public Tank(float x, float y) {
-        this.pos = new Position(x + width/2, y);
+        this.pos = new Position(x + width / 2, y);
         this.angle = 0;
         this.healthPoints = 100;
         this.fuel = 100;
@@ -42,39 +41,34 @@ public class Tank implements IDrawable {
     }
 
     public Shot fire(int windSpeed) {
-        //if (isVisible) {
-            return gun.fire(windSpeed);
-        //}
-        //return gun.getShot();
-    }
+        return gun.fire(windSpeed);
+        }
 
     public Position moveTank(float delta, Terrain terrain) {
         // Get grounds yPos
-        float groundYPos = terrain.getHeightOfCol((int)(pos.getX()+width/2) / terrain.getTileWidth());
-        if(pos.getY() > groundYPos) pos.setY(groundYPos);
+        float groundYPos = terrain.getHeightOfCol((int) (pos.getX() + width / 2) / terrain.getTileSize());
+        if (pos.getY() > groundYPos) pos.setY(groundYPos);
         if (isVisible && fuel > 0 && pos.getX() > 0 && pos.getX() + width < Controller.GAME_WIDTH) {
             if (rightMove) {
                 pos.setX(pos.getX() + speed * delta);
 
                 // Set tank yPos = groundYPos
                 pos.setY(groundYPos);
-
                 rect.move(pos.getX(), groundYPos);
-                decreaseFuel();
-            }
 
-            if (leftMove) {
+                decreaseFuel();
+            } else if (leftMove) {
                 pos.setX(pos.getX() - speed * delta);
-                // Get grounds yPos
-                float yPos = terrain.getHeightOfCol((int)(pos.getX()+width/2) / terrain.getTileWidth());
-                // Set tank yPos + heightOffset
-                pos.setY(yPos);
-                rect.move(pos.getX(), yPos);
+
+                // Set tank yPos = groundYPos
+                pos.setY(groundYPos);
+                rect.move(pos.getX(), groundYPos);
+
                 decreaseFuel();
             }
         }
         // Gör så tankGun följer med tanken
-        gun.setPos(new Position(pos.getX() + width/2, pos.getY()));
+        gun.setPos(new Position(pos.getX() + width / 2, pos.getY()));
         return pos;
     }
 
@@ -153,11 +147,11 @@ public class Tank implements IDrawable {
     }
 
     @Override
-    public boolean isVisible() {
+    public boolean isAlive() {
         return isVisible;
     }
 
-    public void setVisibility(boolean bool) {
+    public void setAlive(boolean bool) {
         isVisible = bool;
     }
 
@@ -165,12 +159,16 @@ public class Tank implements IDrawable {
         return rect;
     }
 
-    public boolean isRightMove() { return rightMove; }
+    public boolean isRightMove() {
+        return rightMove;
+    }
 
-    public boolean isLeftMove() { return leftMove; }
+    public boolean isLeftMove() {
+        return leftMove;
+    }
 
     public void setPos(Position pos) {
         this.pos = pos;
-        gun.setPos(new Position(pos.getX() + width/2, pos.getY()));
+        gun.setPos(new Position(pos.getX() + width / 2, pos.getY()));
     }
 }

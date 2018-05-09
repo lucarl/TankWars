@@ -2,41 +2,38 @@ package com.mygdx.game.model;
 
 import com.mygdx.game.ctrl.Controller;
 
+import static java.lang.Math.*;
+
 public class Terrain {
     private TerrainTile[][] terrainMatrix;
-    private int yPositionOffset;
-    private int xPositionOffset;
     private int rows, cols;
-    private int tileWidth, tileHeight;
+    private int x, y;
+    private int tileSize;
 
     public Terrain() {
-        yPositionOffset = 0;
-        xPositionOffset = 0;
-        cols = Controller.GAME_WIDTH / 5;
-        rows = Controller.GAME_HEIGHT / 5 / 4;
-        tileWidth = 5;
-        tileHeight = 5;
+        tileSize = 5;
+        x = -5; y = 0;
+        cols = Controller.GAME_WIDTH / tileSize + 2; // + extra rader för padding
+        rows = Controller.GAME_HEIGHT / tileSize / 2;  // / terrängen täcker upp till 1/2 av skärmen
+
         terrainMatrix = new TerrainTile[rows][cols];
 
-        for (int i = 0; i < cols; i++) {
-            for (int j = 0; j < Math.abs(Math.cos(Math.toRadians(i*2))* 20 + 5) ; j++) {
-                terrainMatrix[j][i] = new TerrainTile(xPositionOffset, yPositionOffset, true);
+        for (int col = 0; col < cols; col++) {
+            for (int row = 0; row < min(abs(cos(toRadians(col * 2)) * 25 + 5), rows); row++) {
+                terrainMatrix[row][col] = new TerrainTile(x + col * tileSize,
+                                                          y + row * tileSize, true);
 
-                yPositionOffset += tileHeight;
             }
-            xPositionOffset += tileWidth;
-            yPositionOffset = 0;
-
         }
 
 
     }
 
-    public int getHeightOfCol(int col){
+    public int getHeightOfCol(int col) {
         int colHeight = 0;
-        for(int row = 0; row < rows; row++){
-            if(terrainMatrix[row][col] != null){
-                colHeight += tileHeight;
+        for (int row = 0; row < rows; row++) {
+            if (terrainMatrix[row][col] != null) {
+                colHeight += tileSize;
             }
         }
         return colHeight;
@@ -46,11 +43,7 @@ public class Terrain {
         return terrainMatrix;
     }
 
-    public int getTileWidth() {
-        return tileWidth;
-    }
-
-    public int getTileHeight() {
-        return tileHeight;
+    public int getTileSize() {
+        return tileSize;
     }
 }
