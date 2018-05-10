@@ -16,12 +16,12 @@ public class Shot implements IDrawable {
     private float angle = 0;
     private float radius = 10;
     private float weight = 100;
-    private int damage = 1;
+    private int damage = 20;
 
     private float[] vector = new float[2]; // speed
     private Position pos;
     private final int speed = 20;
-    private boolean isVisible;
+    private boolean isAlive;
     private int windSpeed;
 
     private CollisionRect rect;
@@ -34,7 +34,7 @@ public class Shot implements IDrawable {
         this.angle = angle;
         this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -speed; // x speed
         this.vector[1] = (float) Math.cos(Math.toRadians(angle)) * power * speed; // y speed
-        isVisible = true;
+        isAlive = true;
         this.windSpeed = windSpeed;
         rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
         //this.damage = damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
@@ -50,8 +50,8 @@ public class Shot implements IDrawable {
             // TODO not working, want shot to rotate according to vector direction
             //angle = (float) Math.atan(vector[1] / vector[0]);
         } else {
-            //if the shot object is outside the screen x-wise it's unvisible
-            setVisibility(false);
+            //if the shot object is outside the screen x-wise it's marked as dead and will get removed
+            isAlive = false;
         }
     }
 
@@ -91,9 +91,13 @@ public class Shot implements IDrawable {
     }
 
     @Override
-    public boolean isVisible() { return this.isVisible == true; }
+    public boolean isAlive() {
+        return isAlive;
+    }
 
-    public void setVisibility(boolean bool) { this.isVisible = bool; }
+    public void setAlive(boolean bool){
+        isAlive = bool;
+    }
 
     public CollisionRect getRect() {
         return rect;

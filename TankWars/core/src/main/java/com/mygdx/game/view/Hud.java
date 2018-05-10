@@ -65,13 +65,13 @@ public class Hud implements Disposable {
         windLabel = new Label(String.format("Wind: %03d <--", wind), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(nameLabel).expandX().padTop(5);
-        table.add(scoreLabel).expandX().padTop(5);
-        table.add(angleLabel).expandX().padTop(5);
-        table.add(hpLabel);
+        table.add(hpLabel).expandX().padTop(5);
+        table.add(powerLabel).expandX().padTop(5);
+        table.add(windLabel).expandX().padTop(5).padRight(40);
         table.row();
-        table.add(powerLabel).expandX();
+        table.add(scoreLabel).expandX();
         table.add(fuelLabel).expandX();
-        table.add(windLabel).expandX();
+        table.add(angleLabel).expandX();
 
         stage.addActor(table);
 
@@ -83,6 +83,7 @@ public class Hud implements Disposable {
         name = tankWars.getPlayer().getName();
         angle = tankWars.getPlayer().getTank().getGun().getAngle() + 90;
         power = tankWars.getPlayer().getTank().getGun().getPower() * 100;
+        hp = tankWars.getPlayer().getTank().getHealthPoints();
         fuel = tankWars.getPlayer().getTank().getFuel();
         wind = tankWars.getWind().getWindSpeed();
         scoreLabel.setText(String.format("Score: %02d", score));

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.model.*;
 import com.mygdx.game.model.Terrain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,15 +23,15 @@ public class Renderer {
 
     public void render(List<IDrawable> objects) {
         // New hashMap because we only want to draw stuff thats currently in objects
-        sprites = new HashMap<>();
+        //sprites = new HashMap<>();
         // Load every objects sprite and put it in the hashmap
-        loadResources(objects);
+        //loadResources(objects);
         // For each object update it's corresponding sprite with the objects state
         sprites.forEach((obj, sprite) -> {
             sprite.setRotation(obj.getAngle());
             sprite.setPosition(obj.getPos().getX(), obj.getPos().getY());
 
-            if (obj.isVisible()) {
+            if (obj.isAlive()) {
                 sprite.draw(batch);
             }
         });
@@ -40,18 +39,18 @@ public class Renderer {
         batch.dispose();
     }
 
-    private void loadResources(List<IDrawable> objects) {
+    public void loadResources(List<IDrawable> objects) {
         // For each obj in tankWars, load its image and set it according to the objects state
         objects.forEach(obj -> {
-
-            // If objects is not visible
-            Sprite sprite = new Sprite(new Texture(obj.getImgSrc()));
-            sprites.put(obj, sprite);
-            sprite.setOrigin(obj.getOriginX(), obj.getOriginY());
-            // Sets position of sprite and its width and height
-            sprite.setBounds(obj.getPos().getX(), obj.getPos().getY(),
-                    obj.getWidth(), obj.getHeight());
-
+            if(obj != null) {
+                // If objects is not visible
+                Sprite sprite = new Sprite(new Texture(obj.getImgSrc()));
+                sprites.put(obj, sprite);
+                sprite.setOrigin(obj.getOriginX(), obj.getOriginY());
+                // Sets position of sprite and its width and height
+                sprite.setBounds(obj.getPos().getX(), obj.getPos().getY(),
+                        obj.getWidth(), obj.getHeight());
+            }
         });
 
     }

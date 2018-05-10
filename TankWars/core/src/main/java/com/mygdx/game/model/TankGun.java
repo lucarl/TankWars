@@ -16,13 +16,13 @@ public class TankGun implements IDrawable {
     private boolean rightAim;
     private boolean leftAim;
 
-    private Shot shot;
+    //private Shot shot;
 
     public TankGun(Position pos) {
         this.pos = pos;
         angle = 0;
         power = 0.5f;
-        shot = new Shot(new Position(-100, -100), angle, 0, 0);
+        //shot = new Shot(new Position(-100, -100), angle, 0, 0);
         specialShot = false;
         isVisible = true;
         rightAim = false;
@@ -32,14 +32,11 @@ public class TankGun implements IDrawable {
     // fires a new shot at the end of the gun
     public Shot fire(int windSpeed) {
         if (specialShot) {
-            shot.setVisibility(false);
-            shot = new AngryShot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
-            specialShot = false; //VARFÖR SÄTTER VI DEN HÄR TILL FALSE? //Patricia
+            Shot shot = new AngryShot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            specialShot = false;
             return shot;
         } else {
-            shot.setVisibility(false);
-            shot = new Shot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
-
+            Shot shot = new Shot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
             return shot;
         }
     }
@@ -92,11 +89,11 @@ public class TankGun implements IDrawable {
         return power;
     }
 
-    public Shot getShot() {
-        return shot;
-    }
+    //public Shot getShot() {
+    //    return shot;
+    //}
 
-    public void setPos(Position pos, int width, int height) {
+    public void setPos(Position pos) {
         this.pos = new Position(pos.getX() + width/2, pos.getY() + height);
     }
 
@@ -136,11 +133,11 @@ public class TankGun implements IDrawable {
     }
 
     @Override
-    public boolean isVisible() {
+    public boolean isAlive() {
         return isVisible;
     }
 
-    public void setVisibility(boolean bool) {
+    public void setAlive(boolean bool) {
         isVisible = bool;
     }
 

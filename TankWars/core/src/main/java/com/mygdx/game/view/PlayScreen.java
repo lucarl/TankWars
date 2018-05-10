@@ -2,142 +2,115 @@ package com.mygdx.game.view;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.*;
 import com.mygdx.game.ctrl.Controller;
+import com.mygdx.game.model.IDrawable;
 import com.mygdx.game.model.TankWars;
 
-public class PlayScreen implements Screen {
+import java.util.HashMap;
+import java.util.Map;
 
+
+public class PlayScreen implements Screen {
+    //private Map<IDrawable, Sprite> sprites;
+    private Sprite background;
     private TankWars tankWars;
     private Controller controller;
-
-    private Viewport gamePort;
+    private Viewport viewport;
+    private OrthographicCamera camera;
     private Hud hud;
+    private Renderer renderer;
+    private Sprite terrain;
 
-    private Texture tankImg;
-    private Texture gunImg;
-    private Texture shotImg;
-    private Sprite tankSprite;
-    private Sprite gunSprite;
-    private Sprite shotSprite;
-
-    //private Stage stage = new Stage();
 
 
     public PlayScreen(Controller controller, TankWars tankWars) {
         this.controller = controller;
         this.tankWars = tankWars;
-
-
-        gamePort = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+      //  sprites = new HashMap<>();
+        renderer = new Renderer(controller.batch);
         hud = new Hud(controller.batch, tankWars);
+        background = new Sprite(new Texture("background.jpg"));
 
     }
 
     public void show() {
-        String tank = tankWars.getPlayer().getTank().getImgSrc();
-        String gun = tankWars.getPlayer().getTank().getGun().getImgSrc();
-        String shot = tankWars.getPlayer().getTank().getGun().getShot().getImgSrc();
+        // For each obj in tankWars, load its image and set it according to the objects state
+        /*tankWars.getObjects().forEach(obj -> {
+            if (!obj.isAlive()) {
+                sprites.remove(obj);
+            } else {
+                Sprite sprite = new Sprite(new Texture(obj.getImgSrc()));
+                sprites.put(obj, sprite);
+                sprite.setOrigin(obj.getOriginX(), obj.getOriginY());
+                // Sets position of sprite and its width and height
+                sprite.setBounds(obj.getPos().getX(), obj.getPos().getY(),
+                        obj.getWidth(), obj.getHeight());
+            }
+        });
 
-        //batch = new SpriteBatch();
-
-        tankImg = new Texture(tank);
-        gunImg = new Texture(gun);
-        shotImg = new Texture(shot);
-
-        tankSprite = new Sprite(tankImg);
-        gunSprite = new Sprite(gunImg);
-        shotSprite = new Sprite(shotImg);
-
-
-        tankSprite.setPosition( tankWars.getPlayer().getTank().getPos().getX(),
-                 tankWars.getPlayer().getTank().getPos().getY());
-        tankSprite.setSize(tankWars.getPlayer().getTank().getWidth(), tankWars.getPlayer().getTank().getHeight());
-        gunSprite.setPosition(tankWars.getPlayer().getTank().getGun().getPos().getX(),
-                tankWars.getPlayer().getTank().getGun().getPos().getY());
-        gunSprite.setSize(tankWars.getPlayer().getTank().getGun().getWidth(),
-                tankWars.getPlayer().getTank().getGun().getHeight());
-
-
+*/
+        renderer.loadResources(tankWars.getTiles());
+        renderer.loadResources(tankWars.getObjects());
+        background.setSize(Controller.GAME_WIDTH, Controller.GAME_HEIGHT);
         Gdx.input.setInputProcessor(controller);
     }
 
     public void render(float delta) {
-
-
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        //controller.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        renderer.loadResources(tankWars.getShots());
 
         controller.batch.begin();
+        background.draw(controller.batch);
+        renderer.render(tankWars.getObjects());
+        renderer.render(tankWars.getShots());
 
 
-        double x = tankWars.getPlayer().getTank().getPos().getX();
-        double y = tankWars.getPlayer().getTank().getPos().getY();
+        /*      // For each object update it's corresponding sprite with the objects state
+        sprites.forEach((obj, sprite) -> {
+            sprite.setRotation(obj.getAngle());
+            sprite.setPosition(obj.getPos().getX(), obj.getPos().getY());
 
-        tankSprite.setPosition((float) x,
-                (float) y );
-        tankSprite.draw(controller.batch);
-
-
-        gunSprite.setPosition((float)tankWars.getPlayer().getTank().getGun().getPos().getX(),
-                (float)tankWars.getPlayer().getTank().getGun().getPos().getY());
-        gunSprite.setOrigin(tankWars.getPlayer().getTank().getGun().getOriginX(), tankWars.getPlayer().getTank().getGun().getOriginY());
-        gunSprite.setRotation(tankWars.getPlayer().getTank().getGun().getAngle());
-        gunSprite.draw(controller.batch);
-
-
-        if (tankWars.getPlayer().getTank().getGun().getShot().isVisible()) {
-            if (tankWars.getPlayer().getTank().getGun().hasSpecialShot()) {
-                String shot = tankWars.getPlayer().getTank().getGun().getShot().getImgSrc();
-                shotImg = new Texture(shot);
-                shotSprite = new Sprite(shotImg);
-                shotSprite.setSize(tankWars.getPlayer().getTank().getGun().getShot().getWidth(),
-                        tankWars.getPlayer().getTank().getGun().getShot().getWidth());
+            if (obj.isAlive()) {
+                sprite.draw(controller.batch);
             }
-            shotSprite.setPosition( tankWars.getPlayer().getTank().getGun().getShot().getPos().getX(),
-                     tankWars.getPlayer().getTank().getGun().getShot().getPos().getY());
-            shotSprite.draw(controller.batch);
-        }
-
+        });*/
         controller.batch.end();
 
         hud.update();
         hud.stage.draw();
-
-        //stage.act(delta);
-        //stage.draw();
-
-        System.out.println("Angle: " + tankWars.getPlayer().getTank().getAngle() +
-                "\n Tankpos: (" + tankWars.getPlayer().getTank().getPos().getX() +
-                ", " + tankWars.getPlayer().getTank().getPos().getY() + ")" +
-                "\n Shotpos: (" + tankWars.getPlayer().getTank().getGun().getShot().getPos().getX() +
-                ", " + tankWars.getPlayer().getTank().getGun().getShot().getPos().getY() + ")");
-
     }
 
-
+    @Override
     public void resize(int width, int height) {
 
     }
 
+    @Override
     public void pause() {
 
     }
 
+    @Override
     public void resume() {
 
     }
 
+    @Override
     public void hide() {
 
     }
 
+    @Override
     public void dispose() {
+        controller.dispose();
+        hud.dispose();
 
     }
 }
