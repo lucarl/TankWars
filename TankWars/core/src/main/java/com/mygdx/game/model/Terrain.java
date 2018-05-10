@@ -26,7 +26,6 @@ public class Terrain {
             }
         }
 
-
     }
 
     public int getHeightOfCol(int col) {

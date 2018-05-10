@@ -51,7 +51,6 @@ public class Controller extends Game implements InputProcessor {
 
     @Override
     public void dispose() {
-        //assets.manager.dispose();
         assets.disposeAssets();
     }
 

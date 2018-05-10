@@ -36,7 +36,7 @@ public class Renderer {
             }
         });
         System.out.println("Sprites: " + sprites.size());
-        batch.dispose();
+        //batch.dispose();
     }
 
     public void loadResources(List<IDrawable> objects) {
