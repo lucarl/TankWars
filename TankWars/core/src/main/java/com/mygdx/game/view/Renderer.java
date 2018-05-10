@@ -1,5 +1,6 @@
 package com.mygdx.game.view;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,9 +20,6 @@ public class Renderer {
     public Renderer(SpriteBatch batch) {
         this.batch = batch;
         sprites = new HashMap<>();
-
-        //assetsManager = new Assets();
-       // assetsManager.load();
     }
 
     public void render(List<IDrawable> objects) {
@@ -39,6 +37,7 @@ public class Renderer {
             }
         });
         System.out.println("Sprites: " + sprites.size());
+        batch.dispose();
     }
 
     private void loadResources(List<IDrawable> objects) {

@@ -1,4 +1,4 @@
-package com.mygdx.game.model;
+package com.mygdx.game.view;
 
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
@@ -38,10 +38,6 @@ public class Assets {
             new AssetDescriptor<Skin>("ui/uiskin.json", Skin.class,
                     new SkinLoader.SkinParameter("ui/uiskin.pack"));
                     */
-
-    //public static final String tankImage = "tank14.png";
-    //public final String shotBirdImage = "bird.png";
-
 
     public void loadAssets(){
         manager.load(tankImg);
