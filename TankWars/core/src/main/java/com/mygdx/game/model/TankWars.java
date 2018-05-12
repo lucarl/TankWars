@@ -15,6 +15,7 @@ public class TankWars {
     private Wind wind;
     private Terrain terrain;
     private TankWarsFactory tankWarsFactory = new TankWarsFactory();
+    private TerrainTile terrainTile;
     //private List<TerrainTile> terrainTiles;
 
 
@@ -48,8 +49,8 @@ public class TankWars {
         if (isTurnOver && shots.size() == 0) {
             nextPlayer();
         }
-        // Check if shot hits any tank
 
+        // Check if shot hits any tank
         for (Player player : players) {
             CollisionRect tankRect = player.getTank().getRect();
             Tank tank = player.getTank();
@@ -57,6 +58,7 @@ public class TankWars {
                 // Convert to Shot type to get the collision rect
                 Shot shot = (Shot)drawableShot;
                 CollisionRect shotRect = shot.getRect();
+                CollisionRect tileRect = terrainTile.getRect();
                 if (shotRect.collidesWith(tankRect) && tank.isAlive()
                         && shot.isAlive() && !(player == currentPlayer)) {
 
@@ -68,6 +70,9 @@ public class TankWars {
                         tank.setAlive(false);
                         tank.getGun().setAlive(false);
                     }
+                }
+                if (shotRect.collidesWith(tileRect) && terrainTile.isAlive()) {
+                    terrainTile.setAlive(false);
                 }
             }
         }
