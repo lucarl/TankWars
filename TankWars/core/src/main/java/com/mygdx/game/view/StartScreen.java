@@ -89,13 +89,13 @@ public class StartScreen implements Screen {
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
         bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
-        //bigTextButtonStyle.pressedOffsetX = 1;
-        //bigTextButtonStyle.pressedOffsetY = -1;
+        bigTextButtonStyle.pressedOffsetX = 1;
+        bigTextButtonStyle.pressedOffsetY = -1;
         nextButton = new TextButton("NEXT", bigTextButtonStyle);
         nextButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                controller.setPlayScreen();
+                controller.setScreen(new PlayerOptionsScreen(controller));
             }
         });
 
@@ -103,8 +103,8 @@ public class StartScreen implements Screen {
         smallTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         smallTextButtonStyle.up = skin.getDrawable("smallButton.up");
         smallTextButtonStyle.down = skin.getDrawable("smallButton.down");
-        //smallTextButtonStyle.pressedOffsetX = 1;
-        //smallTextButtonStyle.pressedOffsetY = -1;
+        smallTextButtonStyle.pressedOffsetX = 1;
+        smallTextButtonStyle.pressedOffsetY = -1;
 
         arrowButtonLeft1 = new TextButton("<", smallTextButtonStyle);
         arrowButtonRight1 = new TextButton(">", smallTextButtonStyle);
