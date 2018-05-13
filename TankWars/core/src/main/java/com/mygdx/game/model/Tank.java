@@ -9,7 +9,7 @@ public class Tank implements IDrawable {
     private static int height = 20;
     private static int originX = width / 2;
     private static int originY = height / 2;
-    private static final int speed = 150;
+    private static final int speed = 10;
 
 
     private Position pos;
