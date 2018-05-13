@@ -4,12 +4,12 @@ package com.mygdx.game.model;
 import com.mygdx.game.ctrl.Controller;
 
 public class Tank implements IDrawable {
-    private static String tankImgSrc = "tank14.png";
-    private static int width = 80;
-    private static int height = 45;
+    private static String tankImgSrc = "tank.png";
+    private static int width = 40;
+    private static int height = 20;
     private static int originX = width / 2;
     private static int originY = height / 2;
-    private static final int speed = 150;
+    private static final int speed = 10;
 
 
     private Position pos;

@@ -11,7 +11,7 @@ public class Terrain {
     private int tileSize;
 
     public Terrain() {
-        tileSize = 5;
+        tileSize = 3;
         x = -5; y = 0;
         cols = Controller.GAME_WIDTH / tileSize + 2; // + extra rader för padding
         rows = Controller.GAME_HEIGHT / tileSize / 2;  // / terrängen täcker upp till 1/2 av skärmen

@@ -2,15 +2,16 @@ package com.mygdx.game.model;
 import java.util.Random;
 
 public class TerrainTile implements IDrawable{
-    private static final String imageSource = "terrainTile.png";
+    private static final String imageSource = "tile.png";
     private static int width, height;
     private boolean isAlive;
     private Position position;
+    private CollisionRect collisionRect;
 
     public TerrainTile(int x, int y, boolean alive) {
         this.position = new Position(x, y);
-        width = 5;
-        height = 5;
+        width = 3;
+        height = 3;
         this.isAlive = alive;
     }
 
@@ -50,6 +51,14 @@ public class TerrainTile implements IDrawable{
     @Override
     public boolean isAlive() {
         return isAlive;
+    }
+
+    public CollisionRect getRect() {
+        return collisionRect;
+    }
+
+    public void setAlive(boolean bool) {
+        isAlive = bool;
     }
 
 
