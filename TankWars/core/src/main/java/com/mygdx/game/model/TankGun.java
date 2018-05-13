@@ -1,9 +1,9 @@
 package com.mygdx.game.model;
 
 public class TankGun implements IDrawable {
-    private static String imgSrc = "toptube.png";
-    private static int width = 10;
-    private static int height = 40;
+    private static String imgSrc = "tankGun.png";
+    private static int width = 5;
+    private static int height = 20;
     private static int originX = width / 2;
     private static int originY = 0;
     private static final int speed = 50;
