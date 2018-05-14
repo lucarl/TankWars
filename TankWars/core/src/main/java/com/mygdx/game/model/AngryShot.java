@@ -8,8 +8,22 @@ public class AngryShot extends Shot {
     private int damage = 100;
     private final int speed = 5;
 
-    public AngryShot(Position p, float angle, float power, int windSpeed) {
+    /*public AngryShot(Position p, float angle, float power, int windSpeed) {
         super(p, angle, power, windSpeed);
+    }*/
+
+    private float[] vector = getVector();
+
+    public AngryShot(Position pos, float angle, float power, int windSpeed) {
+        setPos(pos);
+        setAngle(angle);
+        this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -getSpeed(); // x speed
+        this.vector[1] = (float) Math.cos(Math.toRadians(angle)) * power * getSpeed(); // y speed
+        setAlive(true);
+        setWindSpeed(windSpeed);
+        setRect(new CollisionRect(pos.getX(), pos.getY(), getWidth(), getHeight()));
+        setDamage(5);
+        setName("Gun");
     }
 
     @Override

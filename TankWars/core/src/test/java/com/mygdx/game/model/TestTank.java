@@ -80,7 +80,7 @@ public class TestTank {
 
     @Test
     public void testFire(){
-        Shot shot = new Shot(new Position(10,10), 10, 10,10);
+        Shot shot = new StandardShot(new Position(10,10), 10, 10,10);
         Shot fireShot = tank.fire(newWindspeed);
         //When a shot is fired the visibility is set to false
         assertFalse(fireShot.isAlive()); //BLIR INTE FALSE!! VARFÖR???

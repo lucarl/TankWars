@@ -30,7 +30,7 @@ public abstract class Shot implements IDrawable {
 
 
     // power should be a float between [0,1]
-    public Shot(Position pos, float angle, float power, int windSpeed) {
+    /*public Shot(Position pos, float angle, float power, int windSpeed) {
         this.pos = pos;
         this.angle = angle;
         this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -speed; // x speed
@@ -39,7 +39,7 @@ public abstract class Shot implements IDrawable {
         this.windSpeed = windSpeed;
         rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
         this.damage = damage;
-    }
+    }*/
 
     public void update(float delta) {
         if (pos.getX() > 0 && pos.getX() < Controller.GAME_WIDTH && pos.getY() > 0) {
@@ -146,6 +146,10 @@ public abstract class Shot implements IDrawable {
 
     public void setWindSpeed(int newWindSpeed) {
         windSpeed = newWindSpeed;
+    }
+
+    public void setRect(CollisionRect newRect) {
+        rect = newRect;
     }
 
 

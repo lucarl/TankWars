@@ -36,7 +36,7 @@ public class TankGun implements IDrawable {
             specialShot = false;
             return shot;
         } else {
-            Shot shot = new Shot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            Shot shot = new StandardShot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
             return shot;
         }
     }
