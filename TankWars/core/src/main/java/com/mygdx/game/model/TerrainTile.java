@@ -9,10 +9,11 @@ public class TerrainTile implements IDrawable{
     private CollisionRect collisionRect;
 
     public TerrainTile(int x, int y, boolean alive) {
-        this.position = new Position(x, y);
+        position = new Position(x, y);
         width = 3;
         height = 3;
-        this.isAlive = alive;
+        isAlive = alive;
+        collisionRect = new CollisionRect(position.getX(),position.getY(), width, height);
     }
 
     @Override

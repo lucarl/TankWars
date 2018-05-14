@@ -31,7 +31,7 @@ public class Terrain {
     public int getHeightOfCol(int col) {
         int colHeight = 0;
         for (int row = 0; row < rows; row++) {
-            if (terrainMatrix[row][col] != null) {
+            if (terrainMatrix[row][col] != null && terrainMatrix[row][col].isAlive()) {
                 colHeight += tileSize;
             }
         }
@@ -44,5 +44,13 @@ public class Terrain {
 
     public int getTileSize() {
         return tileSize;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getCols() {
+        return cols;
     }
 }

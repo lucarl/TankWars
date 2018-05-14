@@ -21,9 +21,7 @@ public class TankWarsFactory {
         }
     }
 
-    public Terrain setupTerrainTiles(List<IDrawable> tiles) {
-        Terrain terrain = new Terrain();
-        TerrainTile[][] terrainMatrix = terrain.getTerrainMatrix();
+    public void setupTerrainTiles(List<IDrawable> tiles, TerrainTile[][] terrainMatrix) {
         for (int i = 0; i < terrainMatrix.length; i++) {
             for (int j = 0; j < terrainMatrix[i].length; j++) {
                 if(terrainMatrix[i][j] != null){
@@ -31,6 +29,5 @@ public class TankWarsFactory {
                 }
             }
         }
-        return terrain;
     }
 }

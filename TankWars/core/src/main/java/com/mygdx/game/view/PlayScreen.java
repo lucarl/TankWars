@@ -68,8 +68,10 @@ public class PlayScreen implements Screen {
 
         controller.batch.begin();
         background.draw(controller.batch);
+        renderer.render(tankWars.getTiles());
         renderer.render(tankWars.getObjects());
         renderer.render(tankWars.getShots());
+
 
 
         /*      // For each object update it's corresponding sprite with the objects state

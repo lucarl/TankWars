@@ -35,7 +35,7 @@ public class Renderer {
                 sprite.draw(batch);
             }
         });
-        System.out.println("Sprites: " + sprites.size());
+
         //batch.dispose();
     }
 

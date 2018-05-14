@@ -31,8 +31,11 @@ public class TankWars {
         tiles = new ArrayList<>();
         wind = new Wind(difficulty);
 
-        terrain = tankWarsFactory.setupTerrainTiles(tiles);
+        //terrain = tankWarsFactory.setupTerrainTiles(tiles);
+        terrain = new Terrain();
+        tankWarsFactory.setupTerrainTiles(tiles, terrain.getTerrainMatrix());
         tankWarsFactory.setupObjects(nPlayers, players, objects, terrain);
+
         round = 0;
         this.nRounds = nRounds;
         playerIndex = 0;
@@ -51,13 +54,15 @@ public class TankWars {
         }
 
         // Check if shot hits any tank
-        for (Player player : players) {
-            CollisionRect tankRect = player.getTank().getRect();
-            Tank tank = player.getTank();
-            for (IDrawable drawableShot : shots) {
-                // Convert to Shot type to get the collision rect
-                Shot shot = (Shot)drawableShot;
-                CollisionRect shotRect = shot.getRect();
+        for (IDrawable drawableShot : shots) {
+            // Convert to Shot type to get the collision rect
+            Shot shot = (Shot) drawableShot;
+            CollisionRect shotRect = shot.getRect();
+
+            // Check collision with tank
+            for (Player player : players) {
+                CollisionRect tankRect = player.getTank().getRect();
+                Tank tank = player.getTank();
                 //CollisionRect tileRect = terrainTile.getRect();
                 if (shotRect.collidesWith(tankRect) && tank.isAlive()
                         && shot.isAlive() && !(player == currentPlayer)) {
@@ -65,7 +70,7 @@ public class TankWars {
                     currentPlayer.addScore();
                     tank.decreaseHealth(shot.getDamage());
                     // Shot collided so we set it to dead so it gets removed later
-                    shot.setAlive(false);
+                    //shot.setAlive(false);
                     if (tank.getHealthPoints() <= 0) {
                         tank.setAlive(false);
                         tank.getGun().setAlive(false);
@@ -75,7 +80,35 @@ public class TankWars {
                 //    terrainTile.setAlive(false);
                 //}
             }
+
+            // Check collision with terrain
+            int groundYPos = terrain.getHeightOfCol((int) shot.getPos().getX() / terrain.getTileSize());
+            if (shot.isAlive() && shot.getPos().getY() <= groundYPos) {
+                shot.setAlive(false);
+
+                int shotStartCol = (int) (shot.getPos().getX() - shot.getRadius()) / terrain.getTileSize() > 0 ?
+                        (int) (shot.getPos().getX() - shot.getRadius()) / terrain.getTileSize() : 0;
+                int shotEndCol = (int) (shot.getPos().getX() + shot.getRadius()) / terrain.getTileSize() < terrain.getRows() * terrain.getTileSize() ?
+                        (int) (shot.getPos().getX() + shot.getRadius()) / terrain.getTileSize() : terrain.getRows() * terrain.getTileSize();
+                int shotStartRow = (int) (shot.getPos().getY() - shot.getRadius()) / terrain.getTileSize() > 0 ?
+                        (int) (shot.getPos().getY() - shot.getRadius()) / terrain.getTileSize() : 0;
+                int shotEndRow = (int) (shot.getPos().getY() + shot.getRadius()) / terrain.getTileSize() < terrain.getRows() ?
+                        (int) (shot.getPos().getY() + shot.getRadius()) / terrain.getTileSize() : terrain.getRows();
+                TerrainTile terrainMatrix[][] = terrain.getTerrainMatrix();
+
+                for (int col = shotStartCol, x = 0; col < shotEndCol; col++, x++) {
+                    for (int row = shotStartRow, y = 0; row < shotEndRow; row++, y++) {
+                        if (terrainMatrix[row][col] != null && terrainMatrix[row][col].isAlive()) {
+                            // TODO spränger fyrkanter, vill ha cirklar
+                            if ((Math.pow(x - shotEndCol, 2) + Math.pow(y - shotEndRow, 2)) > Math.pow(shot.getRadius(), 2)) {
+                                terrainMatrix[row][col].setAlive(false);
+                            }
+                        }
+                    }
+                }
+            }
         }
+
 
         if (isRoundOver()) {
             isTurnOver = true;
@@ -115,6 +148,7 @@ public class TankWars {
             shot.update(delta);
         });
     }
+
     //ändrar till protected för att testa metoden
     protected void removeObjects() {
         for (int i = 0; i < objects.size(); i++) {
@@ -133,6 +167,7 @@ public class TankWars {
             }
         }
     }
+
     //ändrar till protected för att testa metoden
     protected boolean isRoundOver() {
         int nTanks = 0;
@@ -157,7 +192,7 @@ public class TankWars {
     }
 
     public void fire() {
-        if(!isTurnOver){
+        if (!isTurnOver) {
             Shot shot = currentPlayer.getTank().fire(wind.getWindSpeed());
             shots.add(shot);
         }
@@ -200,5 +235,7 @@ public class TankWars {
         return shots;
     }
 
-    public boolean isTurnOver() { return isTurnOver; }
+    public boolean isTurnOver() {
+        return isTurnOver;
+    }
 }

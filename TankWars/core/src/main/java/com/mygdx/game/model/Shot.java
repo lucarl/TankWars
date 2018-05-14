@@ -14,14 +14,19 @@ public abstract class Shot implements IDrawable {
     private static int originY = height / 2;
 
     private float angle = 0;
-    private float radius = 10;
+    private float radius = 20;
     private float weight = 100;
     private int damage;
     private String name;
 
     private float[] vector = new float[2]; // speed
     private Position pos;
-    private int speed = 20;
+    private int speed = 15;
+
+    public float getRadius() {
+        return radius;
+    }
+
     private boolean isAlive;
     private int windSpeed;
 
