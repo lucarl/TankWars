@@ -27,20 +27,6 @@ public abstract class Shot implements IDrawable {
 
     private CollisionRect rect;
 
-
-
-    // power should be a float between [0,1]
-    /*public Shot(Position pos, float angle, float power, int windSpeed) {
-        this.pos = pos;
-        this.angle = angle;
-        this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -speed; // x speed
-        this.vector[1] = (float) Math.cos(Math.toRadians(angle)) * power * speed; // y speed
-        isAlive = true;
-        this.windSpeed = windSpeed;
-        rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
-        this.damage = damage;
-    }*/
-
     public void update(float delta) {
         if (pos.getX() > 0 && pos.getX() < Controller.GAME_WIDTH && pos.getY() > 0) {
             pos.setX(pos.getX() + vector[0] * delta * speed);
@@ -156,7 +142,13 @@ public abstract class Shot implements IDrawable {
         imgSrc = newImgSrc;
     }
 
+    public void setWidth(int newWidth) {
+        width = newWidth;
+    }
 
+    public void setHeight(int newHeight) {
+        height = newHeight;
+    }
 
     public int getWindSpeed() {
         return windSpeed;

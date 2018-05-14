@@ -32,7 +32,7 @@ public class TankGun implements IDrawable {
     // fires a new shot at the end of the gun
     public Shot fire(int windSpeed) {
         if (specialShot) {
-            Shot shot = new AngryShot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            Shot shot = new NukeShot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
             specialShot = false;
             return shot;
         } else {

@@ -11,8 +11,10 @@ public class NukeShot extends Shot{
         setAlive(true);
         setWindSpeed(windSpeed);
         setRect(new CollisionRect(pos.getX(), pos.getY(), getWidth(), getHeight()));
-        setDamage(5);
-        setName("Gun");
+        setDamage(30);
+        setName("Nuke");
         setImgSrc("angrybird.png");
+        setWidth(50);
+        setHeight(50);
     }
 }

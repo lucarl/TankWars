@@ -89,7 +89,7 @@ public class Controller extends Game implements InputProcessor {
             tankWars.getPlayer().getTank().getGun().decreasePower();
         }
 
-        if (keycode == Input.Keys.X) {
+        if (keycode == Input.Keys.NUM_1) {
             tankWars.getPlayer().getTank().getGun().changeWeapon();
         }
 
