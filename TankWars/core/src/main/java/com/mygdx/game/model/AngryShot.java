@@ -8,10 +8,6 @@ public class AngryShot extends Shot {
     private int damage = 100;
     private final int speed = 5;
 
-    /*public AngryShot(Position p, float angle, float power, int windSpeed) {
-        super(p, angle, power, windSpeed);
-    }*/
-
     private float[] vector = getVector();
 
     public AngryShot(Position pos, float angle, float power, int windSpeed) {

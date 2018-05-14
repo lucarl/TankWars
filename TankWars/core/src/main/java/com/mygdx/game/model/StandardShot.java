@@ -16,5 +16,6 @@ public class StandardShot extends Shot {
         setRect(new CollisionRect(pos.getX(), pos.getY(), getWidth(), getHeight()));
         setDamage(5);
         setName("Gun");
+        setImgSrc("bird.png");
     }
 }

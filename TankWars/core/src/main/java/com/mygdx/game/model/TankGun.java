@@ -11,10 +11,11 @@ public class TankGun implements IDrawable {
     private Position pos;
     private float angle;
     private float power;
-    private boolean specialShot;
+    private boolean nuke;
     private boolean isVisible;
     private boolean rightAim;
     private boolean leftAim;
+    private TankGunFactory gunFactory;
 
     //private Shot shot;
 
@@ -23,7 +24,7 @@ public class TankGun implements IDrawable {
         angle = 0;
         power = 0.5f;
         //shot = new Shot(new Position(-100, -100), angle, 0, 0);
-        specialShot = false;
+        nuke = false;
         isVisible = true;
         rightAim = false;
         leftAim = false;
@@ -31,12 +32,14 @@ public class TankGun implements IDrawable {
 
     // fires a new shot at the end of the gun
     public Shot fire(int windSpeed) {
-        if (specialShot) {
-            Shot shot = new AngryShot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
-            specialShot = false;
+        gunFactory = new TankGunFactory();
+        Shot shot = null;
+        if (nuke) {
+            shot = gunFactory.makeTankGun(nuke, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            nuke = false;
             return shot;
         } else {
-            Shot shot = new StandardShot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = new StandardShot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
             return shot;
         }
     }
@@ -76,14 +79,14 @@ public class TankGun implements IDrawable {
     }
 
     public void changeWeapon() {
-        specialShot = !specialShot;
+        nuke = !nuke;
     }
 
     public boolean hasSpecialShot() {
-        return specialShot;
+        return nuke;
     }
 
-    public void setSpecialShot(boolean special){this.specialShot = special;}
+    public void setSpecialShot(boolean special){this.nuke = special;}
 
     public float getPower() {
         return power;

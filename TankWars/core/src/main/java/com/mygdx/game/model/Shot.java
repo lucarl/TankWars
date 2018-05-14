@@ -7,7 +7,7 @@ import com.mygdx.game.ctrl.Controller;
  */
 public abstract class Shot implements IDrawable {
     private static final float GRAVITY = -9.8f;
-    private static String imgSrc = "bird.png";
+    private static String imgSrc;
     private static int width = 15;
     private static int height = 15;
     private static int originX = width / 2;
@@ -31,20 +31,6 @@ public abstract class Shot implements IDrawable {
     private int windSpeed;
 
     private CollisionRect rect;
-
-
-
-    // power should be a float between [0,1]
-    /*public Shot(Position pos, float angle, float power, int windSpeed) {
-        this.pos = pos;
-        this.angle = angle;
-        this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -speed; // x speed
-        this.vector[1] = (float) Math.cos(Math.toRadians(angle)) * power * speed; // y speed
-        isAlive = true;
-        this.windSpeed = windSpeed;
-        rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
-        this.damage = damage;
-    }*/
 
     public void update(float delta) {
         if (pos.getX() > 0 && pos.getX() < Controller.GAME_WIDTH && pos.getY() > 0) {
@@ -157,7 +143,17 @@ public abstract class Shot implements IDrawable {
         rect = newRect;
     }
 
+    public void setImgSrc(String newImgSrc) {
+        imgSrc = newImgSrc;
+    }
 
+    public void setWidth(int newWidth) {
+        width = newWidth;
+    }
+
+    public void setHeight(int newHeight) {
+        height = newHeight;
+    }
 
     public int getWindSpeed() {
         return windSpeed;
