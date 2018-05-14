@@ -5,7 +5,7 @@ import com.mygdx.game.ctrl.Controller;
 /**
  * Created by Carl on 2018-04-23.
  */
-public class Shot implements IDrawable {
+public abstract class Shot implements IDrawable {
     private static final float GRAVITY = -9.8f;
     private static String imgSrc = "bird.png";
     private static int width = 15;
@@ -16,11 +16,12 @@ public class Shot implements IDrawable {
     private float angle = 0;
     private float radius = 10;
     private float weight = 100;
-    private int damage = 20;
+    private int damage;
+    private String name;
 
     private float[] vector = new float[2]; // speed
     private Position pos;
-    private final int speed = 20;
+    private int speed = 20;
     private boolean isAlive;
     private int windSpeed;
 
@@ -37,7 +38,7 @@ public class Shot implements IDrawable {
         isAlive = true;
         this.windSpeed = windSpeed;
         rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
-        //this.damage = damage; borde kanske istället vara en metod i terrain som tar in skottets radius och weight
+        this.damage = damage;
     }
 
     public void update(float delta) {
@@ -106,6 +107,48 @@ public class Shot implements IDrawable {
     public int getDamage() {
         return damage;
     }
+
+    public void setDamage(int newDamage) {
+        damage = newDamage;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String newName) {
+        name = newName;
+    }
+
+    public void setPos(Position newPosition) {
+        pos = newPosition;
+    }
+
+    public void setAngle(float newAngle) {
+        angle = newAngle;
+    }
+
+    public void setVector(float[] newVector) {
+        vector = newVector;
+    }
+
+    public void setSpeed(int newSpeed) {
+        speed = newSpeed;
+    }
+
+    public float[] getVector() {
+        return vector;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setWindSpeed(int newWindSpeed) {
+        windSpeed = newWindSpeed;
+    }
+
+
 
     public int getWindSpeed() {
         return windSpeed;
