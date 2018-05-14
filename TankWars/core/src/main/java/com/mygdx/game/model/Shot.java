@@ -7,7 +7,7 @@ import com.mygdx.game.ctrl.Controller;
  */
 public abstract class Shot implements IDrawable {
     private static final float GRAVITY = -9.8f;
-    private static String imgSrc = "bird.png";
+    private static String imgSrc;
     private static int width = 15;
     private static int height = 15;
     private static int originX = width / 2;
@@ -150,6 +150,10 @@ public abstract class Shot implements IDrawable {
 
     public void setRect(CollisionRect newRect) {
         rect = newRect;
+    }
+
+    public void setImgSrc(String newImgSrc) {
+        imgSrc = newImgSrc;
     }
 
 
