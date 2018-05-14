@@ -3,6 +3,13 @@ package com.mygdx.game.model;
 import com.mygdx.game.ctrl.Controller;
 
 import static java.lang.Math.*;
+/**
+ * A class representing the terrain by creating it using
+ * the class TerrainTile and storing each object in a
+ * matrix of the class
+ *
+ * @author  Carl Lundborg, Adam Kjäll
+ */
 
 public class Terrain {
     private TerrainTile[][] terrainMatrix;

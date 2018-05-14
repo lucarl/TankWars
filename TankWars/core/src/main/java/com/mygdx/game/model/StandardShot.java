@@ -1,7 +1,9 @@
 package com.mygdx.game.model;
 
 /**
- * Created by Carl on 2018-05-14.
+ * A class for the standard shot
+ *
+ * @author  Carl Lundborg, Adam Kjäll
  */
 public class StandardShot extends Shot {
     private float[] vector = getVector();
@@ -19,5 +21,6 @@ public class StandardShot extends Shot {
         setImgSrc("bird.png");
         setWidth(20);
         setHeight(20);
+        setRadius(20);
     }
 }

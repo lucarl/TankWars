@@ -1,7 +1,10 @@
 package com.mygdx.game.model;
 
 /**
- * Created by Carl on 2018-04-19.
+ * A class representing each player
+ * for a certain tank
+ *
+ * @author  Carl Lundborg, Adam Kjäll
  */
 public class Player {
     private static int nPlayers = 1;

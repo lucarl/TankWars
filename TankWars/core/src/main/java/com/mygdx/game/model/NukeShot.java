@@ -1,6 +1,14 @@
 package com.mygdx.game.model;
 
+/**
+ * A class representing a shot upgrade
+ * to a nuke shot
+ *
+ * @author  Carl Lundborg, Adam Kjäll
+ */
+
 public class NukeShot extends Shot{
+
     private float[] vector = getVector();
 
     public NukeShot(Position pos, float angle, float power, int windSpeed) {
@@ -16,5 +24,6 @@ public class NukeShot extends Shot{
         setImgSrc("angrybird.png");
         setWidth(50);
         setHeight(50);
+        setRadius(50);
     }
 }

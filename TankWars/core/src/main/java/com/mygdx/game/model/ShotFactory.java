@@ -1,16 +1,17 @@
 package com.mygdx.game.model;
-
+/**
+ * A class that uses factory pattern
+ * to decide which class to use during
+ * runtime
+ *
+ * @author  Carl Lundborg
+ */
 public class ShotFactory {
-    Shot shot;
-    Position pos = shot.getPos();
-    float angle = shot.getAngle();
-    //float power = shot.
 
- /*   public Shot makeShot(int newShotType) {
+    public Shot makeTankGun(boolean shot, Position position, float angle, float power, int windSpeed) {
 
-        Shot newShot = null;
-        if(newShotType == 1) {
-            //return new NukeShot()
-        } else return null;
-    } */
+        if(shot) {
+            return new NukeShot(position, angle, power, windSpeed);
+        } else return new StandardShot(position, angle, power, windSpeed);
+    }
 }
