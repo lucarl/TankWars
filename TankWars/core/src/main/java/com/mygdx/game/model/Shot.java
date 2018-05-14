@@ -14,7 +14,7 @@ public class Shot implements IDrawable {
     private static int originY = height / 2;
 
     private float angle = 0;
-    private float radius = 10;
+    private int radius = 5;
     private float weight = 100;
     private int damage = 20;
 
@@ -109,5 +109,9 @@ public class Shot implements IDrawable {
 
     public int getWindSpeed() {
         return windSpeed;
+    }
+
+    public int getRadius() {
+        return radius;
     }
 }

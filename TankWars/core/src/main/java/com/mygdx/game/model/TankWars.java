@@ -55,7 +55,7 @@ public class TankWars {
             Tank tank = player.getTank();
             for (IDrawable drawableShot : shots) {
                 // Convert to Shot type to get the collision rect
-                Shot shot = (Shot)drawableShot;
+                Shot shot = (Shot) drawableShot;
                 CollisionRect shotRect = shot.getRect();
                 if (shotRect.collidesWith(tankRect) && tank.isAlive()
                         && shot.isAlive() && !(player == currentPlayer)) {
@@ -68,6 +68,10 @@ public class TankWars {
                         tank.setAlive(false);
                         tank.getGun().setAlive(false);
                     }
+                }
+                if((int)shot.getPos().getY() / terrain.getTileSize()
+                        <= terrain.getHeightOfCol((int)shot.getPos().getX() / terrain.getTileSize())){
+                    shotGroundCollision(shot);
                 }
             }
         }
@@ -129,6 +133,30 @@ public class TankWars {
         }
     }
 
+    private void shotGroundCollision(Shot shot) {
+        TerrainTile[][] tiles = terrain.getTerrainMatrix();
+        // Check which column the shots pos correspond to in the tilemap
+        int xPos = (int) shot.getPos().getX() / terrain.getTileSize();
+        // Get the height of the column aka highest row with tiles at that column
+        int yPos = terrain.getHeightOfCol(xPos);
+        // Find the start and end range to check around the shot
+        int startCol = xPos - shot.getRadius() > 0 ? xPos - shot.getRadius() : 0;
+        int endCol = xPos + shot.getRadius() < tiles.length ?
+                 xPos + shot.getRadius() : tiles.length;
+        int startRow = yPos - shot.getRadius() > 0 ? yPos - shot.getRadius() : 0;
+        int endRow = yPos + shot.getRadius() < tiles[0].length ?
+                yPos + shot.getRadius() : tiles[0].length;
+
+        // For every tile within the shots radius, check if any are alive and kill them :)
+        for (int col = startCol; col < endCol; col++) {
+            for (int row = startRow; row < endRow; row++) {
+                if(tiles[col][row] != null && tiles[col][row].isAlive()){
+                    tiles[col][row].setAlive(false);
+                }
+            }
+        }
+    }
+
     private boolean isRoundOver() {
         int nTanks = 0;
         for (int i = 0; i < players.size(); i++) {
@@ -151,7 +179,7 @@ public class TankWars {
     }
 
     public void fire() {
-        if(!isTurnOver){
+        if (!isTurnOver) {
             Shot shot = currentPlayer.getTank().fire(wind.getWindSpeed());
             shots.add(shot);
         }

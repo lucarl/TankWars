@@ -52,5 +52,8 @@ public class TerrainTile implements IDrawable{
         return isAlive;
     }
 
+    public void setAlive(boolean bool) {
+        isAlive = bool;
+    }
 
 }

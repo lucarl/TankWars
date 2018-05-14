@@ -6,7 +6,7 @@ public class AngryShot extends Shot {
     private static int width = 50;
     private static int height = 50;
     private int damage = 100;
-    private final int speed = 5;
+    
 
     public AngryShot(Position p, float angle, float power, int windSpeed) {
         super(p, angle, power, windSpeed);
@@ -30,8 +30,5 @@ public class AngryShot extends Shot {
     @Override
     public int getDamage() { return damage; }
 
-    @Override
-    public void update(float delta) {
-        super.update(delta);
-    }
+
 }
