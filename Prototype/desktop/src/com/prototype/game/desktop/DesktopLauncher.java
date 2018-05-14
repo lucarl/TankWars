@@ -4,8 +4,8 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.prototype.FlappyBirdDemo.FlappyBird;
 import com.prototype.MVC_Demo.Controller.Controller;
+import com.prototype.game.MenuDemo;
 import com.prototype.screenManagerDemo.Application;
-import main.java.com.mygdx.game.view.MenuDemo;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
