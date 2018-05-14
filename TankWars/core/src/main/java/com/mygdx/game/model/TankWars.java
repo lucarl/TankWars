@@ -58,7 +58,7 @@ public class TankWars {
                 // Convert to Shot type to get the collision rect
                 Shot shot = (Shot)drawableShot;
                 CollisionRect shotRect = shot.getRect();
-                CollisionRect tileRect = terrainTile.getRect();
+                //CollisionRect tileRect = terrainTile.getRect();
                 if (shotRect.collidesWith(tankRect) && tank.isAlive()
                         && shot.isAlive() && !(player == currentPlayer)) {
 
@@ -71,9 +71,9 @@ public class TankWars {
                         tank.getGun().setAlive(false);
                     }
                 }
-                if (shotRect.collidesWith(tileRect) && terrainTile.isAlive()) {
-                    terrainTile.setAlive(false);
-                }
+                //if (shotRect.collidesWith(tileRect) && terrainTile.isAlive()) {
+                //    terrainTile.setAlive(false);
+                //}
             }
         }
 

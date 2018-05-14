@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Assets {
 
-    public AssetManager manager = new AssetManager();
+    public static final AssetManager manager = new AssetManager();
 
     //tank image
     public static final AssetDescriptor<Texture> tankImg =
@@ -21,8 +21,8 @@ public class Assets {
             new AssetDescriptor<Texture>("angrybird.png", Texture.class);
 
     //image of tile for the terrain
-    public static final AssetDescriptor<Texture> terrainTileImag =
-            new AssetDescriptor<Texture>("terrain.png", Texture.class);
+    public static final AssetDescriptor<Texture> terrainTileImg =
+            new AssetDescriptor<Texture>("terrainTile.png", Texture.class);
 
     //tube image for the gun
     public static final AssetDescriptor<Texture> gunTubeImg =
@@ -39,16 +39,16 @@ public class Assets {
                     new SkinLoader.SkinParameter("ui/uiskin.pack"));
                     */
 
-    public void loadAssets(){
+    public static void loadAssets(){
         manager.load(tankImg);
         manager.load(shotBirdImg);
         manager.load(angryBirdImg);
-        manager.load(terrainTileImag);
+        manager.load(terrainTileImg);
         manager.load(gunTubeImg);
         manager.load(backgroundImg);
     }
 
-    public void disposeAssets(){
+    public static void disposeAssets(){
         manager.dispose();
     }
 }

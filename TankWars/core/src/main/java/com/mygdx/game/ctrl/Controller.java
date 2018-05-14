@@ -19,8 +19,7 @@ public class Controller extends Game implements InputProcessor {
     private Screen screen;
     private TankWars tankWars;
     public SpriteBatch batch;
-    private AssetManager manager;
-    private Assets assets;
+
 
 
 
@@ -32,13 +31,11 @@ public class Controller extends Game implements InputProcessor {
         batch = new SpriteBatch();
         screen = new StartScreen(this);
 
-        manager = new AssetManager();
-        assets = new Assets();
         //starts loading assets
-        assets.loadAssets();
+        Assets.loadAssets();
         //Continues when done loading.
         //it won't continue until all assets are finished loading.
-        assets.manager.finishLoading();
+        Assets.manager.finishLoading();
 
         setScreen(screen);
     }
@@ -51,7 +48,7 @@ public class Controller extends Game implements InputProcessor {
 
     @Override
     public void dispose() {
-        assets.disposeAssets();
+        Assets.disposeAssets();
     }
 
     @Override

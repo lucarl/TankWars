@@ -43,8 +43,8 @@ public class Renderer {
         // For each obj in tankWars, load its image and set it according to the objects state
         objects.forEach(obj -> {
             if(obj != null) {
-                // If objects is not visible
-                Sprite sprite = new Sprite(new Texture(obj.getImgSrc()));
+                Texture texture = Assets.manager.get(obj.getImgSrc(), Texture.class);
+                Sprite sprite = new Sprite(texture);
                 sprites.put(obj, sprite);
                 sprite.setOrigin(obj.getOriginX(), obj.getOriginY());
                 // Sets position of sprite and its width and height

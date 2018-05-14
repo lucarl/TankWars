@@ -2,7 +2,7 @@ package com.mygdx.game.model;
 import java.util.Random;
 
 public class TerrainTile implements IDrawable{
-    private static final String imageSource = "tile.png";
+    private static final String imageSource = "terrainTile.png";
     private static int width, height;
     private boolean isAlive;
     private Position position;
