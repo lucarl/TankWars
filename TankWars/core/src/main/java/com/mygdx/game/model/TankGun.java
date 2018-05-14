@@ -12,6 +12,7 @@ public class TankGun implements IDrawable {
     private float angle;
     private float power;
     private boolean nuke;
+    private boolean standard;
     private boolean isVisible;
     private boolean rightAim;
     private boolean leftAim;
@@ -25,6 +26,7 @@ public class TankGun implements IDrawable {
         power = 0.5f;
         //shot = new Shot(new Position(-100, -100), angle, 0, 0);
         nuke = false;
+        standard = false;
         isVisible = true;
         rightAim = false;
         leftAim = false;
@@ -39,7 +41,8 @@ public class TankGun implements IDrawable {
             nuke = false;
             return shot;
         } else {
-            shot = new StandardShot(new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = gunFactory.makeTankGun(standard, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            standard = false;
             return shot;
         }
     }
@@ -78,8 +81,12 @@ public class TankGun implements IDrawable {
         rightAim = b;
     }
 
-    public void changeWeapon() {
+    public void changeNuke() {
         nuke = !nuke;
+    }
+
+    public void changeStandard() {
+        standard = !standard;
     }
 
     public boolean hasSpecialShot() {

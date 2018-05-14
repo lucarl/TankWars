@@ -85,12 +85,17 @@ public class Controller extends Game implements InputProcessor {
         if (keycode == Input.Keys.A) {
             tankWars.getPlayer().getTank().getGun().increasePower();
         }
+
         if (keycode == Input.Keys.Z) {
             tankWars.getPlayer().getTank().getGun().decreasePower();
         }
 
         if (keycode == Input.Keys.NUM_1) {
-            tankWars.getPlayer().getTank().getGun().changeWeapon();
+            tankWars.getPlayer().getTank().getGun().changeStandard();
+        }
+
+        if (keycode == Input.Keys.NUM_2) {
+            tankWars.getPlayer().getTank().getGun().changeNuke();
         }
 
         if (keycode == Input.Keys.N) {
