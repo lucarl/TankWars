@@ -1,6 +1,7 @@
 package com.mygdx.game.model;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.ctrl.Controller;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
@@ -10,6 +11,7 @@ import static org.junit.Assert.assertFalse;
 public class TestTankGun {
 
     private TankGun tankGun = new TankGun(new Position(0.1f, 0.1f));
+    private int testWindSpeed = 100;
 
     //A test for the fire() method in TankGun
     //Checks if the fire method creates a shot of type AngryShot
@@ -18,24 +20,32 @@ public class TestTankGun {
         //Set to true in order to test if fire returns AngryShot
         tankGun.setSpecialShot(true);
         //The shot created by the method
-        //Shot actualShot = tankGun.fire();
-        //The expected shot - the shot the method is expected to create
-
+        Shot actualShot = tankGun.fire(testWindSpeed );
         //check if actualShot is of type AngryShot
-        //assertTrue(actualShot instanceof AngryShot);
+        assertTrue(actualShot instanceof AngryShot);
+        //test if correct interval
+        assertTrue(actualShot.getPos().getX() > 0 &&
+                actualShot.getPos().getX() < Controller.GAME_WIDTH &&
+                actualShot.getPos().getY() > 0);
+        //correct windspeed?
+        assertTrue(testWindSpeed == actualShot.getWindSpeed());
     }
 
-    //Checks if the fire method creates a shot of type AngryShot
+    //Checks if the fire method creates a shot of type Shot
     @Test
-    public void testFire() {
+    public void testFireShot() {
         //Set to false in order to test if fire method returns Shot object
         tankGun.setSpecialShot(false);
         //The shot created by the method
-        //Shot actualShot = tankGun.fire();
-        //The expected shot - the shot the method is expected to create
-
-        //check if actualShot is of type AngryShot
-        //assertTrue(actualShot instanceof Shot);
+        Shot actualShot = tankGun.fire(testWindSpeed);
+        //check if Shot type
+        assertTrue(actualShot instanceof Shot);
+        //test if correct interval
+        assertTrue(actualShot.getPos().getX() > 0 &&
+                actualShot.getPos().getX() < Controller.GAME_WIDTH &&
+                actualShot.getPos().getY() > 0);
+        //correct windspeed?
+        assertTrue(testWindSpeed == actualShot.getWindSpeed());
     }
 
     @Test
@@ -88,6 +98,14 @@ public class TestTankGun {
         tankGun.setRightAim(true);
         assertTrue(tankGun.isRightAim());
         assertFalse(tankGun.isLeftAim());
+    }
+
+    @Test
+    public void testChangeWeapon(){
+        boolean cuurentSpecialShot = tankGun.hasSpecialShot();
+        tankGun.changeWeapon();
+        assertTrue(!cuurentSpecialShot);
+
     }
 
 }

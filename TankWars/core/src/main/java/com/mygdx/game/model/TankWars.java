@@ -115,8 +115,8 @@ public class TankWars {
             shot.update(delta);
         });
     }
-
-    private void removeObjects() {
+    //ändrar till protected för att testa metoden
+    protected void removeObjects() {
         for (int i = 0; i < objects.size(); i++) {
             if (!objects.get(i).isAlive()) {
                 objects.remove(i);
@@ -133,15 +133,16 @@ public class TankWars {
             }
         }
     }
-
-    private boolean isRoundOver() {
+    //ändrar till protected för att testa metoden
+    protected boolean isRoundOver() {
         int nTanks = 0;
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getTank().isAlive()) {
                 nTanks++;
             }
         }
-        return nTanks <= 1;
+        //if only one tank is left on the field we have a winner and the round is over
+        return nTanks <= 1; //är det inte mer rimligt att ha nTanks == 1 ??
     }
 
     // TODO se till att vänta med nextPlayer tills currentplayers skott skjutits färdigt
@@ -198,4 +199,6 @@ public class TankWars {
     public List<IDrawable> getShots() {
         return shots;
     }
+
+    public boolean isTurnOver() { return isTurnOver; }
 }
