@@ -4,7 +4,7 @@ package com.mygdx.game.model;
 import com.mygdx.game.ctrl.Controller;
 
 public class Tank implements IDrawable {
-    private static String tankImgSrc = "tank14.png";
+    private static String tankImgSrc = "tank1.png";
     private static int width = 40;
     private static int height = 20;
     private static int originX = width / 2;

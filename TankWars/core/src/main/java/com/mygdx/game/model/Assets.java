@@ -10,7 +10,7 @@ public class Assets {
 
     //tank image
     public static final AssetDescriptor<Texture> tankImg =
-            new AssetDescriptor<Texture>("tank14.png", Texture.class);
+            new AssetDescriptor<Texture>("tank1.png", Texture.class);
 
     //flappybird imnage
     public static final AssetDescriptor<Texture> shotBirdImg =
@@ -26,7 +26,7 @@ public class Assets {
 
     //tube image for the gun
     public static final AssetDescriptor<Texture> gunTubeImg =
-            new AssetDescriptor<Texture>("toptube.png", Texture.class);
+            new AssetDescriptor<Texture>("tankGun.png", Texture.class);
 
     //background image
     public static final AssetDescriptor<Texture> backgroundImg =
