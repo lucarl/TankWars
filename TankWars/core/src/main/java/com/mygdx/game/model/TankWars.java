@@ -81,6 +81,7 @@ public class TankWars {
                 //}
             }
 
+            // TODO funkar sådär, explosionerna beter sig konstigt, inga perfekta cirkulära explosioner
             // Check collision with terrain
             int groundYPos = terrain.getHeightOfCol((int) shot.getPos().getX() / terrain.getTileSize());
             if (shot.isAlive() && shot.getPos().getY() <= groundYPos) {
@@ -96,11 +97,13 @@ public class TankWars {
                         (int) (shot.getPos().getY() + shot.getRadius()) / terrain.getTileSize() : terrain.getRows();
                 TerrainTile terrainMatrix[][] = terrain.getTerrainMatrix();
 
+                int midpoint = (int)shot.getPos().getY() / terrain.getTileSize();
                 for (int col = shotStartCol, x = 0; col < shotEndCol; col++, x++) {
+                    int yy =  x - midpoint;
                     for (int row = shotStartRow, y = 0; row < shotEndRow; row++, y++) {
+                        int xx = y - midpoint;
                         if (terrainMatrix[row][col] != null && terrainMatrix[row][col].isAlive()) {
-                            // TODO spränger fyrkanter, vill ha cirklar
-                            if ((Math.pow(x - shotEndCol, 2) + Math.pow(y - shotEndRow, 2)) > Math.pow(shot.getRadius(), 2)) {
+                            if (Math.sqrt(xx*xx + yy*yy) <= midpoint) {
                                 terrainMatrix[row][col].setAlive(false);
                             }
                         }
