@@ -21,8 +21,6 @@ public class Controller extends Game implements InputProcessor {
     public SpriteBatch batch;
 
 
-
-
     public Controller(TankWars tankWars) {
         this.tankWars = tankWars;
     }
@@ -36,6 +34,7 @@ public class Controller extends Game implements InputProcessor {
         //Continues when done loading.
         //it won't continue until all assets are finished loading.
         Assets.manager.finishLoading();
+        //Assets.manager.getProgress();
 
         setScreen(screen);
     }
