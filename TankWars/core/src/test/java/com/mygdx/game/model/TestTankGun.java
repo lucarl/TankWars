@@ -103,7 +103,7 @@ public class TestTankGun {
     @Test
     public void testChangeWeapon(){
         boolean cuurentSpecialShot = tankGun.hasSpecialShot();
-        tankGun.changeWeapon();
+        tankGun.changeNuke();
         assertTrue(!cuurentSpecialShot);
 
     }

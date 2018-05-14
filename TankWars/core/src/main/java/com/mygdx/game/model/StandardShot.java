@@ -17,5 +17,7 @@ public class StandardShot extends Shot {
         setDamage(5);
         setName("Gun");
         setImgSrc("bird.png");
+        setWidth(20);
+        setHeight(20);
     }
 }
