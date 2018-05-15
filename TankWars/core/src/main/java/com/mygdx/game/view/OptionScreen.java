@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Application;
 
@@ -26,8 +27,9 @@ public class OptionScreen implements Screen {
     private TextButton startButton;
 
     private Skin skin;
-    private Table table;
-    private ScreenViewport viewport;
+    private Table outerTable;
+    private Table innerTable;
+    private FitViewport viewport;
     private Stage stage;
     private SpriteBatch batch;
     private TextureAtlas atlas;
@@ -38,16 +40,12 @@ public class OptionScreen implements Screen {
 
     @Override
     public void show() {
-        viewport = new ScreenViewport();
-        stage = new Stage(viewport);
-        batch = new SpriteBatch();
+        viewport = new FitViewport(Application.GAME_WIDTH, Application.GAME_HEIGHT);
+        stage = new Stage(viewport, app.batch);
 
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
         // skin = new Skin(Gdx.files.internal("uiskin.json"));
-
-        table = new Table(skin);
-        table.setBounds(0, 0, Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
@@ -61,9 +59,23 @@ public class OptionScreen implements Screen {
             }
         });
 
-        table.add(startButton);
+        innerTable = new Table(skin);
+        innerTable.setFillParent(true);
+        innerTable.top();
+        innerTable.padTop(100);
 
-        stage.addActor(table);
+
+        innerTable.add().width(500).height(150);
+        innerTable.row();
+        innerTable.add(startButton);
+        innerTable.row();
+        innerTable.add().height(50);
+        innerTable.row();
+        innerTable.add().height(50);
+
+        innerTable.setDebug(true);
+
+        stage.addActor(innerTable);
 
         // Take input from ui
         Gdx.input.setInputProcessor(stage);
@@ -76,11 +88,8 @@ public class OptionScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-
-
-        batch.end();
-
+        app.batch.begin();
+        app.batch.end();
         stage.act(delta);
         stage.draw();
 

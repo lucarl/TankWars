@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Application;
 import com.mygdx.game.model.TankWars;
 
 // Heads on display, is used for showing information about the game during gameplay.
@@ -47,7 +48,7 @@ public class Hud implements Disposable {
 
         wind = tankWars.getWind().getWindSpeed();
 
-        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        viewport = new FitViewport(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         stage = new Stage(viewport, batch);
 
         Table table = new Table();
@@ -73,6 +74,7 @@ public class Hud implements Disposable {
         table.add(fuelLabel).expandX();
         table.add(angleLabel).expandX();
 
+        table.setDebug(true);
         stage.addActor(table);
 
 
