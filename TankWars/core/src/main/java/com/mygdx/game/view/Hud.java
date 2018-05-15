@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
+import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.TankWars;
 
 // Heads on display, is used for showing information about the game during gameplay.
@@ -68,7 +69,7 @@ public class Hud implements Disposable {
 
 
         // Create label with a string and a style
-        BitmapFont font = new BitmapFont(Gdx.files.internal("hudFont.fnt"));
+        BitmapFont font = Assets.manager.get("hudFont.fnt");
 
         scoreLabel = new Label(String.format("Score: %03d", score), new Label.LabelStyle(font, Color.WHITE));
         nameLabel = new Label("Player: " + name, new Label.LabelStyle(font, Color.WHITE));

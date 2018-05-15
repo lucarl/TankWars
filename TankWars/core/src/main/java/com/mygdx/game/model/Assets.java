@@ -3,6 +3,7 @@ package com.mygdx.game.model;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class Assets {
 
@@ -44,6 +45,15 @@ public class Assets {
     public static final AssetDescriptor<Texture> splashImg =
             new AssetDescriptor<Texture>("tanks.jpg", Texture.class);
 
+    // HUD font
+    public static final AssetDescriptor<BitmapFont> hudFont =
+            new AssetDescriptor<>("hudFont.fnt", BitmapFont.class);
+
+    // tank wars font
+    public static final AssetDescriptor<BitmapFont> tankWarsFont =
+            new AssetDescriptor<>("myfont.fnt", BitmapFont.class);
+
+
 
     //skin
     /*
@@ -62,6 +72,8 @@ public class Assets {
         manager.load(backgroundImg);
         manager.load(explosionAni);
         manager.load(splashImg);
+        manager.load(hudFont);
+        manager.load(tankWarsFont);
     }
 
     public static void disposeAssets(){

@@ -49,7 +49,7 @@ public class Tank implements IDrawable {
         float currentGroundHeight = terrain.getHeightOfCol((int) (pos.getX() + width / 2) / terrain.getTileSize());
         float newPos = rightMove ? pos.getX() + speed * delta : pos.getX() - speed * delta;
         float newGroundHeight = terrain.getHeightOfCol((int) (newPos + width / 2) / terrain.getTileSize());
-        float maxHeightDifference = terrain.getTileSize() * 3f;
+        float maxHeightDifference = terrain.getTileSize() * 4f;
         boolean canMoveThere = newGroundHeight - currentGroundHeight < maxHeightDifference;
 
         if (pos.getY() > currentGroundHeight) pos.setY(currentGroundHeight);
