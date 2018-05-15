@@ -2,12 +2,15 @@ package com.mygdx.game.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -63,25 +66,46 @@ public class MenuScreen implements Screen {
 
         //optionsButton
         optionsButton = new TextButton("OPTIONS", bigTextButtonStyle);
+        optionsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setOptionScreen();
+            }
+        });
 
         //exitButton
         exitButton = new TextButton("EXIT", bigTextButtonStyle);
+        exitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.exit();
+            }
+        });
+
+        BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
+        //heading
+        LabelStyle headingStyle = new LabelStyle();
+        headingStyle.font = menuFont;
+        headingStyle.fontColor = Color.BLUE;
+
+
+        //Label heading = new Label(Gdx.files.internal("menu.fnt"), Color.BLUE, "TANK WARS");
 
         table = new Table(skin);
         table.setFillParent(true);
         table.top();
         table.padTop(100);
 
-
+        //button setup in table
         table.add().width(500).height(150);
+        table.add();
         table.row();
         table.add(startButton);
         table.row();
-        //table.add(optionsButton);
+        table.add(optionsButton);
         table.add().height(50);
         table.row();
-        //table.add(exitButton);
-        table.add().height(50);
+        table.add(exitButton);
 
         table.setDebug(true);
 

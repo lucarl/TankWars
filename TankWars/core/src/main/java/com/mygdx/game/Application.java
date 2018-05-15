@@ -22,12 +22,11 @@ public class Application extends Game{
 
     public void setPlayScreen() {
         screen.dispose();
-
         screen = new PlayScreen(this);
         setScreen(screen);
     }
 
-    public void setStartScreen() {
+    public void setMenuScreen() {
         screen.dispose();
         screen = new OptionsScreen(this);
         setScreen(screen);
