@@ -1,7 +1,8 @@
 package com.mygdx.game.model;
 
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.ctrl.Controller;
+
+import com.mygdx.game.Application;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
@@ -25,7 +26,7 @@ public class TestTankGun {
         assertTrue(actualShot instanceof AngryShot);
         //test if correct interval
         assertTrue(actualShot.getPos().getX() > 0 &&
-                actualShot.getPos().getX() < Controller.GAME_WIDTH &&
+                actualShot.getPos().getX() < Application.GAME_WIDTH &&
                 actualShot.getPos().getY() > 0);
         //correct windspeed?
         assertTrue(testWindSpeed == actualShot.getWindSpeed());
@@ -42,7 +43,7 @@ public class TestTankGun {
         assertTrue(actualShot instanceof Shot);
         //test if correct interval
         assertTrue(actualShot.getPos().getX() > 0 &&
-                actualShot.getPos().getX() < Controller.GAME_WIDTH &&
+                actualShot.getPos().getX() < Application.GAME_WIDTH &&
                 actualShot.getPos().getY() > 0);
         //correct windspeed?
         assertTrue(testWindSpeed == actualShot.getWindSpeed());

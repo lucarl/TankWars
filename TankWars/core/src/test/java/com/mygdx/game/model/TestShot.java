@@ -1,6 +1,6 @@
 package com.mygdx.game.model;
 
-import com.mygdx.game.ctrl.Controller;
+import com.mygdx.game.Application;
 import org.junit.Test;
 import static junit.framework.TestCase.assertTrue;
 
@@ -19,7 +19,7 @@ public class TestShot {
      */
     @Test
     public void testUpdate(){
-        Shot shot = new StandardShot(new Position(Controller.GAME_WIDTH +1,10), 90, 0.1f, 50);
+        Shot shot = new StandardShot(new Position(Application.GAME_WIDTH +1,10), 90, 0.1f, 50);
         shot.update(System.nanoTime());
         assertTrue(!shot.isAlive());
     }

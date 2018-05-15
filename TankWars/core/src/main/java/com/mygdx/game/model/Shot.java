@@ -1,6 +1,7 @@
 package com.mygdx.game.model;
 
-import com.mygdx.game.ctrl.Controller;
+import com.mygdx.game.Application;
+
 /**
  * An abstract class used by each ammunition
  * extention, TankGun and ShotFactory
@@ -33,7 +34,7 @@ public abstract class Shot implements IDrawable {
     private CollisionRect rect;
 
     public void update(float delta) {
-        if (pos.getX() > 0 && pos.getX() < Controller.GAME_WIDTH && pos.getY() > 0) {
+        if (pos.getX() > 0 && pos.getX() < Application.GAME_WIDTH && pos.getY() > 0) {
             pos.setX(pos.getX() + vector[0] * delta * speed);
             pos.setY(pos.getY() + vector[1] * delta * speed);
             vector[0] += windSpeed * delta;

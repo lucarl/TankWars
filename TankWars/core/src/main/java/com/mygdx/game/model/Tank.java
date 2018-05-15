@@ -1,7 +1,7 @@
 package com.mygdx.game.model;
 
 
-import com.mygdx.game.ctrl.Controller;
+import com.mygdx.game.Application;
 
 public class Tank implements IDrawable {
     private static String tankImgSrc = "tank1.png";
@@ -54,7 +54,7 @@ public class Tank implements IDrawable {
 
         if (pos.getY() > currentGroundHeight) pos.setY(currentGroundHeight);
 
-        if (canMoveThere && isVisible && fuel > 0 && pos.getX() > 0 && pos.getX() + width < Controller.GAME_WIDTH) {
+        if (canMoveThere && isVisible && fuel > 0 && pos.getX() > 0 && pos.getX() + width < Application.GAME_WIDTH) {
             if (rightMove) {
                 pos.setX(pos.getX() + speed * delta);
 
