@@ -30,7 +30,6 @@ public class TankWars {
         objects = new ArrayList<>();
         shots = new ArrayList<>();
         tiles = new ArrayList<>();
-        upgrade = new ArrayList<>();
         wind = new Wind(difficulty);
 
         //terrain = tankWarsFactory.setupTerrainTiles(tiles);
