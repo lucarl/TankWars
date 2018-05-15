@@ -3,6 +3,7 @@ package com.mygdx.game.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -10,9 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -59,11 +58,17 @@ public class OptionsScreen implements Screen {
 
     private TextButton nextButton;
 
+    Label optionsLabel;
+    Label roundsLabel;
+    Label playersLabel;
+    Label difficultyLabel;
+
     private BitmapFont font;
     private TextureAtlas atlas;
 
     private Skin skin;
     private Table table;
+
 
     public OptionsScreen(Application app) {
         this.app = app;
@@ -77,7 +82,7 @@ public class OptionsScreen implements Screen {
 
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
-        // skin = new Skin(Gdx.files.internal("uiskin.json"));
+        //skin = new Skin(Gdx.files.internal("uiskin.json"));
 
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
@@ -102,29 +107,67 @@ public class OptionsScreen implements Screen {
 
         arrowButtonLeft1 = new TextButton("<", smallTextButtonStyle);
         arrowButtonRight1 = new TextButton(">", smallTextButtonStyle);
+        arrowButtonLeft2 = new TextButton("<", smallTextButtonStyle);
+        arrowButtonRight2 = new TextButton(">", smallTextButtonStyle);
+        arrowButtonLeft3 = new TextButton("<", smallTextButtonStyle);
+        arrowButtonRight3 = new TextButton(">", smallTextButtonStyle);
+
+        optionsLabel = new Label("Options",
+                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.CYAN));
+        roundsLabel = new Label("Number of rounds",
+                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
+        playersLabel = new Label("Number of players",
+                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
+        difficultyLabel = new Label("Difficulty",
+                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
 
         table = new Table(skin);
         table.setFillParent(true);
-        table.top();
-        table.padTop(100);
+        table.setBounds(Application.GAME_WIDTH/5, 0,
+                Application.GAME_WIDTH/2, Application.GAME_HEIGHT);
+        table.top().left();
+        table.padTop(30);
 
+        table.row().height(125);
         table.add().width(100);
-        table.add().width(300).height(150);
+        optionsLabel.setFontScale(2.0f);
+        table.add(optionsLabel).width(optionsLabel.getPrefWidth());
         table.add().width(100);
+
         table.row();
-        table.add().width(100);
-        table.add().height(75);
-        table.add().width(100);
+        table.add();
+        table.add(roundsLabel);
+        table.add();
+
+        table.row().height(75);
+        table.add(arrowButtonLeft1).right();
+        table.add().width(50);
+        table.add(arrowButtonRight1).left();
+
         table.row();
-        table.add().width(100);
-        table.add().height(75);
-        table.add().width(100);
+        table.add();
+        table.add(playersLabel);
+        table.add();
+
+        table.row().height(75);
+        table.add(arrowButtonLeft2).right();
+        table.add().width(50);
+        table.add(arrowButtonRight2).left();
+
         table.row();
-        table.add().width(100);
-        table.add().height(75);
-        table.add().width(100);
-        table.row();
-        table.add().height(150);
+        table.add();
+        table.add(difficultyLabel);
+        table.add();
+
+        table.row().height(75);
+        table.add(arrowButtonLeft3).right();
+        table.add().width(50);
+        table.add(arrowButtonRight3).left();
+
+        table.row().height(75);
+        table.add();
+        table.add(nextButton).center();
+        table.add();
 
         table.setDebug(true);
 
