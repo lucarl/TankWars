@@ -19,7 +19,7 @@ public class Terrain {
         terrainMatrix = new TerrainTile[rows][cols];
 
         for (int col = 0; col < cols; col++) {
-            for (int row = 0; row < min(abs(cos(toRadians(col)) * 75 + 75), rows); row++) {
+            for (int row = 0; row < min(abs(cos(toRadians(col)) * 50 + 50), rows); row++) {
                 terrainMatrix[row][col] = new TerrainTile(x + col * tileSize,
                                                           y + row * tileSize, true, tileSize);
 
