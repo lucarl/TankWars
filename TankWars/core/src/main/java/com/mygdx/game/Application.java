@@ -28,13 +28,11 @@ public class Application extends Game{
 
     public void setMenuScreen() {
         screen.dispose();
-        screen = new OptionsScreen(this);
         setScreen(screen);
     }
 
     public void setOptionScreen() {
         screen.dispose();
-        screen = new MenuScreen(this);
         setScreen(screen);
     }
 

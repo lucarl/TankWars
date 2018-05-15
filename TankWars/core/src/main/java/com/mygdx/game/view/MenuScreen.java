@@ -36,6 +36,7 @@ public class MenuScreen implements Screen {
     private Stage stage;
     private SpriteBatch batch;
     private TextureAtlas atlas;
+    private Label heading;
 
     public MenuScreen(Application app) {
         this.app = app;
@@ -82,14 +83,7 @@ public class MenuScreen implements Screen {
             }
         });
 
-        BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
-        //heading
-        LabelStyle headingStyle = new LabelStyle();
-        headingStyle.font = menuFont;
-        headingStyle.fontColor = Color.BLUE;
 
-
-        //Label heading = new Label(Gdx.files.internal("menu.fnt"), Color.BLUE, "TANK WARS");
 
         table = new Table(skin);
         table.setFillParent(true);
@@ -97,10 +91,7 @@ public class MenuScreen implements Screen {
         table.padTop(100);
 
         //button setup in table
-        table.add().width(500).height(150);
-        table.add();
         table.row();
-        table.add(startButton);
         table.row();
         table.add(optionsButton);
         table.add().height(50);
