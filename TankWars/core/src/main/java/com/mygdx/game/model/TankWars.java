@@ -59,28 +59,6 @@ public class TankWars {
             Shot shot = (Shot) drawableShot;
             CollisionRect shotRect = shot.getRect();
 
-            // Check collision with tank
-            for (Player player : players) {
-                CollisionRect tankRect = player.getTank().getRect();
-                Tank tank = player.getTank();
-                //CollisionRect tileRect = terrainTile.getRect();
-                if (shotRect.collidesWith(tankRect) && tank.isAlive()
-                        && shot.isAlive() && !(player == currentPlayer)) {
-
-                    currentPlayer.addScore();
-                    tank.decreaseHealth(shot.getDamage());
-                    // Shot collided so we set it to dead so it gets removed later
-                    //shot.setAlive(false);
-                    if (tank.getHealthPoints() <= 0) {
-                        tank.setAlive(false);
-                        tank.getGun().setAlive(false);
-                    }
-                }
-                //if (shotRect.collidesWith(tileRect) && terrainTile.isAlive()) {
-                //    terrainTile.setAlive(false);
-                //}
-            }
-
             // TODO funkar sådär, explosionerna beter sig konstigt, inga perfekta cirkulära explosioner
             // Check collision with terrain
             int groundYPos = terrain.getHeightOfCol((int) shot.getPos().getX() / terrain.getTileSize());
@@ -110,6 +88,26 @@ public class TankWars {
                     }
                 }
             }
+
+            // Check collision with tank
+            for (Player player : players) {
+                CollisionRect tankRect = player.getTank().getRect();
+                Tank tank = player.getTank();
+                //CollisionRect tileRect = terrainTile.getRect();
+                if (shotRect.collidesWith(tankRect) && tank.isAlive()
+                        && shot.isAlive() && !(player == currentPlayer)) {
+
+                    currentPlayer.addScore();
+                    tank.decreaseHealth(shot.getDamage());
+                    // Shot collided so we set it to dead so it gets removed later
+                    //shot.setAlive(false);
+                    if (tank.getHealthPoints() <= 0) {
+                        tank.setAlive(false);
+                        tank.getGun().setAlive(false);
+                    }
+                }
+            }
+
         }
 
 
@@ -120,24 +118,6 @@ public class TankWars {
     }
     // TODO Display who won the round and some action to continue to next round
 
-    /*private void setupTerrainTiles() {
-        Terrain terrain = new Terrain();
-        TerrainTile[][] terrainMatrix = terrain.getTerrainMatrix();
-        for (int i = 0; i < terrainMatrix.length; i++) {
-            for (int j = 0; j < terrainMatrix[i].length; j++) {
-                objects.add(terrainMatrix[i][j]);
-            }
-        }
-    }*/
-
-    /*private void setupObjects(int nPlayers) {
-        for (int i = 0; i < nPlayers; i++) {
-            players.add(new Player());
-            objects.add(players.get(i).getTank().getGun().getShot());
-            objects.add(players.get(i).getTank().getGun());
-            objects.add(players.get(i).getTank());
-        }
-    }*/
 
     public void update(float delta) {
         // Remove dead objects
@@ -241,4 +221,6 @@ public class TankWars {
     public boolean isTurnOver() {
         return isTurnOver;
     }
+
+
 }

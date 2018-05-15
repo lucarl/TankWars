@@ -1,18 +1,15 @@
 package com.mygdx.game.view;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.model.*;
-import com.mygdx.game.model.Terrain;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Renderer {
-    private com.mygdx.game.model.Terrain terrain = new Terrain();
     private Map<IDrawable, Sprite> sprites;
     private SpriteBatch batch;
 
@@ -22,10 +19,6 @@ public class Renderer {
     }
 
     public void render(List<IDrawable> objects) {
-        // New hashMap because we only want to draw stuff thats currently in objects
-        //sprites = new HashMap<>();
-        // Load every objects sprite and put it in the hashmap
-        //loadResources(objects);
         // For each object update it's corresponding sprite with the objects state
         sprites.forEach((obj, sprite) -> {
             sprite.setRotation(obj.getAngle());
@@ -35,8 +28,6 @@ public class Renderer {
                 sprite.draw(batch);
             }
         });
-
-        //batch.dispose();
     }
 
     public void loadResources(List<IDrawable> objects) {

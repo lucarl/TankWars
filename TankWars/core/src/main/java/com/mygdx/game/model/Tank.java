@@ -9,7 +9,7 @@ public class Tank implements IDrawable {
     private static int height = 20;
     private static int originX = width / 2;
     private static int originY = height / 2;
-    private static final int speed = 10;
+    private static final int speed = 100;
 
 
     private Position pos;
@@ -46,23 +46,29 @@ public class Tank implements IDrawable {
 
     public Position moveTank(float delta, Terrain terrain) {
         // Get grounds yPos
-        float groundYPos = terrain.getHeightOfCol((int) (pos.getX() + width / 2) / terrain.getTileSize());
-        if (pos.getY() > groundYPos) pos.setY(groundYPos);
-        if (isVisible && fuel > 0 && pos.getX() > 0 && pos.getX() + width < Controller.GAME_WIDTH) {
+        float currentGroundHeight = terrain.getHeightOfCol((int) (pos.getX() + width / 2) / terrain.getTileSize());
+        float newPos = rightMove ? pos.getX() + speed * delta : pos.getX() - speed * delta;
+        float newGroundHeight = terrain.getHeightOfCol((int) (newPos + width / 2) / terrain.getTileSize());
+        float maxHeightDifference = terrain.getTileSize() * 2f;
+        boolean canMoveThere = newGroundHeight - currentGroundHeight < maxHeightDifference;
+
+        if (pos.getY() > currentGroundHeight) pos.setY(currentGroundHeight);
+
+        if (canMoveThere && isVisible && fuel > 0 && pos.getX() > 0 && pos.getX() + width < Controller.GAME_WIDTH) {
             if (rightMove) {
                 pos.setX(pos.getX() + speed * delta);
 
                 // Set tank yPos = groundYPos
-                pos.setY(groundYPos);
-                rect.move(pos.getX(), groundYPos);
+                pos.setY(newGroundHeight);
+                rect.move(pos.getX(), newGroundHeight);
 
                 decreaseFuel();
             } else if (leftMove) {
                 pos.setX(pos.getX() - speed * delta);
 
                 // Set tank yPos = groundYPos
-                pos.setY(groundYPos);
-                rect.move(pos.getX(), groundYPos);
+                pos.setY(newGroundHeight);
+                rect.move(pos.getX(), newGroundHeight);
 
                 decreaseFuel();
             }

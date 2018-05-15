@@ -8,10 +8,10 @@ public class TerrainTile implements IDrawable{
     private Position position;
     private CollisionRect collisionRect;
 
-    public TerrainTile(int x, int y, boolean alive) {
+    public TerrainTile(int x, int y, boolean alive, int tileSize) {
         position = new Position(x, y);
-        width = 3;
-        height = 3;
+        width = tileSize;
+        height = tileSize;
         isAlive = alive;
         collisionRect = new CollisionRect(position.getX(),position.getY(), width, height);
     }

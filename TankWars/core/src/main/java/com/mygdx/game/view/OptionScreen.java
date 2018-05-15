@@ -13,14 +13,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.game.ctrl.Controller;
+import com.mygdx.game.Application;
+
 
 /**
  * Created by marianarale on 2018-05-12.
  */
-public class PlayerOptionsScreen implements Screen {
+public class OptionScreen implements Screen {
 
-    private Controller controller;
+    private Application app;
 
     private TextButton startButton;
 
@@ -31,11 +32,9 @@ public class PlayerOptionsScreen implements Screen {
     private SpriteBatch batch;
     private TextureAtlas atlas;
 
-    public PlayerOptionsScreen(Controller controller) {
-        this.controller = controller;
-
+    public OptionScreen(Application app) {
+        this.app = app;
     }
-
 
     @Override
     public void show() {
@@ -48,7 +47,7 @@ public class PlayerOptionsScreen implements Screen {
         // skin = new Skin(Gdx.files.internal("uiskin.json"));
 
         table = new Table(skin);
-        table.setBounds(0,0,controller.GAME_WIDTH,controller.GAME_HEIGHT);
+        table.setBounds(0, 0, Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
@@ -58,7 +57,7 @@ public class PlayerOptionsScreen implements Screen {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                controller.setPlayScreen();
+                app.setPlayScreen();
             }
         });
 

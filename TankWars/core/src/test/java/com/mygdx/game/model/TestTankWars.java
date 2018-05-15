@@ -21,7 +21,7 @@ public class TestTankWars {
     public void setUp(){
         tankWarsTest = new TankWars(2,5,Difficulty.EASY);
         tank = new Tank(1,1);
-        testTile = new TerrainTile(10,10, false);
+        testTile = new TerrainTile(10,10, false, 5);
         shot = new StandardShot(new Position(5,5),0.1f, 1f, 10);
         terrain = new Terrain();
         delta = System.nanoTime();

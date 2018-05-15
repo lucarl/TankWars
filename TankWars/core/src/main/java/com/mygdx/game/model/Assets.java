@@ -32,6 +32,15 @@ public class Assets {
     public static final AssetDescriptor<Texture> backgroundImg =
             new AssetDescriptor<Texture>("background.jpg", Texture.class);
 
+    //explosion animation
+    public static final AssetDescriptor<Texture> explosionAni =
+            new AssetDescriptor<Texture>("explosion.png", Texture.class);
+
+    //splash image
+    public static final AssetDescriptor<Texture> splashImg =
+            new AssetDescriptor<Texture>("tanks.jpg", Texture.class);
+
+
     //skin
     /*
     public static final AssetDescriptor<Skin> uiSkin =
@@ -46,6 +55,8 @@ public class Assets {
         manager.load(terrainTileImg);
         manager.load(gunTubeImg);
         manager.load(backgroundImg);
+        manager.load(explosionAni);
+        manager.load(splashImg);
     }
 
     public static void disposeAssets(){

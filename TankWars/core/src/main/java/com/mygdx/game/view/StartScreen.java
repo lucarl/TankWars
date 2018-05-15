@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.ctrl.Controller;
+import com.mygdx.game.Application;
 
 public class StartScreen implements Screen {
 
@@ -36,7 +36,7 @@ public class StartScreen implements Screen {
     private Stage stage;
     private SpriteBatch batch;
     private Viewport viewport;
-    private Controller controller;
+    private Application app;
 
     private Texture imgRight;
     private Texture imgLeft;
@@ -66,8 +66,8 @@ public class StartScreen implements Screen {
     private Skin skin;
     private Table table;
 
-    public StartScreen(Controller controller) {
-        this.controller = controller;
+    public StartScreen(Application app) {
+        this.app = app;
 
     }
 
@@ -82,7 +82,7 @@ public class StartScreen implements Screen {
         // skin = new Skin(Gdx.files.internal("uiskin.json"));
 
         table = new Table(skin);
-        table.setBounds(0,0,controller.GAME_WIDTH,controller.GAME_HEIGHT);
+        table.setBounds(0,0, Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
 
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
@@ -95,7 +95,7 @@ public class StartScreen implements Screen {
         nextButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                controller.setScreen(new PlayerOptionsScreen(controller));
+                app.setOptionScreen();
             }
         });
 
@@ -216,7 +216,7 @@ public class StartScreen implements Screen {
 
         if (xRange && yRange && Gdx.input.justTouched()
                 || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-                controller.setPlayScreen();
+                app.setPlayScreen();
         }
     }
 

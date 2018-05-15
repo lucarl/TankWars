@@ -2,61 +2,40 @@ package com.mygdx.game.view;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.*;
-import com.mygdx.game.ctrl.Controller;
-import com.mygdx.game.model.IDrawable;
+import com.mygdx.game.Application;
+
+import com.mygdx.game.ctrl.PlayController;
+import com.mygdx.game.model.Assets;
+import com.mygdx.game.model.Difficulty;
+
 import com.mygdx.game.model.TankWars;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
 public class PlayScreen implements Screen {
-    //private Map<IDrawable, Sprite> sprites;
     private Sprite background;
     private TankWars tankWars;
-    private Controller controller;
-    private Viewport viewport;
-    private OrthographicCamera camera;
+    private Application app;
+    private PlayController controller;
     private Hud hud;
     private Renderer renderer;
-    private Sprite terrain;
 
+    public PlayScreen(Application app) {
+        this.app = app;
+        // TODO tankWars parametrar borde finnas i en setup fil
+        tankWars = new TankWars(4, 3, Difficulty.EASY);
+        controller = new PlayController(tankWars);
+        renderer = new Renderer(app.batch);
+        hud = new Hud(app.batch, tankWars);
 
-
-    public PlayScreen(Controller controller, TankWars tankWars) {
-        this.controller = controller;
-        this.tankWars = tankWars;
-      //  sprites = new HashMap<>();
-        renderer = new Renderer(controller.batch);
-        hud = new Hud(controller.batch, tankWars);
-        background = new Sprite(new Texture("background.jpg"));
-
+        Texture texture = Assets.manager.get("background.jpg");
+        background = new Sprite(texture);
     }
 
     public void show() {
-        // For each obj in tankWars, load its image and set it according to the objects state
-        /*tankWars.getObjects().forEach(obj -> {
-            if (!obj.isAlive()) {
-                sprites.remove(obj);
-            } else {
-                Sprite sprite = new Sprite(new Texture(obj.getImgSrc()));
-                sprites.put(obj, sprite);
-                sprite.setOrigin(obj.getOriginX(), obj.getOriginY());
-                // Sets position of sprite and its width and height
-                sprite.setBounds(obj.getPos().getX(), obj.getPos().getY(),
-                        obj.getWidth(), obj.getHeight());
-            }
-        });
-
-*/
         renderer.loadResources(tankWars.getTiles());
         renderer.loadResources(tankWars.getObjects());
-        background.setSize(Controller.GAME_WIDTH, Controller.GAME_HEIGHT);
+        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         Gdx.input.setInputProcessor(controller);
     }
 
@@ -64,26 +43,17 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        tankWars.gameLoop(delta);
+
         renderer.loadResources(tankWars.getShots());
 
-        controller.batch.begin();
-        background.draw(controller.batch);
+        app.batch.begin();
+        background.draw(app.batch);
         renderer.render(tankWars.getTiles());
         renderer.render(tankWars.getObjects());
         renderer.render(tankWars.getShots());
 
-
-
-        /*      // For each object update it's corresponding sprite with the objects state
-        sprites.forEach((obj, sprite) -> {
-            sprite.setRotation(obj.getAngle());
-            sprite.setPosition(obj.getPos().getX(), obj.getPos().getY());
-
-            if (obj.isAlive()) {
-                sprite.draw(controller.batch);
-            }
-        });*/
-        controller.batch.end();
+        app.batch.end();
 
         hud.update();
         hud.stage.draw();
@@ -111,7 +81,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-        controller.dispose();
+
         hud.dispose();
 
     }
