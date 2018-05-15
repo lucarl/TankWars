@@ -7,6 +7,7 @@ import java.util.List;
 public class TankWars {
     private int playerIndex;
     private Player currentPlayer;
+    private List<IDrawable> upgrade;
     private List<Player> players;
     private List<IDrawable> objects;
     private List<IDrawable> tiles;
@@ -29,6 +30,7 @@ public class TankWars {
         objects = new ArrayList<>();
         shots = new ArrayList<>();
         tiles = new ArrayList<>();
+        upgrade = new ArrayList<>();
         wind = new Wind(difficulty);
 
         //terrain = tankWarsFactory.setupTerrainTiles(tiles);

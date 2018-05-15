@@ -20,6 +20,7 @@ public class TankWarsFactory {
             int yPos = terrain.getHeightOfCol((int) tank.getPos().getX() / terrain.getTileSize() + tank.getHeight()/2);
             tank.setPos(new Position(tank.getPos().getX(), yPos));
             players.add(new Player(tank));
+            //objects.add(new Upgrade(500, 500));
             //objects.add(players.get(i).getTank().getGun().getShot());
             objects.add(players.get(i).getTank().getGun());
             objects.add(players.get(i).getTank());

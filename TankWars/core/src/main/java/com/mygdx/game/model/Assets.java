@@ -12,13 +12,17 @@ public class Assets {
     public static final AssetDescriptor<Texture> tankImg =
             new AssetDescriptor<Texture>("tank1.png", Texture.class);
 
-    //flappybird imnage
+    //standard shot image
     public static final AssetDescriptor<Texture> shotBirdImg =
             new AssetDescriptor<Texture>("cannonBall.png", Texture.class);
 
-    //angrybird image
+    //nuke image
     public static final AssetDescriptor<Texture> angryBirdImg =
             new AssetDescriptor<Texture>("nuke.png", Texture.class);
+
+    //upgrade image
+    public static final AssetDescriptor<Texture>  upgradeBoxImg =
+            new AssetDescriptor<Texture>("upgradeBox.png", Texture.class);
 
     //image of tile for the terrain
     public static final AssetDescriptor<Texture> terrainTileImg =
@@ -52,6 +56,7 @@ public class Assets {
         manager.load(tankImg);
         manager.load(shotBirdImg);
         manager.load(angryBirdImg);
+        manager.load(upgradeBoxImg);
         manager.load(terrainTileImg);
         manager.load(gunTubeImg);
         manager.load(backgroundImg);

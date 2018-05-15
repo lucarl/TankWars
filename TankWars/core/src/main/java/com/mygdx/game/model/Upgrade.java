@@ -6,15 +6,18 @@ package com.mygdx.game.model;
  *
  * @author  Carl Lundborg
  */
-public class Upgrade implements IDrawable{
-    private static String ImgSrc;
-    private static int width = 50;
-    private static int height = 50;
+/*public class Upgrade implements IDrawable{
+    private static String ImgSrc = "upgradeBox.png";
+    private static int width = 40;
+    private static int height = 40;
     private boolean isVisible;
     private CollisionRect rect;
     private Position pos;
 
     public Upgrade(float x, float y) {
+        rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
+        this.pos = new Position(width, height);
+        isVisible = true;
         rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
     }
 
@@ -55,6 +58,6 @@ public class Upgrade implements IDrawable{
 
     @Override
     public boolean isAlive() {
-        return false;
+        return isVisible;
     }
-}
+}*/
