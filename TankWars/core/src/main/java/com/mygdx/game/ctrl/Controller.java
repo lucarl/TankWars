@@ -6,7 +6,7 @@
 //import com.mygdx.game.model.Assets;
 //import com.mygdx.game.model.TankWars;
 //import com.mygdx.game.view.PlayScreen;
-//import com.mygdx.game.view.StartScreen;
+//import com.mygdx.game.view.OptionsScreen;
 //
 //
 //import java.awt.event.KeyEvent;
@@ -27,7 +27,7 @@
 //
 //    public void create() {
 //        batch = new SpriteBatch();
-//        screen = new StartScreen(this);
+//        screen = new OptionsScreen(this);
 //
 //        //starts loading assets
 //        Assets.loadAssets();

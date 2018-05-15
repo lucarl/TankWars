@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
 
-public class StartScreen implements Screen {
+public class OptionsScreen implements Screen {
 
     //Constants for the next button
     private static final int NEXT_BUTTON_WIDTH = 20;
@@ -34,7 +34,6 @@ public class StartScreen implements Screen {
     private static final int ARROW_BUTTON_X = 450;
 
     private Stage stage;
-    private SpriteBatch batch;
     private Viewport viewport;
     private Application app;
 
@@ -66,7 +65,7 @@ public class StartScreen implements Screen {
     private Skin skin;
     private Table table;
 
-    public StartScreen(Application app) {
+    public OptionsScreen(Application app) {
         this.app = app;
 
     }
@@ -74,16 +73,11 @@ public class StartScreen implements Screen {
     @Override
     public void show() {
         viewport = new ScreenViewport();
-        stage = new Stage(viewport);
-        batch = new SpriteBatch();
+        stage = new Stage(viewport, app.batch);
 
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
         // skin = new Skin(Gdx.files.internal("uiskin.json"));
-
-        table = new Table(skin);
-        table.setBounds(0,0, Application.GAME_WIDTH, Application.GAME_HEIGHT);
-
 
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
@@ -109,10 +103,37 @@ public class StartScreen implements Screen {
         arrowButtonLeft1 = new TextButton("<", smallTextButtonStyle);
         arrowButtonRight1 = new TextButton(">", smallTextButtonStyle);
 
-        table.add(nextButton);
+        table = new Table(skin);
+        table.setFillParent(true);
+        table.top();
+        table.padTop(100);
+
+        table.add().width(100);
+        table.add().width(300).height(150);
+        table.add().width(100);
         table.row();
-        table.add(arrowButtonLeft1);
-        table.add(arrowButtonRight1);
+        table.add().width(100);
+        table.add().height(75);
+        table.add().width(100);
+        table.row();
+        table.add().width(100);
+        table.add().height(75);
+        table.add().width(100);
+        table.row();
+        table.add().width(100);
+        table.add().height(75);
+        table.add().width(100);
+        table.row();
+        table.add().height(150);
+
+        table.setDebug(true);
+
+        stage.addActor(table);
+
+        //table.add(nextButton);
+        //table.row();
+        //table.add(arrowButtonLeft1);
+        //table.add(arrowButtonRight1);
 
         stage.addActor(table);
 
@@ -178,7 +199,7 @@ public class StartScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
+        app.batch.begin();
 
         //Draw left arrow buttons
         //arrowButtonLeft1.update(batch,Gdx.input.getX(), Gdx.input.getY());
@@ -190,7 +211,7 @@ public class StartScreen implements Screen {
 
         handleNextButton();
 
-        batch.end();
+        app.batch.end();
 
         stage.act(delta);
         stage.draw();

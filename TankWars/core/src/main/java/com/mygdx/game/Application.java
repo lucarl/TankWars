@@ -29,7 +29,7 @@ public class Application extends Game{
 
     public void setStartScreen() {
         screen.dispose();
-        screen = new StartScreen(this);
+        screen = new OptionsScreen(this);
         setScreen(screen);
     }
 
