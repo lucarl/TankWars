@@ -83,7 +83,12 @@ public class MenuScreen implements Screen {
             }
         });
 
+        //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
 
+        //heading label setup
+        heading = new Label("TANK WARS",
+                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
+        heading.setFontScale(2.8f);
 
         table = new Table(skin);
         table.setFillParent(true);
@@ -91,8 +96,13 @@ public class MenuScreen implements Screen {
         table.padTop(100);
 
         //button setup in table
+        table.add().width(500).height(90);
         table.row();
+        table.add(heading);
         table.row();
+        table.add(startButton);
+        table.add().height(50);
+        table.row().pad(20);
         table.add(optionsButton);
         table.add().height(50);
         table.row();

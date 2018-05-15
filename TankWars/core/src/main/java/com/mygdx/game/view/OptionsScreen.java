@@ -103,9 +103,6 @@ public class OptionsScreen implements Screen {
         //bigTextButtonStyle.pressedOffsetY = -1;
 
         nextButton = new TextButton("NEXT", bigTextButtonStyle);
-<<<<<<< HEAD
-=======
->>>>>>> 50ff6a64c7d1e292d7c54f970948b57dfe4035a0
 
         TextButton.TextButtonStyle smallTextButtonStyle = new TextButton.TextButtonStyle();
         smallTextButtonStyle.font = font;
