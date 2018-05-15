@@ -58,10 +58,10 @@ public class OptionsScreen implements Screen {
 
     private TextButton nextButton;
 
-    Label optionsLabel;
-    Label roundsLabel;
-    Label playersLabel;
-    Label difficultyLabel;
+    private Label optionsLabel;
+    private Label roundsLabel;
+    private Label playersLabel;
+    private Label difficultyLabel;
 
     private BitmapFont font;
     private TextureAtlas atlas;
@@ -112,20 +112,21 @@ public class OptionsScreen implements Screen {
         arrowButtonLeft3 = new TextButton("<", smallTextButtonStyle);
         arrowButtonRight3 = new TextButton(">", smallTextButtonStyle);
 
+        BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
+
         optionsLabel = new Label("Options",
-                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.CYAN));
+                new Label.LabelStyle(font, Color.CYAN));
         roundsLabel = new Label("Number of rounds",
-                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
+                new Label.LabelStyle(font, Color.WHITE));
         playersLabel = new Label("Number of players",
-                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
+                new Label.LabelStyle(font, Color.WHITE));
         difficultyLabel = new Label("Difficulty",
-                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
+                new Label.LabelStyle(font, Color.WHITE));
 
         table = new Table(skin);
         table.setFillParent(true);
-        table.setBounds(Application.GAME_WIDTH/5, 0,
-                Application.GAME_WIDTH/2, Application.GAME_HEIGHT);
-        table.top().left();
+
+        table.top();
         table.padTop(30);
 
         table.row().height(125);
@@ -140,7 +141,7 @@ public class OptionsScreen implements Screen {
         table.add();
 
         table.row().height(75);
-        table.add(arrowButtonLeft1).right();
+        table.add(arrowButtonLeft1).right().width(arrowButtonLeft1.getPrefWidth());
         table.add().width(50);
         table.add(arrowButtonRight1).left();
 
@@ -177,8 +178,6 @@ public class OptionsScreen implements Screen {
         //table.row();
         //table.add(arrowButtonLeft1);
         //table.add(arrowButtonRight1);
-
-        stage.addActor(table);
 
         // Take input from ui
         Gdx.input.setInputProcessor(stage);
