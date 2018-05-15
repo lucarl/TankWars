@@ -14,7 +14,7 @@ public class Assets {
 
     //flappybird imnage
     public static final AssetDescriptor<Texture> shotBirdImg =
-            new AssetDescriptor<Texture>("bird.png", Texture.class);
+            new AssetDescriptor<Texture>("cannonBall.png", Texture.class);
 
     //angrybird image
     public static final AssetDescriptor<Texture> angryBirdImg =
