@@ -13,28 +13,28 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Application;
 
 
 /**
  * Created by marianarale on 2018-05-12.
  */
-public class OptionScreen implements Screen {
+public class MenuScreen implements Screen {
 
     private Application app;
 
     private TextButton startButton;
+    private TextButton optionsButton;
+    private TextButton exitButton;
 
     private Skin skin;
-    private Table outerTable;
-    private Table innerTable;
+    private Table table;
     private FitViewport viewport;
     private Stage stage;
     private SpriteBatch batch;
     private TextureAtlas atlas;
 
-    public OptionScreen(Application app) {
+    public MenuScreen(Application app) {
         this.app = app;
     }
 
@@ -51,6 +51,8 @@ public class OptionScreen implements Screen {
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
         bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
+
+        //startButton
         startButton = new TextButton("START", bigTextButtonStyle);
         startButton.addListener(new ClickListener() {
             @Override
@@ -59,23 +61,31 @@ public class OptionScreen implements Screen {
             }
         });
 
-        innerTable = new Table(skin);
-        innerTable.setFillParent(true);
-        innerTable.top();
-        innerTable.padTop(100);
+        //optionsButton
+        optionsButton = new TextButton("OPTIONS", bigTextButtonStyle);
+
+        //exitButton
+        exitButton = new TextButton("EXIT", bigTextButtonStyle);
+
+        table = new Table(skin);
+        table.setFillParent(true);
+        table.top();
+        table.padTop(100);
 
 
-        innerTable.add().width(500).height(150);
-        innerTable.row();
-        innerTable.add(startButton);
-        innerTable.row();
-        innerTable.add().height(50);
-        innerTable.row();
-        innerTable.add().height(50);
+        table.add().width(500).height(150);
+        table.row();
+        table.add(startButton);
+        table.row();
+        //table.add(optionsButton);
+        table.add().height(50);
+        table.row();
+        //table.add(exitButton);
+        table.add().height(50);
 
-        innerTable.setDebug(true);
+        table.setDebug(true);
 
-        stage.addActor(innerTable);
+        stage.addActor(table);
 
         // Take input from ui
         Gdx.input.setInputProcessor(stage);

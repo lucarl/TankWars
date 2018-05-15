@@ -35,7 +35,7 @@ public class Application extends Game{
 
     public void setOptionScreen() {
         screen.dispose();
-        screen = new OptionScreen(this);
+        screen = new MenuScreen(this);
         setScreen(screen);
     }
 
