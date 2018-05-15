@@ -8,10 +8,13 @@ package com.mygdx.game.model;
  */
 public class ShotFactory {
 
-    public Shot makeTankGun(boolean shot, Position position, float angle, float power, int windSpeed) {
-
-        if(shot) {
-            return new NukeShot(position, angle, power, windSpeed);
-        } else return new StandardShot(position, angle, power, windSpeed);
+    public Shot makeTankGun(int changeWeapon, Position position, float angle, float power, int windSpeed) {
+        if (changeWeapon == 1) {
+            return new StandardShot (position, angle, power, windSpeed);
+        }
+        if (changeWeapon == 2) {
+            return new NukeShot (position, angle, power, windSpeed);
+        }
+        else return new StandardShot (position, angle, power, windSpeed);
     }
 }
