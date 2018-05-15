@@ -94,7 +94,7 @@ public class OptionsScreen implements Screen {
         nextButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                app.setOptionScreen();
+                app.setPlayScreen();
             }
         });
 
