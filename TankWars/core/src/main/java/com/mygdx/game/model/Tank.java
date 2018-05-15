@@ -17,6 +17,7 @@ public class Tank implements IDrawable {
     private int healthPoints;
     private float fuel;
     private TankGun gun;
+    private Shot shot;
 
     private boolean isVisible;
     private boolean rightMove;
@@ -41,7 +42,8 @@ public class Tank implements IDrawable {
     }
 
     public Shot fire(int windSpeed) {
-        return gun.fire(windSpeed);
+        shot = gun.fire(windSpeed);
+        return shot;
         }
 
     public Position moveTank(float delta, Terrain terrain) {
@@ -121,6 +123,10 @@ public class Tank implements IDrawable {
 
     public int getHealthPoints() {
         return healthPoints;
+    }
+
+    public Shot getShot() {
+        return shot;
     }
 
 
