@@ -37,14 +37,12 @@ public class TankGun implements IDrawable {
         Shot shot = null;
         if (standard) {
             changeWeapon = 1;
-            System.out.print("standard");
             shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
             standard = false;
             return shot;
         }
         if (nuke) {
             changeWeapon = 2;
-            System.out.print("nuke");
             shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
             nuke = false;
             return shot;

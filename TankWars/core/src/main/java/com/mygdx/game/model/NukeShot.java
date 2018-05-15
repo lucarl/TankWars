@@ -21,7 +21,7 @@ public class NukeShot extends Shot{
         setRect(new CollisionRect(pos.getX(), pos.getY(), getWidth(), getHeight()));
         setDamage(30);
         setName("Nuke");
-        setImgSrc("angrybird.png");
+        setImgSrc("nuke.png");
         setWidth(50);
         setHeight(50);
         setRadius(50);

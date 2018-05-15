@@ -18,7 +18,7 @@ public class Assets {
 
     //angrybird image
     public static final AssetDescriptor<Texture> angryBirdImg =
-            new AssetDescriptor<Texture>("angrybird.png", Texture.class);
+            new AssetDescriptor<Texture>("nuke.png", Texture.class);
 
     //image of tile for the terrain
     public static final AssetDescriptor<Texture> terrainTileImg =
