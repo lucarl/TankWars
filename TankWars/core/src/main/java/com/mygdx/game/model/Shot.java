@@ -1,10 +1,14 @@
 package com.mygdx.game.model;
 
 import com.mygdx.game.ctrl.Controller;
-
 /**
- * Created by Carl on 2018-04-23.
+ * An abstract class used by each ammunition
+ * extention, TankGun and ShotFactory
+ * to form a factory pattern
+ *
+ * @author  Carl Lundborg, Adam Kjäll
  */
+
 public abstract class Shot implements IDrawable {
     private static final float GRAVITY = -9.8f;
     private static String imgSrc;
@@ -14,7 +18,7 @@ public abstract class Shot implements IDrawable {
     private static int originY = height / 2;
 
     private float angle = 0;
-    private float radius = 20;
+    private float radius;
     private float weight = 100;
     private int damage;
     private String name;
@@ -22,10 +26,6 @@ public abstract class Shot implements IDrawable {
     private float[] vector = new float[2]; // speed
     private Position pos;
     private int speed = 15;
-
-    public float getRadius() {
-        return radius;
-    }
 
     private boolean isAlive;
     private int windSpeed;
@@ -93,6 +93,14 @@ public abstract class Shot implements IDrawable {
 
     public CollisionRect getRect() {
         return rect;
+    }
+
+    public float getRadius() {
+        return radius;
+    }
+
+    public void setRadius(float newRadius) {
+        radius = newRadius;
     }
 
     public int getDamage() {

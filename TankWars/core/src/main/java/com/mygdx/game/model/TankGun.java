@@ -16,7 +16,7 @@ public class TankGun implements IDrawable {
     private boolean isVisible;
     private boolean rightAim;
     private boolean leftAim;
-    private TankGunFactory gunFactory;
+    private ShotFactory shotFactory;
 
     //private Shot shot;
 
@@ -34,14 +34,14 @@ public class TankGun implements IDrawable {
 
     // fires a new shot at the end of the gun
     public Shot fire(int windSpeed) {
-        gunFactory = new TankGunFactory();
+        shotFactory = new ShotFactory();
         Shot shot = null;
         if (nuke) {
-            shot = gunFactory.makeTankGun(nuke, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(nuke, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
             nuke = false;
             return shot;
         } else {
-            shot = gunFactory.makeTankGun(standard, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(standard, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
             standard = false;
             return shot;
         }

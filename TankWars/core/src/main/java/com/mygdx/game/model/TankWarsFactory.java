@@ -1,6 +1,12 @@
 package com.mygdx.game.model;
 
 import java.util.List;
+/**
+ * A factory class for creating all dynamic objects
+ * during the start of the program
+ *
+ * @author  Carl Lundborg, Adam Kjäll
+ */
 
 public class TankWarsFactory {
 
