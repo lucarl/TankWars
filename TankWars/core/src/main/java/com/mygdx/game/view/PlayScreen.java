@@ -58,6 +58,7 @@ public class PlayScreen implements Screen {
 
         hud.update();
         hud.stage.draw();
+        hud.stage.act();
     }
 
     @Override
