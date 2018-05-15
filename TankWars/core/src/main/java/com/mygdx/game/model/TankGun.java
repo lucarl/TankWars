@@ -17,6 +17,7 @@ public class TankGun implements IDrawable {
     private boolean rightAim;
     private boolean leftAim;
     private ShotFactory shotFactory;
+    private int changeWeapon;
 
     //private Shot shot;
 
@@ -25,8 +26,6 @@ public class TankGun implements IDrawable {
         angle = 0;
         power = 0.5f;
         //shot = new Shot(new Position(-100, -100), angle, 0, 0);
-        nuke = false;
-        standard = false;
         isVisible = true;
         rightAim = false;
         leftAim = false;
@@ -36,12 +35,20 @@ public class TankGun implements IDrawable {
     public Shot fire(int windSpeed) {
         shotFactory = new ShotFactory();
         Shot shot = null;
+        if (standard) {
+            changeWeapon = 1;
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            standard = false;
+            return shot;
+        }
         if (nuke) {
-            shot = shotFactory.makeTankGun(nuke, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            changeWeapon = 2;
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
             nuke = false;
             return shot;
         } else {
-            shot = shotFactory.makeTankGun(standard, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            changeWeapon = 1;
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
             standard = false;
             return shot;
         }
@@ -82,11 +89,11 @@ public class TankGun implements IDrawable {
     }
 
     public void changeNuke() {
-        nuke = !nuke;
+        nuke = true;
     }
 
     public void changeStandard() {
-        standard = !standard;
+        standard = true;
     }
 
     public boolean hasSpecialShot() {

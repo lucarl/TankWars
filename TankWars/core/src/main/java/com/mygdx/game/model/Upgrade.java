@@ -7,7 +7,7 @@ package com.mygdx.game.model;
  * @author  Carl Lundborg
  */
 public class Upgrade implements IDrawable{
-    private static String tankImgSrc = "AngryShot.png";
+    private static String ImgSrc;
     private static int width = 50;
     private static int height = 50;
     private boolean isVisible;

@@ -14,11 +14,11 @@ public class Assets {
 
     //flappybird imnage
     public static final AssetDescriptor<Texture> shotBirdImg =
-            new AssetDescriptor<Texture>("bird.png", Texture.class);
+            new AssetDescriptor<Texture>("cannonBall.png", Texture.class);
 
     //angrybird image
     public static final AssetDescriptor<Texture> angryBirdImg =
-            new AssetDescriptor<Texture>("angrybird.png", Texture.class);
+            new AssetDescriptor<Texture>("nuke.png", Texture.class);
 
     //image of tile for the terrain
     public static final AssetDescriptor<Texture> terrainTileImg =
