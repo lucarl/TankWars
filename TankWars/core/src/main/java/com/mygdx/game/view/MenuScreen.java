@@ -2,6 +2,7 @@ package com.mygdx.game.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,8 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Application;
+import com.mygdx.game.model.Assets;
 
 
 /**
@@ -38,8 +41,21 @@ public class MenuScreen implements Screen {
     private TextureAtlas atlas;
     private Label heading;
 
+    Sound soundTheme = Assets.manager.get("TankWarsTheme.mp3", Sound.class);
+
     public MenuScreen(Application app) {
         this.app = app;
+
+        final long soundThemeID = soundTheme.loop(0.1f,1.0f,0.1f);
+
+        Timer.schedule((new Timer.Task() {
+            @Override
+            public void run() {
+                soundTheme.loop(soundThemeID);
+            }
+        }),1);
+
+
     }
 
     @Override
@@ -62,6 +78,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 app.setPlayScreen();
+                soundTheme.stop();
             }
         });
 
@@ -80,6 +97,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
+                soundTheme.stop();
             }
         });
 
@@ -154,5 +172,6 @@ public class MenuScreen implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
+        soundTheme.dispose();
     }
 }

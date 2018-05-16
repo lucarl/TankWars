@@ -63,17 +63,21 @@ public class PlayController implements InputProcessor {
     public boolean keyUp(int keycode) {
         if (keycode == Input.Keys.LEFT) {
             tankWars.getPlayer().getTank().setLeftMove(false);
+            //tankWars.getPlayer().getTank().setSoundMoveLeft(false);
         }
         if (keycode == Input.Keys.RIGHT) {
             tankWars.getPlayer().getTank().setRightMove(false);
+            //tankWars.getPlayer().getTank().setSoundMoveRight(false);
         }
 
         if (keycode == Input.Keys.UP) {
             tankWars.getPlayer().getTank().getGun().setLeftAim(false);
+            //tankWars.getPlayer().getTank().getGun().setSoundAim(false,false);
         }
 
         if (keycode == Input.Keys.DOWN) {
             tankWars.getPlayer().getTank().getGun().setRightAim(false);
+            //tankWars.getPlayer().getTank().getGun().setSoundAim(false,false);
         }
 
         return true;
