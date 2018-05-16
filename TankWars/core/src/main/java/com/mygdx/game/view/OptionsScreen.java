@@ -294,8 +294,8 @@ public class OptionsScreen implements Screen {
         arrowButtonLeft1.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // Loops through ints in the range [2,8] and updates the label and state
-                NUMBER_OF_ROUNDS = Math.abs(--NUMBER_OF_ROUNDS % 9);
+                // Loops through ints in the range [1,10] and updates the label and state
+                NUMBER_OF_ROUNDS--;
                 NUMBER_OF_ROUNDS = NUMBER_OF_ROUNDS < 2 ? 1 : NUMBER_OF_ROUNDS;
                 nRoundsLabel.setText(String.valueOf(NUMBER_OF_ROUNDS));
             }
@@ -304,9 +304,9 @@ public class OptionsScreen implements Screen {
         arrowButtonRight1.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // Loops through ints in the range [2,8] and updates the label and state
-                NUMBER_OF_ROUNDS = ++NUMBER_OF_ROUNDS % 9;
-                NUMBER_OF_ROUNDS = NUMBER_OF_ROUNDS < 2 ? 1 : NUMBER_OF_ROUNDS;
+                // Loops through ints in the range [1,10] and updates the label and state
+                NUMBER_OF_ROUNDS++;
+                NUMBER_OF_ROUNDS = NUMBER_OF_ROUNDS > 10 ? 10 : NUMBER_OF_ROUNDS;
                 nRoundsLabel.setText(String.valueOf(NUMBER_OF_ROUNDS));
             }
         });
@@ -314,8 +314,8 @@ public class OptionsScreen implements Screen {
         arrowButtonLeft2.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // Loops through ints in the range [2,4] and updates the label and state
-                NUMBER_OF_PLAYERS = Math.abs(--NUMBER_OF_PLAYERS % 5);
+                // Loops through ints in the range [2,5] and updates the label and state
+                NUMBER_OF_PLAYERS--;
                 NUMBER_OF_PLAYERS = NUMBER_OF_PLAYERS < 3 ? 2 : NUMBER_OF_PLAYERS;
                 nPlayersLabel.setText(String.valueOf(NUMBER_OF_PLAYERS));
             }
@@ -324,9 +324,9 @@ public class OptionsScreen implements Screen {
         arrowButtonRight2.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // Loops through ints in the range [2,4] and updates the label and state
-                NUMBER_OF_PLAYERS = ++NUMBER_OF_PLAYERS % 5;
-                NUMBER_OF_PLAYERS = NUMBER_OF_PLAYERS < 3 ? 2 : NUMBER_OF_PLAYERS;
+                // Loops through ints in the range [2,5] and updates the label and state
+                NUMBER_OF_PLAYERS++;
+                NUMBER_OF_PLAYERS = NUMBER_OF_PLAYERS > 5 ? 5 : NUMBER_OF_PLAYERS;
                 nPlayersLabel.setText(String.valueOf(NUMBER_OF_PLAYERS));
             }
         });
@@ -334,7 +334,7 @@ public class OptionsScreen implements Screen {
         arrowButtonLeft3.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // Left button decrease the difficulty, doesn't loop around
+                // Left button decrease the difficulty
                 DIFFICULTY = DIFFICULTY == Difficulty.HARD ? Difficulty.MEDIUM : Difficulty.EASY;
                 nDiffLabel.setText(DIFFICULTY.toString());
             }
@@ -343,7 +343,7 @@ public class OptionsScreen implements Screen {
         arrowButtonRight3.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // Left button increase the difficulty, doesn't loop around
+                // Left button increase the difficulty
                 DIFFICULTY = DIFFICULTY == Difficulty.EASY ? Difficulty.MEDIUM : Difficulty.HARD;
                 nDiffLabel.setText(DIFFICULTY.toString());
             }
