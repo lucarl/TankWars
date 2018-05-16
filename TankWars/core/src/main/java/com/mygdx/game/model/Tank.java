@@ -10,6 +10,7 @@ public class Tank implements IDrawable {
     private static int originX = width / 2;
     private static int originY = height / 2;
     private static final int speed = 100;
+    private static final int roatationSpeed = 5;
 
 
     private Position pos;
@@ -49,8 +50,8 @@ public class Tank implements IDrawable {
     public Position moveTank(float delta, Terrain terrain) {
         // Get grounds yPos
         float currentGroundHeight = terrain.getHeightOfCol((int) (pos.getX() + width / 2) / terrain.getTileSize());
-        float newPos = rightMove ? pos.getX() + speed * delta : pos.getX()- speed * delta;
-        float newGroundHeight = terrain.getHeightOfCol((int) (newPos + width/2) / terrain.getTileSize());
+        float newPos = rightMove ? pos.getX() + speed * delta : pos.getX() - speed * delta;
+        float newGroundHeight = terrain.getHeightOfCol((int) (newPos + width / 2) / terrain.getTileSize());
         //float maxHeightDifference = terrain.getTileSize() * 4f;
         float newAngle = 5 * (newGroundHeight - currentGroundHeight) * terrain.getTileSize();
         float maxAngle = 45;
@@ -63,7 +64,7 @@ public class Tank implements IDrawable {
                 pos.setX(newPos);
                 // Set tank yPos = groundYPos
                 pos.setY(newGroundHeight);
-                angle = newAngle;
+                angle = angle < newAngle ? Math.min(angle+roatationSpeed, newAngle) : Math.max(angle-roatationSpeed, newAngle);
 
                 rect.move(newPos, newGroundHeight);
 
@@ -73,7 +74,8 @@ public class Tank implements IDrawable {
                 // Set tank yPos = groundYPos
                 pos.setY(newGroundHeight);
 
-                angle = -newAngle;
+                angle = angle < -newAngle ? Math.min(angle+roatationSpeed, -newAngle) : Math.max(angle-roatationSpeed, -newAngle);
+                
 
 
                 rect.move(newPos, newGroundHeight);
