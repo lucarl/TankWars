@@ -41,7 +41,6 @@ public class Tank implements IDrawable {
     }
 
     public Shot fire(int windSpeed) {
-        return gun.fire(windSpeed);
         }
 
     public Position moveTank(float delta, Terrain terrain) {

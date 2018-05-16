@@ -25,7 +25,6 @@ import com.mygdx.game.Application;
 import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.TankWars;
 
-// Heads on display, is used for showing information about the game during gameplay.
 // It polls the model for data
 public class Hud implements Disposable {
     private TankWars tankWars;
@@ -66,9 +65,6 @@ public class Hud implements Disposable {
         hp = tankWars.getPlayer().getTank().getHealthPoints();
         wind = tankWars.getWind().getWindSpeed();
 
-
-
-        // Create label with a string and a style
         BitmapFont font = Assets.manager.get("hudFont.fnt");
 
         scoreLabel = new Label(String.format("Score: %03d", score), new Label.LabelStyle(font, Color.WHITE));
@@ -109,8 +105,7 @@ public class Hud implements Disposable {
 
         //table.setDebug(true);
         stage.addActor(table);
-
-
+        
     }
 
     public void update() {

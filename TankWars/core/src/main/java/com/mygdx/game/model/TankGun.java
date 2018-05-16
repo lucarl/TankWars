@@ -19,8 +19,6 @@ public class TankGun implements IDrawable {
     private ShotFactory shotFactory;
     private int changeWeapon;
 
-    //private Shot shot;
-
     public TankGun(Position pos) {
         this.pos = pos;
         angle = 0;
@@ -34,7 +32,6 @@ public class TankGun implements IDrawable {
     // fires a new shot at the end of the gun
     public Shot fire(int windSpeed) {
         shotFactory = new ShotFactory();
-        Shot shot = null;
         if (standard) {
             changeWeapon = 1;
             shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
@@ -106,9 +103,6 @@ public class TankGun implements IDrawable {
         return power;
     }
 
-    //public Shot getShot() {
-    //    return shot;
-    //}
 
     public void setPos(Position pos) {
         this.pos = new Position(pos.getX() + width/2, pos.getY() + height);
