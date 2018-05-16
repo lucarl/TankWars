@@ -361,6 +361,7 @@ public class OptionsScreen implements Screen {
     public void dispose() {
 
         stage.dispose();
+        skin.dispose();
         //table.dispose();
     }
 }

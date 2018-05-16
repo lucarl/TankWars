@@ -32,7 +32,7 @@ public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
 
-    HealthBar hpBar;
+    private HealthBar hpBar;
 
     private Integer score;
     private String name;
@@ -42,13 +42,13 @@ public class Hud implements Disposable {
     private float fuel;
     private Integer wind;
 
-    Label scoreLabel;
-    Label nameLabel;
-    Label hpLabel;
-    Label angleLabel;
-    Label powerLabel;
-    Label fuelLabel;
-    Label windLabel;
+    private Label scoreLabel;
+    private Label nameLabel;
+    private Label hpLabel;
+    private Label angleLabel;
+    private Label powerLabel;
+    private Label fuelLabel;
+    private Label windLabel;
 
     public Hud(SpriteBatch batch, TankWars tankWars) {
         this.tankWars = tankWars;
