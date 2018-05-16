@@ -13,31 +13,27 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
+import com.mygdx.game.model.Difficulty;
+
+
 
 public class OptionsScreen implements Screen {
 
     //Constants for the next button
     private static final int NEXT_BUTTON_WIDTH = 20;
     private static final int NEXT_BUTTON_HEIGHT = 5;
-    private static final int ARROW_BUTTON_SIDE = 40;
 
-
-    private static final int NEXT_BUTTON_Y = 75;
-    private static final int NEXT_BUTTON_X = 400;
-
-
-    private static final int ARROW_BUTTON_X = 450;
+    //private static final int ARROW_BUTTON_SIDE = 40;
+   // private static final int NEXT_BUTTON_Y = 75;
+    //private static final int NEXT_BUTTON_X = 400;
+    //private static final int ARROW_BUTTON_X = 450;
 
     private Stage stage;
     private Viewport viewport;
     private Application app;
-
-    private Texture imgRight;
-    private Texture imgLeft;
 
 
     /*private ArrowButton arrowButtonRight1;
@@ -58,6 +54,10 @@ public class OptionsScreen implements Screen {
 
     private TextButton nextButton;
 
+    private TextField textFieldRounds;
+    private TextField textFieldPlayers;
+    private TextField textFieldDifficulty;
+
     private Label optionsLabel;
     private Label roundsLabel;
     private Label playersLabel;
@@ -67,12 +67,16 @@ public class OptionsScreen implements Screen {
     private TextureAtlas atlas;
 
     private Skin skin;
+    private Skin textFieldSkin;
     private Table table;
+
+    private int defaultRounds = 3;
+    private int defaultPlayers = 2;
+    private Difficulty defaultEasy = Difficulty.EASY;
 
 
     public OptionsScreen(Application app) {
         this.app = app;
-
     }
 
     @Override
@@ -82,6 +86,9 @@ public class OptionsScreen implements Screen {
 
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
+        textFieldSkin = new Skin(Gdx.files.internal("uiskin.json"));
+
+
         //skin = new Skin(Gdx.files.internal("uiskin.json"));
 
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
@@ -123,6 +130,80 @@ public class OptionsScreen implements Screen {
         difficultyLabel = new Label("Difficulty",
                 new Label.LabelStyle(font, Color.WHITE));
 
+        //textfields
+
+        //TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
+        //textFieldStyle.fontColor = Color.WHITE;
+        //textFieldStyle.font = textFieldSkin.getFont("myfont.fnt");
+
+        textFieldRounds = new TextField(Integer.toString(defaultRounds), textFieldSkin);
+        textFieldPlayers = new TextField(Integer.toString(defaultPlayers), textFieldSkin);
+        textFieldDifficulty = new TextField(defaultEasy.toString(), textFieldSkin);
+
+        textFieldRounds.setDisabled(true);
+        textFieldPlayers.setDisabled(true);
+        textFieldDifficulty.setDisabled(true);
+
+        arrowButtonLeft1.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                defaultRounds--;
+                textFieldRounds.setText(Integer.toString(defaultRounds));
+            }
+        });
+
+        arrowButtonRight1.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                    defaultRounds++;
+                    textFieldRounds.setText(Integer.toString(defaultRounds));
+            }
+        });
+
+        arrowButtonLeft2.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                defaultPlayers--;
+                textFieldPlayers.setText(Integer.toString(defaultPlayers));
+            }
+        });
+
+        arrowButtonRight2.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                defaultPlayers++;
+                textFieldPlayers.setText(Integer.toString(defaultPlayers));
+            }
+        });
+
+        arrowButtonLeft3.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+               for(int i = Difficulty.values().length - 1 ; i >= 0; i--) {
+                   textFieldDifficulty.setText(Difficulty.values()[i].toString());
+               }
+            }
+        });
+
+        arrowButtonRight3.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+               for(int i = 1; i <= Difficulty.values().length - 1; i++){
+                   textFieldDifficulty.setText(Difficulty.values()[i].toString());
+               }
+
+               /* for(Difficulty difficulty : Difficulty.values()){
+                    textFieldDifficulty.setText(difficulty.toString());
+                }
+                */
+            }
+        });
+
+
+
+
+        //table setup
+
         table = new Table(skin);
         table.setFillParent(true);
 
@@ -142,7 +223,8 @@ public class OptionsScreen implements Screen {
 
         table.row().height(75);
         table.add(arrowButtonLeft1).right().width(arrowButtonLeft1.getPrefWidth());
-        table.add().width(50);
+        //table.add().width(50);
+        table.add(textFieldRounds).width(optionsLabel.getPrefWidth()); //ska vara lika bred som label...
         table.add(arrowButtonRight1).left();
 
         table.row();
@@ -152,7 +234,8 @@ public class OptionsScreen implements Screen {
 
         table.row().height(75);
         table.add(arrowButtonLeft2).right();
-        table.add().width(50);
+        //table.add().width(50);
+        table.add(textFieldPlayers).width(optionsLabel.getPrefWidth()); //ska vara lika bred som label...
         table.add(arrowButtonRight2).left();
 
         table.row();
@@ -162,7 +245,8 @@ public class OptionsScreen implements Screen {
 
         table.row().height(75);
         table.add(arrowButtonLeft3).right();
-        table.add().width(50);
+        //table.add().width(50);
+        table.add(textFieldDifficulty).width(optionsLabel.getPrefWidth()); //ska vara lika bred som label...
         table.add(arrowButtonRight3).left();
 
         table.row().height(75);

@@ -23,7 +23,6 @@ public class TankWars {
     private int round;
     private int nRounds;
 
-
     public TankWars(int nPlayers, int nRounds, Difficulty difficulty) {
         //terrainTiles = new ArrayList<>();
         players = new ArrayList<>();
@@ -223,6 +222,10 @@ public class TankWars {
     public boolean isTurnOver() {
         return isTurnOver;
     }
+
+    public int getRound() { return round; }
+
+    public int getnRounds() { return nRounds; }
 
 
 }

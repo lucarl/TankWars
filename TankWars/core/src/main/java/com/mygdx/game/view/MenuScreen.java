@@ -53,6 +53,7 @@ public class MenuScreen implements Screen {
 
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
+        bigTextButtonStyle.fontColor = Color.WHITE;
         bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
         bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
 
@@ -87,8 +88,8 @@ public class MenuScreen implements Screen {
 
         //heading label setup
         heading = new Label("TANK WARS",
-                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
-        heading.setFontScale(2.8f);
+                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("menu.fnt")), Color.WHITE));
+        heading.setFontScale(1.4f);
 
         table = new Table(skin);
         table.setFillParent(true);
