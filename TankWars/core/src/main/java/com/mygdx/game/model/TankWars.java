@@ -1,6 +1,10 @@
 package com.mygdx.game.model;
 
 
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.utils.Timer;
+import com.mygdx.game.model.Assets;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +26,9 @@ public class TankWars {
 
     private int round;
     private int nRounds;
+
+    Sound soundShoot = Assets.manager.get("cannon.mp3", Sound.class);
+    Sound soundBoom = Assets.manager.get("boom.mp3", Sound.class);
 
 
     public TankWars(int nPlayers, int nRounds, Difficulty difficulty) {
@@ -134,6 +141,10 @@ public class TankWars {
     }
 
     //ändrar till protected för att testa metoden
+    /**
+     * Method for removing objects such as shots and tiles.
+     * When the shot is removed a sound is added.
+     */
     protected void removeObjects() {
         for (int i = 0; i < objects.size(); i++) {
             if (!objects.get(i).isAlive()) {
@@ -147,9 +158,22 @@ public class TankWars {
         }
         for (int i = 0; i < shots.size(); i++) {
             if (shots.get(i) != null && !shots.get(i).isAlive()) {
+
+                final long soundBoomID = soundBoom.loop(14.0f, 1.5f, 0.0f);
+
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        soundBoom.loop(soundBoomID);
+                        soundBoom.stop();
+                    }
+                }), 4);
+
                 shots.remove(i);
             }
+
         }
+
     }
 
     //ändrar till protected för att testa metoden
@@ -180,6 +204,16 @@ public class TankWars {
             Shot shot = currentPlayer.getTank().fire(wind.getWindSpeed());
             shots.add(shot);
         }
+
+        final long soundShootID = soundShoot.loop(0.3f, 1.0f, 0.0f);
+
+        Timer.schedule((new Timer.Task() {
+            @Override
+            public void run() {
+                soundShoot.loop(soundShootID);
+                soundShoot.stop();
+            }
+        }), 1);
 
         isTurnOver = true;
     }

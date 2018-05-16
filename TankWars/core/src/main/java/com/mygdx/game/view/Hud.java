@@ -1,11 +1,14 @@
 package com.mygdx.game.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -21,6 +24,7 @@ public class Hud implements Disposable {
     private TankWars tankWars;
     public Stage stage;
     private Viewport viewport;
+    private Application app;
 
     private HealthBar hpBar;
 
@@ -42,6 +46,7 @@ public class Hud implements Disposable {
     private Label powerLabel;
     private Label fuelLabel;
     private Label windLabel;
+    private Label menuLabel;
 
     public Hud(SpriteBatch batch, TankWars tankWars) {
         this.tankWars = tankWars;
@@ -71,6 +76,7 @@ public class Hud implements Disposable {
         fuelLabel = new Label(String.format("Fuel: %03f", fuel), new Label.LabelStyle(font, Color.WHITE));
         windLabel = new Label(String.format("Wind: %03d <--", wind), new Label.LabelStyle(font, Color.WHITE));
         shotLabel = new Label("Shot: " + shot, new Label.LabelStyle(font, Color.WHITE));
+        menuLabel = new Label("Return to Menu", new Label.LabelStyle(font,Color.RED));
 
         // Setup the table layout
         Table table = new Table();
@@ -91,6 +97,7 @@ public class Hud implements Disposable {
         table.add(fuelLabel);
         table.add(angleLabel);
         table.add(shotLabel);
+        table.add(menuLabel);
 
         // Align the labels
         nameLabel.setAlignment(Align.center);
@@ -101,6 +108,7 @@ public class Hud implements Disposable {
         fuelLabel.setAlignment(Align.center);
         angleLabel.setAlignment(Align.center);
         shotLabel.setAlignment(Align.center);
+        menuLabel.setAlignment(Align.center);
 
         //table.setDebug(true);
         stage.addActor(table);
@@ -126,6 +134,13 @@ public class Hud implements Disposable {
         shotLabel.setText(String.format("Shot:", shot));
 
         hpBar.setValue(hp / 100f);
+
+        menuLabel.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.exit();
+            }
+        });
 
         if (wind < 0) {
             windLabel.setText(String.format("Wind: %02d <--", Math.abs(wind)));

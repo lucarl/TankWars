@@ -2,6 +2,7 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
@@ -53,6 +54,19 @@ public class Assets {
     private static final AssetDescriptor<BitmapFont> tankWarsFont =
             new AssetDescriptor<>("myfont.fnt", BitmapFont.class);
 
+    // sounds
+
+    private static final AssetDescriptor<Sound> soundShoot =
+            new AssetDescriptor<Sound>("cannon.mp3", Sound.class);
+    private static final AssetDescriptor<Sound> soundMove =
+            new AssetDescriptor<Sound>("tanker.mp3", Sound.class);
+    private static final AssetDescriptor<Sound> soundBoom =
+            new AssetDescriptor<Sound>("boom.mp3", Sound.class);
+    private static final AssetDescriptor<Sound> soundAim =
+            new AssetDescriptor<Sound>("badaim.mp3", Sound.class);
+    private static final AssetDescriptor<Sound> soundTheme =
+            new AssetDescriptor<Sound>("TankWarsTheme.mp3", Sound.class);
+
 
 
     //skin
@@ -74,6 +88,11 @@ public class Assets {
         manager.load(splashImg);
         manager.load(hudFont);
         manager.load(tankWarsFont);
+        manager.load(soundAim);
+        manager.load(soundBoom);
+        manager.load(soundShoot);
+        manager.load(soundMove);
+        manager.load(soundTheme);
     }
 
     public static void disposeAssets(){
