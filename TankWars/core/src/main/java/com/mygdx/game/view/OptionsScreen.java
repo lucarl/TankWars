@@ -23,9 +23,9 @@ import com.mygdx.game.model.Difficulty;
 
 public class OptionsScreen implements Screen {
 
-    private static int NUMBER_OF_PLAYERS = 2;
-    private static int NUMBER_OF_ROUNDS = 3;
-    private static Difficulty DIFFICULTY = Difficulty.EASY;
+    static int NUMBER_OF_PLAYERS = 2;
+    static int NUMBER_OF_ROUNDS = 3;
+    static Difficulty DIFFICULTY = Difficulty.EASY;
 
     //Constants for the next button
     private static final int NEXT_BUTTON_WIDTH = 20;

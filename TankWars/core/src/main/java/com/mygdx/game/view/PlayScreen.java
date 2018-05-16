@@ -23,8 +23,8 @@ public class PlayScreen implements Screen {
 
     public PlayScreen(Application app) {
         this.app = app;
-        // TODO tankWars parametrar borde finnas i en setup fil
-        tankWars = new TankWars(4, 3, Difficulty.EASY);
+        // TODO tankWars parametrar borde finnas i en setup fil?
+        tankWars = new TankWars(OptionsScreen.NUMBER_OF_PLAYERS, OptionsScreen.NUMBER_OF_ROUNDS, OptionsScreen.DIFFICULTY);
         controller = new PlayController(tankWars);
         renderer = new Renderer(app.batch);
         hud = new Hud(app.batch, tankWars);

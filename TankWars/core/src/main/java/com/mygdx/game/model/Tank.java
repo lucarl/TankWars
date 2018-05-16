@@ -57,13 +57,16 @@ public class Tank implements IDrawable {
         float maxAngle = 45;
         boolean canMoveThere = newAngle <= maxAngle;
 
-        if (pos.getY() > currentGroundHeight) pos.setY(currentGroundHeight);
+        if (pos.getY() > currentGroundHeight) {
+            pos.setY(currentGroundHeight);
+        }
 
         if (canMoveThere && isVisible && fuel > 0 && newPos > 0 && newPos + width < Application.GAME_WIDTH) {
             if (rightMove) {
                 pos.setX(newPos);
                 // Set tank yPos = groundYPos
                 pos.setY(newGroundHeight);
+
                 angle = angle < newAngle ? Math.min(angle+roatationSpeed, newAngle) : Math.max(angle-roatationSpeed, newAngle);
 
                 rect.move(newPos, newGroundHeight);
@@ -75,8 +78,6 @@ public class Tank implements IDrawable {
                 pos.setY(newGroundHeight);
 
                 angle = angle < -newAngle ? Math.min(angle+roatationSpeed, -newAngle) : Math.max(angle-roatationSpeed, -newAngle);
-                
-
 
                 rect.move(newPos, newGroundHeight);
 
