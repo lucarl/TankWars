@@ -44,33 +44,39 @@ public class Tank implements IDrawable {
     public Shot fire(int windSpeed) {
         shot = gun.fire(windSpeed);
         return shot;
-        }
+    }
 
     public Position moveTank(float delta, Terrain terrain) {
         // Get grounds yPos
         float currentGroundHeight = terrain.getHeightOfCol((int) (pos.getX() + width / 2) / terrain.getTileSize());
-        float newPos = rightMove ? pos.getX() + speed * delta : pos.getX() - speed * delta;
-        float newGroundHeight = terrain.getHeightOfCol((int) (newPos + width / 2) / terrain.getTileSize());
-        float maxHeightDifference = terrain.getTileSize() * 4f;
-        boolean canMoveThere = newGroundHeight - currentGroundHeight < maxHeightDifference;
+        float newPos = rightMove ? pos.getX() + speed * delta : pos.getX()- speed * delta;
+        float newGroundHeight = terrain.getHeightOfCol((int) (newPos + width/2) / terrain.getTileSize());
+        //float maxHeightDifference = terrain.getTileSize() * 4f;
+        float newAngle = 5 * (newGroundHeight - currentGroundHeight) * terrain.getTileSize();
+        float maxAngle = 45;
+        boolean canMoveThere = newAngle <= maxAngle;
 
         if (pos.getY() > currentGroundHeight) pos.setY(currentGroundHeight);
 
-        if (canMoveThere && isVisible && fuel > 0 && pos.getX() > 0 && pos.getX() + width < Application.GAME_WIDTH) {
+        if (canMoveThere && isVisible && fuel > 0 && newPos > 0 && newPos + width < Application.GAME_WIDTH) {
             if (rightMove) {
-                pos.setX(pos.getX() + speed * delta);
-
+                pos.setX(newPos);
                 // Set tank yPos = groundYPos
                 pos.setY(newGroundHeight);
-                rect.move(pos.getX(), newGroundHeight);
+                angle = newAngle;
+
+                rect.move(newPos, newGroundHeight);
 
                 decreaseFuel();
             } else if (leftMove) {
-                pos.setX(pos.getX() - speed * delta);
-
+                pos.setX(newPos);
                 // Set tank yPos = groundYPos
                 pos.setY(newGroundHeight);
-                rect.move(pos.getX(), newGroundHeight);
+
+                angle = -newAngle;
+
+
+                rect.move(newPos, newGroundHeight);
 
                 decreaseFuel();
             }
@@ -150,12 +156,12 @@ public class Tank implements IDrawable {
 
     @Override
     public int getOriginX() {
-        return 0;
+        return originX;
     }
 
     @Override
     public int getOriginY() {
-        return 0;
+        return originY;
     }
 
     @Override

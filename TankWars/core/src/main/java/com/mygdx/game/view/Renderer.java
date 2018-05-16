@@ -21,10 +21,9 @@ public class Renderer {
     public void render(List<IDrawable> objects) {
         // For each object update it's corresponding sprite with the objects state
         sprites.forEach((obj, sprite) -> {
-            sprite.setRotation(obj.getAngle());
-            sprite.setPosition(obj.getPos().getX(), obj.getPos().getY());
-
             if (obj.isAlive()) {
+                sprite.setRotation(obj.getAngle());
+                sprite.setPosition(obj.getPos().getX(), obj.getPos().getY());
                 sprite.draw(batch);
             }
         });

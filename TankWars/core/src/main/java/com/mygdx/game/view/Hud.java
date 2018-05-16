@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
 import com.mygdx.game.model.Assets;
+import com.mygdx.game.model.ShotFactory;
 import com.mygdx.game.model.TankWars;
 
 // Heads up display, is used for showing information about the game during gameplay.
