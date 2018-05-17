@@ -17,7 +17,7 @@ public class TestTankGun {
     //A test for the fire() method in TankGun
     //Checks if the fire method creates a shot of type AngryShot
     @Test
-    public void testFireAngryShot() {
+    /*public void testFireAngryShot() {
         //Set to true in order to test if fire returns AngryShot
         tankGun.setSpecialShot(true);
         //The shot created by the method
@@ -47,9 +47,9 @@ public class TestTankGun {
                 actualShot.getPos().getY() > 0);
         //correct windspeed?
         assertTrue(testWindSpeed == actualShot.getWindSpeed());
-    }
+    }*/
 
-    @Test
+    //@Test
     public void testAimTankRight(){
         float startAngle = tankGun.getAngle(); // 0
         //setRightAim to true and call aim method
@@ -101,12 +101,12 @@ public class TestTankGun {
         assertFalse(tankGun.isLeftAim());
     }
 
-    @Test
+    /*@Test
     public void testChangeWeapon(){
         boolean cuurentSpecialShot = tankGun.hasSpecialShot();
         tankGun.changeNuke();
         assertTrue(!cuurentSpecialShot);
 
-    }
+    }*/
 
 }

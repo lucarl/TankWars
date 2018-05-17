@@ -12,7 +12,7 @@ public class ShotFactory {
         if (changeWeapon == 1) {
             return new StandardShot (position, angle, power, windSpeed);
         }
-        if (changeWeapon == 2) {
+        else if (changeWeapon == 2) {
             return new NukeShot (position, angle, power, windSpeed);
         }
         else return new StandardShot (position, angle, power, windSpeed);

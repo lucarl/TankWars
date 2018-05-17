@@ -30,7 +30,6 @@ public class TankGun implements IDrawable {
     public TankGun(Position pos) {
         this.pos = pos;
         angle = 0;
-
         power = 0.5f;
         //shot = new Shot(new Position(-100, -100), angle, 0, 0);
         isVisible = true;
@@ -135,7 +134,7 @@ public class TankGun implements IDrawable {
     public void changeStandard() {
         standard = true;
     }
-
+    /*
     public boolean hasSpecialShot() {
         return nuke;
     }
@@ -143,7 +142,7 @@ public class TankGun implements IDrawable {
     public void setSpecialShot(boolean special) {
         this.nuke = special;
     }
-
+    */
     public float getPower() {
         return power;
     }
