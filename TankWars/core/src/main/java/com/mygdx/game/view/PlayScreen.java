@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -25,6 +26,7 @@ public class PlayScreen implements Screen {
     private Hud hud;
     private Renderer renderer;
     private Skin skin;
+    private Stage stage;
     private TextButton menuButton;
 
     public PlayScreen(Application app) {
@@ -35,6 +37,7 @@ public class PlayScreen implements Screen {
         renderer = new Renderer(app.batch);
         hud = new Hud(app.batch, tankWars);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
+        stage = new Stage();
 
         Texture texture = Assets.manager.get("background.jpg");
         background = new Sprite(texture);
@@ -44,8 +47,8 @@ public class PlayScreen implements Screen {
         renderer.loadResources(tankWars.getTiles());
         renderer.loadResources(tankWars.getObjects());
         background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
-        Gdx.input.setInputProcessor(controller);
-
+        InputMultiplexer im = new InputMultiplexer(stage, controller);
+        Gdx.input.setInputProcessor(im);
 
         //return to menu button
         menuButton = new TextButton("Return to Menu",skin);
@@ -57,8 +60,11 @@ public class PlayScreen implements Screen {
             }
         });
 
-        hud.stage.addActor(menuButton);
+        stage.addActor(menuButton);
+
     }
+
+
 
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 1, 1);
@@ -78,6 +84,9 @@ public class PlayScreen implements Screen {
 
         hud.update();
         hud.stage.draw();
+        stage.draw();
+        stage.act();
+
         hud.stage.act();
     }
 
@@ -105,6 +114,7 @@ public class PlayScreen implements Screen {
     public void dispose() {
 
         hud.dispose();
+        stage.dispose();
 
     }
 }

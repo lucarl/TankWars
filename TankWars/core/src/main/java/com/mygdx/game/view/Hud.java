@@ -143,7 +143,6 @@ public class Hud implements Disposable {
             windLabel.setText(String.format("Wind: %02d -->", wind));
         }
 
-        Gdx.input.setInputProcessor(stage);
     }
 
 
