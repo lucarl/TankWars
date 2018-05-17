@@ -1,5 +1,9 @@
 package com.mygdx.game.model;
 
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.utils.Timer;
+import com.mygdx.game.model.Assets;
+
 public class TankGun implements IDrawable {
     private static String imgSrc = "tankGun.png";
     private static int width = 5;
@@ -20,6 +24,8 @@ public class TankGun implements IDrawable {
     private ShotFactory shotFactory;
     private int changeWeapon;
     private Shot shot;
+
+    Sound soundAim = Assets.manager.get("badaim.mp3", Sound.class);
 
     public TankGun(Position pos) {
         this.pos = pos;
@@ -76,6 +82,17 @@ public class TankGun implements IDrawable {
     }
 
     public void setLeftAim(boolean b) {
+
+        final long soundAimID = soundAim.loop(0.3f,1.0f,0.0f);
+
+        Timer.schedule((new Timer.Task() {
+            @Override
+            public void run() {
+                soundAim.loop(soundAimID);
+                soundAim.stop();
+            }
+        }),1);
+
         if (rightAim && b) {
             rightAim = false;
         }
@@ -84,12 +101,32 @@ public class TankGun implements IDrawable {
 
 
     public void setRightAim(boolean b) {
+
+        final long soundAimID = soundAim.loop(0.3f,1.0f,0.0f);
+
+        Timer.schedule((new Timer.Task() {
+            @Override
+            public void run() {
+                soundAim.loop(soundAimID);
+                soundAim.stop();
+            }
+        }),1);
+
         if (leftAim && b) {
             leftAim = false;
         }
         rightAim = b;
 
     }
+
+   /* public void setSoundAim(boolean m, boolean n){
+
+        soundAim.pause();
+        rightAim=m;
+        leftAim=n;
+
+    }
+    */
 
     public void changeNuke() {
         nuke = true;

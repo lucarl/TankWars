@@ -1,7 +1,11 @@
 package com.mygdx.game.model;
 
 
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.Application;
+import com.mygdx.game.model.Assets;
 
 public class Tank implements IDrawable {
     private static String tankImgSrc = "tank1.png";
@@ -25,6 +29,8 @@ public class Tank implements IDrawable {
     private boolean leftMove;
 
     private CollisionRect rect;
+
+    Sound soundMove = Assets.manager.get("tanker.mp3", Sound.class);
 
     public Tank(float x, float y) {
         this.pos = new Position(x + width / 2, y);
@@ -57,13 +63,16 @@ public class Tank implements IDrawable {
         float maxAngle = 45;
         boolean canMoveThere = newAngle <= maxAngle;
 
-        if (pos.getY() > currentGroundHeight) pos.setY(currentGroundHeight);
+        if (pos.getY() > currentGroundHeight) {
+            pos.setY(currentGroundHeight);
+        }
 
         if (canMoveThere && isVisible && fuel > 0 && newPos > 0 && newPos + width < Application.GAME_WIDTH) {
             if (rightMove) {
                 pos.setX(newPos);
                 // Set tank yPos = groundYPos
                 pos.setY(newGroundHeight);
+
                 angle = angle < newAngle ? Math.min(angle+roatationSpeed, newAngle) : Math.max(angle-roatationSpeed, newAngle);
 
                 rect.move(newPos, newGroundHeight);
@@ -75,8 +84,6 @@ public class Tank implements IDrawable {
                 pos.setY(newGroundHeight);
 
                 angle = angle < -newAngle ? Math.min(angle+roatationSpeed, -newAngle) : Math.max(angle-roatationSpeed, -newAngle);
-                
-
 
                 rect.move(newPos, newGroundHeight);
 
@@ -88,19 +95,95 @@ public class Tank implements IDrawable {
         return pos;
     }
 
+
+    /**
+     * If the tanks go left then they will move and make a sound.
+     * @param b boolean variable
+     */
     public void setLeftMove(boolean b) {
+
+        final long soundMoveID = soundMove.loop(0.3f, 1.0f, 0.0f);
+
+        Timer.schedule((new Timer.Task() {
+            @Override
+            public void run() {
+                soundMove.loop(soundMoveID);
+                soundMove.stop();
+            }
+        }), 1);
+
         if (rightMove && b) {
+
             rightMove = false;
         }
         leftMove = b;
+
     }
 
+   /* public void setSoundMoveLeft(boolean b) {
+
+        final long soundMoveID = soundMove.loop(0.3f, 1.0f, 0.0f);
+
+        Timer.schedule((new Timer.Task() {
+            @Override
+            public void run() {
+                soundMove.stop(soundMoveID);
+            }
+        }), 1);
+
+        if (rightMove && b) {
+
+            rightMove = false;
+        }
+        leftMove = b;
+
+    }
+    */
+
+    /**
+     * If the tanks go right then they will move and make a sound.
+     * @param b boolean variable
+     */
     public void setRightMove(boolean b) {
+
+        final long soundMoveID = soundMove.loop(0.3f, 1.0f, 0.0f);
+
+        Timer.schedule((new Timer.Task() {
+            @Override
+            public void run() {
+                soundMove.loop(soundMoveID);
+                soundMove.stop();
+            }
+        }), 1);
+
+
         if (leftMove && b) {
+
             leftMove = false;
         }
         rightMove = b;
+
     }
+
+   /* public void setSoundMoveRight(boolean b) {
+
+        final long soundMoveID = soundMove.loop(0.3f, 1.0f, 0.0f);
+
+        Timer.schedule((new Timer.Task() {
+            @Override
+            public void run() {
+                soundMove.stop(soundMoveID);
+            }
+        }), 1);
+
+        if (leftMove && b) {
+
+            leftMove = false;
+        }
+        rightMove = b;
+
+    }
+    */
 
     //sätter till public för att göra ett test!!!
     public double decreaseFuel() {
@@ -191,4 +274,9 @@ public class Tank implements IDrawable {
         this.pos = pos;
         gun.setPos(new Position(pos.getX() + width / 2, pos.getY()));
     }
+
+    public void dispose() {
+        soundMove.dispose();
+    }
+
 }
