@@ -1,4 +1,4 @@
-package com.mygdx.game.view;
+package com.mygdx.game.utils;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -7,20 +7,17 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class HealthBar extends ProgressBar {
+public class PowerBar extends ProgressBar {
 
     private int width;
     private int height;
 
-    public HealthBar(int width, int height) {
+    public PowerBar(int width, int height) {
         super(0f, 1f, 0.01f, false, new ProgressBarStyle());
         this.width = width;
         this.height = height;
 
         setupHpBar();
-
-        //setWidth(width);
-        //setHeight(height);
 
         setAnimateDuration(0.0f);
         setValue(1f);
@@ -32,7 +29,7 @@ public class HealthBar extends ProgressBar {
 
         // Setup the red part of the hp bar
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.RED);
+        pixmap.setColor(Color.BLACK);
         pixmap.fill();
         TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
         pixmap.dispose();
@@ -42,7 +39,7 @@ public class HealthBar extends ProgressBar {
 
         // Setup the green part of the hp bar
         pixmap = new Pixmap(0, height, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.GREEN);
+        pixmap.setColor(Color.RED);
         pixmap.fill();
         drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
         pixmap.dispose();
@@ -52,7 +49,7 @@ public class HealthBar extends ProgressBar {
 
         // Setup the green part of the hp bar
         pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.GREEN);
+        pixmap.setColor(Color.RED);
         pixmap.fill();
         drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
         pixmap.dispose();
@@ -62,3 +59,4 @@ public class HealthBar extends ProgressBar {
 
     }
 }
+

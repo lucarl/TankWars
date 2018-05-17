@@ -1,4 +1,6 @@
-package com.mygdx.game.model;
+package com.mygdx.game.model.factorys;
+
+import com.mygdx.game.model.*;
 
 import java.util.List;
 /**

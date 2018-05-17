@@ -18,21 +18,8 @@ public class TestShot {
      *
      */
     @Test
-    public void testUpdate() {
         Shot shot = new StandardShot(new Position(Application.GAME_WIDTH +1,10), 90, 0.1f, 50);
         shot.update(System.nanoTime());
         assertTrue(!shot.isAlive());
-    }
-
-    @Test
-    public void testName() {
-        String name;
-        String name1;
-        Shot shot = new StandardShot(new Position(Application.GAME_WIDTH +1,10), 90, 0.1f, 50);
-        Shot shot1 = new NukeShot(new Position(Application.GAME_WIDTH +1,10), 90, 0.1f, 50);
-        name = shot.getName();
-        System.out.println(name);
-        name1 = shot1.getName();
-        System.out.println(name1);
     }
 }

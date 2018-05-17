@@ -2,10 +2,9 @@ package com.mygdx.game.model;
 
 
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.Application;
-import com.mygdx.game.model.Assets;
+import com.mygdx.game.services.Assets;
 
 public class Tank implements IDrawable {
     private static String tankImgSrc = "tank1.png";

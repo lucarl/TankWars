@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Application;
-import com.mygdx.game.model.Assets;
+import com.mygdx.game.services.Assets;
 
 public class LoadingScreen implements Screen {
 

@@ -1,5 +1,6 @@
 package com.mygdx.game.model;
 
+
 public class CollisionRect {
     private float x, y;
     private int width, height;
