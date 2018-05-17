@@ -17,7 +17,7 @@ public class FuelBar extends ProgressBar {
         this.width = width;
         this.height = height;
 
-        setupHpBar();
+        setupBar();
 
         setAnimateDuration(0.0f);
         setValue(1f);
@@ -25,7 +25,7 @@ public class FuelBar extends ProgressBar {
         setAnimateDuration(0.25f);
     }
 
-    private void setupHpBar() {
+    private void setupBar() {
 
         // Setup the red part of the hp bar
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);

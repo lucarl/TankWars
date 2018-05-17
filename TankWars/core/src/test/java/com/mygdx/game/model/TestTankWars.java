@@ -1,5 +1,6 @@
 package com.mygdx.game.model;
 
+import com.mygdx.game.services.Assets;
 import org.junit.Before;
 import org.junit.Test;
 

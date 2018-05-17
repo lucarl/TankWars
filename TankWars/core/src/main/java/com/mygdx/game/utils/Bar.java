@@ -7,17 +7,19 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class HealthBar extends ProgressBar {
+public class Bar extends ProgressBar {
 
     private int width;
     private int height;
+    private Color color;
 
-    public HealthBar(int width, int height) {
+    public Bar(int width, int height, Color color) {
         super(0f, 1f, 0.01f, false, new ProgressBarStyle());
         this.width = width;
         this.height = height;
+        this.color = color;
 
-        setupHpBar();
+        setupBar();
 
         setAnimateDuration(0.0f);
         setValue(1f);
@@ -25,31 +27,31 @@ public class HealthBar extends ProgressBar {
         setAnimateDuration(0.25f);
     }
 
-    private void setupHpBar() {
+    private void setupBar() {
 
-        // Setup the red part of the hp bar
-        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.RED);
-        pixmap.fill();
-        TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
-        pixmap.dispose();
+        // Setup the background part of the hp bar
+        //Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        //pixmap.setColor(color);
+        //pixmap.fill();
+        //TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        //pixmap.dispose();
 
         // Setup the style
-        getStyle().background = drawable;
+        //getStyle().background = drawable;
 
-        // Setup the green part of the hp bar
-        pixmap = new Pixmap(0, height, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.GREEN);
+        // Setup the vertical part of the hp bar
+        Pixmap pixmap = new Pixmap(0, height, Pixmap.Format.RGBA8888);
+        pixmap.setColor(color);
         pixmap.fill();
-        drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
         pixmap.dispose();
 
         // Knob controlls the width of the green region
         getStyle().knob = drawable;
 
-        // Setup the green part of the hp bar
+        // Setup the horizontal part of the hp bar
         pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.GREEN);
+        pixmap.setColor(color);
         pixmap.fill();
         drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
         pixmap.dispose();

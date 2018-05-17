@@ -90,9 +90,9 @@ public class TankWars {
                     for (int row = shotStartRow, y = 0; row < shotEndRow; row++, y++) {
                         int xx = y - midpoint;
                         if (terrainMatrix[row][col] != null && terrainMatrix[row][col].isAlive()) {
-                        //    if (Math.sqrt(xx*xx + yy*yy) <= midpoint) {
+                            if (Math.sqrt(xx*xx + yy*yy) <= midpoint) {
                                 terrainMatrix[row][col].setAlive(false);
-                        //    }
+                            }
                         }
                     }
                 }
@@ -109,7 +109,7 @@ public class TankWars {
                     currentPlayer.addScore();
                     tank.decreaseHealth(shot.getDamage());
                     // Shot collided so we set it to dead so it gets removed later
-                    //shot.setAlive(false);
+                    shot.setAlive(false);
                     if (tank.getHealthPoints() <= 0) {
                         tank.setAlive(false);
                         tank.getGun().setAlive(false);

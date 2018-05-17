@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Application;
@@ -105,28 +106,27 @@ public class MenuScreen implements Screen {
 
         //heading label setup
         heading = new Label("TANK WARS",
-                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("menu.fnt")), Color.WHITE));
+                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
         heading.setFontScale(1.4f);
 
         table = new Table(skin);
         table.setFillParent(true);
         table.top();
-        table.padTop(100);
+        table.padTop(25);
 
         //button setup in table
-        table.add().width(500).height(90);
-        table.row();
+        table.row().width(500);
         table.add(heading);
-        table.row();
+        table.row().padTop(50);
         table.add(startButton);
-        table.add().height(50);
         table.row().pad(20);
         table.add(optionsButton);
-        table.add().height(50);
         table.row();
         table.add(exitButton);
 
-        table.setDebug(true);
+        heading.setAlignment(Align.center);
+
+        //table.setDebug(true);
 
         stage.addActor(table);
 

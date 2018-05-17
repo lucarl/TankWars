@@ -1,17 +1,12 @@
 package com.mygdx.game.utils;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -27,9 +22,9 @@ public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
 
-    private HealthBar hpBar;
-    private FuelBar fuelBar;
-    private PowerBar powerBar;
+    private Bar hpBar;
+    private Bar fuelBar;
+    private Bar powerBar;
 
     private Integer score;
     private String name;
@@ -56,9 +51,9 @@ public class Hud implements Disposable {
         viewport = new FitViewport(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         stage = new Stage(viewport, batch);
 
-        hpBar = new HealthBar(100, 20);
-        fuelBar = new FuelBar(100, 20);
-        powerBar = new PowerBar(100, 20);
+        hpBar = new Bar(100, 20, Color.GREEN);
+        fuelBar = new Bar(100, 20, Color.RED);
+        powerBar = new Bar(100, 20, Color.RED);
 
         score = tankWars.getPlayer().getScore();
         name = tankWars.getPlayer().getName();
@@ -115,6 +110,7 @@ public class Hud implements Disposable {
 
         table.add(scoreLabel);
         table.add(angleLabel);
+        table.add(windLabel);
         table.add(shotLabel);
         //table.add(menuButton).width(fuelLabel.getPrefWidth());
 

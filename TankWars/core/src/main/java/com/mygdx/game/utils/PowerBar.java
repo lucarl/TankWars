@@ -17,7 +17,7 @@ public class PowerBar extends ProgressBar {
         this.width = width;
         this.height = height;
 
-        setupHpBar();
+        setupBar();
 
         setAnimateDuration(0.0f);
         setValue(1f);
@@ -25,11 +25,11 @@ public class PowerBar extends ProgressBar {
         setAnimateDuration(0.25f);
     }
 
-    private void setupHpBar() {
+    private void setupBar() {
 
         // Setup the red part of the hp bar
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.BLACK);
+        pixmap.setColor(Color.alpha(0));
         pixmap.fill();
         TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
         pixmap.dispose();
