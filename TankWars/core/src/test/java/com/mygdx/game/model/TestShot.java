@@ -18,7 +18,6 @@ public class TestShot {
      *
      */
     @Test
-    public void testUpdate(){
         Shot shot = new StandardShot(new Position(Application.GAME_WIDTH +1,10), 90, 0.1f, 50);
         shot.update(System.nanoTime());
         assertTrue(!shot.isAlive());

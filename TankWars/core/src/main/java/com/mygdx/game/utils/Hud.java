@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+=======
+>>>>>>> 1d1b801db7f92a7373f4699eee1100f3ee7b66f5:TankWars/core/src/main/java/com/mygdx/game/view/Hud.java
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
@@ -79,7 +81,6 @@ public class Hud implements Disposable {
         fuelLabel = new Label(String.format("Fuel: %03f", fuel), new Label.LabelStyle(font, Color.WHITE));
         windLabel = new Label(String.format("Wind: %03d <--", wind), new Label.LabelStyle(font, Color.WHITE));
         shotLabel = new Label("Shot: " + shot, new Label.LabelStyle(font, Color.WHITE));
-        menuLabel = new Label("Return to Menu", new Label.LabelStyle(font,Color.RED));
 
         // Setup the table layout
         Table table = new Table();
@@ -115,7 +116,6 @@ public class Hud implements Disposable {
         table.add(scoreLabel);
         table.add(angleLabel);
         table.add(shotLabel);
-        table.add(menuLabel);
 
         // Align the labels
         nameLabel.setAlignment(Align.center);
@@ -126,7 +126,6 @@ public class Hud implements Disposable {
         fuelLabel.setAlignment(Align.center);
         angleLabel.setAlignment(Align.center);
         shotLabel.setAlignment(Align.center);
-        menuLabel.setAlignment(Align.center);
 
         //table.setDebug(true);
         stage.addActor(table);
@@ -154,13 +153,6 @@ public class Hud implements Disposable {
         hpBar.setValue(hp / 100f);
         fuelBar.setValue(fuel / 100f);
         powerBar.setValue(power / 100f);
-
-        menuLabel.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
-            }
-        });
 
         if (wind < 0) {
             windLabel.setText(String.format("Wind: %02d <--", Math.abs(wind)));

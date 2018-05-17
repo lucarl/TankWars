@@ -4,6 +4,9 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+<<<<<<< HEAD
+=======
+>>>>>>> 1d1b801db7f92a7373f4699eee1100f3ee7b66f5
 import com.mygdx.game.Application;
 
 import com.mygdx.game.ctrl.PlayController;
