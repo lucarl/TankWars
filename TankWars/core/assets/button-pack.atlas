@@ -6,10 +6,10 @@ filter: Nearest,Nearest
 repeat: none
 bigButton.down
   rotate: false
-  xy: 2, 66
+  xy: 2, 2
   size: 198, 62
   split: 0, 1, 1, 1
-  pad: -1, -1, 0, 61
+  pad: -1, -1, 0, 0
   orig: 198, 62
   offset: 0, 0
   index: -1
@@ -31,10 +31,10 @@ smallButton.down
   index: -1
 smallButton.up
   rotate: false
-  xy: 282, 56
+  xy: 202, 56
   size: 78, 72
   split: 0, 0, 1, 0
-  pad: 0, 77, -1, -1
+  pad: 0, 0, -1, -1
   orig: 78, 72
   offset: 0, 0
   index: -1
