@@ -10,6 +10,7 @@ public class TankGun implements IDrawable {
 
     private Position pos;
     private float angle;
+
     private float power;
     private boolean nuke;
     private boolean standard;
@@ -18,12 +19,12 @@ public class TankGun implements IDrawable {
     private boolean leftAim;
     private ShotFactory shotFactory;
     private int changeWeapon;
-
-    //private Shot shot;
+    private Shot shot;
 
     public TankGun(Position pos) {
         this.pos = pos;
         angle = 0;
+
         power = 0.5f;
         //shot = new Shot(new Position(-100, -100), angle, 0, 0);
         isVisible = true;
@@ -33,8 +34,8 @@ public class TankGun implements IDrawable {
 
     // fires a new shot at the end of the gun
     public Shot fire(int windSpeed) {
+        shot = null;
         shotFactory = new ShotFactory();
-        Shot shot = null;
         if (standard) {
             changeWeapon = 1;
             shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
@@ -65,11 +66,11 @@ public class TankGun implements IDrawable {
 
     public float aimTank(float delta) {
         if (rightAim) {
-            this.angle = angle < 110 ? angle + speed * delta : 110;
+            angle = angle < 110 ? angle + speed * delta : 110;
         }
 
         if (leftAim) {
-            this.angle = angle > -110 ? angle - speed * delta : -110;
+            angle = angle > -110 ? angle - speed * delta : -110;
         }
         return angle;
     }
@@ -81,11 +82,13 @@ public class TankGun implements IDrawable {
         leftAim = b;
     }
 
+
     public void setRightAim(boolean b) {
         if (leftAim && b) {
             leftAim = false;
         }
         rightAim = b;
+
     }
 
     public void changeNuke() {
@@ -100,18 +103,24 @@ public class TankGun implements IDrawable {
         return nuke;
     }
 
-    public void setSpecialShot(boolean special){this.nuke = special;}
+    public void setSpecialShot(boolean special) {
+        this.nuke = special;
+    }
 
     public float getPower() {
         return power;
     }
 
-    //public Shot getShot() {
-    //    return shot;
-    //}
+    public Shot getShot() {
+        return shot;
+    }
+
+    public void setAngle(float angle) {
+        this.angle = angle;
+    }
 
     public void setPos(Position pos) {
-        this.pos = new Position(pos.getX() + width/2, pos.getY() + height);
+        this.pos = new Position(pos.getX() + width / 2, pos.getY() + height);
     }
 
     @Override
@@ -136,7 +145,7 @@ public class TankGun implements IDrawable {
 
     @Override
     public float getAngle() {
-        return this.angle;
+        return angle;
     }
 
     @Override
@@ -149,6 +158,10 @@ public class TankGun implements IDrawable {
         return originY;
     }
 
+    public int getChangeWeapon() {
+        return changeWeapon;
+    }
+
     @Override
     public boolean isAlive() {
         return isVisible;
@@ -158,7 +171,11 @@ public class TankGun implements IDrawable {
         isVisible = bool;
     }
 
-    public boolean isRightAim() { return rightAim; }
+    public boolean isRightAim() {
+        return rightAim;
+    }
 
-    public boolean isLeftAim() { return leftAim; }
+    public boolean isLeftAim() {
+        return leftAim;
+    }
 }

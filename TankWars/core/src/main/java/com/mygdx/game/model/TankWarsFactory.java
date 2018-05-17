@@ -12,19 +12,28 @@ public class TankWarsFactory {
 
     public void setupObjects(int nPlayers, List<Player> players, List<IDrawable> objects, Terrain terrain) {
 
-        int xPos = 100;
+        int xPos1 = 5;
+        int xPos2 = 900;
+        Tank tank;
         for (int i = 0; i < nPlayers; i++) {
             // Just nu sätts tanksen en bit ovanför marken å faller ner på marken,
             // Vill få dom att spawna på marken
-            Tank tank = new Tank(xPos,0);
+            //Place tanks evenly on map
+            if(i%2 == 0) {
+                tank = new Tank(xPos1,0);
+                xPos1 += 200;
+            } else {
+                tank = new Tank(xPos2,0);
+                xPos2 -= 200;
+            }
+            Upgrade upgrade = new Upgrade(10, 1000);
             int yPos = terrain.getHeightOfCol((int) tank.getPos().getX() / terrain.getTileSize() + tank.getHeight()/2);
             tank.setPos(new Position(tank.getPos().getX(), yPos));
             players.add(new Player(tank));
-            //objects.add(new Upgrade(500, 500));
+            objects.add(new Upgrade(upgrade.getPos().getX(), upgrade.getPos().getY()));
             //objects.add(players.get(i).getTank().getGun().getShot());
             objects.add(players.get(i).getTank().getGun());
             objects.add(players.get(i).getTank());
-            xPos += 150;
         }
     }
 

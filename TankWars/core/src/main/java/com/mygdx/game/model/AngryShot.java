@@ -10,6 +10,7 @@ public class AngryShot extends Shot {
 
     private float[] vector = getVector();
 
+
     public AngryShot(Position pos, float angle, float power, int windSpeed) {
         setPos(pos);
         setAngle(angle);

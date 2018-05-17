@@ -2,6 +2,7 @@ package com.mygdx.game.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -13,27 +14,37 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
+import com.mygdx.game.model.Assets;
 import com.mygdx.game.model.Difficulty;
 
-
-
 public class OptionsScreen implements Screen {
+
+    private static int NUMBER_OF_PLAYERS = 2;
+    private static int NUMBER_OF_ROUNDS = 3;
+    private static Difficulty DIFFICULTY = Difficulty.EASY;
 
     //Constants for the next button
     private static final int NEXT_BUTTON_WIDTH = 20;
     private static final int NEXT_BUTTON_HEIGHT = 5;
+    private static final int ARROW_BUTTON_SIDE = 40;
 
-    //private static final int ARROW_BUTTON_SIDE = 40;
-   // private static final int NEXT_BUTTON_Y = 75;
-    //private static final int NEXT_BUTTON_X = 400;
-    //private static final int ARROW_BUTTON_X = 450;
+
+    private static final int NEXT_BUTTON_Y = 75;
+    private static final int NEXT_BUTTON_X = 400;
+
+
+    private static final int ARROW_BUTTON_X = 450;
 
     private Stage stage;
     private Viewport viewport;
     private Application app;
+
+    private Texture imgRight;
+    private Texture imgLeft;
 
 
     /*private ArrowButton arrowButtonRight1;
@@ -54,29 +65,24 @@ public class OptionsScreen implements Screen {
 
     private TextButton nextButton;
 
-    private TextField textFieldRounds;
-    private TextField textFieldPlayers;
-    private TextField textFieldDifficulty;
-
     private Label optionsLabel;
     private Label roundsLabel;
     private Label playersLabel;
     private Label difficultyLabel;
+    private Label nRoundsLabel;
+    private Label nPlayersLabel;
+    private Label nDiffLabel; // TODO kom på bättre namn
 
     private BitmapFont font;
     private TextureAtlas atlas;
 
     private Skin skin;
-    private Skin textFieldSkin;
     private Table table;
-
-    private int defaultRounds = 3;
-    private int defaultPlayers = 2;
-    private Difficulty defaultEasy = Difficulty.EASY;
 
 
     public OptionsScreen(Application app) {
         this.app = app;
+
     }
 
     @Override
@@ -86,31 +92,24 @@ public class OptionsScreen implements Screen {
 
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
-        textFieldSkin = new Skin(Gdx.files.internal("uiskin.json"));
-
-
         //skin = new Skin(Gdx.files.internal("uiskin.json"));
 
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
-        bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
+        BitmapFont font = Assets.manager.get("myfont.fnt");
+        bigTextButtonStyle.font = font;
         bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
         bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
-        bigTextButtonStyle.pressedOffsetX = 1;
-        bigTextButtonStyle.pressedOffsetY = -1;
+        //bigTextButtonStyle.pressedOffsetX = 1;
+        //bigTextButtonStyle.pressedOffsetY = -1;
+
         nextButton = new TextButton("NEXT", bigTextButtonStyle);
-        nextButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                app.setPlayScreen();
-            }
-        });
 
         TextButton.TextButtonStyle smallTextButtonStyle = new TextButton.TextButtonStyle();
-        smallTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
+        smallTextButtonStyle.font = font;
         smallTextButtonStyle.up = skin.getDrawable("smallButton.up");
         smallTextButtonStyle.down = skin.getDrawable("smallButton.down");
-        smallTextButtonStyle.pressedOffsetX = 1;
-        smallTextButtonStyle.pressedOffsetY = -1;
+        //smallTextButtonStyle.pressedOffsetX = 1;
+        //smallTextButtonStyle.pressedOffsetY = -1;
 
         arrowButtonLeft1 = new TextButton("<", smallTextButtonStyle);
         arrowButtonRight1 = new TextButton(">", smallTextButtonStyle);
@@ -119,8 +118,7 @@ public class OptionsScreen implements Screen {
         arrowButtonLeft3 = new TextButton("<", smallTextButtonStyle);
         arrowButtonRight3 = new TextButton(">", smallTextButtonStyle);
 
-        BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
-
+        // OptionsScreen big header and sub headers for the options
         optionsLabel = new Label("Options",
                 new Label.LabelStyle(font, Color.CYAN));
         roundsLabel = new Label("Number of rounds",
@@ -130,131 +128,19 @@ public class OptionsScreen implements Screen {
         difficultyLabel = new Label("Difficulty",
                 new Label.LabelStyle(font, Color.WHITE));
 
-        //textfields
+        // Labels that show the values of the current options selection
+        nRoundsLabel = new Label(String.valueOf(NUMBER_OF_PLAYERS),
+                new Label.LabelStyle(font, Color.CYAN));
+        nPlayersLabel = new Label(String.valueOf(NUMBER_OF_PLAYERS),
+                new Label.LabelStyle(font, Color.CYAN));
+        nDiffLabel = new Label(DIFFICULTY.toString(),
+                new Label.LabelStyle(font, Color.CYAN));
 
-        //TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
-        //textFieldStyle.fontColor = Color.WHITE;
-        //textFieldStyle.font = textFieldSkin.getFont("myfont.fnt");
+        // Makes a table and adds labels and buttons to it
+        setupTable();
 
-        textFieldRounds = new TextField(Integer.toString(defaultRounds), textFieldSkin);
-        textFieldPlayers = new TextField(Integer.toString(defaultPlayers), textFieldSkin);
-        textFieldDifficulty = new TextField(defaultEasy.toString(), textFieldSkin);
-
-        textFieldRounds.setDisabled(true);
-        textFieldPlayers.setDisabled(true);
-        textFieldDifficulty.setDisabled(true);
-
-        arrowButtonLeft1.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                defaultRounds--;
-                textFieldRounds.setText(Integer.toString(defaultRounds));
-            }
-        });
-
-        arrowButtonRight1.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                    defaultRounds++;
-                    textFieldRounds.setText(Integer.toString(defaultRounds));
-            }
-        });
-
-        arrowButtonLeft2.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                defaultPlayers--;
-                textFieldPlayers.setText(Integer.toString(defaultPlayers));
-            }
-        });
-
-        arrowButtonRight2.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                defaultPlayers++;
-                textFieldPlayers.setText(Integer.toString(defaultPlayers));
-            }
-        });
-
-        arrowButtonLeft3.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-               for(int i = Difficulty.values().length - 1 ; i >= 0; i--) {
-                   textFieldDifficulty.setText(Difficulty.values()[i].toString());
-               }
-            }
-        });
-
-        arrowButtonRight3.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-               for(int i = 1; i <= Difficulty.values().length - 1; i++){
-                   textFieldDifficulty.setText(Difficulty.values()[i].toString());
-               }
-
-               /* for(Difficulty difficulty : Difficulty.values()){
-                    textFieldDifficulty.setText(difficulty.toString());
-                }
-                */
-            }
-        });
-
-
-
-
-        //table setup
-
-        table = new Table(skin);
-        table.setFillParent(true);
-
-        table.top();
-        table.padTop(30);
-
-        table.row().height(125);
-        table.add().width(100);
-        optionsLabel.setFontScale(2.0f);
-        table.add(optionsLabel).width(optionsLabel.getPrefWidth());
-        table.add().width(100);
-
-        table.row();
-        table.add();
-        table.add(roundsLabel);
-        table.add();
-
-        table.row().height(75);
-        table.add(arrowButtonLeft1).right().width(arrowButtonLeft1.getPrefWidth());
-        //table.add().width(50);
-        table.add(textFieldRounds).width(optionsLabel.getPrefWidth()); //ska vara lika bred som label...
-        table.add(arrowButtonRight1).left();
-
-        table.row();
-        table.add();
-        table.add(playersLabel);
-        table.add();
-
-        table.row().height(75);
-        table.add(arrowButtonLeft2).right();
-        //table.add().width(50);
-        table.add(textFieldPlayers).width(optionsLabel.getPrefWidth()); //ska vara lika bred som label...
-        table.add(arrowButtonRight2).left();
-
-        table.row();
-        table.add();
-        table.add(difficultyLabel);
-        table.add();
-
-        table.row().height(75);
-        table.add(arrowButtonLeft3).right();
-        //table.add().width(50);
-        table.add(textFieldDifficulty).width(optionsLabel.getPrefWidth()); //ska vara lika bred som label...
-        table.add(arrowButtonRight3).left();
-
-        table.row().height(75);
-        table.add();
-        table.add(nextButton).center();
-        table.add();
-
-        table.setDebug(true);
+        // Only for debug table layout
+        //table.setDebug(true);
 
         stage.addActor(table);
 
@@ -266,6 +152,7 @@ public class OptionsScreen implements Screen {
         // Take input from ui
         Gdx.input.setInputProcessor(stage);
 
+        addButtonListeners();
         //table.setWidth(controller.GAME_WIDTH);
         //table.setHeight(controller.GAME_HEIGHT);
 
@@ -320,6 +207,57 @@ public class OptionsScreen implements Screen {
 
     }
 
+    // Creates a 8x3 table with labels and buttons
+    private void setupTable(){
+
+        table = new Table(skin);
+        table.setFillParent(true);
+
+        table.top();
+        table.padTop(20);
+
+        table.row();
+        table.add();
+        optionsLabel.setFontScale(2.0f);
+        table.add(optionsLabel);
+        table.add();
+
+        table.row();
+        table.add();
+        table.add(roundsLabel).padTop(20);
+        table.add();
+
+        table.row();
+        table.add(arrowButtonLeft1).right();
+        table.add(nRoundsLabel);
+        table.add(arrowButtonRight1).left();
+
+        table.row();
+        table.add();
+        table.add(playersLabel);
+        table.add();
+
+        table.row();
+        table.add(arrowButtonLeft2).right();
+        table.add(nPlayersLabel).padTop(20);
+        table.add(arrowButtonRight2).left();
+
+        table.row();
+        table.add();
+        table.add(difficultyLabel).padTop(20);
+        table.add();
+
+        table.row();
+        table.add(arrowButtonLeft3).right();
+        table.add(nDiffLabel);
+        table.add(arrowButtonRight3).left();
+
+        table.row();
+        table.add();
+        table.add(nextButton).center();
+        table.add();
+    }
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -331,11 +269,11 @@ public class OptionsScreen implements Screen {
         //arrowButtonLeft1.update(batch,Gdx.input.getX(), Gdx.input.getY());
 
         //Draw next button
-       //batch.draw(nextButton, NEXT_BUTTON_X, NEXT_BUTTON_Y ,NEXT_BUTTON_WIDTH, NEXT_BUTTON_HEIGHT);
-       //Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH / 2,
+        //batch.draw(nextButton, NEXT_BUTTON_X, NEXT_BUTTON_Y ,NEXT_BUTTON_WIDTH, NEXT_BUTTON_HEIGHT);
+        //Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH / 2,
         //                Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2
 
-        handleNextButton();
+        //handleNextButton();
 
         app.batch.end();
 
@@ -344,28 +282,96 @@ public class OptionsScreen implements Screen {
 
     }
 
-    private void handleNextButton() {
+    private void addButtonListeners() {
+        // If next button is clicked change screen
+        nextButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setPlayScreen();
+            }
+        });
+
+        arrowButtonLeft1.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Loops through ints in the range [1,10] and updates the label and state
+                NUMBER_OF_ROUNDS--;
+                NUMBER_OF_ROUNDS = NUMBER_OF_ROUNDS < 2 ? 1 : NUMBER_OF_ROUNDS;
+                nRoundsLabel.setText(String.valueOf(NUMBER_OF_ROUNDS));
+            }
+        });
+
+        arrowButtonRight1.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Loops through ints in the range [1,10] and updates the label and state
+                NUMBER_OF_ROUNDS++;
+                NUMBER_OF_ROUNDS = NUMBER_OF_ROUNDS > 10 ? 10 : NUMBER_OF_ROUNDS;
+                nRoundsLabel.setText(String.valueOf(NUMBER_OF_ROUNDS));
+            }
+        });
+
+        arrowButtonLeft2.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Loops through ints in the range [2,5] and updates the label and state
+                NUMBER_OF_PLAYERS--;
+                NUMBER_OF_PLAYERS = NUMBER_OF_PLAYERS < 3 ? 2 : NUMBER_OF_PLAYERS;
+                nPlayersLabel.setText(String.valueOf(NUMBER_OF_PLAYERS));
+            }
+        });
+
+        arrowButtonRight2.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Loops through ints in the range [2,5] and updates the label and state
+                NUMBER_OF_PLAYERS++;
+                NUMBER_OF_PLAYERS = NUMBER_OF_PLAYERS > 5 ? 5 : NUMBER_OF_PLAYERS;
+                nPlayersLabel.setText(String.valueOf(NUMBER_OF_PLAYERS));
+            }
+        });
+
+        arrowButtonLeft3.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Left button decrease the difficulty
+                DIFFICULTY = DIFFICULTY == Difficulty.HARD ? Difficulty.MEDIUM : Difficulty.EASY;
+                nDiffLabel.setText(DIFFICULTY.toString());
+            }
+        });
+
+        arrowButtonRight3.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Left button increase the difficulty
+                DIFFICULTY = DIFFICULTY == Difficulty.EASY ? Difficulty.MEDIUM : Difficulty.HARD;
+                nDiffLabel.setText(DIFFICULTY.toString());
+            }
+        });
+    }
+
+   /* private void handleNextButton() {
 
         boolean xRange = false;
         boolean yRange = false;
 
-        int x = Gdx.graphics.getWidth()/2 - NEXT_BUTTON_WIDTH/2;
-        int y = Gdx.graphics.getHeight()/2  - NEXT_BUTTON_HEIGHT / 2 + NEXT_BUTTON_HEIGHT;
+        int x = Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH / 2;
+        int y = Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2 + NEXT_BUTTON_HEIGHT;
 
-        if(Gdx.input.getX() > x &&  Gdx.input.getX() < x + NEXT_BUTTON_WIDTH ){
+        if (Gdx.input.getX() > x && Gdx.input.getX() < x + NEXT_BUTTON_WIDTH) {
             xRange = true;
         }
 
-        if(Gdx.graphics.getHeight() - Gdx.input.getY() < y && Gdx.graphics.getHeight()
+        if (Gdx.graphics.getHeight() - Gdx.input.getY() < y && Gdx.graphics.getHeight()
                 - Gdx.input.getY() > Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2) {
             yRange = true;
         }
 
         if (xRange && yRange && Gdx.input.justTouched()
                 || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-                app.setPlayScreen();
+            app.setPlayScreen();
         }
-    }
+    }*/
 
 
     @Override
@@ -390,8 +396,8 @@ public class OptionsScreen implements Screen {
 
     @Override
     public void dispose() {
-
         stage.dispose();
-        //table.dispose();
+        skin.dispose();
+
     }
 }

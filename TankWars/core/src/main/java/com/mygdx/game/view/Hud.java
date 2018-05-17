@@ -1,37 +1,28 @@
 package com.mygdx.game.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar.ProgressBarStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
+import com.mygdx.game.model.Assets;
+import com.mygdx.game.model.ShotFactory;
 import com.mygdx.game.model.TankWars;
 
-// Heads on display, is used for showing information about the game during gameplay.
+// Heads up display, is used for showing information about the game during gameplay.
 // It polls the model for data
 public class Hud implements Disposable {
     private TankWars tankWars;
     public Stage stage;
     private Viewport viewport;
 
-    HealthBar hpBar;
+    private HealthBar hpBar;
 
     private Integer score;
     private String name;
@@ -40,14 +31,17 @@ public class Hud implements Disposable {
     private float power;
     private float fuel;
     private Integer wind;
+    private String shot;
 
-    Label scoreLabel;
-    Label nameLabel;
-    Label hpLabel;
-    Label angleLabel;
-    Label powerLabel;
-    Label fuelLabel;
-    Label windLabel;
+
+    private Label shotLabel;
+    private Label scoreLabel;
+    private Label nameLabel;
+    private Label hpLabel;
+    private Label angleLabel;
+    private Label powerLabel;
+    private Label fuelLabel;
+    private Label windLabel;
 
     public Hud(SpriteBatch batch, TankWars tankWars) {
         this.tankWars = tankWars;
@@ -56,7 +50,6 @@ public class Hud implements Disposable {
 
         hpBar = new HealthBar(100, 20);
 
-
         score = tankWars.getPlayer().getScore();
         name = tankWars.getPlayer().getName();
         angle = tankWars.getPlayer().getTank().getAngle() + 90;
@@ -64,12 +57,12 @@ public class Hud implements Disposable {
         fuel = tankWars.getPlayer().getTank().getGun().getPower();
         hp = tankWars.getPlayer().getTank().getHealthPoints();
         wind = tankWars.getWind().getWindSpeed();
+        //shot = tankWars.getPlayer().getTank().getShot().getName();
 
-
+        // Bitmap font for labels
+        BitmapFont font = Assets.manager.get("hudFont.fnt");
 
         // Create label with a string and a style
-        BitmapFont font = new BitmapFont(Gdx.files.internal("hudFont.fnt"));
-
         scoreLabel = new Label(String.format("Score: %03d", score), new Label.LabelStyle(font, Color.WHITE));
         nameLabel = new Label("Player: " + name, new Label.LabelStyle(font, Color.WHITE));
         hpLabel = new Label(String.format("HP: %03d", hp), new Label.LabelStyle(font, Color.WHITE));
@@ -77,6 +70,7 @@ public class Hud implements Disposable {
         powerLabel = new Label(String.format("Power: %03f", power), new Label.LabelStyle(font, Color.WHITE));
         fuelLabel = new Label(String.format("Fuel: %03f", fuel), new Label.LabelStyle(font, Color.WHITE));
         windLabel = new Label(String.format("Wind: %03d <--", wind), new Label.LabelStyle(font, Color.WHITE));
+        shotLabel = new Label("Shot: " + shot, new Label.LabelStyle(font, Color.WHITE));
 
         // Setup the table layout
         Table table = new Table();
@@ -96,6 +90,7 @@ public class Hud implements Disposable {
         table.add(hpBar).maxWidth(hpBar.getPrefWidth());
         table.add(fuelLabel);
         table.add(angleLabel);
+        table.add(shotLabel);
 
         // Align the labels
         nameLabel.setAlignment(Align.center);
@@ -105,10 +100,10 @@ public class Hud implements Disposable {
         scoreLabel.setAlignment(Align.center);
         fuelLabel.setAlignment(Align.center);
         angleLabel.setAlignment(Align.center);
+        shotLabel.setAlignment(Align.center);
 
         //table.setDebug(true);
         stage.addActor(table);
-
 
     }
 
@@ -120,6 +115,7 @@ public class Hud implements Disposable {
         hp = tankWars.getPlayer().getTank().getHealthPoints();
         fuel = tankWars.getPlayer().getTank().getFuel();
         wind = tankWars.getWind().getWindSpeed();
+        //shot = tankWars.getPlayer().getTank().getGun().getShot().getName();
 
         scoreLabel.setText(String.format("Score: %02d", score));
         nameLabel.setText("Player: " + name);
@@ -127,6 +123,7 @@ public class Hud implements Disposable {
         powerLabel.setText(String.format("Power: %.0f", power));
         hpLabel.setText(String.format("HP: %03d", hp));
         fuelLabel.setText(String.format("Fuel: %.0f", fuel));
+        shotLabel.setText(String.format("Shot:", shot));
 
         hpBar.setValue(hp / 100f);
 

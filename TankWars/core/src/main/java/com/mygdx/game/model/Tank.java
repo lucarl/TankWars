@@ -10,6 +10,7 @@ public class Tank implements IDrawable {
     private static int originX = width / 2;
     private static int originY = height / 2;
     private static final int speed = 100;
+    private static final int roatationSpeed = 5;
 
 
     private Position pos;
@@ -17,6 +18,7 @@ public class Tank implements IDrawable {
     private int healthPoints;
     private float fuel;
     private TankGun gun;
+    private Shot shot;
 
     private boolean isVisible;
     private boolean rightMove;
@@ -41,34 +43,42 @@ public class Tank implements IDrawable {
     }
 
     public Shot fire(int windSpeed) {
-        return gun.fire(windSpeed);
-        }
+        shot = gun.fire(windSpeed);
+        return shot;
+    }
 
     public Position moveTank(float delta, Terrain terrain) {
         // Get grounds yPos
         float currentGroundHeight = terrain.getHeightOfCol((int) (pos.getX() + width / 2) / terrain.getTileSize());
         float newPos = rightMove ? pos.getX() + speed * delta : pos.getX() - speed * delta;
         float newGroundHeight = terrain.getHeightOfCol((int) (newPos + width / 2) / terrain.getTileSize());
-        float maxHeightDifference = terrain.getTileSize() * 3f;
-        boolean canMoveThere = newGroundHeight - currentGroundHeight < maxHeightDifference;
+        //float maxHeightDifference = terrain.getTileSize() * 4f;
+        float newAngle = 5 * (newGroundHeight - currentGroundHeight) * terrain.getTileSize();
+        float maxAngle = 45;
+        boolean canMoveThere = newAngle <= maxAngle;
 
         if (pos.getY() > currentGroundHeight) pos.setY(currentGroundHeight);
 
-        if (canMoveThere && isVisible && fuel > 0 && pos.getX() > 0 && pos.getX() + width < Application.GAME_WIDTH) {
+        if (canMoveThere && isVisible && fuel > 0 && newPos > 0 && newPos + width < Application.GAME_WIDTH) {
             if (rightMove) {
-                pos.setX(pos.getX() + speed * delta);
-
+                pos.setX(newPos);
                 // Set tank yPos = groundYPos
                 pos.setY(newGroundHeight);
-                rect.move(pos.getX(), newGroundHeight);
+                angle = angle < newAngle ? Math.min(angle+roatationSpeed, newAngle) : Math.max(angle-roatationSpeed, newAngle);
+
+                rect.move(newPos, newGroundHeight);
 
                 decreaseFuel();
             } else if (leftMove) {
-                pos.setX(pos.getX() - speed * delta);
-
+                pos.setX(newPos);
                 // Set tank yPos = groundYPos
                 pos.setY(newGroundHeight);
-                rect.move(pos.getX(), newGroundHeight);
+
+                angle = angle < -newAngle ? Math.min(angle+roatationSpeed, -newAngle) : Math.max(angle-roatationSpeed, -newAngle);
+                
+
+
+                rect.move(newPos, newGroundHeight);
 
                 decreaseFuel();
             }
@@ -123,6 +133,10 @@ public class Tank implements IDrawable {
         return healthPoints;
     }
 
+    public Shot getShot() {
+        return shot;
+    }
+
 
     public float getFuel() {
         return fuel;
@@ -144,12 +158,12 @@ public class Tank implements IDrawable {
 
     @Override
     public int getOriginX() {
-        return 0;
+        return originX;
     }
 
     @Override
     public int getOriginY() {
-        return 0;
+        return originY;
     }
 
     @Override
