@@ -4,9 +4,12 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-<<<<<<< HEAD
-=======
->>>>>>> 1d1b801db7f92a7373f4699eee1100f3ee7b66f5
+
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.Application;
 
 import com.mygdx.game.ctrl.PlayController;
@@ -23,6 +26,8 @@ public class PlayScreen implements Screen {
     private PlayController controller;
     private Hud hud;
     private Renderer renderer;
+    private Skin skin;
+    private TextButton menuButton;
 
     public PlayScreen(Application app) {
         this.app = app;
@@ -31,6 +36,7 @@ public class PlayScreen implements Screen {
         controller = new PlayController(tankWars);
         renderer = new Renderer(app.batch);
         hud = new Hud(app.batch, tankWars);
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
 
         Texture texture = Assets.manager.get("background.jpg");
         background = new Sprite(texture);
@@ -41,6 +47,19 @@ public class PlayScreen implements Screen {
         renderer.loadResources(tankWars.getObjects());
         background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         Gdx.input.setInputProcessor(controller);
+
+
+        //return to menu button
+        menuButton = new TextButton("Return to Menu",skin);
+        menuButton.getLabel().setFontScale(0.9f);
+        menuButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setMenuScreen();
+            }
+        });
+
+        hud.stage.addActor(menuButton);
     }
 
     public void render(float delta) {

@@ -8,9 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-=======
->>>>>>> 1d1b801db7f92a7373f4699eee1100f3ee7b66f5:TankWars/core/src/main/java/com/mygdx/game/view/Hud.java
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
@@ -116,6 +116,7 @@ public class Hud implements Disposable {
         table.add(scoreLabel);
         table.add(angleLabel);
         table.add(shotLabel);
+        //table.add(menuButton).width(fuelLabel.getPrefWidth());
 
         // Align the labels
         nameLabel.setAlignment(Align.center);
@@ -161,6 +162,8 @@ public class Hud implements Disposable {
         } else {
             windLabel.setText(String.format("Wind: %02d -->", wind));
         }
+
+        Gdx.input.setInputProcessor(stage);
     }
 
 

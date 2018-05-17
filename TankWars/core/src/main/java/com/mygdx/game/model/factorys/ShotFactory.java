@@ -18,11 +18,10 @@ public class ShotFactory {
         if (changeWeapon == 1) {
             return new StandardShot(position, angle, power, windSpeed);
         }
-<<<<<<< HEAD:TankWars/core/src/main/java/com/mygdx/game/model/factorys/ShotFactory.java
         if (changeWeapon == 2) {
             return new NukeShot(position, angle, power, windSpeed);
-=======
->>>>>>> 1d1b801db7f92a7373f4699eee1100f3ee7b66f5:TankWars/core/src/main/java/com/mygdx/game/model/ShotFactory.java
+        }else if (changeWeapon == 2) {
+            return new NukeShot (position, angle, power, windSpeed);
         }
         else return new StandardShot (position, angle, power, windSpeed);
     }
