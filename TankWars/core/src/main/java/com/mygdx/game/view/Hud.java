@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
@@ -76,7 +78,6 @@ public class Hud implements Disposable {
         fuelLabel = new Label(String.format("Fuel: %03f", fuel), new Label.LabelStyle(font, Color.WHITE));
         windLabel = new Label(String.format("Wind: %03d <--", wind), new Label.LabelStyle(font, Color.WHITE));
         shotLabel = new Label("Shot: " + shot, new Label.LabelStyle(font, Color.WHITE));
-        menuLabel = new Label("Return to Menu", new Label.LabelStyle(font,Color.RED));
 
         // Setup the table layout
         Table table = new Table();
@@ -97,7 +98,7 @@ public class Hud implements Disposable {
         table.add(fuelLabel);
         table.add(angleLabel);
         table.add(shotLabel);
-        table.add(menuLabel);
+        //table.add(menuButton).width(fuelLabel.getPrefWidth());
 
         // Align the labels
         nameLabel.setAlignment(Align.center);
@@ -108,7 +109,6 @@ public class Hud implements Disposable {
         fuelLabel.setAlignment(Align.center);
         angleLabel.setAlignment(Align.center);
         shotLabel.setAlignment(Align.center);
-        menuLabel.setAlignment(Align.center);
 
         //table.setDebug(true);
         stage.addActor(table);
@@ -135,13 +135,6 @@ public class Hud implements Disposable {
 
         hpBar.setValue(hp / 100f);
 
-        menuLabel.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
-            }
-        });
-
         if (wind < 0) {
             windLabel.setText(String.format("Wind: %02d <--", Math.abs(wind)));
         } else if (wind == 0) {
@@ -149,6 +142,8 @@ public class Hud implements Disposable {
         } else {
             windLabel.setText(String.format("Wind: %02d -->", wind));
         }
+
+        Gdx.input.setInputProcessor(stage);
     }
 
 
