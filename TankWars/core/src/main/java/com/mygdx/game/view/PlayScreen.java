@@ -4,14 +4,14 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.Application;
 
 import com.mygdx.game.ctrl.PlayController;
-import com.mygdx.game.model.Assets;
-import com.mygdx.game.model.Difficulty;
+import com.mygdx.game.services.Assets;
 
 import com.mygdx.game.model.TankWars;
+import com.mygdx.game.services.Renderer;
+import com.mygdx.game.utils.Hud;
 
 public class PlayScreen implements Screen {
     private Sprite background;

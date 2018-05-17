@@ -3,7 +3,8 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Timer;
-import com.mygdx.game.model.Assets;
+import com.mygdx.game.model.factorys.TankWarsFactory;
+import com.mygdx.game.services.Assets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,9 +90,9 @@ public class TankWars {
                     for (int row = shotStartRow, y = 0; row < shotEndRow; row++, y++) {
                         int xx = y - midpoint;
                         if (terrainMatrix[row][col] != null && terrainMatrix[row][col].isAlive()) {
-                            if (Math.sqrt(xx*xx + yy*yy) <= midpoint) {
+                        //    if (Math.sqrt(xx*xx + yy*yy) <= midpoint) {
                                 terrainMatrix[row][col].setAlive(false);
-                            }
+                        //    }
                         }
                     }
                 }

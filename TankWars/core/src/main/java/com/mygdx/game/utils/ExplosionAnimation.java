@@ -1,8 +1,9 @@
-package com.mygdx.game.view;
+package com.mygdx.game.utils;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mygdx.game.model.Assets;
+import com.mygdx.game.services.Assets;
+import com.mygdx.game.utils.Animation;
 
 public class ExplosionAnimation {
 

@@ -1,4 +1,4 @@
-package com.mygdx.game.view;
+package com.mygdx.game.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
@@ -14,8 +15,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
-import com.mygdx.game.model.Assets;
-import com.mygdx.game.model.ShotFactory;
+import com.mygdx.game.services.Assets;
 import com.mygdx.game.model.TankWars;
 
 // Heads up display, is used for showing information about the game during gameplay.
@@ -24,9 +24,10 @@ public class Hud implements Disposable {
     private TankWars tankWars;
     public Stage stage;
     private Viewport viewport;
-    private Application app;
 
     private HealthBar hpBar;
+    private FuelBar fuelBar;
+    private PowerBar powerBar;
 
     private Integer score;
     private String name;
@@ -54,12 +55,14 @@ public class Hud implements Disposable {
         stage = new Stage(viewport, batch);
 
         hpBar = new HealthBar(100, 20);
+        fuelBar = new FuelBar(100, 20);
+        powerBar = new PowerBar(100, 20);
 
         score = tankWars.getPlayer().getScore();
         name = tankWars.getPlayer().getName();
         angle = tankWars.getPlayer().getTank().getAngle() + 90;
         power = tankWars.getPlayer().getTank().getGun().getPower() * 100;
-        fuel = tankWars.getPlayer().getTank().getGun().getPower();
+        fuel = tankWars.getPlayer().getTank().getFuel();
         hp = tankWars.getPlayer().getTank().getHealthPoints();
         wind = tankWars.getWind().getWindSpeed();
         //shot = tankWars.getPlayer().getTank().getShot().getName();
@@ -88,13 +91,28 @@ public class Hud implements Disposable {
 
         table.row().width(Application.GAME_WIDTH / 6).padTop(5);
         table.add(nameLabel);
-        table.add(hpLabel);
-        table.add(powerLabel);
-        table.add(windLabel);
+
+        // Stack label on top of the bar
+        Stack stack = new Stack();
+        stack.add(hpBar);
+        stack.add(hpLabel);
+        table.add(stack).width(hpBar.getPrefWidth());
+
+        // Stack label on top of the bar
+        stack = new Stack();
+        stack.add(powerBar);
+        stack.add(powerLabel);
+        table.add(stack).width(powerBar.getPrefWidth());
+
+        // Stack label on top of the bar
+        stack = new Stack();
+        stack.add(fuelBar);
+        stack.add(fuelLabel);
+        table.add(stack).width(fuelBar.getPrefWidth());
+
         table.row().width(Application.GAME_WIDTH / 6).padTop(5);
+
         table.add(scoreLabel);
-        table.add(hpBar).maxWidth(hpBar.getPrefWidth());
-        table.add(fuelLabel);
         table.add(angleLabel);
         table.add(shotLabel);
         table.add(menuLabel);
@@ -134,6 +152,8 @@ public class Hud implements Disposable {
         shotLabel.setText(String.format("Shot:", shot));
 
         hpBar.setValue(hp / 100f);
+        fuelBar.setValue(fuel / 100f);
+        powerBar.setValue(power / 100f);
 
         menuLabel.addListener(new ClickListener() {
             @Override

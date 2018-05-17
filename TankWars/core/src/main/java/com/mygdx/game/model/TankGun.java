@@ -2,7 +2,8 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Timer;
-import com.mygdx.game.model.Assets;
+import com.mygdx.game.model.factorys.ShotFactory;
+import com.mygdx.game.services.Assets;
 
 public class TankGun implements IDrawable {
     private static String imgSrc = "tankGun.png";
@@ -62,11 +63,11 @@ public class TankGun implements IDrawable {
     }
 
     public void increasePower() {
-        power = power >= 0 && power <= 1 ? power + 0.05f : this.power;
+        power = power < 1 ? power + 0.05f : this.power;
     }
 
     public void decreasePower() {
-        power = power >= 0 && power <= 1 ? power - 0.05f : this.power;
+        power = power > 0.1f ? power - 0.05f : this.power;
     }
 
 

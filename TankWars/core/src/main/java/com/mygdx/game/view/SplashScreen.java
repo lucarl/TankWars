@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.Application;
-import com.mygdx.game.model.Assets;
+import com.mygdx.game.services.Assets;
 
 
 public class SplashScreen implements Screen {
