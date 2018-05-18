@@ -1,9 +1,6 @@
 package com.mygdx.game.model.factorys;
 
-import com.mygdx.game.model.NukeShot;
-import com.mygdx.game.model.Position;
-import com.mygdx.game.model.Shot;
-import com.mygdx.game.model.StandardShot;
+import com.mygdx.game.model.*;
 
 /**
  * A class that uses factory pattern
@@ -20,8 +17,9 @@ public class ShotFactory {
         }
         if (changeWeapon == 2) {
             return new NukeShot(position, angle, power, windSpeed);
-        }else if (changeWeapon == 2) {
-            return new NukeShot (position, angle, power, windSpeed);
+        }
+        if (changeWeapon == 3) {
+            return new Missile(position, angle, power, windSpeed);
         }
         else return new StandardShot (position, angle, power, windSpeed);
     }

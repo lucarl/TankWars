@@ -51,6 +51,10 @@ public class PlayController implements InputProcessor {
             tankWars.getPlayer().getTank().getGun().changeNuke();
         }
 
+        if (keycode == Input.Keys.NUM_3) {
+            tankWars.getPlayer().getTank().getGun().changeMissile();
+        }
+
         if (keycode == Input.Keys.N) {
             tankWars.nextPlayer();
         }
