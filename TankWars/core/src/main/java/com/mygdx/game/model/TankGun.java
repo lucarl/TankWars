@@ -18,8 +18,8 @@ public class TankGun implements IDrawable {
 
     private float power;
     private boolean nuke;
-    private boolean missile;
     private boolean standard;
+    private boolean missile;
     private boolean isVisible;
     private boolean rightAim;
     private boolean leftAim;
@@ -58,12 +58,14 @@ public class TankGun implements IDrawable {
         if (missile) {
             changeWeapon = 3;
             shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
-        }
-        else {
+            missile = false;
+            return shot;
+        } else {
             changeWeapon = 1;
             shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
             standard = false;
-        } return shot;
+        }
+        return shot;
     }
 
     public void increasePower() {
@@ -88,7 +90,7 @@ public class TankGun implements IDrawable {
 
     public void setLeftAim(boolean b) {
 
-        final long soundAimID = soundAim.loop(0.3f,1.0f,0.0f);
+        final long soundAimID = soundAim.loop(0.3f, 1.0f, 0.0f);
 
         Timer.schedule((new Timer.Task() {
             @Override
@@ -96,7 +98,7 @@ public class TankGun implements IDrawable {
                 soundAim.loop(soundAimID);
                 soundAim.stop();
             }
-        }),1);
+        }), 1);
 
         if (rightAim && b) {
             rightAim = false;
@@ -107,7 +109,7 @@ public class TankGun implements IDrawable {
 
     public void setRightAim(boolean b) {
 
-        final long soundAimID = soundAim.loop(0.3f,1.0f,0.0f);
+        final long soundAimID = soundAim.loop(0.3f, 1.0f, 0.0f);
 
         Timer.schedule((new Timer.Task() {
             @Override
@@ -115,7 +117,7 @@ public class TankGun implements IDrawable {
                 soundAim.loop(soundAimID);
                 soundAim.stop();
             }
-        }),1);
+        }), 1);
 
         if (leftAim && b) {
             leftAim = false;
@@ -144,6 +146,7 @@ public class TankGun implements IDrawable {
     public void changeStandard() {
         standard = true;
     }
+
     public boolean hasSpecialShot() {
         return nuke;
     }
@@ -151,6 +154,7 @@ public class TankGun implements IDrawable {
     public void setSpecialShot(boolean special) {
         this.nuke = special;
     }
+
     public float getPower() {
         return power;
     }

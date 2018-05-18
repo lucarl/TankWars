@@ -21,6 +21,9 @@ public class ShotFactory {
         if (changeWeapon == 3) {
             return new Missile(position, angle, power, windSpeed);
         }
+        if (changeWeapon == 3) {
+            return new Missile (position, angle, power, windSpeed);
+        }
         else return new StandardShot (position, angle, power, windSpeed);
     }
 }
