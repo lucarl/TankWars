@@ -20,7 +20,7 @@ public class Renderer {
     }
 
     public void render(List<IDrawable> objects) {
-        // For each object update it's corresponding sprite with the objects state
+        // For each object updateObjects it's corresponding sprite with the objects state
         sprites.forEach((obj, sprite) -> {
             if (obj.isAlive()) {
                 sprite.setRotation(obj.getAngle());

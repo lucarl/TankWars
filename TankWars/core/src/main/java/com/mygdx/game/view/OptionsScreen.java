@@ -262,7 +262,7 @@ public class OptionsScreen implements Screen {
         app.batch.begin();
 
         //Draw left arrow buttons
-        //arrowButtonLeft1.update(batch,Gdx.input.getX(), Gdx.input.getY());
+        //arrowButtonLeft1.updateObjects(batch,Gdx.input.getX(), Gdx.input.getY());
 
         //Draw next button
         //batch.draw(nextButton, NEXT_BUTTON_X, NEXT_BUTTON_Y ,NEXT_BUTTON_WIDTH, NEXT_BUTTON_HEIGHT);

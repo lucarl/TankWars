@@ -33,7 +33,7 @@ public class TestTankWars {
         tankWarsTest.getShots().removeAll(tankWarsTest.getShots());
     }
 
-    //update
+    //updateObjects
 
     //removeObjects
 
