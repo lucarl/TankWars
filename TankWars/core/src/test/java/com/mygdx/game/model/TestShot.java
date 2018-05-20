@@ -5,7 +5,7 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertTrue;
 
 /**
- * A test class for Shot where the update()
+ * A test class for Shot where the updateObjects()
  * method is tested.
  *
  */
@@ -15,7 +15,7 @@ import static junit.framework.TestCase.assertTrue;
 public class TestShot {
 
     /**
-     * Create Shot object and call update().
+     * Create Shot object and call updateObjects().
      * @result The object is not visible if its x position is bigger
      * than the game screen's width.
      *

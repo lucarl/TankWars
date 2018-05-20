@@ -23,7 +23,7 @@ public class Tank implements IDrawable {
     private TankGun gun;
     private Shot shot;
 
-    private boolean isVisible;
+    private boolean isAlive;
     private boolean rightMove;
     private boolean leftMove;
 
@@ -39,7 +39,7 @@ public class Tank implements IDrawable {
         // Place the gun on the tank
         this.gun = new TankGun(new Position(pos.getX() + width / 2, pos.getY() + height));
 
-        isVisible = true;
+        isAlive = true;
         rightMove = false;
         leftMove = false;
 
@@ -66,7 +66,7 @@ public class Tank implements IDrawable {
             pos.setY(currentGroundHeight);
         }
 
-        if (canMoveThere && isVisible && fuel > 0 && newPos > 0 && newPos + width < Application.GAME_WIDTH) {
+        if (canMoveThere && isAlive && fuel > 0 && newPos > 0 && newPos + width < Application.GAME_WIDTH) {
             if (rightMove) {
                 pos.setX(newPos);
                 // Set tank yPos = groundYPos
@@ -250,11 +250,11 @@ public class Tank implements IDrawable {
 
     @Override
     public boolean isAlive() {
-        return isVisible;
+        return isAlive;
     }
 
     public void setAlive(boolean bool) {
-        isVisible = bool;
+        isAlive = bool;
     }
 
     public CollisionRect getRect() {
