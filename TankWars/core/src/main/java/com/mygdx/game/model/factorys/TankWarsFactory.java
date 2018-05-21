@@ -11,8 +11,9 @@ import java.util.List;
  */
 
 public class TankWarsFactory {
+    private Terrain terrain = new Terrain();
 
-    public void setupObjects(int nPlayers, List<Player> players, List<IDrawable> objects, Terrain terrain) {
+    public void setupObjects(int nPlayers, List<Player> players, List<IDrawable> objects) {
 
         int xPos1 = 5;
         int xPos2 = 900;
@@ -39,7 +40,8 @@ public class TankWarsFactory {
         }
     }
 
-    public void setupTerrainTiles(List<IDrawable> tiles, TerrainTile[][] terrainMatrix) {
+    public void setupTerrainTiles(List<IDrawable> tiles) {
+        TerrainTile[][] terrainMatrix = terrain.getTerrainMatrix();
         for (int i = 0; i < terrainMatrix.length; i++) {
             for (int j = 0; j < terrainMatrix[i].length; j++) {
                 if(terrainMatrix[i][j] != null){
@@ -47,5 +49,9 @@ public class TankWarsFactory {
                 }
             }
         }
+    }
+
+    public Terrain getTerrain() {
+        return terrain;
     }
 }
