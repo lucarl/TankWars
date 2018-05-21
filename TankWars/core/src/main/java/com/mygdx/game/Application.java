@@ -5,10 +5,17 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.view.*;
 
+
+import com.google.common.eventbus.EventBus;
+
+
 public class Application extends Game{
     public static final String TITLE = "TANK WARS";
     public static final int GAME_WIDTH = 1000;
     public static final int GAME_HEIGHT = 600;
+
+    public static final EventBus BUS = new EventBus(); // Google Guavas bus
+
 
     private Screen screen;
     public SpriteBatch batch;

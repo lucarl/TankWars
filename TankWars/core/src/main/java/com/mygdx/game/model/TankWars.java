@@ -1,13 +1,13 @@
 package com.mygdx.game.model;
 
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.Application;
+import com.mygdx.game.events.SoundEvents;
 import com.mygdx.game.model.factorys.TankWarsFactory;
-import com.mygdx.game.services.Assets;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mygdx.game.Application.BUS;
 
 public class TankWars {
     private Player currentPlayer;
@@ -31,12 +31,11 @@ public class TankWars {
     private boolean shooting = false;
     private boolean gameOver = false;
 
-    Sound soundShoot = Assets.manager.get("cannon.mp3", Sound.class);
-    Sound soundBoom = Assets.manager.get("boom.mp3", Sound.class);
+//    Sound soundShoot = Assets.manager.get("cannon.mp3", Sound.class);
+ //   Sound soundBoom = Assets.manager.get("boom.mp3", Sound.class);
 
 
     /**
-     *
      * @param nPlayers
      * @param nRounds
      * @param difficulty
@@ -55,7 +54,7 @@ public class TankWars {
          *  Sedan skapa en ny instance av tankWars och skicka med alla objecten
          *  i konstruktorn
          *
-          */
+         */
         tankWarsFactory.setupTerrainTiles(tiles, terrain.getTerrainMatrix());
         tankWarsFactory.setupObjects(nPlayers, players, objects, terrain);
 
@@ -65,6 +64,7 @@ public class TankWars {
 
     /**
      * Updates the world one frame
+     *
      * @param delta is the time since the last call to update
      */
     public void updateWorld(float delta) {
@@ -96,7 +96,7 @@ public class TankWars {
                     /** TODO lite roligare poängsystem
                      * eller inte ens ha poäng för träff/kill
                      * utan bara samla poäng för vem som vann rundan
-                      */
+                     */
                     currentPlayer.addScore();
                     // Tank got hit, remove hp
                     tank.decreaseHealth(shot.getDamage());
@@ -110,7 +110,9 @@ public class TankWars {
                     shot.setAlive(false);
                     shooting = false;
                     isTurnOver = true;
-                    // TODO send explosion event
+
+                    // Send explosion event
+                    BUS.post(new SoundEvents("explosion"));
                 } else if (hasCollidedWithWorld(shot)) {
                     /**
                      * TODO hade vart nice ifall explosionen skadar
@@ -121,7 +123,8 @@ public class TankWars {
                     shot.setAlive(false);
                     shooting = false;
                     isTurnOver = true;
-                    // TODO send explosion event
+                    // Send explosion event
+                    BUS.post(new SoundEvents("explosion"));
                 }
             });
 
@@ -142,24 +145,21 @@ public class TankWars {
     private void shotExplosion(Shot shot) {
         // Check collision with terrain
 
-        int shotStartCol = (int) (shot.getPos().getX() - shot.getRadius()) / terrain.getTileSize() > 0 ?
+        int startCol = (int) (shot.getPos().getX() - shot.getRadius()) / terrain.getTileSize() > 0 ?
                 (int) (shot.getPos().getX() - shot.getRadius()) / terrain.getTileSize() : 0;
-        int shotEndCol = (int) (shot.getPos().getX() + shot.getRadius()) / terrain.getTileSize() < terrain.getCols() ?
+        int endCol = (int) (shot.getPos().getX() + shot.getRadius()) / terrain.getTileSize() < terrain.getCols() ?
                 (int) (shot.getPos().getX() + shot.getRadius()) / terrain.getTileSize() : terrain.getCols();
-        int shotStartRow = (int) (shot.getPos().getY() - shot.getRadius()) / terrain.getTileSize() > 0 ?
+        int startRow = (int) (shot.getPos().getY() - shot.getRadius()) / terrain.getTileSize() > 0 ?
                 (int) (shot.getPos().getY() - shot.getRadius()) / terrain.getTileSize() : 0;
-        int shotEndRow = (int) (shot.getPos().getY() + shot.getRadius()) / terrain.getTileSize() < terrain.getRows() ?
+        int endRow = (int) (shot.getPos().getY() + shot.getRadius()) / terrain.getTileSize() < terrain.getRows() ?
                 (int) (shot.getPos().getY() + shot.getRadius()) / terrain.getTileSize() : terrain.getRows();
 
         TerrainTile terrainMatrix[][] = terrain.getTerrainMatrix();
 
-        //int midpoint = (int) shot.getPos().getY() / terrain.getTileSize();
-        for (int col = shotStartCol, x = 0; col < shotEndCol; col++, x++) {
-            //int yy = x - midpoint;
-            for (int row = shotStartRow, y = 0; row < shotEndRow; row++, y++) {
-                //int xx = y - midpoint;
-                if (terrainMatrix[row][col] != null && terrainMatrix[row][col].isAlive()) {
-                    //if (Math.sqrt(xx * xx + yy * yy) <= midpoint) {
+        for (int col = startCol; col < endCol; col++) {
+            for (int row = startRow; row < endRow; row++) {
+                if (terrainMatrix[row][col] != null) {
+                    //if (Math.pow(col - startX, 2) + Math.pow(row - startY, 2) <= Math.pow((int)shot.getRadius(), 2)) {
                         terrainMatrix[row][col].setAlive(false);
                     //}
                 }
@@ -207,22 +207,10 @@ public class TankWars {
      */
     /**
      * TODO samma här, ut med libgdx grejerna till viewn eller någon annan lyssnare
-     *
      */
     protected void removeObjects() {
         for (int i = 0; i < shots.size(); i++) {
             if (shots.get(i) != null && !shots.get(i).isAlive()) {
-
-                final long soundBoomID = soundBoom.loop(14.0f, 1.5f, 0.0f);
-
-                Timer.schedule((new Timer.Task() {
-                    @Override
-                    public void run() {
-                        soundBoom.loop(soundBoomID);
-                        soundBoom.stop();
-                    }
-                }), 4);
-
                 shots.remove(i);
             }
 
@@ -259,21 +247,8 @@ public class TankWars {
             shooting = true;
             isTurnOver = true;
 
-            /**
-             * TODO skapa ett shoot event istället,
-             * en ljudklass lyssnar efter events och spelar upp detta
-             * om shoot eventet avfyras,
-             */
-            final long soundShootID = soundShoot.loop(0.3f, 1.0f, 0.0f);
-
-            Timer.schedule((new Timer.Task() {
-                @Override
-                public void run() {
-                    soundShoot.loop(soundShootID);
-                    soundShoot.stop();
-                }
-            }), 1);
-
+            // Create a sound event for shooting
+            BUS.post(new SoundEvents("fire"));
         }
 
 
@@ -281,6 +256,7 @@ public class TankWars {
 
     /**
      * Updates the tankGuns angle
+     *
      * @param delta is the time since the last frame
      */
     public void aim(float delta) {
@@ -291,6 +267,7 @@ public class TankWars {
 
     /**
      * Updates the tanks position
+     *
      * @param delta is the time since the last frame
      */
     public void move(float delta) {

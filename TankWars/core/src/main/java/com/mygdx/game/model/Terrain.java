@@ -25,6 +25,7 @@ public class Terrain {
 
         terrainMatrix = new TerrainTile[rows][cols];
 
+        // TODO Out of bounds sometimes
         for (int col = 0; col < cols; col++) {
             for (int row = 0; row < min(abs(cos(toRadians(col)) * 50 + 50), rows); row++) {
                 terrainMatrix[row][col] = new TerrainTile(x + col * tileSize,
