@@ -16,7 +16,7 @@ public class StandardShot extends Shot {
         setAlive(true);
         setWindSpeed(windSpeed);
         setRect(new CollisionRect(pos.getX(), pos.getY(), getWidth(), getHeight()));
-        setDamage(5);
+        setDamage(100);
         setName("Gun");
         setImgSrc("cannonBall.png");
         setWidth(20);

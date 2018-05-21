@@ -16,7 +16,7 @@ public class Event {
         PLAYER_POSITION,
         DICE_FST,
         DICE_SEC, 
-        MONOPOLY_NEXT,
+        PLAY_ANIMATION_EXPLOSION,
     }
 
     private final Tag tag;

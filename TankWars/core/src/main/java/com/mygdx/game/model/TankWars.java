@@ -101,6 +101,7 @@ public class TankWars {
                     if (tank.getHealthPoints() <= 0) {
                         tank.setAlive(false);
                         tank.getGun().setAlive(false);
+                        EventBus.BUS.publish(new Event(Event.Tag.PLAY_ANIMATION_EXPLOSION, tank));
                     }
                     // Removes terrain around the collision
                     shotExplosion(shot);
