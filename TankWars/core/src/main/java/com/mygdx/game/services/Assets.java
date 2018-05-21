@@ -53,7 +53,7 @@ public class Assets {
     //------------------- ANIMATIONS ----------------------------
     //explosion animation
     private static final AssetDescriptor<Texture> explosionAni =
-            new AssetDescriptor<Texture>("explosion.png", Texture.class);
+            new AssetDescriptor<Texture>("explosions3.png", Texture.class);
 
     //------------------- FONTS ----------------------------
     // HUD font

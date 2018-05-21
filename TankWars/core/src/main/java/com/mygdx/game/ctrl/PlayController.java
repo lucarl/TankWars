@@ -2,11 +2,7 @@ package com.mygdx.game.ctrl;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.google.common.eventbus.Subscribe;
-import com.mygdx.game.view.PlaySounds;
 import com.mygdx.game.model.TankWars;
-
-import static com.mygdx.game.Application.BUS;
 
 public class PlayController implements InputProcessor {
 
