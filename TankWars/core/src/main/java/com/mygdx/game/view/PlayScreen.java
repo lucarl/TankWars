@@ -14,13 +14,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.Application;
 
 import com.mygdx.game.ctrl.PlayController;
+import com.mygdx.game.events.Event;
+import com.mygdx.game.events.EventBus;
+import com.mygdx.game.events.IEventHandler;
 import com.mygdx.game.services.Assets;
 
 import com.mygdx.game.model.TankWars;
 import com.mygdx.game.services.Renderer;
 import com.mygdx.game.utils.Hud;
 
-public class PlayScreen implements Screen {
+public class PlayScreen implements Screen, IEventHandler {
     private Sprite background;
     private TankWars tankWars;
     private Application app;
@@ -43,6 +46,9 @@ public class PlayScreen implements Screen {
 
         Texture texture = Assets.manager.get("background.jpg");
         background = new Sprite(texture);
+
+        // Register to the eventBus
+        initEvent();
     }
 
     public void show() {
@@ -53,7 +59,7 @@ public class PlayScreen implements Screen {
         Gdx.input.setInputProcessor(im);
 
         //return to menu button
-        menuButton = new TextButton("Return to Menu",skin);
+        menuButton = new TextButton("Return to Menu", skin);
         menuButton.getLabel().setFontScale(0.9f);
         menuButton.addListener(new ClickListener() {
             @Override
@@ -65,7 +71,6 @@ public class PlayScreen implements Screen {
         stage.addActor(menuButton);
 
     }
-
 
 
     public void render(float delta) {
@@ -90,6 +95,19 @@ public class PlayScreen implements Screen {
         stage.act();
 
         hud.stage.act();
+    }
+
+    @Override
+    public void onEvent(Event evt) {
+        if (evt.getTag() == Event.Tag.PLAY_SOUND_FIRE) {
+            PlaySounds.playFire();
+        } else if (evt.getTag() == Event.Tag.PLAY_SOUND_EXPLOSION) {
+            PlaySounds.playFire();
+        }
+    }
+
+    private void initEvent() {
+        EventBus.BUS.register(this);
     }
 
     @Override
@@ -119,4 +137,5 @@ public class PlayScreen implements Screen {
         stage.dispose();
 
     }
+
 }

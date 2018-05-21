@@ -9,6 +9,15 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
+/**
+ *
+ * A test class for some of the core methods
+ * included in the TankWars class.
+ *
+ * @author Patricia Zabecka
+ *
+ */
+
 public class TestTankWars {
 
     private TankWars tankWarsTest;

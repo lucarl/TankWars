@@ -103,6 +103,8 @@ public class MenuScreen implements Screen {
         //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
 
         //heading label setup
+        heading = new Label("TANK WARS", new Label.LabelStyle(
+                new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
         heading.setFontScale(1.4f);
 
         table = new Table(skin);

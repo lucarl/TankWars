@@ -1,13 +1,12 @@
 package com.mygdx.game.model;
 
 import com.mygdx.game.Application;
-import com.mygdx.game.events.SoundEvents;
+import com.mygdx.game.events.Event;
+import com.mygdx.game.events.EventBus;
 import com.mygdx.game.model.factorys.TankWarsFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.mygdx.game.Application.BUS;
 
 public class TankWars {
     private Player currentPlayer;
@@ -110,7 +109,7 @@ public class TankWars {
                     isTurnOver = true;
 
                     // Send explosion event
-                    BUS.post(new SoundEvents("explosion"));
+                    EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_EXPLOSION, null));
                 } else if (hasCollidedWithWorld(shot)) {
                     /**
                      * TODO hade vart nice ifall explosionen skadar
@@ -122,7 +121,7 @@ public class TankWars {
                     shooting = false;
                     isTurnOver = true;
                     // Send explosion event
-                    BUS.post(new SoundEvents("explosion"));
+                    EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_EXPLOSION, null));
                 }
             });
 
@@ -246,7 +245,7 @@ public class TankWars {
             isTurnOver = true;
 
             // Create a sound event for shooting
-            BUS.post(new SoundEvents("fire"));
+            EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_FIRE, null));
         }
 
 

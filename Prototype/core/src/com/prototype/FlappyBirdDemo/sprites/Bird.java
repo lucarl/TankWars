@@ -23,6 +23,8 @@ public class Bird {
         texture = new Texture("birdanimation.png");
         birdAnimation = new Animation(new TextureRegion(texture), 3, 0.5f);
         bounds = new Rectangle(x, y, texture.getWidth() / 3, texture.getHeight());
+
+
     }
 
     public void update(float dt) {

@@ -6,10 +6,18 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
+/**
+ * An assets class whose purpose is to load and manage
+ * all the assets that are used in the game.
+ *
+ * @author Patricia Zabecka
+ *
+ */
 public class Assets {
 
     public static final AssetManager manager = new AssetManager();
 
+    //------------------- TEXTURES ----------------------------
     //tank image
     private static final AssetDescriptor<Texture> tankImg =
             new AssetDescriptor<Texture>("tank1.png", Texture.class);
@@ -38,24 +46,25 @@ public class Assets {
     private static final AssetDescriptor<Texture> backgroundImg =
             new AssetDescriptor<Texture>("background.jpg", Texture.class);
 
-    //explosion animation
-    private static final AssetDescriptor<Texture> explosionAni =
-            new AssetDescriptor<Texture>("explosion.png", Texture.class);
-
     //splash image
     private static final AssetDescriptor<Texture> splashImg =
             new AssetDescriptor<Texture>("tanks.jpg", Texture.class);
 
+    //------------------- ANIMATIONS ----------------------------
+    //explosion animation
+    private static final AssetDescriptor<Texture> explosionAni =
+            new AssetDescriptor<Texture>("explosion.png", Texture.class);
+
+    //------------------- FONTS ----------------------------
     // HUD font
     private static final AssetDescriptor<BitmapFont> hudFont =
             new AssetDescriptor<>("hudFont.fnt", BitmapFont.class);
 
     // tank wars font
-    private static final AssetDescriptor<BitmapFont> tankWarsFont =
+    private static final AssetDescriptor<BitmapFont> headingFont =
             new AssetDescriptor<>("myfont.fnt", BitmapFont.class);
 
-    // sounds
-
+    //------------------- SOUNDS ----------------------------
     private static final AssetDescriptor<Sound> soundShoot =
             new AssetDescriptor<Sound>("cannon.mp3", Sound.class);
     private static final AssetDescriptor<Sound> soundMove =
@@ -87,7 +96,7 @@ public class Assets {
         manager.load(explosionAni);
         manager.load(splashImg);
         manager.load(hudFont);
-        manager.load(tankWarsFont);
+        manager.load(headingFont);
         manager.load(soundAim);
         manager.load(soundBoom);
         manager.load(soundShoot);

@@ -3,7 +3,7 @@ package com.mygdx.game.ctrl;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.google.common.eventbus.Subscribe;
-import com.mygdx.game.events.SoundEvents;
+import com.mygdx.game.view.PlaySounds;
 import com.mygdx.game.model.TankWars;
 
 import static com.mygdx.game.Application.BUS;
@@ -11,26 +11,12 @@ import static com.mygdx.game.Application.BUS;
 public class PlayController implements InputProcessor {
 
     private TankWars tankWars;
-    private SoundEvents soundEvents = new SoundEvents("h");
 
     public PlayController(TankWars tankWars) {
         this.tankWars = tankWars;
-        BUS.register(this);
     }
 
-    @Subscribe
-    public void onEvent(SoundEvents evt) {
 
-        switch (evt.getSound()) {
-            case "fire":
-                soundEvents.playFire();
-                break;
-            case "explosion":
-                soundEvents.playExplosion();
-                break;
-        }
-
-    }
 
     @Override
     public boolean keyDown(int keycode) {

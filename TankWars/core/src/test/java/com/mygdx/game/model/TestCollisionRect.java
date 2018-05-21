@@ -8,6 +8,8 @@ import static junit.framework.TestCase.assertTrue;
  * A test class for the methods
  * included in the CollisionRect class.
  *
+ *  @author Patricia Zabecka
+ *
  */
 
 public class TestCollisionRect {
