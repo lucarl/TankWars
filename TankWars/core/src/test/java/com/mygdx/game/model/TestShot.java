@@ -8,6 +8,8 @@ import static junit.framework.TestCase.assertTrue;
  * A test class for Shot where the updateObjects()
  * method is tested.
  *
+ * @author Patricia Zabecka
+ *
  */
 
 
@@ -20,7 +22,6 @@ public class TestShot {
      * than the game screen's width.
      *
      */
-
 
     @Test
     public void testShot(){

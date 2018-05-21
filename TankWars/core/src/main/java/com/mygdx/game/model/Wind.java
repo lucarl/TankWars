@@ -30,7 +30,6 @@ public class Wind {
                 break;
         }
     }
-
     public int getWindSpeed() {
         return windSpeed;
     }

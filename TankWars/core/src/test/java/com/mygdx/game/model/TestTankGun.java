@@ -9,6 +9,15 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+/**
+ *
+ * A test class for some of the core methods
+ * included in the TankGun class.
+ *
+ * @author Patricia Zabecka
+ *
+ */
+
 
 public class TestTankGun {
 
@@ -104,6 +113,7 @@ public class TestTankGun {
         assertFalse(tankGun.isLeftAim());
     }
 
+    @Test
     public void testChangeWeapon() {
         boolean cuurentSpecialShot = tankGun.hasSpecialShot();
         tankGun.changeNuke();

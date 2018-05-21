@@ -8,6 +8,15 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+/**
+ *
+ * A test class for some of the core methods
+ * included in the Tank class.
+ *
+ * @author Patricia Zabecka
+ *
+ */
+
 public class TestTank {
 
     private Tank tank;

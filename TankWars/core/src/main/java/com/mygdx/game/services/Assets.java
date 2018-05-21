@@ -6,6 +6,14 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
+/**
+ * An assets class whose purpose is to load and manage
+ * all the assets that are used in the game.
+ *
+ * @author Patricia Zabecka
+ *
+ */
+
 public class Assets {
 
     public static final AssetManager manager = new AssetManager();
@@ -54,6 +62,11 @@ public class Assets {
     private static final AssetDescriptor<BitmapFont> tankWarsFont =
             new AssetDescriptor<>("myfont.fnt", BitmapFont.class);
 
+    // tank wars heading font
+    private static final AssetDescriptor<BitmapFont> headingFont =
+            new AssetDescriptor<>("myfont.fnt", BitmapFont.class);
+
+
     // sounds
 
     private static final AssetDescriptor<Sound> soundShoot =
@@ -88,6 +101,7 @@ public class Assets {
         manager.load(splashImg);
         manager.load(hudFont);
         manager.load(tankWarsFont);
+        manager.load(headingFont);
         manager.load(soundAim);
         manager.load(soundBoom);
         manager.load(soundShoot);
