@@ -15,6 +15,7 @@ public class TankWars {
     private Terrain terrain;
 
     // TODO factory klassen kan vara static, då behövs inte detta objektet
+    private TankWarsFactory tankWarsFactory;
 
     private List<IDrawable> upgrade;
     private List<Player> players;
@@ -30,9 +31,6 @@ public class TankWars {
     private boolean shooting = false;
     private boolean gameOver = false;
 
-//    Sound soundShoot = Assets.manager.get("cannon.mp3", Sound.class);
- //   Sound soundBoom = Assets.manager.get("boom.mp3", Sound.class);
-
 
     /**
      * @param nPlayers
@@ -45,6 +43,8 @@ public class TankWars {
         shots = new ArrayList<>();
         tiles = new ArrayList<>();
         wind = new Wind(difficulty);
+        tankWarsFactory = new TankWarsFactory();
+        terrain = tankWarsFactory.getTerrain();
 
         /**
          *  TODO alla object som används av tankWars kan skapas i factoryn
@@ -52,15 +52,9 @@ public class TankWars {
          *  Sedan skapa en ny instance av tankWars och skicka med alla objecten
          *  i konstruktorn
          *
-<<<<<<< HEAD
          */
-        tankWarsFactory.setupTerrainTiles(tiles, terrain.getTerrainMatrix());
-        tankWarsFactory.setupObjects(nPlayers, players, objects, terrain);
-=======
-          */
         tankWarsFactory.setupTerrainTiles(tiles);
         tankWarsFactory.setupObjects(nPlayers, players, objects);
->>>>>>> 7ca0c5718842fbaaa5c86608e5688105be59820b
 
         this.nRounds = nRounds;
         currentPlayer = players.get(playerIndex);
