@@ -12,7 +12,6 @@ import java.util.List;
 
 public class TankWarsFactory {
 
-    public void setupObjects(int nPlayers, List<Player> players, List<IDrawable> objects, Terrain terrain) {
 
         int xPos1 = 5;
         int xPos2 = 900;
@@ -29,7 +28,6 @@ public class TankWarsFactory {
                 xPos2 -= 200;
             }
             Upgrade upgrade = new Upgrade(10, 1000);
-            int yPos = terrain.getHeightOfCol((int) tank.getPos().getX() / terrain.getTileSize());
             tank.setPos(new Position(tank.getPos().getX(), yPos));
             players.add(new Player(tank));
             objects.add(new Upgrade(upgrade.getPos().getX(), upgrade.getPos().getY()));
@@ -39,7 +37,6 @@ public class TankWarsFactory {
         }
     }
 
-    public void setupTerrainTiles(List<IDrawable> tiles, TerrainTile[][] terrainMatrix) {
         for (int i = 0; i < terrainMatrix.length; i++) {
             for (int j = 0; j < terrainMatrix[i].length; j++) {
                 if(terrainMatrix[i][j] != null){
