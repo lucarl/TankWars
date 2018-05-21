@@ -3,6 +3,7 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Timer;
+import com.mygdx.game.Application;
 import com.mygdx.game.model.factorys.TankWarsFactory;
 import com.mygdx.game.services.Assets;
 
@@ -11,6 +12,8 @@ import java.util.List;
 
 public class TankWars {
     private int playerIndex;
+
+    private Application app;
     private Player currentPlayer;
     private List<IDrawable> upgrade;
     private List<Player> players;
@@ -185,6 +188,7 @@ public class TankWars {
                 nTanks++;
             }
         }
+
         //if only one tank is left on the field we have a winner and the round is over
         return nTanks <= 1; //är det inte mer rimligt att ha nTanks == 1 ??
     }
