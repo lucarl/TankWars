@@ -10,10 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
@@ -28,17 +25,14 @@ import com.mygdx.game.services.Assets;
 public class ScoreScreen implements Screen {
 
     private Application app;
-
-    private TextButton startButton;
-    private TextButton optionsButton;
-    private TextButton exitButton;
+    //private TextButton exitButton;
+    private TextField txtScores;
 
     private Skin skin;
     private Table table;
     private FitViewport viewport;
     private Stage stage;
     private SpriteBatch batch;
-    private TextureAtlas atlas;
     private Label heading;
 
     Sound soundTheme = Assets.manager.get("TankWarsTheme.mp3", Sound.class);
@@ -63,36 +57,15 @@ public class ScoreScreen implements Screen {
         viewport = new FitViewport(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         stage = new Stage(viewport, app.batch);
 
-        atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
-        skin = new Skin(atlas);
+        //atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
         // skin = new Skin(Gdx.files.internal("uiskin.json"));
 
-        TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
-        bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
-        bigTextButtonStyle.fontColor = Color.WHITE;
-        bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
-        bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
 
-        //startButton
-        startButton = new TextButton("START", bigTextButtonStyle);
-        startButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                app.setPlayScreen();
-                soundTheme.stop();
-            }
-        });
+        //TextArea.TextFieldStyle txtScoresStyle = new TextField.TextFieldStyle();
 
-        //optionsButton
-        optionsButton = new TextButton("OPTIONS", bigTextButtonStyle);
-        optionsButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                app.setOptionScreen();
-            }
-        });
 
-        //exitButton
+        /*
         exitButton = new TextButton("EXIT", bigTextButtonStyle);
         exitButton.addListener(new ClickListener() {
             @Override
@@ -101,15 +74,19 @@ public class ScoreScreen implements Screen {
                 soundTheme.stop();
             }
         });
+        */
 
         //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
 
         //heading label setup
-        heading = new Label("PLAYER SCORE",
+        heading = new Label("LEADERBOARDS",
                 new Label.LabelStyle(new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
         heading.setFontScale(1.4f);
 
-        table = new Table(skin);
+        txtScores = new TextField("",skin);
+        txtScores.setSize(200,500);
+
+        table = new Table();
         table.setFillParent(true);
         table.top();
         table.padTop(25);
@@ -118,11 +95,7 @@ public class ScoreScreen implements Screen {
         table.row().width(500);
         table.add(heading);
         table.row().padTop(50);
-        table.add(startButton);
-        table.row().pad(20);
-        table.add(optionsButton);
-        table.row();
-        table.add(exitButton);
+        table.add(txtScores);
 
         heading.setAlignment(Align.center);
 

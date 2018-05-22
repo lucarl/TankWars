@@ -67,8 +67,6 @@ public class Assets {
     private static final AssetDescriptor<Sound> soundTheme =
             new AssetDescriptor<Sound>("TankWarsTheme.mp3", Sound.class);
 
-
-
     //skin
     /*
     public static final AssetDescriptor<Skin> uiSkin =

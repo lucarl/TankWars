@@ -93,8 +93,6 @@ public class PlayScreen implements Screen {
         stage.addActor(menuButton);
         stage.addActor(table);
 
-
-
     }
 
 
