@@ -23,6 +23,8 @@ import com.mygdx.game.model.TankWars;
 import com.mygdx.game.utils.Hud;
 
 import java.util.ArrayList;
+import com.mygdx.game.view.PlaySounds;
+import com.mygdx.game.view.Explosion;
 import java.util.List;
 
 public class PlayScreen implements Screen, IEventHandler {
@@ -71,6 +73,8 @@ public class PlayScreen implements Screen, IEventHandler {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 app.setMenuScreen();
+                PlaySounds.playThemeReturn();
+
             }
         });
 
@@ -113,11 +117,28 @@ public class PlayScreen implements Screen, IEventHandler {
         if (evt.getTag() == Event.Tag.PLAY_SOUND_FIRE) {
             PlaySounds.playFire();
         } else if (evt.getTag() == Event.Tag.PLAY_SOUND_EXPLOSION) {
-            PlaySounds.playFire();
-        } else if (evt.getTag() == Event.Tag.PLAY_ANIMATION_EXPLOSION) {
+            //PlaySounds.playFire();
+            PlaySounds.playExplosion();
+        }
+        else if (evt.getTag() == Event.Tag.PLAY_SOUND_AIM){
+            PlaySounds.playAim();
+        }
+        else if(evt.getTag() == Event.Tag.PLAY_SOUND_MOVE){
+            PlaySounds.playMove();
+        }
+        else if (evt.getTag() == Event.Tag.PLAY_ANIMATION_EXPLOSION || evt.getTag() == Event.Tag.PLAY_SOUND_ANIMATION_EXPLOSION) {
             Tank tank = (Tank) evt.getValue();
             explosions.add(new Explosion(tank.getPos()));
+            PlaySounds.playTankDestroy();
         }
+
+        else if(evt.getTag() == Event.Tag.PLAY_SOUND_NUKE){
+            PlaySounds.playNuke();
+        }
+        else if(evt.getTag() == Event.Tag.PLAY_SOUND_MISSILE){
+            PlaySounds.playMissile();
+        }
+
     }
 
     private void initEvent() {

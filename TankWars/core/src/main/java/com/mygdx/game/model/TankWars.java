@@ -260,7 +260,10 @@ public class TankWars {
     public void aim(float delta) {
         if (!isTurnOver) {
             currentPlayer.getTank().getGun().aimTank(delta);
+            //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_AIM, null));
         }
+
+
     }
 
     /**
@@ -269,8 +272,10 @@ public class TankWars {
      * @param delta is the time since the last frame
      */
     public void move(float delta) {
-        if (!isTurnOver)
+        if (!isTurnOver) {
             currentPlayer.getTank().moveTank(delta, terrain);
+            //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_MOVE, null));
+        }
     }
 
     public Player getPlayer() {

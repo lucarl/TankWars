@@ -16,8 +16,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
 import com.mygdx.game.services.Assets;
 import com.mygdx.game.model.Difficulty;
+import com.mygdx.game.events.Event;
+import com.mygdx.game.events.IEventHandler;
+import com.mygdx.game.view.PlaySounds;
+import com.mygdx.game.events.EventBus;
 
-public class OptionsScreen implements Screen {
+public class OptionsScreen implements Screen, IEventHandler {
 
     public static int NUMBER_OF_PLAYERS = 2;
     public static int NUMBER_OF_ROUNDS = 3;
@@ -60,6 +64,8 @@ public class OptionsScreen implements Screen {
     private TextButton arrowButtonLeft3;
 
     private TextButton nextButton;
+    private TextButton backButton;
+    private TextButton muteButton;
 
     private Label optionsLabel;
     private Label roundsLabel;
@@ -77,7 +83,9 @@ public class OptionsScreen implements Screen {
 
 
     public OptionsScreen(Application app) {
+
         this.app = app;
+        initEvent();
 
     }
 
@@ -98,7 +106,7 @@ public class OptionsScreen implements Screen {
         //bigTextButtonStyle.pressedOffsetX = 1;
         //bigTextButtonStyle.pressedOffsetY = -1;
 
-        nextButton = new TextButton("NEXT", bigTextButtonStyle);
+        //nextButton = new TextButton("NEXT", bigTextButtonStyle);
 
         TextButton.TextButtonStyle smallTextButtonStyle = new TextButton.TextButtonStyle();
         smallTextButtonStyle.font = font;
@@ -106,6 +114,10 @@ public class OptionsScreen implements Screen {
         smallTextButtonStyle.down = skin.getDrawable("smallButton.down");
         //smallTextButtonStyle.pressedOffsetX = 1;
         //smallTextButtonStyle.pressedOffsetY = -1;
+
+        nextButton = new TextButton("START GAME", bigTextButtonStyle);
+        muteButton = new TextButton("MUTE SOUND", bigTextButtonStyle);
+        backButton = new TextButton("BACK", smallTextButtonStyle);
 
         arrowButtonLeft1 = new TextButton("<", smallTextButtonStyle);
         arrowButtonRight1 = new TextButton(">", smallTextButtonStyle);
@@ -249,10 +261,27 @@ public class OptionsScreen implements Screen {
         table.add(arrowButtonRight3).left();
 
         table.row();
+        table.add(backButton).center().padRight(100);
+        table.add(muteButton).center();
+        table.add(nextButton).center().padLeft(100);
         table.add();
-        table.add(nextButton).center();
-        table.add();
+        table.row();
+
     }
+
+    @Override
+    public void onEvent(com.mygdx.game.events.Event evt) {
+
+        if(evt.getTag() == Event.Tag.PLAY_SOUND_THEME){
+            PlaySounds.stopTheme();
+        }
+
+    }
+
+    private void initEvent() {
+        EventBus.BUS.register(this);
+    }
+
 
     @Override
     public void render(float delta) {
@@ -284,6 +313,23 @@ public class OptionsScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 app.setPlayScreen();
+                PlaySounds.stopTheme();
+            }
+        });
+
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setMenuScreen();
+            }
+        });
+
+        muteButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                PlaySounds.stopTheme();
+
             }
         });
 
