@@ -5,6 +5,8 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.Application;
 import com.mygdx.game.services.Assets;
+import com.mygdx.game.events.Event;
+import com.mygdx.game.events.EventBus;
 
 public class Tank implements IDrawable {
     private static String tankImgSrc = "tank1.png";
@@ -29,7 +31,6 @@ public class Tank implements IDrawable {
 
     private CollisionRect rect;
 
-    Sound soundMove = Assets.manager.get("tanker.mp3", Sound.class);
 
     public Tank(float x, float y) {
         this.pos = new Position(x + width / 2, y);
@@ -101,15 +102,7 @@ public class Tank implements IDrawable {
      */
     public void setLeftMove(boolean b) {
 
-        final long soundMoveID = soundMove.loop(0.3f, 1.0f, 0.0f);
-
-        Timer.schedule((new Timer.Task() {
-            @Override
-            public void run() {
-                soundMove.loop(soundMoveID);
-                soundMove.stop();
-            }
-        }), 1);
+        EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_MOVE, null));
 
         if (rightMove && b) {
 
@@ -118,26 +111,6 @@ public class Tank implements IDrawable {
         leftMove = b;
 
     }
-
-   /* public void setSoundMoveLeft(boolean b) {
-
-        final long soundMoveID = soundMove.loop(0.3f, 1.0f, 0.0f);
-
-        Timer.schedule((new Timer.Task() {
-            @Override
-            public void run() {
-                soundMove.stop(soundMoveID);
-            }
-        }), 1);
-
-        if (rightMove && b) {
-
-            rightMove = false;
-        }
-        leftMove = b;
-
-    }
-    */
 
     /**
      * If the tanks go right then they will move and make a sound.
@@ -145,16 +118,7 @@ public class Tank implements IDrawable {
      */
     public void setRightMove(boolean b) {
 
-        final long soundMoveID = soundMove.loop(0.3f, 1.0f, 0.0f);
-
-        Timer.schedule((new Timer.Task() {
-            @Override
-            public void run() {
-                soundMove.loop(soundMoveID);
-                soundMove.stop();
-            }
-        }), 1);
-
+        EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_MOVE, null));
 
         if (leftMove && b) {
 
@@ -163,26 +127,6 @@ public class Tank implements IDrawable {
         rightMove = b;
 
     }
-
-   /* public void setSoundMoveRight(boolean b) {
-
-        final long soundMoveID = soundMove.loop(0.3f, 1.0f, 0.0f);
-
-        Timer.schedule((new Timer.Task() {
-            @Override
-            public void run() {
-                soundMove.stop(soundMoveID);
-            }
-        }), 1);
-
-        if (leftMove && b) {
-
-            leftMove = false;
-        }
-        rightMove = b;
-
-    }
-    */
 
     //sätter till public för att göra ett test!!!
     public double decreaseFuel() {
@@ -274,8 +218,5 @@ public class Tank implements IDrawable {
         gun.setPos(new Position(pos.getX() + width / 2, pos.getY()));
     }
 
-    public void dispose() {
-        soundMove.dispose();
-    }
 
 }
