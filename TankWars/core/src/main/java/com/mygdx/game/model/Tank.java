@@ -12,6 +12,7 @@ public class Tank implements IDrawable {
     private static int height = 20;
     private static int originX = width / 2;
     private static int originY = height / 2;
+    private static final float gravity = 4f;
     private static final int speed = 100;
     private static final int roatationSpeed = 5;
 
@@ -54,41 +55,42 @@ public class Tank implements IDrawable {
 
     public Position moveTank(float delta, Terrain terrain) {
         // Get grounds yPos
-        float currentGroundHeight = terrain.getHeightOfCol((int) (pos.getX() + width / 2) / terrain.getTileSize());
-        float newPos = rightMove ? pos.getX() + speed * delta : pos.getX() - speed * delta;
-        float newGroundHeight = terrain.getHeightOfCol((int) (newPos + width / 2) / terrain.getTileSize());
-        //float maxHeightDifference = terrain.getTileSize() * 4f;
-        float newAngle = 5 * (newGroundHeight - currentGroundHeight) * terrain.getTileSize();
-        float maxAngle = 45;
+        float currentGroundHeight = terrain.getActualHeightAtPos(
+                (int) (pos.getX() + width / 2) / terrain.getTileSize(),
+                (int) (pos.getY() + height) / terrain.getTileSize());
+        float newXPos = rightMove ? pos.getX()  + speed * delta : pos.getX() - speed * delta;
+        float newYPos = terrain.getActualHeightAtPos(
+                (int) (newXPos + width / 2) / terrain.getTileSize(),
+                (int) ((pos.getY() + height) / terrain.getTileSize()));
+
+        float newAngle = 5 * (newYPos - currentGroundHeight) * terrain.getTileSize();
+        float maxAngle = 150; // Not degrees
+
         boolean canMoveThere = newAngle <= maxAngle;
 
         if (pos.getY() > currentGroundHeight) {
+            pos.setY(pos.getY() - gravity);
+        } else {
             pos.setY(currentGroundHeight);
         }
 
-        if (canMoveThere && isAlive && fuel > 0 && newPos > 0 && newPos + width < Application.GAME_WIDTH) {
+        if (canMoveThere && isAlive && fuel > 0 && newXPos > 0 && newXPos + width < Application.GAME_WIDTH) {
             if (rightMove) {
-                pos.setX(newPos);
-                // Set tank yPos = groundYPos
-                pos.setY(newGroundHeight);
+                pos.setX(newXPos);
 
-                angle = angle < newAngle ? Math.min(angle+roatationSpeed, newAngle) : Math.max(angle-roatationSpeed, newAngle);
-
-                rect.move(newPos, newGroundHeight);
+                angle = angle < newAngle ? Math.min(angle + roatationSpeed, newAngle) : Math.max(angle - roatationSpeed, newAngle);
 
                 decreaseFuel();
             } else if (leftMove) {
-                pos.setX(newPos);
-                // Set tank yPos = groundYPos
-                pos.setY(newGroundHeight);
+                pos.setX(newXPos);
 
-                angle = angle < -newAngle ? Math.min(angle+roatationSpeed, -newAngle) : Math.max(angle-roatationSpeed, -newAngle);
-
-                rect.move(newPos, newGroundHeight);
+                angle = angle < -newAngle ? Math.min(angle + roatationSpeed, -newAngle) : Math.max(angle - roatationSpeed, -newAngle);
 
                 decreaseFuel();
             }
         }
+
+        rect.move(pos.getX(), pos.getY());
         // Gör så tankGun följer med tanken
         gun.setPos(new Position(pos.getX() + width / 2, pos.getY()));
         return pos;
@@ -97,6 +99,7 @@ public class Tank implements IDrawable {
 
     /**
      * If the tanks go left then they will move and make a sound.
+     *
      * @param b boolean variable
      */
     public void setLeftMove(boolean b) {
@@ -141,6 +144,7 @@ public class Tank implements IDrawable {
 
     /**
      * If the tanks go right then they will move and make a sound.
+     *
      * @param b boolean variable
      */
     public void setRightMove(boolean b) {
@@ -187,14 +191,14 @@ public class Tank implements IDrawable {
     //sätter till public för att göra ett test!!!
     public double decreaseFuel() {
         if (leftMove || rightMove) {
-            this.fuel -= 0.1f;
+            fuel = fuel >= 0.1f ? fuel - 0.1f : 0;
         }
-        return this.fuel;
+        return fuel;
     }
 
     public int decreaseHealth(int damage) {
-        this.healthPoints -= damage;
-        return this.healthPoints;
+        healthPoints = healthPoints >= damage ? healthPoints - damage : 0;
+        return healthPoints;
     }
 
     public TankGun getGun() {
