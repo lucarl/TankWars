@@ -4,6 +4,8 @@ import com.mygdx.game.model.*;
 
 import java.util.List;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * A factory class for creating all dynamic objects
  * during the start of the program
@@ -19,6 +21,8 @@ public class TankWarsFactory {
         int xPos2 = 900;
         Tank tank;
         for (int i = 0; i < nPlayers; i++) {
+            int randomX = ThreadLocalRandom.current().nextInt(5, 900 + 1);
+            int randomY = ThreadLocalRandom.current().nextInt(300, 600);
             // Just nu sätts tanksen en bit ovanför marken å faller ner på marken,
             // Vill få dom att spawna på marken
             //Place tanks evenly on map
@@ -29,11 +33,11 @@ public class TankWarsFactory {
                 tank = new Tank(xPos2, 0);
                 xPos2 -= 200;
             }
-            Upgrade upgrade = new Upgrade(10, 1000);
+            //Upgrade upgrade = new Upgrade(10, 10);
             int yPos = terrain.getHeightOfCol((int) tank.getPos().getX() / terrain.getTileSize());
             tank.setPos(new Position(tank.getPos().getX(), yPos));
             players.add(new Player(tank));
-            objects.add(new Upgrade(upgrade.getPos().getX(), upgrade.getPos().getY()));
+            objects.add(new Upgrade(randomX, randomY));
             //objects.add(players.get(i).getTank().getGun().getShot());
             objects.add(players.get(i).getTank().getGun());
             objects.add(players.get(i).getTank());
