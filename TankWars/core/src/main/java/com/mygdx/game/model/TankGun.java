@@ -45,24 +45,28 @@ public class TankGun implements IDrawable {
         shotFactory = new ShotFactory();
         if (standard) {
             changeWeapon = 1;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
+                    angle, power, windSpeed);
             standard = false;
             return shot;
         }
         if (nuke) {
             changeWeapon = 2;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
+                    angle, power, windSpeed);
             nuke = false;
             return shot;
         }
         if (missile) {
             changeWeapon = 3;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
+                    angle, power, windSpeed);
             missile = false;
             return shot;
         } else {
             changeWeapon = 1;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
+                    angle, power, windSpeed);
             standard = false;
         }
         return shot;
