@@ -27,10 +27,9 @@ public class TestCollisionRect {
     float expectedY = startValue.getY();
     assertTrue(expectedX == 1 && expectedY == 1);
     }
-
  /**
   * Create two CollisionRect objects and test if they collide with each other .
-  * @result
+  * @result the test will be passed if the conditions for the ranges of the rectangles are satisfied.
   *
   */
     @Test

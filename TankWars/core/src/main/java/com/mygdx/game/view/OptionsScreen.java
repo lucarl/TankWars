@@ -115,6 +115,7 @@ public class OptionsScreen implements Screen, IEventHandler {
         //smallTextButtonStyle.pressedOffsetX = 1;
         //smallTextButtonStyle.pressedOffsetY = -1;
 
+        //create buttons
         nextButton = new TextButton("START GAME", bigTextButtonStyle);
         muteButton = new TextButton("MUTE SOUND", bigTextButtonStyle);
         backButton = new TextButton("BACK", smallTextButtonStyle);
@@ -301,7 +302,6 @@ public class OptionsScreen implements Screen, IEventHandler {
         //handleNextButton();
 
         app.batch.end();
-
         stage.act(delta);
         stage.draw();
 
