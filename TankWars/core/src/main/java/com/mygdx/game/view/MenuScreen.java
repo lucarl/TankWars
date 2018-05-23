@@ -124,6 +124,7 @@ public class MenuScreen implements Screen, IEventHandler {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 app.setPlayScreen();
+                PlaySounds.stopTheme();
             }
         });
         optionsButton.addListener(new ClickListener() {

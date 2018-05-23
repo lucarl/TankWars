@@ -56,6 +56,9 @@ public class OptionsScreen implements Screen, IEventHandler {
     private Skin skin;
     private Table table;
 
+    private Sprite background;
+    private Boolean clicked = false;
+
 
     public OptionsScreen(Application app) {
         this.app = app;
@@ -87,6 +90,9 @@ public class OptionsScreen implements Screen, IEventHandler {
 
         //create buttons
         nextButton = new TextButton("START GAME", bigTextButtonStyle);
+        muteButton = new TextButton("MUTE THEME", bigTextButtonStyle);
+        muteButton2 = new TextButton("MUTE GAME", bigTextButtonStyle);
+        backButton = new TextButton("BACK", bigTextButtonStyle);
 
         arrowButtonLeft1 = new TextButton("<", smallTextButtonStyle);
         arrowButtonRight1 = new TextButton(">", smallTextButtonStyle);
