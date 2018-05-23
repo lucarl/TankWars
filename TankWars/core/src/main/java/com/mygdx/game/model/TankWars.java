@@ -257,7 +257,6 @@ public class TankWars {
      * @param delta is the time since the last frame
      */
     public void move(float delta) {
-
         players.forEach(player -> {
             player.getTank().moveTank(delta, terrain);
         });
