@@ -10,6 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
 
 import com.mygdx.game.ctrl.PlayController;
@@ -68,6 +71,13 @@ public class PlayScreen implements Screen, IEventHandler {
         background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         InputMultiplexer im = new InputMultiplexer(stage, controller);
         Gdx.input.setInputProcessor(im);
+        //viewport = new FitViewport(Application.GAME_WIDTH, Application.GAME_HEIGHT);
+        //stage = new Stage(viewport, app.batch);
+
+        table = new Table(skin);
+        table.setWidth(stage.getWidth());
+        table.align(Align.center|Align.bottom);
+        table.setPosition(0, Gdx.graphics.getHeight());
 
         //return to menu button
         menuButton = new TextButton("Return to Menu", skin);
@@ -88,7 +98,22 @@ public class PlayScreen implements Screen, IEventHandler {
             }
         });
 
+        //score
+        scoreButton = new TextButton("Show Leaderboards",skin);
+        scoreButton.getLabel().setFontScale(0.9f);
+        scoreButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setScoreScreen();
+            }
+        });
+
+        table.add(menuButton);
+        table.add(scoreButton).padLeft(50);
+
+        stage.addActor(scoreButton);
         stage.addActor(menuButton);
+        stage.addActor(table);
 
     }
 

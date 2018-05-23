@@ -87,8 +87,6 @@ public class Assets {
             new AssetDescriptor<Sound>("missile.mp3",Sound.class);
 
 
-
-
     //skin
     /*
     public static final AssetDescriptor<Skin> uiSkin =

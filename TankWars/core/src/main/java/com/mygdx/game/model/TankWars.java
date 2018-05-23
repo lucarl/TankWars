@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankWars {
+
     private Player currentPlayer;
     private Wind wind;
     private Terrain terrain;
@@ -213,6 +214,7 @@ public class TankWars {
                 nTanks++;
             }
         }
+
         //if only one tank is left on the field we have a winner and the round is over
         return nTanks <= 1; //är det inte mer rimligt att ha nTanks == 1 ??
     }
