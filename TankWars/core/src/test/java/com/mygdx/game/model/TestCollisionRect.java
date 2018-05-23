@@ -29,6 +29,7 @@ public class TestCollisionRect {
     }
  /**
   * Create two CollisionRect objects and test if they collide with each other .
+  * @result the test will be passed if the conditions for the ranges of the rectangles are satisfied.
   *
   */
     @Test
