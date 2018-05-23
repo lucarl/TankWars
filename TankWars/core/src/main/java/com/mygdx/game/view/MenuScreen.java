@@ -2,7 +2,6 @@ package com.mygdx.game.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -16,16 +15,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Application;
 import com.mygdx.game.services.Assets;
+import com.mygdx.game.events.EventBus;
+import com.mygdx.game.events.Event;
+import com.mygdx.game.view.PlaySounds;
+import com.mygdx.game.events.IEventHandler;
 
 
 /**
  * Created by marianarale on 2018-05-12.
  */
-public class MenuScreen implements Screen {
+public class MenuScreen implements Screen, IEventHandler {
 
     private Application app;
 
@@ -41,19 +43,12 @@ public class MenuScreen implements Screen {
     private TextureAtlas atlas;
     private Label heading;
 
-    Sound soundTheme = Assets.manager.get("TankWarsTheme.mp3", Sound.class);
-
     public MenuScreen(Application app) {
         this.app = app;
 
-        final long soundThemeID = soundTheme.loop(0.1f,1.0f,0.1f);
+        //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
+        initEvent();
 
-        Timer.schedule((new Timer.Task() {
-            @Override
-            public void run() {
-                soundTheme.loop(soundThemeID);
-            }
-        }),1);
     }
 
     @Override
@@ -77,7 +72,8 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 app.setPlayScreen();
-                soundTheme.stop();
+                PlaySounds.stopTheme();
+
             }
         });
 
@@ -96,7 +92,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
-                soundTheme.stop();
+                PlaySounds.stopTheme();
             }
         });
 
@@ -131,8 +127,21 @@ public class MenuScreen implements Screen {
         // Take input from ui
         Gdx.input.setInputProcessor(stage);
 
+    }
+
+    @Override
+    public void onEvent(Event evt) {
+
+        if(evt.getTag() == Event.Tag.PLAY_SOUND_THEME){
+            PlaySounds.stopTheme();
+        }
 
     }
+
+    private void initEvent() {
+        EventBus.BUS.register(this);
+    }
+
 
     @Override
     public void render(float delta) {
@@ -170,6 +179,5 @@ public class MenuScreen implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
-        soundTheme.dispose();
     }
 }

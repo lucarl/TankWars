@@ -13,52 +13,54 @@ public class PlayController implements InputProcessor {
     }
 
 
-
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.LEFT) {
-            tankWars.getPlayer().getTank().setLeftMove(true);
+        if (!tankWars.isTurnOver()) {
+            if (keycode == Input.Keys.LEFT) {
+                tankWars.getPlayer().getTank().setLeftMove(true);
+            }
+
+            if (keycode == Input.Keys.RIGHT) {
+                tankWars.getPlayer().getTank().setRightMove(true);
+            }
+
+            if (keycode == Input.Keys.UP) {
+                tankWars.getPlayer().getTank().getGun().setLeftAim(true);
+            }
+
+            if (keycode == Input.Keys.DOWN) {
+                tankWars.getPlayer().getTank().getGun().setRightAim(true);
+            }
+
+            if (keycode == Input.Keys.SPACE) {
+                tankWars.fire();
+
+            }
+
+            if (keycode == Input.Keys.A) {
+                tankWars.getPlayer().getTank().getGun().increasePower();
+            }
+
+            if (keycode == Input.Keys.Z) {
+                tankWars.getPlayer().getTank().getGun().decreasePower();
+            }
+
+            if (keycode == Input.Keys.NUM_1) {
+                tankWars.getPlayer().getTank().getGun().changeStandard();
+            }
+
+            if (keycode == Input.Keys.NUM_2) {
+                tankWars.getPlayer().getTank().getGun().changeNuke();
+            }
+
+            if (keycode == Input.Keys.NUM_3) {
+                tankWars.getPlayer().getTank().getGun().changeMissile();
+            }
         }
 
-        if (keycode == Input.Keys.RIGHT) {
-            tankWars.getPlayer().getTank().setRightMove(true);
-        }
-
-        if (keycode == Input.Keys.UP) {
-            tankWars.getPlayer().getTank().getGun().setLeftAim(true);
-        }
-
-        if (keycode == Input.Keys.DOWN) {
-            tankWars.getPlayer().getTank().getGun().setRightAim(true);
-        }
-
-        if (keycode == Input.Keys.SPACE) {
-            tankWars.fire();
-
-        }
-
-        if (keycode == Input.Keys.A) {
-            tankWars.getPlayer().getTank().getGun().increasePower();
-        }
-
-        if (keycode == Input.Keys.Z) {
-            tankWars.getPlayer().getTank().getGun().decreasePower();
-        }
-
-        if (keycode == Input.Keys.NUM_1) {
-            tankWars.getPlayer().getTank().getGun().changeStandard();
-        }
-
-        if (keycode == Input.Keys.NUM_2) {
-            tankWars.getPlayer().getTank().getGun().changeNuke();
-        }
-
-        if (keycode == Input.Keys.NUM_3) {
-            tankWars.getPlayer().getTank().getGun().changeMissile();
-        }
-
+        // FOR TESTING
         if (keycode == Input.Keys.N) {
-            tankWars.nextPlayer();
+           tankWars.nextPlayer();
         }
 
 

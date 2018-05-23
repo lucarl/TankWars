@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
  * An assets class whose purpose is to load and manage
  * all the assets that are used in the game.
  *
- * @author Patricia Zabecka
+ * @author Patricia Zabecka, Thomas Jinton
  *
  */
 public class Assets {
@@ -71,10 +71,17 @@ public class Assets {
             new AssetDescriptor<Sound>("tanker.mp3", Sound.class);
     private static final AssetDescriptor<Sound> soundBoom =
             new AssetDescriptor<Sound>("boom.mp3", Sound.class);
+    private static final AssetDescriptor<Sound> soundDestroy =
+            new AssetDescriptor<Sound>("destroy.mp3",Sound.class);
     private static final AssetDescriptor<Sound> soundAim =
             new AssetDescriptor<Sound>("badaim.mp3", Sound.class);
     private static final AssetDescriptor<Sound> soundTheme =
             new AssetDescriptor<Sound>("TankWarsTheme.mp3", Sound.class);
+    private static final AssetDescriptor<Sound> soundNuke =
+            new AssetDescriptor<Sound>("nuke.mp3",Sound.class);
+    private static final AssetDescriptor<Sound> soundMissile =
+            new AssetDescriptor<Sound>("missile.mp3",Sound.class);
+
 
 
 
@@ -102,6 +109,9 @@ public class Assets {
         manager.load(soundShoot);
         manager.load(soundMove);
         manager.load(soundTheme);
+        manager.load(soundMissile);
+        manager.load(soundNuke);
+        manager.load(soundDestroy);
     }
 
     public static void disposeAssets(){

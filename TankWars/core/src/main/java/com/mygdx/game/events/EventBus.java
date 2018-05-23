@@ -35,6 +35,7 @@ public enum EventBus {
         synchronized (handlers) {
             handlers.stream().forEach((evh) -> {
                 evh.onEvent(evt);
+                //evh.onEventMenu(evt);
             });
         }
     }

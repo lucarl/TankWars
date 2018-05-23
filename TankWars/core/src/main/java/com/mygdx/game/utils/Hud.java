@@ -68,13 +68,13 @@ public class Hud implements Disposable {
         BitmapFont font = Assets.manager.get("hudFont.fnt");
 
         // Create label with a string and a style
-        scoreLabel = new Label(String.format("Score: %03d", score), new Label.LabelStyle(font, Color.WHITE));
+        scoreLabel = new Label(String.format("Score: %02d", score), new Label.LabelStyle(font, Color.WHITE));
         nameLabel = new Label("Player: " + name, new Label.LabelStyle(font, Color.WHITE));
         hpLabel = new Label(String.format("HP: %03d", hp), new Label.LabelStyle(font, Color.WHITE));
         angleLabel = new Label(String.format("Angle: %.0f", angle), new Label.LabelStyle(font, Color.WHITE));
-        powerLabel = new Label(String.format("Power: %03f", power), new Label.LabelStyle(font, Color.WHITE));
-        fuelLabel = new Label(String.format("Fuel: %03f", fuel), new Label.LabelStyle(font, Color.WHITE));
-        windLabel = new Label(String.format("Wind: %03d <--", wind), new Label.LabelStyle(font, Color.WHITE));
+        powerLabel = new Label(String.format("Power: %.0f", power), new Label.LabelStyle(font, Color.WHITE));
+        fuelLabel = new Label(String.format("Fuel: %.0f", fuel), new Label.LabelStyle(font, Color.WHITE));
+        windLabel = new Label(String.format("Wind: %2d <--", wind), new Label.LabelStyle(font, Color.WHITE));
         shotLabel = new Label("Shot: " + shot, new Label.LabelStyle(font, Color.WHITE));
 
         // Setup the table layout
