@@ -6,7 +6,7 @@ import com.prototype.managers.Assets;
 
 public class MenuDemo extends Game {
 
-    //SplashScreen2 splashScreen2;
+    SplashScreen2 splashScreen2;
     SplashScreen splashScreen;
     public Assets AssetsManager = new Assets();
 
@@ -14,8 +14,8 @@ public class MenuDemo extends Game {
     public void create(){
         //splashScreen2 = new SplashScreen2();
         //setScreen(splashScreen2);
-        splashScreen = new SplashScreen();
-        setScreen(splashScreen);
+        splashScreen2 = new SplashScreen2();
+        setScreen(splashScreen2);
     }
 
 

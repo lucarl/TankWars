@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
@@ -218,15 +219,27 @@ public class OptionsScreen implements Screen, IEventHandler {
         nextButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                app.setPlayScreen();
-                PlaySounds.stopTheme();
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setPlayScreen();
+                        PlaySounds.stopTheme();
+                    }
+                }), 1);
+
             }
         });
 
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                app.setMenuScreen();
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setMenuScreen();
+                    }
+                }), 1);
+
             }
         });
 

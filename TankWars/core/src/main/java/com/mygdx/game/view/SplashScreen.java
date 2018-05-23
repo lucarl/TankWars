@@ -14,7 +14,6 @@ import com.mygdx.game.events.Event;
 import com.mygdx.game.view.PlaySounds;
 import com.mygdx.game.events.IEventHandler;
 
-
 public class SplashScreen implements Screen, IEventHandler {
 
     private Application app;
@@ -76,6 +75,7 @@ public class SplashScreen implements Screen, IEventHandler {
     private void update(float delta) {
         stage.act(delta);
     }
+
 
     @Override
     public void resize(int width, int height) {
