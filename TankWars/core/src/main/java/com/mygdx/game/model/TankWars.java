@@ -1,17 +1,11 @@
 package com.mygdx.game.model;
 
 import com.mygdx.game.model.factorys.TankWarsFactory;
-import com.mygdx.game.services.Assets;
-import java.util.ArrayList;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.Application;
 
 public class TankWars {
 
     private Player currentPlayer;
-    private int playerIndex;
-    private Application app;
     private List<IDrawable> upgrade;
     private List<Player> players;
     private List<IDrawable> objects;
