@@ -21,7 +21,7 @@ public class OptionsScreen implements Screen {
 
     public static int NUMBER_OF_PLAYERS = 2;
     public static int NUMBER_OF_ROUNDS = 3;
-    static Difficulty DIFFICULTY = Difficulty.EASY;
+    public static Difficulty DIFFICULTY = Difficulty.EASY;
 
     //Constants for the next button
     private static final int NEXT_BUTTON_WIDTH = 20;

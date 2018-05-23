@@ -14,7 +14,6 @@ public class TankWars {
     private Terrain terrain;
 
     // TODO factory klassen kan vara static, då behövs inte detta objektet
-    private TankWarsFactory tankWarsFactory;
 
     private List<IDrawable> upgrade;
     private List<Player> players;
@@ -30,20 +29,13 @@ public class TankWars {
     private boolean shooting = false;
     private boolean gameOver = false;
 
-
-    /**
-     * @param nPlayers
-     * @param nRounds
-     * @param difficulty
-     */
-    public TankWars(int nPlayers, int nRounds, Difficulty difficulty) {
-        players = new ArrayList<>();
-        objects = new ArrayList<>();
-        shots = new ArrayList<>();
-        tiles = new ArrayList<>();
-        wind = new Wind(difficulty);
-        tankWarsFactory = new TankWarsFactory();
-        terrain = tankWarsFactory.getTerrain();
+    public TankWars(Terrain terrain, List<Player> players, List<IDrawable> objects, List<IDrawable> shots, List<IDrawable> tiles, Wind wind) {
+        this.terrain = terrain;
+        this.players = players;
+        this.objects = objects;
+        this.shots = shots;
+        this.tiles = tiles;
+        this.wind = wind;
 
         /**
          *  TODO alla object som används av tankWars kan skapas i factoryn
@@ -52,10 +44,9 @@ public class TankWars {
          *  i konstruktorn
          *
          */
-        tankWarsFactory.setupTerrainTiles(tiles);
-        tankWarsFactory.setupObjects(nPlayers, players, objects);
 
-        this.nRounds = nRounds;
+
+
         currentPlayer = players.get(playerIndex);
     }
 
@@ -72,6 +63,7 @@ public class TankWars {
             // TODO save which player won the round
             round++;
             if (round < nRounds) {
+                terrain = new Terrain();
                 /**
                  * TODO make a new tank for every player
                  * and a new terrain
@@ -158,7 +150,7 @@ public class TankWars {
             for (int row = startRow; row < endRow; row++) {
                 if (terrainMatrix[row][col] != null) {
                     //if (Math.pow(col - startX, 2) + Math.pow(row - startY, 2) <= Math.pow((int)shot.getRadius(), 2)) {
-                        terrainMatrix[row][col].setAlive(false);
+                    terrainMatrix[row][col].setAlive(false);
                     //}
                 }
             }

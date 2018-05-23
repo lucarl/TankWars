@@ -17,6 +17,7 @@ import com.mygdx.game.events.Event;
 import com.mygdx.game.events.EventBus;
 import com.mygdx.game.events.IEventHandler;
 import com.mygdx.game.model.Tank;
+import com.mygdx.game.model.factorys.TankWarsFactory;
 import com.mygdx.game.services.Assets;
 
 import com.mygdx.game.model.TankWars;
@@ -35,12 +36,14 @@ public class PlayScreen implements Screen, IEventHandler {
     private Skin skin;
     private Stage stage;
     private TextButton menuButton;
+    private TankWarsFactory tankWarsFactory;
 
     private List<Explosion> explosions;
 
     public PlayScreen(Application app) {
+        tankWarsFactory = new TankWarsFactory();
         this.app = app;
-        tankWars = new TankWars(OptionsScreen.NUMBER_OF_PLAYERS, OptionsScreen.NUMBER_OF_ROUNDS, OptionsScreen.DIFFICULTY);
+        tankWars = tankWarsFactory.makeTankWars();
         controller = new PlayController(tankWars);
         renderer = new Renderer(app.batch);
         hud = new Hud(app.batch, tankWars);
