@@ -29,7 +29,7 @@ public class TestTankWars {
 
     @Before
     public void setUp(){
-        tankWarsTest = new TankWars(2,5,Difficulty.EASY);
+        //tankWarsTest = new TankWars();
         tank = new Tank(1,1);
         testTile = new TerrainTile(10,10, false, 5);
         shot = new StandardShot(new Position(5,5),0.1f, 1f, 10);

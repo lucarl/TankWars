@@ -12,7 +12,6 @@ public class TankWars {
     private Player currentPlayer;
     private Wind wind;
     private Terrain terrain;
-
     private TankWarsFactory tankWarsFactory;
 
     private List<IDrawable> upgrade;
@@ -29,25 +28,14 @@ public class TankWars {
     private boolean shooting = false;
     private boolean gameOver = false;
 
-
-    /**
-     * @param nPlayers
-     * @param nRounds
-     * @param difficulty
-     */
-    public TankWars(int nPlayers, int nRounds, Difficulty difficulty) {
-        players = new ArrayList<>();
-        objects = new ArrayList<>();
-        shots = new ArrayList<>();
-        tiles = new ArrayList<>();
-        wind = new Wind(difficulty);
-        tankWarsFactory = new TankWarsFactory();
-        terrain = tankWarsFactory.getTerrain();
-
-        tankWarsFactory.setupTerrainTiles(tiles);
-        tankWarsFactory.setupObjects(nPlayers, players, objects);
-
-        this.nRounds = nRounds;
+    public TankWars(Terrain terrain, List<Player> players, List<IDrawable> objects, List<IDrawable> shots, List<IDrawable> tiles, Wind wind) {
+        this.terrain = terrain;
+        this.players = players;
+        this.objects = objects;
+        this.shots = shots;
+        this.tiles = tiles;
+        this.wind = wind;
+      
         currentPlayer = players.get(playerIndex);
     }
 
@@ -65,6 +53,7 @@ public class TankWars {
             round++;
             currentPlayer.addScore();
             if (round < nRounds) {
+                terrain = new Terrain();
                 /**
                  * TODO make a new tank for every player
                  * and a new terrain
@@ -159,6 +148,7 @@ public class TankWars {
 
                         }
                     }
+
                     //}
                 }
             }
