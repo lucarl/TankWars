@@ -3,8 +3,6 @@ package com.mygdx.game.events;
 /**
  A single event
 
- @author hajo
-
  */
 public class Event {
 
@@ -21,13 +19,6 @@ public class Event {
         PLAY_SOUND_MISSILE,
 
     }
-
-    /*
-       PLAYER_IN_JAIL,
-        PLAYER_POSITION,
-        DICE_FST,
-        DICE_SEC,
-     */
 
     private final Tag tag;
     // Data to send

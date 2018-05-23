@@ -9,7 +9,7 @@ import com.mygdx.game.view.*;
 public class Application extends Game{
     public static final String TITLE = "TANK WARS";
     public static final int GAME_WIDTH = 1000;
-    public static final int GAME_HEIGHT = 600;
+    public static final int GAME_HEIGHT = 625;
 
 
     private Screen screen;

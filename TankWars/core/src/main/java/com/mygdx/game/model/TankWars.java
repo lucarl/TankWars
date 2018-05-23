@@ -246,6 +246,7 @@ public class TankWars {
             isTurnOver = true;
 
             // Create a sound event for shooting
+
             EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_FIRE, null));
         }
 
