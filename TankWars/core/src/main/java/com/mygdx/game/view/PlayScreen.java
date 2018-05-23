@@ -77,6 +77,13 @@ public class PlayScreen implements Screen, IEventHandler {
             public void clicked(InputEvent event, float x, float y) {
                 app.setMenuScreen();
                 PlaySounds.playThemeReturn();
+                PlaySounds.stopFire();
+                PlaySounds.stopMove();
+                PlaySounds.stopAim();
+                PlaySounds.stopExplosion();
+                PlaySounds.stopNuke();
+                PlaySounds.stopMissile();
+                PlaySounds.stopTankDestroy();
 
             }
         });

@@ -19,6 +19,7 @@ import com.mygdx.game.model.Difficulty;
 import com.mygdx.game.events.Event;
 import com.mygdx.game.events.IEventHandler;
 import com.mygdx.game.events.EventBus;
+import com.mygdx.game.view.PlayScreen;
 
 public class OptionsScreen implements Screen, IEventHandler {
 
@@ -41,6 +42,7 @@ public class OptionsScreen implements Screen, IEventHandler {
     private TextButton nextButton;
     private TextButton backButton;
     private TextButton muteButton;
+    private TextButton muteButton2;
 
     private Label optionsLabel;
     private Label roundsLabel;
@@ -53,7 +55,6 @@ public class OptionsScreen implements Screen, IEventHandler {
     private TextureAtlas atlas;
     private Skin skin;
     private Table table;
-    private Sprite background;
 
 
     public OptionsScreen(Application app) {
@@ -86,8 +87,7 @@ public class OptionsScreen implements Screen, IEventHandler {
 
         //create buttons
         nextButton = new TextButton("START GAME", bigTextButtonStyle);
-        muteButton = new TextButton("MUTE SOUND", bigTextButtonStyle);
-        backButton = new TextButton("BACK", smallTextButtonStyle);
+
         arrowButtonLeft1 = new TextButton("<", smallTextButtonStyle);
         arrowButtonRight1 = new TextButton(">", smallTextButtonStyle);
         arrowButtonLeft2 = new TextButton("<", smallTextButtonStyle);
@@ -168,14 +168,17 @@ public class OptionsScreen implements Screen, IEventHandler {
         table.add(arrowButtonRight3).left();
 
         table.row();
-        table.add(backButton).center().padRight(100);
-        table.add(muteButton).center();
-        table.add(nextButton).center().padLeft(100);
+        table.add(muteButton).center().padTop(20);
+        table.add();
+        table.add(backButton).center().padTop(20);
+        table.add();
+
+        table.row();
+        table.add(muteButton2).center().padTop(5);
+        table.add();
+        table.add(nextButton).center().padTop(5);
         table.add();
         table.row();
-
-        // Only for debug table layout
-        //table.setDebug(true);
 
     }
 
@@ -225,7 +228,30 @@ public class OptionsScreen implements Screen, IEventHandler {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 
-                PlaySounds.stopTheme();
+                clicked = !clicked;
+                if(clicked){
+                    PlaySounds.pauseTheme();
+                }
+                else {
+                    //PlaySounds.playThemeReturn();
+                    PlaySounds.resumeTheme();
+                }
+            }
+        });
+
+        muteButton2.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                clicked = !clicked;
+                if(clicked){
+
+
+                }
+
+                else {
+
+                }
 
             }
         });
