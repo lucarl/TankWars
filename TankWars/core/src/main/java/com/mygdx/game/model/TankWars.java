@@ -257,8 +257,7 @@ public class TankWars {
      * @param delta is the time since the last frame
      */
     public void aim(float delta) {
-        adamsBranch22/05
-        currentPlayer.getTank().getGun().aimTank(delta)
+        currentPlayer.getTank().getGun().aimTank(delta);
 
     }
 
@@ -268,7 +267,7 @@ public class TankWars {
      * @param delta is the time since the last frame
      */
     public void move(float delta) {
-        adamsBranch22/05
+
         players.forEach(player -> {
             player.getTank().moveTank(delta, terrain);
         });

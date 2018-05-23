@@ -34,7 +34,7 @@ public class TankWarsFactory {
                 xPos2 -= 200;
             }
             //Upgrade upgrade = new Upgrade(10, 10);
-            int yPos = terrain.getHeightOfCol((int) tank.getPos().getX() / terrain.getTileSize());
+            int yPos = terrain.getMaxHeightOfCol((int) tank.getPos().getX() / terrain.getTileSize());
 
             tank.setPos(new Position(tank.getPos().getX(), yPos));
             players.add(new Player(tank));
