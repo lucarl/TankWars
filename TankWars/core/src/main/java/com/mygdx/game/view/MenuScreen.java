@@ -90,6 +90,7 @@ public class MenuScreen implements Screen, IEventHandler {
         setupMenuTable();
         stage.addActor(table);
 
+        addMenuButtonListeners();
         // Take input from ui
         Gdx.input.setInputProcessor(stage);
     }
