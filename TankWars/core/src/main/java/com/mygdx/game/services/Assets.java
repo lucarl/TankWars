@@ -46,6 +46,10 @@ public class Assets {
     private static final AssetDescriptor<Texture> backgroundImg =
             new AssetDescriptor<Texture>("background.jpg", Texture.class);
 
+    //background menu image
+    private static final AssetDescriptor<Texture> menuImg =
+            new AssetDescriptor<Texture>("menuscreen.jpg", Texture.class);
+
     //splash image
     private static final AssetDescriptor<Texture> splashImg =
             new AssetDescriptor<Texture>("tanks.jpg", Texture.class);
@@ -102,6 +106,7 @@ public class Assets {
         manager.load(backgroundImg);
         manager.load(explosionAni);
         manager.load(splashImg);
+        manager.load(menuImg);
         manager.load(hudFont);
         manager.load(headingFont);
         manager.load(soundAim);

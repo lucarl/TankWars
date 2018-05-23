@@ -22,8 +22,6 @@ public class TestShot {
      * than the game screen's width.
      *
      */
-
-
     @Test
     public void testShot(){
         Shot shot = new StandardShot(new Position(Application.GAME_WIDTH +1,10), 90, 0.1f, 50);
