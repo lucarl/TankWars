@@ -4,6 +4,7 @@ import com.mygdx.game.Application;
 import com.mygdx.game.events.Event;
 import com.mygdx.game.events.EventBus;
 import com.mygdx.game.model.factorys.TankWarsFactory;
+import com.mygdx.game.view.OptionsScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,6 @@ public class TankWars {
 
     private int playerIndex = 0;
     private int round = 0;
-    private int nRounds;
 
     private boolean isTurnOver = false;
     private boolean shooting = false;
@@ -52,7 +52,7 @@ public class TankWars {
             // TODO save which player won the round
             round++;
             currentPlayer.addScore();
-            if (round < nRounds) {
+            if (round < OptionsScreen.NUMBER_OF_ROUNDS) {
                 terrain = new Terrain();
                 /**
                  * TODO make a new tank for every player
