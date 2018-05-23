@@ -9,6 +9,15 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
+/**
+ *
+ * A test class for some of the core methods
+ * included in the TankWars class.
+ *
+ * @author Patricia Zabecka
+ *
+ */
+
 public class TestTankWars {
 
     private TankWars tankWarsTest;
@@ -18,9 +27,13 @@ public class TestTankWars {
     private Terrain terrain;
     private float delta;
 
+    /**
+     * Sets up a tank, tile, shot, terrain and a tankWars object and initializes a delta
+     * value for testing.
+     */
     @Before
     public void setUp(){
-        tankWarsTest = new TankWars(2,5,Difficulty.EASY);
+        //tankWarsTest = new TankWars();
         tank = new Tank(1,1);
         testTile = new TerrainTile(10,10, false, 5);
         shot = new StandardShot(new Position(5,5),0.1f, 1f, 10);
@@ -33,10 +46,13 @@ public class TestTankWars {
         tankWarsTest.getShots().removeAll(tankWarsTest.getShots());
     }
 
-    //update
+    //updateObjects
 
     //removeObjects
-
+    /**
+     * The test checks if
+     * @result
+     */
     @Test
     public void testRemoveObjectTank(){
         //adds an object at index 1 to our empty list
@@ -47,7 +63,10 @@ public class TestTankWars {
         //test if object tank is removed by checking if the list is empty
         assertTrue(tankWarsTest.getObjects().isEmpty());
     }
-
+    /**
+     * The test checks if
+     * @result
+     */
     @Test
     public void testRemoveObjectTile(){
         tankWarsTest.getTiles().add(0,testTile);
@@ -55,7 +74,10 @@ public class TestTankWars {
         assertTrue(tankWarsTest.getTiles().isEmpty());
 
     }
-
+    /**
+     * The test checks if
+     * @result
+     */
     @Test
     public void testRemoveObjectShot(){
         tankWarsTest.getShots().add(0,shot);
@@ -63,7 +85,10 @@ public class TestTankWars {
         tankWarsTest.removeObjects();
         assertTrue(tankWarsTest.getShots().isEmpty());
     }
-
+    /**
+     * The test checks if
+     * @result
+     */
     //isRoundOver
     @Test
     public void testIsRoundOver(){
@@ -72,7 +97,10 @@ public class TestTankWars {
         //should return true becuase only one player is alive
         assertTrue(tankWarsTest.isRoundOver());
     }
-
+    /**
+     * The test checks if
+     * @result
+     */
     //nextPlayer
     @Test
     public void testNextPlayerTurnOver(){
@@ -81,16 +109,20 @@ public class TestTankWars {
         boolean expectedTurnOver = tankWarsTest.isTurnOver(); //should be set to true after nextPlayer() is called
         assertEquals(expectedTurnOver, actualTurnOver);
     }
-
+    /**
+     * The test checks if
+     * @result
+     */
     //aim
-
     @Test
     public void testAim(){
        tankWarsTest.aim(delta);
     }
-
+    /**
+     * The test checks if
+     * @result
+     */
     //move
-
     @Test
     public void testMove(){
         Position actualPos = tankWarsTest.getPlayer().getTank().getPos();
@@ -99,9 +131,10 @@ public class TestTankWars {
         //assertTrue(expectedPos == actualPos); is true but should be false
         assertTrue(expectedPos != actualPos); //TEST FAILED
     }
-
-    //fire
-
+    /**
+     * The test checks if
+     * @result
+     */
     @Test
     public void testFire(){
         tankWarsTest.fire();

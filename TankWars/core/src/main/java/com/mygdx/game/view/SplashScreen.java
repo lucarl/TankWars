@@ -9,9 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.Application;
 import com.mygdx.game.services.Assets;
+import com.mygdx.game.events.EventBus;
+import com.mygdx.game.events.Event;
+import com.mygdx.game.view.PlaySounds;
+import com.mygdx.game.events.IEventHandler;
 
 
-public class SplashScreen implements Screen {
+public class SplashScreen implements Screen, IEventHandler {
 
     private Application app;
 
@@ -21,6 +25,10 @@ public class SplashScreen implements Screen {
     public SplashScreen(Application app) {
         this.app = app;
         stage = new Stage();
+
+        EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
+        initEvent();
+
     }
 
     @Override
@@ -29,6 +37,7 @@ public class SplashScreen implements Screen {
             @Override
             public void run() {
                 app.setMenuScreen();
+                PlaySounds.playTheme();
             }
         };
 
@@ -39,6 +48,19 @@ public class SplashScreen implements Screen {
                 Actions.run(transitionRunnable))));
 
         stage.addActor(splashImage);
+    }
+
+    @Override
+    public void onEvent(Event evt) {
+
+        if(evt.getTag() == Event.Tag.PLAY_SOUND_THEME){
+            PlaySounds.playTheme();
+        }
+
+    }
+
+    private void initEvent() {
+        EventBus.BUS.register(this);
     }
 
     @Override

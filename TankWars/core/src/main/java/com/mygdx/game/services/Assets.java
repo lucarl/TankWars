@@ -6,10 +6,18 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
+/**
+ * An assets class whose purpose is to load and manage
+ * all the assets that are used in the game.
+ *
+ * @author Patricia Zabecka, Thomas Jinton
+ *
+ */
 public class Assets {
 
     public static final AssetManager manager = new AssetManager();
 
+    //------------------- TEXTURES ----------------------------
     //tank image
     private static final AssetDescriptor<Texture> tankImg =
             new AssetDescriptor<Texture>("tank1.png", Texture.class);
@@ -38,34 +46,46 @@ public class Assets {
     private static final AssetDescriptor<Texture> backgroundImg =
             new AssetDescriptor<Texture>("background.jpg", Texture.class);
 
-    //explosion animation
-    private static final AssetDescriptor<Texture> explosionAni =
-            new AssetDescriptor<Texture>("explosion.png", Texture.class);
+    //background menu image
+    private static final AssetDescriptor<Texture> menuImg =
+            new AssetDescriptor<Texture>("menuscreen.jpg", Texture.class);
 
     //splash image
     private static final AssetDescriptor<Texture> splashImg =
             new AssetDescriptor<Texture>("tanks.jpg", Texture.class);
 
+    //------------------- ANIMATIONS ----------------------------
+    //explosion animation
+    private static final AssetDescriptor<Texture> explosionAni =
+            new AssetDescriptor<Texture>("explosions3.png", Texture.class);
+
+    //------------------- FONTS ----------------------------
     // HUD font
     private static final AssetDescriptor<BitmapFont> hudFont =
             new AssetDescriptor<>("hudFont.fnt", BitmapFont.class);
 
     // tank wars font
-    private static final AssetDescriptor<BitmapFont> tankWarsFont =
+    private static final AssetDescriptor<BitmapFont> headingFont =
             new AssetDescriptor<>("myfont.fnt", BitmapFont.class);
 
-    // sounds
-
+    //------------------- SOUNDS ----------------------------
     private static final AssetDescriptor<Sound> soundShoot =
             new AssetDescriptor<Sound>("cannon.mp3", Sound.class);
     private static final AssetDescriptor<Sound> soundMove =
             new AssetDescriptor<Sound>("tanker.mp3", Sound.class);
     private static final AssetDescriptor<Sound> soundBoom =
             new AssetDescriptor<Sound>("boom.mp3", Sound.class);
+    private static final AssetDescriptor<Sound> soundDestroy =
+            new AssetDescriptor<Sound>("destroy.mp3",Sound.class);
     private static final AssetDescriptor<Sound> soundAim =
             new AssetDescriptor<Sound>("badaim.mp3", Sound.class);
     private static final AssetDescriptor<Sound> soundTheme =
             new AssetDescriptor<Sound>("TankWarsTheme.mp3", Sound.class);
+    private static final AssetDescriptor<Sound> soundNuke =
+            new AssetDescriptor<Sound>("nuke.mp3",Sound.class);
+    private static final AssetDescriptor<Sound> soundMissile =
+            new AssetDescriptor<Sound>("missile.mp3",Sound.class);
+
 
     //skin
     /*
@@ -84,13 +104,17 @@ public class Assets {
         manager.load(backgroundImg);
         manager.load(explosionAni);
         manager.load(splashImg);
+        manager.load(menuImg);
         manager.load(hudFont);
-        manager.load(tankWarsFont);
+        manager.load(headingFont);
         manager.load(soundAim);
         manager.load(soundBoom);
         manager.load(soundShoot);
         manager.load(soundMove);
         manager.load(soundTheme);
+        manager.load(soundMissile);
+        manager.load(soundNuke);
+        manager.load(soundDestroy);
     }
 
     public static void disposeAssets(){

@@ -2,10 +2,11 @@ package com.mygdx.game.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -16,21 +17,25 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Application;
 import com.mygdx.game.services.Assets;
+import com.mygdx.game.events.EventBus;
+import com.mygdx.game.events.Event;
+import com.mygdx.game.view.PlaySounds;
+import com.mygdx.game.events.IEventHandler;
 
 
 /**
  * Created by marianarale on 2018-05-12.
  */
-public class MenuScreen implements Screen {
+public class MenuScreen implements Screen, IEventHandler {
 
     private Application app;
 
     private TextButton startButton;
     private TextButton optionsButton;
+    private TextButton helpButton;
     private TextButton exitButton;
 
     private Skin skin;
@@ -40,22 +45,17 @@ public class MenuScreen implements Screen {
     private SpriteBatch batch;
     private TextureAtlas atlas;
     private Label heading;
-
-    Sound soundTheme = Assets.manager.get("TankWarsTheme.mp3", Sound.class);
+    private Sprite background;
 
     public MenuScreen(Application app) {
         this.app = app;
 
-        final long soundThemeID = soundTheme.loop(0.1f,1.0f,0.1f);
+        //background setup
+        Texture texture = Assets.manager.get("menuscreen.jpg");
+        background = new Sprite(texture);
 
-        Timer.schedule((new Timer.Task() {
-            @Override
-            public void run() {
-                soundTheme.loop(soundThemeID);
-            }
-        }),1);
-
-
+        //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
+        initEvent();
     }
 
     @Override
@@ -65,50 +65,38 @@ public class MenuScreen implements Screen {
 
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
-        // skin = new Skin(Gdx.files.internal("uiskin.json"));
 
+        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
+
+        //Button style setup
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         bigTextButtonStyle.fontColor = Color.WHITE;
         bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
         bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
 
-        //startButton
+        //create buttons
         startButton = new TextButton("START", bigTextButtonStyle);
-        startButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                app.setPlayScreen();
-                soundTheme.stop();
-            }
-        });
-
-        //optionsButton
         optionsButton = new TextButton("OPTIONS", bigTextButtonStyle);
-        optionsButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                app.setOptionScreen();
-            }
-        });
-
-        //exitButton
+        helpButton = new TextButton("HELP", bigTextButtonStyle);
         exitButton = new TextButton("EXIT", bigTextButtonStyle);
-        exitButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
-                soundTheme.stop();
-            }
-        });
-
-        //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
 
         //heading label setup
-        heading = new Label("TANK WARS",
-                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
+        heading = new Label("TANK WARS", new Label.LabelStyle(
+                new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
         heading.setFontScale(1.4f);
+        heading.setAlignment(Align.center);
 
+        //create table
+        setupMenuTable();
+        stage.addActor(table);
+
+        addMenuButtonListeners();
+        // Take input from ui
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    private void setupMenuTable(){
         table = new Table(skin);
         table.setFillParent(true);
         table.top();
@@ -119,22 +107,63 @@ public class MenuScreen implements Screen {
         table.add(heading);
         table.row().padTop(50);
         table.add(startButton);
-        table.row().pad(20);
+        table.row().pad(10);
         table.add(optionsButton);
+        table.row().pad(10);
+        table.add(helpButton);
         table.row();
         table.add(exitButton);
 
-        heading.setAlignment(Align.center);
-
+        //display layouts for debugging
         //table.setDebug(true);
+    }
 
-        stage.addActor(table);
+    private void addMenuButtonListeners(){
 
-        // Take input from ui
-        Gdx.input.setInputProcessor(stage);
+        startButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setPlayScreen();
+                PlaySounds.stopTheme();
+            }
+        });
+        optionsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setOptionScreen();
+            }
+        });
 
+        helpButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setOptionScreen();
+            }
+        });
+
+        exitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.exit();
+                PlaySounds.stopTheme();
+            }
+        });
+    }
+
+
+    @Override
+    public void onEvent(Event evt) {
+
+        if(evt.getTag() == Event.Tag.PLAY_SOUND_THEME){
+            PlaySounds.stopTheme();
+        }
 
     }
+
+    private void initEvent() {
+        EventBus.BUS.register(this);
+    }
+
 
     @Override
     public void render(float delta) {
@@ -142,10 +171,10 @@ public class MenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         app.batch.begin();
+        background.draw(app.batch);
         app.batch.end();
         stage.act(delta);
         stage.draw();
-
     }
 
     @Override
@@ -172,6 +201,5 @@ public class MenuScreen implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
-        soundTheme.dispose();
     }
 }

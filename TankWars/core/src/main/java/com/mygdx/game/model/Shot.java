@@ -37,7 +37,7 @@ public abstract class Shot implements IDrawable {
         if (pos.getX() > 0 && pos.getX() < Application.GAME_WIDTH && pos.getY() > 0) {
             pos.setX(pos.getX() + vector[0] * delta * speed);
             pos.setY(pos.getY() + vector[1] * delta * speed);
-            vector[0] += windSpeed * delta;
+            vector[0] += windSpeed/3 * delta; // /3 because windspeed was to strong
             vector[1] += GRAVITY * delta;
             rect.move(pos.getX(), pos.getY());
             // TODO not working, want shot to rotate according to vector direction
@@ -46,6 +46,11 @@ public abstract class Shot implements IDrawable {
             //if the shot object is outside the screen x-wise it's marked as dead and will get removed
             isAlive = false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return name ;
     }
 
     @Override

@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
@@ -17,13 +16,22 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
 
 import com.mygdx.game.ctrl.PlayController;
+import com.mygdx.game.events.Event;
+import com.mygdx.game.events.EventBus;
+import com.mygdx.game.events.IEventHandler;
+import com.mygdx.game.model.Tank;
+import com.mygdx.game.model.factorys.TankWarsFactory;
 import com.mygdx.game.services.Assets;
 
 import com.mygdx.game.model.TankWars;
-import com.mygdx.game.services.Renderer;
 import com.mygdx.game.utils.Hud;
 
-public class PlayScreen implements Screen {
+import java.util.ArrayList;
+import com.mygdx.game.view.PlaySounds;
+import com.mygdx.game.view.Explosion;
+import java.util.List;
+
+public class PlayScreen implements Screen, IEventHandler {
     private Sprite background;
     private TankWars tankWars;
     private Application app;
@@ -38,17 +46,23 @@ public class PlayScreen implements Screen {
     private List<Explosion> explosions;
 
     public PlayScreen(Application app) {
+        tankWarsFactory = new TankWarsFactory();
         this.app = app;
-        // TODO tankWars parametrar borde finnas i en setup fil?
-        tankWars = new TankWars(OptionsScreen.NUMBER_OF_PLAYERS, OptionsScreen.NUMBER_OF_ROUNDS, OptionsScreen.DIFFICULTY);
+        tankWars = tankWarsFactory.makeTankWars();
         controller = new PlayController(tankWars);
         renderer = new Renderer(app.batch);
         hud = new Hud(app.batch, tankWars);
-        skin = new Skin(Gdx.files.internal("uiskin.json"));
         stage = new Stage();
+
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
 
         Texture texture = Assets.manager.get("background.jpg");
         background = new Sprite(texture);
+
+        explosions = new ArrayList<>();
+
+        // Register to the eventBus
+        initEvent();
     }
 
     public void show() {
@@ -66,12 +80,21 @@ public class PlayScreen implements Screen {
         table.setPosition(0, Gdx.graphics.getHeight());
 
         //return to menu button
-        menuButton = new TextButton("Return to Menu",skin);
+        menuButton = new TextButton("Return to Menu", skin);
         menuButton.getLabel().setFontScale(0.9f);
         menuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 app.setMenuScreen();
+                PlaySounds.playThemeReturn();
+                PlaySounds.stopFire();
+                PlaySounds.stopMove();
+                PlaySounds.stopAim();
+                PlaySounds.stopExplosion();
+                PlaySounds.stopNuke();
+                PlaySounds.stopMissile();
+                PlaySounds.stopTankDestroy();
+
             }
         });
 
@@ -95,12 +118,12 @@ public class PlayScreen implements Screen {
     }
 
 
-
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        tankWars.gameLoop(delta);
+        tankWars.updateWorld(delta);
+        updateExplosions(delta);
 
         renderer.loadResources(tankWars.getShots());
 
@@ -109,6 +132,10 @@ public class PlayScreen implements Screen {
         renderer.render(tankWars.getTiles());
         renderer.render(tankWars.getObjects());
         renderer.render(tankWars.getShots());
+
+        explosions.forEach(explosion -> {
+            explosion.render(app.batch);
+        });
 
         app.batch.end();
 
@@ -119,6 +146,51 @@ public class PlayScreen implements Screen {
 
         hud.stage.act();
     }
+
+    @Override
+    public void onEvent(Event evt) {
+        if (evt.getTag() == Event.Tag.PLAY_SOUND_FIRE) {
+            PlaySounds.playFire();
+        } else if (evt.getTag() == Event.Tag.PLAY_SOUND_EXPLOSION) {
+            //PlaySounds.playFire();
+            PlaySounds.playExplosion();
+        }
+        else if (evt.getTag() == Event.Tag.PLAY_SOUND_AIM){
+            PlaySounds.playAim();
+        }
+        else if(evt.getTag() == Event.Tag.PLAY_SOUND_MOVE){
+            PlaySounds.playMove();
+        }
+        else if (evt.getTag() == Event.Tag.PLAY_ANIMATION_EXPLOSION || evt.getTag() == Event.Tag.PLAY_SOUND_ANIMATION_EXPLOSION) {
+            Tank tank = (Tank) evt.getValue();
+            explosions.add(new Explosion(tank.getPos()));
+            PlaySounds.playTankDestroy();
+        }
+
+        else if(evt.getTag() == Event.Tag.PLAY_SOUND_NUKE){
+            PlaySounds.playNuke();
+        }
+        else if(evt.getTag() == Event.Tag.PLAY_SOUND_MISSILE){
+            PlaySounds.playMissile();
+        }
+
+    }
+
+    private void initEvent() {
+        EventBus.BUS.register(this);
+    }
+
+    private void updateExplosions(float delta){
+        List<Explosion> explosionsToRemove = new ArrayList<>();
+        for (Explosion explosion : explosions) {
+            explosion.update(delta);
+            if (explosion.isRemove()) {
+                explosionsToRemove.add(explosion);
+            }
+        }
+        explosions.removeAll(explosionsToRemove);
+    }
+
 
     @Override
     public void resize(int width, int height) {
@@ -147,4 +219,5 @@ public class PlayScreen implements Screen {
         stage.dispose();
 
     }
+
 }

@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -16,40 +16,20 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
 import com.mygdx.game.services.Assets;
 import com.mygdx.game.model.Difficulty;
+import com.mygdx.game.events.Event;
+import com.mygdx.game.events.IEventHandler;
+import com.mygdx.game.events.EventBus;
+import com.mygdx.game.view.PlayScreen;
 
-public class OptionsScreen implements Screen {
+public class OptionsScreen implements Screen, IEventHandler {
 
-    static int NUMBER_OF_PLAYERS = 2;
-    static int NUMBER_OF_ROUNDS = 3;
-    static Difficulty DIFFICULTY = Difficulty.EASY;
-
-    //Constants for the next button
-    private static final int NEXT_BUTTON_WIDTH = 20;
-    private static final int NEXT_BUTTON_HEIGHT = 5;
-    private static final int ARROW_BUTTON_SIDE = 40;
-
-
-    private static final int NEXT_BUTTON_Y = 75;
-    private static final int NEXT_BUTTON_X = 400;
-
-
-    private static final int ARROW_BUTTON_X = 450;
+    public static int NUMBER_OF_PLAYERS = 2;
+    public static int NUMBER_OF_ROUNDS = 3;
+    public static Difficulty DIFFICULTY = Difficulty.EASY;
 
     private Stage stage;
     private Viewport viewport;
     private Application app;
-
-    private Texture imgRight;
-    private Texture imgLeft;
-
-
-    /*private ArrowButton arrowButtonRight1;
-    private ArrowButton arrowButtonRight2;
-    private ArrowButton arrowButtonRight3;
-
-    private ArrowButton arrowButtonLeft1;
-    private ArrowButton arrowButtonLeft2;
-    private ArrowButton arrowButtonLeft3;*/
 
     private TextButton arrowButtonRight1;
     private TextButton arrowButtonRight2;
@@ -60,6 +40,9 @@ public class OptionsScreen implements Screen {
     private TextButton arrowButtonLeft3;
 
     private TextButton nextButton;
+    private TextButton backButton;
+    private TextButton muteButton;
+    private TextButton muteButton2;
 
     private Label optionsLabel;
     private Label roundsLabel;
@@ -69,16 +52,19 @@ public class OptionsScreen implements Screen {
     private Label nPlayersLabel;
     private Label nDiffLabel; // TODO kom på bättre namn
 
-    private BitmapFont font;
     private TextureAtlas atlas;
-
     private Skin skin;
     private Table table;
+
+    private Sprite background;
+    private Boolean clicked = false;
 
 
     public OptionsScreen(Application app) {
         this.app = app;
 
+        //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
+        initEvent();
     }
 
     @Override
@@ -95,17 +81,18 @@ public class OptionsScreen implements Screen {
         bigTextButtonStyle.font = font;
         bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
         bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
-        //bigTextButtonStyle.pressedOffsetX = 1;
-        //bigTextButtonStyle.pressedOffsetY = -1;
 
-        nextButton = new TextButton("NEXT", bigTextButtonStyle);
-
+        //create button style
         TextButton.TextButtonStyle smallTextButtonStyle = new TextButton.TextButtonStyle();
         smallTextButtonStyle.font = font;
         smallTextButtonStyle.up = skin.getDrawable("smallButton.up");
         smallTextButtonStyle.down = skin.getDrawable("smallButton.down");
-        //smallTextButtonStyle.pressedOffsetX = 1;
-        //smallTextButtonStyle.pressedOffsetY = -1;
+
+        //create buttons
+        nextButton = new TextButton("START GAME", bigTextButtonStyle);
+        muteButton = new TextButton("MUTE THEME", bigTextButtonStyle);
+        muteButton2 = new TextButton("MUTE GAME", bigTextButtonStyle);
+        backButton = new TextButton("BACK", bigTextButtonStyle);
 
         arrowButtonLeft1 = new TextButton("<", smallTextButtonStyle);
         arrowButtonRight1 = new TextButton(">", smallTextButtonStyle);
@@ -113,6 +100,8 @@ public class OptionsScreen implements Screen {
         arrowButtonRight2 = new TextButton(">", smallTextButtonStyle);
         arrowButtonLeft3 = new TextButton("<", smallTextButtonStyle);
         arrowButtonRight3 = new TextButton(">", smallTextButtonStyle);
+        //add listeners to the buttons
+        addButtonListeners();
 
         // OptionsScreen big header and sub headers for the options
         optionsLabel = new Label("Options",
@@ -134,78 +123,14 @@ public class OptionsScreen implements Screen {
 
         // Makes a table and adds labels and buttons to it
         setupTable();
-
-        // Only for debug table layout
-        //table.setDebug(true);
-
         stage.addActor(table);
-
-        //table.add(nextButton);
-        //table.row();
-        //table.add(arrowButtonLeft1);
-        //table.add(arrowButtonRight1);
 
         // Take input from ui
         Gdx.input.setInputProcessor(stage);
-
-        addButtonListeners();
-        //table.setWidth(controller.GAME_WIDTH);
-        //table.setHeight(controller.GAME_HEIGHT);
-
-        //nextButton = new TextButton("NEXT", skin);
-        //arrowButtonLeft1 = new TextButton("<", skin);
-        //arrowButtonRight1 = new TextButton(">", skin);
-
-        //table.add(arrowButtonLeft1).width(ARROW_BUTTON_SIDE).height(ARROW_BUTTON_SIDE);
-        //table.add(arrowButtonRight1).width(ARROW_BUTTON_SIDE).height(ARROW_BUTTON_SIDE);
-        //table.row();
-        //table.add(nextButton).width(NEXT_BUTTON_WIDTH).height(NEXT_BUTTON_HEIGHT).padBottom((controller.GAME_HEIGHT/8));
-
-        /*tableArrow = new Table();
-        tableArrow.setWidth(controller.GAME_WIDTH);
-        tableArrow.align(Align.center|Align.top);
-
-        arrowButtonLeft1 = new TextButton("<", skin);
-        arrowButtonRight1 = new TextButton(">", skin);
-        tableArrow.add(arrowButtonRight1).width(ARROW_BUTTON_SIDE).height(ARROW_BUTTON_SIDE).top();
-        tableArrow.padLeft(50);
-        tableArrow.add(arrowButtonLeft1).width(ARROW_BUTTON_SIDE).height(ARROW_BUTTON_SIDE).top();
-        tableArrow.padRight(50);*/
-
-        /*
-        imgRight = new Texture("rightarrow.png");
-        imgLeft = new Texture("leftarrow.png");
-
-        //Create left arrow buttons
-        arrowButtonLeft1 = new ArrowButton(imgLeft,333, (int)(Controller.GAME_HEIGHT * 0.78),
-          imgLeft.getWidth()/15,imgLeft.getHeight()/15);
-
-
-        arrowButtonLeft2 = new ArrowButton(imgLeft,333, (int)(Controller.GAME_HEIGHT * 0.58),
-                imgLeft.getWidth()/15,imgLeft.getHeight()/15);
-
-        arrowButtonLeft3 = new ArrowButton(imgLeft,333, (int)(Controller.GAME_HEIGHT * 0.38),
-                imgLeft.getWidth()/15,imgLeft.getHeight()/15);
-
-
-
-        //Create right arrow buttons
-
-       arrowButtonRight1 = new ArrowButton(imgRight,Controller.GAME_WIDTH/9, (int)(Controller.GAME_HEIGHT * 0.78),
-                imgLeft.getWidth()/15,imgLeft.getHeight()/15);
-
-        arrowButtonRight2 = new ArrowButton(imgRight,Controller.GAME_WIDTH/6, (int)(Controller.GAME_HEIGHT * 0.58),
-                imgLeft.getWidth()/15,imgLeft.getHeight()/15);
-
-        arrowButtonRight3 = new ArrowButton(imgRight,Controller.GAME_WIDTH/6, (int)(Controller.GAME_HEIGHT * 0.38),
-                imgLeft.getWidth()/15,imgLeft.getHeight()/15);*/
-
-
     }
 
     // Creates a 8x3 table with labels and buttons
     private void setupTable(){
-
         table = new Table(skin);
         table.setFillParent(true);
 
@@ -249,10 +174,33 @@ public class OptionsScreen implements Screen {
         table.add(arrowButtonRight3).left();
 
         table.row();
+        table.add(muteButton).center().padTop(20);
         table.add();
-        table.add(nextButton).center();
+        table.add(backButton).center().padTop(20);
         table.add();
+
+        table.row();
+        table.add(muteButton2).center().padTop(5);
+        table.add();
+        table.add(nextButton).center().padTop(5);
+        table.add();
+        table.row();
+
     }
+
+    @Override
+    public void onEvent(com.mygdx.game.events.Event evt) {
+
+        if(evt.getTag() == Event.Tag.PLAY_SOUND_THEME){
+            PlaySounds.stopTheme();
+        }
+
+    }
+
+    private void initEvent() {
+        EventBus.BUS.register(this);
+    }
+
 
     @Override
     public void render(float delta) {
@@ -260,22 +208,9 @@ public class OptionsScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         app.batch.begin();
-
-        //Draw left arrow buttons
-        //arrowButtonLeft1.update(batch,Gdx.input.getX(), Gdx.input.getY());
-
-        //Draw next button
-        //batch.draw(nextButton, NEXT_BUTTON_X, NEXT_BUTTON_Y ,NEXT_BUTTON_WIDTH, NEXT_BUTTON_HEIGHT);
-        //Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH / 2,
-        //                Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2
-
-        //handleNextButton();
-
         app.batch.end();
-
         stage.act(delta);
         stage.draw();
-
     }
 
     private void addButtonListeners() {
@@ -284,6 +219,46 @@ public class OptionsScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 app.setPlayScreen();
+                PlaySounds.stopTheme();
+            }
+        });
+
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setMenuScreen();
+            }
+        });
+
+        muteButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                clicked = !clicked;
+                if(clicked){
+                    PlaySounds.pauseTheme();
+                }
+                else {
+                    //PlaySounds.playThemeReturn();
+                    PlaySounds.resumeTheme();
+                }
+            }
+        });
+
+        muteButton2.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                clicked = !clicked;
+                if(clicked){
+
+
+                }
+
+                else {
+
+                }
+
             }
         });
 
@@ -346,54 +321,23 @@ public class OptionsScreen implements Screen {
         });
     }
 
-   /* private void handleNextButton() {
-
-        boolean xRange = false;
-        boolean yRange = false;
-
-        int x = Gdx.graphics.getWidth() / 2 - NEXT_BUTTON_WIDTH / 2;
-        int y = Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2 + NEXT_BUTTON_HEIGHT;
-
-        if (Gdx.input.getX() > x && Gdx.input.getX() < x + NEXT_BUTTON_WIDTH) {
-            xRange = true;
-        }
-
-        if (Gdx.graphics.getHeight() - Gdx.input.getY() < y && Gdx.graphics.getHeight()
-                - Gdx.input.getY() > Gdx.graphics.getHeight() / 2 - NEXT_BUTTON_HEIGHT / 2) {
-            yRange = true;
-        }
-
-        if (xRange && yRange && Gdx.input.justTouched()
-                || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            app.setPlayScreen();
-        }
-    }*/
-
-
     @Override
     public void resize(int width, int height) {
         viewport.setScreenSize(width, height);
     }
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() { }
 
     @Override
-    public void resume() {
-
-    }
+    public void resume() { }
 
     @Override
-    public void hide() {
-
-    }
+    public void hide() { }
 
     @Override
     public void dispose() {
         stage.dispose();
         skin.dispose();
-
     }
 }

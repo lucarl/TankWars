@@ -1,9 +1,8 @@
 package com.mygdx.game.model;
 
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.model.factorys.ShotFactory;
-import com.mygdx.game.services.Assets;
+import com.mygdx.game.events.Event;
+import com.mygdx.game.events.EventBus;
 
 public class TankGun implements IDrawable {
     private static String imgSrc = "tankGun.png";
@@ -27,8 +26,6 @@ public class TankGun implements IDrawable {
     private int changeWeapon;
     private Shot shot;
 
-    Sound soundAim = Assets.manager.get("badaim.mp3", Sound.class);
-
     public TankGun(Position pos) {
         this.pos = pos;
         angle = 0;
@@ -45,24 +42,34 @@ public class TankGun implements IDrawable {
         shotFactory = new ShotFactory();
         if (standard) {
             changeWeapon = 1;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
+                    angle, power, windSpeed);
             standard = false;
             return shot;
         }
         if (nuke) {
+
+            EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_NUKE, null));
+
             changeWeapon = 2;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
+                    angle, power, windSpeed);
             nuke = false;
             return shot;
         }
         if (missile) {
+
+            EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_MISSILE, null));
+
             changeWeapon = 3;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
+                    angle, power, windSpeed);
             missile = false;
             return shot;
         } else {
             changeWeapon = 1;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
+                    angle, power, windSpeed);
             standard = false;
         }
         return shot;
@@ -90,15 +97,7 @@ public class TankGun implements IDrawable {
 
     public void setLeftAim(boolean b) {
 
-        final long soundAimID = soundAim.loop(0.3f, 1.0f, 0.0f);
-
-        Timer.schedule((new Timer.Task() {
-            @Override
-            public void run() {
-                soundAim.loop(soundAimID);
-                soundAim.stop();
-            }
-        }), 1);
+        EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_AIM, null));
 
         if (rightAim && b) {
             rightAim = false;
@@ -109,15 +108,7 @@ public class TankGun implements IDrawable {
 
     public void setRightAim(boolean b) {
 
-        final long soundAimID = soundAim.loop(0.3f, 1.0f, 0.0f);
-
-        Timer.schedule((new Timer.Task() {
-            @Override
-            public void run() {
-                soundAim.loop(soundAimID);
-                soundAim.stop();
-            }
-        }), 1);
+        EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_AIM, null));
 
         if (leftAim && b) {
             leftAim = false;
@@ -125,15 +116,6 @@ public class TankGun implements IDrawable {
         rightAim = b;
 
     }
-
-   /* public void setSoundAim(boolean m, boolean n){
-
-        soundAim.pause();
-        rightAim=m;
-        leftAim=n;
-
-    }
-    */
 
     public void changeNuke() {
         nuke = true;
