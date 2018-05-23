@@ -33,10 +33,9 @@ public class PlayScreen implements Screen {
     private Skin skin;
     private Stage stage;
     private TextButton menuButton;
-    private TextButton scoreButton;
-    private Table table;
+    private TankWarsFactory tankWarsFactory;
 
-    private FitViewport viewport;
+    private List<Explosion> explosions;
 
     public PlayScreen(Application app) {
         this.app = app;
