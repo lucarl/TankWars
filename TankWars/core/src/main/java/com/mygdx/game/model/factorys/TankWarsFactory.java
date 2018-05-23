@@ -2,7 +2,14 @@ package com.mygdx.game.model.factorys;
 
 import com.mygdx.game.model.*;
 
+
+import com.mygdx.game.view.OptionsScreen;
+import com.mygdx.game.view.OptionsScreen.*;
+
+
+import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * A factory class for creating all dynamic objects
@@ -12,7 +19,30 @@ import java.util.List;
  */
 
 public class TankWarsFactory {
+    private int nPlayers = OptionsScreen.NUMBER_OF_PLAYERS;
+    private Difficulty difficulty = OptionsScreen.DIFFICULTY;
+    private List<Player> players;
+    private List<IDrawable> objects;
+    private List<IDrawable> tiles;
+    private List<IDrawable> shots;
+    //private List<IDrawable> upgrade;
+    private Wind wind;
     private Terrain terrain = new Terrain();
+    private TankWars tankWars;
+
+
+    public TankWars makeTankWars() {
+        wind = new Wind(difficulty);
+        //upgrade = new ArrayList<>();
+        shots = new ArrayList<>();
+        players = new ArrayList<>();
+        objects = new ArrayList<>();
+        tiles = new ArrayList<>();
+        setupObjects(nPlayers, players, objects);
+        setupTerrainTiles(tiles);
+        tankWars = new TankWars(terrain, players, objects, shots, tiles, wind);
+        return tankWars;
+    }
 
     public void setupObjects(int nPlayers, List<Player> players, List<IDrawable> objects) {
         int xPos1 = 5;
@@ -29,8 +59,10 @@ public class TankWarsFactory {
                 tank = new Tank(xPos2, 0);
                 xPos2 -= 200;
             }
+
             Upgrade upgrade = new Upgrade(10, 1000);
-            int yPos = terrain.getHeightOfCol((int) tank.getPos().getX() / terrain.getTileSize());
+            int yPos = terrain.getMaxHeightOfCol((int) tank.getPos().getX() / terrain.getTileSize());
+
             tank.setPos(new Position(tank.getPos().getX(), yPos));
             players.add(new Player(tank));
             objects.add(new Upgrade(upgrade.getPos().getX(), upgrade.getPos().getY()));
@@ -49,9 +81,5 @@ public class TankWarsFactory {
                 }
             }
         }
-    }
-
-    public Terrain getTerrain() {
-        return terrain;
     }
 }

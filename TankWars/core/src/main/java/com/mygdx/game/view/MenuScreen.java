@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -33,6 +35,7 @@ public class MenuScreen implements Screen, IEventHandler {
 
     private TextButton startButton;
     private TextButton optionsButton;
+    private TextButton helpButton;
     private TextButton exitButton;
 
     private Skin skin;
@@ -42,13 +45,17 @@ public class MenuScreen implements Screen, IEventHandler {
     private SpriteBatch batch;
     private TextureAtlas atlas;
     private Label heading;
+    private Sprite background;
 
     public MenuScreen(Application app) {
         this.app = app;
 
+        //background setup
+        Texture texture = Assets.manager.get("menuscreen.jpg");
+        background = new Sprite(texture);
+
         //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
         initEvent();
-
     }
 
     @Override
@@ -58,51 +65,38 @@ public class MenuScreen implements Screen, IEventHandler {
 
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
-        // skin = new Skin(Gdx.files.internal("uiskin.json"));
 
+        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
+
+        //Button style setup
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         bigTextButtonStyle.fontColor = Color.WHITE;
         bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
         bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
 
-        //startButton
+        //create buttons
         startButton = new TextButton("START", bigTextButtonStyle);
-        startButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                app.setPlayScreen();
-                PlaySounds.stopTheme();
-
-            }
-        });
-
-        //optionsButton
         optionsButton = new TextButton("OPTIONS", bigTextButtonStyle);
-        optionsButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                app.setOptionScreen();
-            }
-        });
-
-        //exitButton
+        helpButton = new TextButton("HELP", bigTextButtonStyle);
         exitButton = new TextButton("EXIT", bigTextButtonStyle);
-        exitButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
-                PlaySounds.stopTheme();
-            }
-        });
-
-        //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
 
         //heading label setup
         heading = new Label("TANK WARS", new Label.LabelStyle(
                 new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
         heading.setFontScale(1.4f);
+        heading.setAlignment(Align.center);
 
+        //create table
+        setupMenuTable();
+        stage.addActor(table);
+
+        addMenuButtonListeners();
+        // Take input from ui
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    private void setupMenuTable(){
         table = new Table(skin);
         table.setFillParent(true);
         table.top();
@@ -113,21 +107,48 @@ public class MenuScreen implements Screen, IEventHandler {
         table.add(heading);
         table.row().padTop(50);
         table.add(startButton);
-        table.row().pad(20);
+        table.row().pad(10);
         table.add(optionsButton);
+        table.row().pad(10);
+        table.add(helpButton);
         table.row();
         table.add(exitButton);
 
-        heading.setAlignment(Align.center);
-
+        //display layouts for debugging
         //table.setDebug(true);
-
-        stage.addActor(table);
-
-        // Take input from ui
-        Gdx.input.setInputProcessor(stage);
-
     }
+
+    private void addMenuButtonListeners(){
+
+        startButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setPlayScreen();
+            }
+        });
+        optionsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setOptionScreen();
+            }
+        });
+
+        helpButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setOptionScreen();
+            }
+        });
+
+        exitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.exit();
+                PlaySounds.stopTheme();
+            }
+        });
+    }
+
 
     @Override
     public void onEvent(Event evt) {
@@ -149,10 +170,10 @@ public class MenuScreen implements Screen, IEventHandler {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         app.batch.begin();
+        background.draw(app.batch);
         app.batch.end();
         stage.act(delta);
         stage.draw();
-
     }
 
     @Override

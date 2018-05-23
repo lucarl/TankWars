@@ -2,6 +2,7 @@ package com.mygdx.game.ctrl;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.mygdx.game.model.Tank;
 import com.mygdx.game.model.TankWars;
 
 public class PlayController implements InputProcessor {
@@ -13,53 +14,55 @@ public class PlayController implements InputProcessor {
     }
 
 
-
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.LEFT) {
-            tankWars.getPlayer().getTank().setLeftMove(true);
+        Tank tank = tankWars.getPlayer().getTank();
+        if (!tankWars.isTurnOver()) {
+            if (keycode == Input.Keys.LEFT) {
+                tank.setLeftMove(true);
+            }
+
+            if (keycode == Input.Keys.RIGHT) {
+                tank.setRightMove(true);
+            }
+
+            if (keycode == Input.Keys.UP) {
+                tank.getGun().setLeftAim(true);
+            }
+
+            if (keycode == Input.Keys.DOWN) {
+                tank.getGun().setRightAim(true);
+            }
+
+            if (keycode == Input.Keys.SPACE) {
+                tankWars.fire();
+            }
+
+            if (keycode == Input.Keys.A) {
+                tank.getGun().increasePower();
+            }
+
+            if (keycode == Input.Keys.Z) {
+                tank.getGun().decreasePower();
+            }
+
+            if (keycode == Input.Keys.NUM_1) {
+                tank.getGun().changeStandard();
+            }
+
+            if (keycode == Input.Keys.NUM_2) {
+                tank.getGun().changeNuke();
+            }
+
+            if (keycode == Input.Keys.NUM_3) {
+                tank.getGun().changeMissile();
+            }
         }
 
-        if (keycode == Input.Keys.RIGHT) {
-            tankWars.getPlayer().getTank().setRightMove(true);
-        }
-
-        if (keycode == Input.Keys.UP) {
-            tankWars.getPlayer().getTank().getGun().setLeftAim(true);
-        }
-
-        if (keycode == Input.Keys.DOWN) {
-            tankWars.getPlayer().getTank().getGun().setRightAim(true);
-        }
-
-        if (keycode == Input.Keys.SPACE) {
-            tankWars.fire();
-
-        }
-
-        if (keycode == Input.Keys.A) {
-            tankWars.getPlayer().getTank().getGun().increasePower();
-        }
-
-        if (keycode == Input.Keys.Z) {
-            tankWars.getPlayer().getTank().getGun().decreasePower();
-        }
-
-        if (keycode == Input.Keys.NUM_1) {
-            tankWars.getPlayer().getTank().getGun().changeStandard();
-        }
-
-        if (keycode == Input.Keys.NUM_2) {
-            tankWars.getPlayer().getTank().getGun().changeNuke();
-        }
-
-        if (keycode == Input.Keys.NUM_3) {
-            tankWars.getPlayer().getTank().getGun().changeMissile();
-        }
-
-        if (keycode == Input.Keys.N) {
-            tankWars.nextPlayer();
-        }
+        // FOR TESTING
+        //if (keycode == Input.Keys.N) {
+        //   tankWars.nextPlayer();
+        //}
 
 
         return true;
@@ -67,23 +70,20 @@ public class PlayController implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
+        Tank tank = tankWars.getPlayer().getTank();
         if (keycode == Input.Keys.LEFT) {
-            tankWars.getPlayer().getTank().setLeftMove(false);
-            //tankWars.getPlayer().getTank().setSoundMoveLeft(false);
+            tank.setLeftMove(false);
         }
         if (keycode == Input.Keys.RIGHT) {
-            tankWars.getPlayer().getTank().setRightMove(false);
-            //tankWars.getPlayer().getTank().setSoundMoveRight(false);
+            tank.setRightMove(false);
         }
 
         if (keycode == Input.Keys.UP) {
-            tankWars.getPlayer().getTank().getGun().setLeftAim(false);
-            //tankWars.getPlayer().getTank().getGun().setSoundAim(false,false);
+            tank.getGun().setLeftAim(false);
         }
 
         if (keycode == Input.Keys.DOWN) {
-            tankWars.getPlayer().getTank().getGun().setRightAim(false);
-            //tankWars.getPlayer().getTank().getGun().setSoundAim(false,false);
+            tank.getGun().setRightAim(false);
         }
 
         return true;

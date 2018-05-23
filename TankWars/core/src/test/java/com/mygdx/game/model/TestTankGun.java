@@ -113,6 +113,7 @@ public class TestTankGun {
         assertFalse(tankGun.isLeftAim());
     }
 
+    @Test
     public void testChangeWeapon() {
         boolean cuurentSpecialShot = tankGun.hasSpecialShot();
         tankGun.changeNuke();

@@ -42,7 +42,8 @@ public class TankGun implements IDrawable {
         shotFactory = new ShotFactory();
         if (standard) {
             changeWeapon = 1;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
+                    angle, power, windSpeed);
             standard = false;
             return shot;
         }
@@ -51,7 +52,8 @@ public class TankGun implements IDrawable {
             EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_NUKE, null));
 
             changeWeapon = 2;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
+                    angle, power, windSpeed);
             nuke = false;
             return shot;
         }
@@ -60,12 +62,14 @@ public class TankGun implements IDrawable {
             EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_MISSILE, null));
 
             changeWeapon = 3;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
+                    angle, power, windSpeed);
             missile = false;
             return shot;
         } else {
             changeWeapon = 1;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX(), pos.getY()), angle, power, windSpeed);
+            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
+                    angle, power, windSpeed);
             standard = false;
         }
         return shot;
