@@ -35,20 +35,8 @@ public class ScoreScreen implements Screen {
     private SpriteBatch batch;
     private Label heading;
 
-    Sound soundTheme = Assets.manager.get("TankWarsTheme.mp3", Sound.class);
-
     public ScoreScreen(Application app) {
         this.app = app;
-
-        final long soundThemeID = soundTheme.loop(0.1f,1.0f,0.1f);
-
-        Timer.schedule((new Timer.Task() {
-            @Override
-            public void run() {
-                soundTheme.loop(soundThemeID);
-            }
-        }),1);
-
 
     }
 
@@ -145,6 +133,5 @@ public class ScoreScreen implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
-        soundTheme.dispose();
     }
 }

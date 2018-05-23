@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
@@ -40,9 +41,11 @@ public class PlayScreen implements Screen, IEventHandler {
     private Renderer renderer;
     private Skin skin;
     private Stage stage;
-    private TextButton menuButton;
-    private TankWarsFactory tankWarsFactory;
 
+    private TextButton scoreButton;
+    private TextButton menuButton;
+    private Table table;
+    private TankWarsFactory tankWarsFactory;
     private List<Explosion> explosions;
 
     public PlayScreen(Application app) {
@@ -79,6 +82,7 @@ public class PlayScreen implements Screen, IEventHandler {
         table.align(Align.center|Align.bottom);
         table.setPosition(0, Gdx.graphics.getHeight());
 
+
         //return to menu button
         menuButton = new TextButton("Return to Menu", skin);
         menuButton.getLabel().setFontScale(0.9f);
@@ -110,7 +114,6 @@ public class PlayScreen implements Screen, IEventHandler {
 
         table.add(menuButton);
         table.add(scoreButton).padLeft(50);
-
         stage.addActor(scoreButton);
         stage.addActor(menuButton);
         stage.addActor(table);
