@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
@@ -89,6 +90,7 @@ public class PlayScreen implements Screen, IEventHandler {
         menuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+
                 app.setMenuScreen();
                 PlaySounds.playThemeReturn();
                 PlaySounds.stopFire();
@@ -109,6 +111,7 @@ public class PlayScreen implements Screen, IEventHandler {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 app.setScoreScreen();
+                PlaySounds.playThemeReturn();
             }
         });
 

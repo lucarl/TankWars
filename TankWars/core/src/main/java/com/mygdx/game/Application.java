@@ -51,5 +51,18 @@ public class Application extends Game{
         screen = new ScoreScreen(this);
         setScreen(screen);
     }
+
+    public void setHelpScreen() {
+        screen.dispose();
+        screen = new HelpScreen(this);
+        setScreen(screen);
+    }
+
+    public void setCreditsScreen() {
+        screen.dispose();
+        screen = new CreditsScreen(this);
+        setScreen(screen);
+    }
+
 }
 

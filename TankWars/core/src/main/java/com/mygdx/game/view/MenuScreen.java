@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Application;
 import com.mygdx.game.services.Assets;
@@ -36,6 +37,7 @@ public class MenuScreen implements Screen, IEventHandler {
     private TextButton startButton;
     private TextButton optionsButton;
     private TextButton helpButton;
+    private TextButton creditsButton;
     private TextButton exitButton;
 
     private Skin skin;
@@ -78,7 +80,8 @@ public class MenuScreen implements Screen, IEventHandler {
         //create buttons
         startButton = new TextButton("START", bigTextButtonStyle);
         optionsButton = new TextButton("OPTIONS", bigTextButtonStyle);
-        helpButton = new TextButton("HELP", bigTextButtonStyle);
+        creditsButton = new TextButton("CREDITS", bigTextButtonStyle);
+        helpButton= new TextButton("HELP", bigTextButtonStyle);
         exitButton = new TextButton("EXIT", bigTextButtonStyle);
 
         //heading label setup
@@ -110,6 +113,8 @@ public class MenuScreen implements Screen, IEventHandler {
         table.row().pad(10);
         table.add(optionsButton);
         table.row().pad(10);
+        table.add(creditsButton);
+        table.row().pad(10);
         table.add(helpButton);
         table.row();
         table.add(exitButton);
@@ -123,21 +128,55 @@ public class MenuScreen implements Screen, IEventHandler {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                app.setPlayScreen();
-                PlaySounds.stopTheme();
+
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setPlayScreen();
+                        PlaySounds.stopTheme();
+
+                    }
+                }), 1);
             }
         });
         optionsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                app.setOptionScreen();
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setOptionScreen();
+
+                    }
+                }), 1);
             }
         });
 
         helpButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                app.setOptionScreen();
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setHelpScreen();
+
+                    }
+                }), 1);
+
+            }
+        });
+
+        creditsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setCreditsScreen();
+
+                    }
+                }), 1);
+
             }
         });
 
