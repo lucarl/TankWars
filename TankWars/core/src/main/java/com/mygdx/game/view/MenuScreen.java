@@ -49,12 +49,13 @@ public class MenuScreen implements Screen, IEventHandler {
 
     public MenuScreen(Application app) {
         this.app = app;
+
         //background setup
         Texture texture = Assets.manager.get("menuscreen.jpg");
         background = new Sprite(texture);
+
         //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
         initEvent();
-
     }
 
     @Override
@@ -90,6 +91,7 @@ public class MenuScreen implements Screen, IEventHandler {
         setupMenuTable();
         stage.addActor(table);
 
+        addMenuButtonListeners();
         // Take input from ui
         Gdx.input.setInputProcessor(stage);
     }
@@ -105,13 +107,14 @@ public class MenuScreen implements Screen, IEventHandler {
         table.add(heading);
         table.row().padTop(50);
         table.add(startButton);
-        table.row().pad(20);
+        table.row().pad(10);
         table.add(optionsButton);
         table.row().pad(10);
         table.add(helpButton);
         table.row();
         table.add(exitButton);
 
+        //display layouts for debugging
         //table.setDebug(true);
     }
 
