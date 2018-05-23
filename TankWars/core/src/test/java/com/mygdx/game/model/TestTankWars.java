@@ -45,7 +45,6 @@ public class TestTankWars {
     //updateObjects
 
     //removeObjects
-
     @Test
     public void testRemoveObjectTank(){
         //adds an object at index 1 to our empty list
@@ -56,7 +55,6 @@ public class TestTankWars {
         //test if object tank is removed by checking if the list is empty
         assertTrue(tankWarsTest.getObjects().isEmpty());
     }
-
     @Test
     public void testRemoveObjectTile(){
         tankWarsTest.getTiles().add(0,testTile);
@@ -64,7 +62,6 @@ public class TestTankWars {
         assertTrue(tankWarsTest.getTiles().isEmpty());
 
     }
-
     @Test
     public void testRemoveObjectShot(){
         tankWarsTest.getShots().add(0,shot);
@@ -72,7 +69,6 @@ public class TestTankWars {
         tankWarsTest.removeObjects();
         assertTrue(tankWarsTest.getShots().isEmpty());
     }
-
     //isRoundOver
     @Test
     public void testIsRoundOver(){
@@ -81,7 +77,6 @@ public class TestTankWars {
         //should return true becuase only one player is alive
         assertTrue(tankWarsTest.isRoundOver());
     }
-
     //nextPlayer
     @Test
     public void testNextPlayerTurnOver(){
@@ -90,16 +85,12 @@ public class TestTankWars {
         boolean expectedTurnOver = tankWarsTest.isTurnOver(); //should be set to true after nextPlayer() is called
         assertEquals(expectedTurnOver, actualTurnOver);
     }
-
     //aim
-
     @Test
     public void testAim(){
        tankWarsTest.aim(delta);
     }
-
     //move
-
     @Test
     public void testMove(){
         Position actualPos = tankWarsTest.getPlayer().getTank().getPos();
@@ -108,9 +99,6 @@ public class TestTankWars {
         //assertTrue(expectedPos == actualPos); is true but should be false
         assertTrue(expectedPos != actualPos); //TEST FAILED
     }
-
-    //fire
-
     @Test
     public void testFire(){
         tankWarsTest.fire();

@@ -9,9 +9,6 @@ public class ArrowButton {
     private Sprite skin;
 
     public ArrowButton(Texture texture, int x, int y, float width, float height) {
-        skin = new Sprite(texture); // your image
-        skin.setPosition(x, y);
-        skin.setSize(width, height);
     }
 
     public void update (SpriteBatch batch, float input_x, float input_y) {

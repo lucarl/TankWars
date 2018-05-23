@@ -16,8 +16,6 @@ public class testTerrain {
 
     @Test
     public void testCoordinates() {
-        Terrain terrain = new Terrain();
-        TerrainTile[][] terrainTiles = terrain.getTerrainMatrix();
         assertTrue(terrainTiles[0][0].getPos().getX() == 0);
         assertTrue(terrainTiles[0][0].getPos().getY() == 195);
         assertTrue(terrainTiles[0][1].getPos().getX() == 5);

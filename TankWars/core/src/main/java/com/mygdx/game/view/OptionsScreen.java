@@ -301,7 +301,6 @@ public class OptionsScreen implements Screen, IEventHandler {
         //handleNextButton();
 
         app.batch.end();
-
         stage.act(delta);
         stage.draw();
 

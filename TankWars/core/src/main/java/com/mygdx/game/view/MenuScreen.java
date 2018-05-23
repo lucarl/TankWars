@@ -45,7 +45,6 @@ public class MenuScreen implements Screen, IEventHandler {
 
     public MenuScreen(Application app) {
         this.app = app;
-
         //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
         initEvent();
 
@@ -58,7 +57,6 @@ public class MenuScreen implements Screen, IEventHandler {
 
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
-        // skin = new Skin(Gdx.files.internal("uiskin.json"));
 
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
@@ -66,37 +64,9 @@ public class MenuScreen implements Screen, IEventHandler {
         bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
         bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
 
-        //startButton
         startButton = new TextButton("START", bigTextButtonStyle);
-        startButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                app.setPlayScreen();
-                PlaySounds.stopTheme();
-
-            }
-        });
-
-        //optionsButton
         optionsButton = new TextButton("OPTIONS", bigTextButtonStyle);
-        optionsButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                app.setOptionScreen();
-            }
-        });
-
-        //exitButton
         exitButton = new TextButton("EXIT", bigTextButtonStyle);
-        exitButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
-                PlaySounds.stopTheme();
-            }
-        });
-
-        //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
 
         //heading label setup
         heading = new Label("TANK WARS", new Label.LabelStyle(
@@ -118,14 +88,10 @@ public class MenuScreen implements Screen, IEventHandler {
         table.row();
         table.add(exitButton);
 
-        heading.setAlignment(Align.center);
-
         //table.setDebug(true);
 
         stage.addActor(table);
 
-        // Take input from ui
-        Gdx.input.setInputProcessor(stage);
 
     }
 
@@ -152,7 +118,6 @@ public class MenuScreen implements Screen, IEventHandler {
         app.batch.end();
         stage.act(delta);
         stage.draw();
-
     }
 
     @Override
