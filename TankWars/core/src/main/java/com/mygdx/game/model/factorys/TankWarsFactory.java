@@ -25,6 +25,8 @@ public class TankWarsFactory {
     private List<IDrawable> objects;
     private List<IDrawable> tiles;
     private List<IDrawable> shots;
+    private List<IDrawable> tanks;
+    private List<IDrawable> gun;
     //private List<IDrawable> upgrade;
     private Wind wind;
     private Terrain terrain = new Terrain();
@@ -36,15 +38,17 @@ public class TankWarsFactory {
         //upgrade = new ArrayList<>();
         shots = new ArrayList<>();
         players = new ArrayList<>();
+        tanks = new ArrayList<>();
         objects = new ArrayList<>();
         tiles = new ArrayList<>();
-        setupObjects(nPlayers, players, objects);
+        gun = new ArrayList<>();
+        setupObjects(nPlayers, players, objects, tanks, gun);
         setupTerrainTiles(tiles);
-        tankWars = new TankWars(terrain, players, objects, shots, tiles, wind);
+        tankWars = new TankWars(terrain, players, objects, shots, tiles, wind, tanks, gun);
         return tankWars;
     }
 
-    public void setupObjects(int nPlayers, List<Player> players, List<IDrawable> objects) {
+    public void setupObjects(int nPlayers, List<Player> players, List<IDrawable> objects, List<IDrawable> tanks, List<IDrawable> gun) {
         int xPos1 = 5;
         int xPos2 = 900;
         Tank tank;
@@ -67,8 +71,8 @@ public class TankWarsFactory {
             players.add(new Player(tank));
             objects.add(new Upgrade(upgrade.getPos().getX(), upgrade.getPos().getY()));
             //objects.add(players.get(i).getTank().getGun().getShot());
-            objects.add(players.get(i).getTank().getGun());
-            objects.add(players.get(i).getTank());
+            gun.add(players.get(i).getTank().getGun());
+            tanks.add(players.get(i).getTank());
         }
     }
 

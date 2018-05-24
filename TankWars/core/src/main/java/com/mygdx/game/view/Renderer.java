@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Renderer {
     private Map<IDrawable, Sprite> sprites;
+
     private SpriteBatch batch;
 
     public Renderer(SpriteBatch batch) {
@@ -43,6 +44,8 @@ public class Renderer {
                         obj.getWidth(), obj.getHeight());
             }
         });
+
+
 
     }
 }
