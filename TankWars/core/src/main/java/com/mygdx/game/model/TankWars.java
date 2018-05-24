@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankWars {
+
     private Player currentPlayer;
     private Wind wind;
     private Terrain terrain;
@@ -20,6 +21,8 @@ public class TankWars {
     private List<IDrawable> objects; // TODO se över om denna är användbar
     private List<IDrawable> tiles;
     private List<IDrawable> shots;
+    private List<IDrawable> tanks;
+    private List<IDrawable> gun;
 
     private int playerIndex = 0;
     private int round = 0;
@@ -28,17 +31,20 @@ public class TankWars {
     private boolean shooting = false;
     private boolean gameOver = false;
 
-    public TankWars(Terrain terrain, List<Player> players, List<IDrawable> objects, List<IDrawable> shots, List<IDrawable> tiles, Wind wind) {
-
+    public TankWars(Terrain terrain, List<Player> players, List<IDrawable> objects, List<IDrawable> shots,
+                    List<IDrawable> tiles, Wind wind, List<IDrawable> tanks, List<IDrawable> gun) {
         this.terrain = terrain;
         this.players = players;
         this.objects = objects;
         this.shots = shots;
         this.tiles = tiles;
         this.wind = wind;
+        this.tanks = tanks;
+        this.gun = gun;
       
         currentPlayer = players.get(playerIndex);
     }
+
     /**
      * Updates the world one frame
      *
@@ -53,7 +59,17 @@ public class TankWars {
             round++;
             currentPlayer.addScore();
             if (round < OptionsScreen.NUMBER_OF_ROUNDS) {
-                terrain = new Terrain();
+                for (int i = 0; i < tiles.size(); i++) {
+                    TerrainTile tile = (TerrainTile) tiles.get(i);
+                    tile.setAlive(true);
+                }
+                for(int i = 0; i < tanks.size(); i++) {
+                    Tank tank = (Tank) tanks.get(i);
+                    TankGun gun = (TankGun) getGun().get(i);
+                    tank.setAlive(true);
+                    gun.setAlive(true);
+                }
+                
                 /**
                  * TODO make a new tank for every player
                  * and a new terrain
@@ -83,6 +99,7 @@ public class TankWars {
                         tank.getGun().setAlive(false);
                         EventBus.BUS.publish(new Event(Event.Tag.PLAY_ANIMATION_EXPLOSION, tank));
                     }
+
                     // Send explosion event
                     EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_EXPLOSION, null));
                 } else if (hasCollidedWithWorld(shot)) {
@@ -147,6 +164,7 @@ public class TankWars {
 
                         }
                     }
+
                     //}
                 }
             }
@@ -211,6 +229,7 @@ public class TankWars {
                 nTanks++;
             }
         }
+
         //if only one tank is left on the field we have a winner and the round is over
         return nTanks <= 1; //är det inte mer rimligt att ha nTanks == 1 ??
     }
@@ -233,6 +252,7 @@ public class TankWars {
             isTurnOver = true;
 
             // Create a sound event for shooting
+
             EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_FIRE, null));
         }
 
@@ -266,6 +286,14 @@ public class TankWars {
 
     public List<IDrawable> getObjects() {
         return objects;
+    }
+
+    public List<IDrawable> getTanks() {
+        return tanks;
+    }
+
+    public List<IDrawable> getGun() {
+        return gun;
     }
 
     public Wind getWind() {

@@ -16,16 +16,24 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Application;
+import com.mygdx.game.model.Player;
 import com.mygdx.game.services.Assets;
 
 
 /**
  * Created by marianarale on 2018-05-12.
  */
-public class HelpScreen implements Screen {
+public class ScoreScreen implements Screen {
 
     private Application app;
-    private TextButton backButton;
+    private TextButton returnMenuButton;
+    private TextArea txtScoresWinner;
+    private TextArea txtScoresSecond;
+    private TextArea txtScoresThird;
+    private TextArea txtScoresFourth;
+    private TextArea txtScoresFifth;
+
+    private Label heading;
 
     private Skin skin;
     private Skin skin2;
@@ -35,10 +43,7 @@ public class HelpScreen implements Screen {
     private SpriteBatch batch;
     private TextureAtlas atlas;
 
-    private Label heading;
-    private Label tutorialText;
-
-    public HelpScreen(Application app) {
+    public ScoreScreen(Application app) {
         this.app = app;
 
     }
@@ -57,22 +62,28 @@ public class HelpScreen implements Screen {
         bigTextButtonStyle.up = skin2.getDrawable("bigButton.up");
         bigTextButtonStyle.down = skin2.getDrawable("bigButton.down");
 
-        backButton = new TextButton("BACK", bigTextButtonStyle);
+        returnMenuButton = new TextButton("RETURN TO MENU", bigTextButtonStyle);
 
         //TextArea.TextFieldStyle txtScoresStyle = new TextField.TextFieldStyle();
         //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
 
-        heading = new Label("TUTORIAL",
+        heading = new Label("LEADERBOARDS",
                 new Label.LabelStyle(new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
         heading.setFontScale(1.4f);
         heading.setAlignment(Align.center);
 
-        tutorialText = new Label("Basic instructions for how to play Tank Wars:",
-                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
-        tutorialText.setFontScale(0.8f);
-        tutorialText.setAlignment(Align.center);
+        txtScoresWinner = new TextArea("",skin);
+        txtScoresWinner.setSize(210,210);
+        txtScoresSecond = new TextArea("",skin);
+        txtScoresSecond.setSize(210,210);
+        txtScoresThird = new TextArea("",skin);
+        txtScoresThird.setSize(210,210);
+        txtScoresFourth = new TextArea("",skin);
+        txtScoresFourth.setSize(210,210);
+        txtScoresFifth = new TextArea("",skin);
+        txtScoresFifth.setSize(210,210);
 
-        setupHelpTable();
+        setupScoreTable();
         stage.addActor(table);
 
         addMenuButtonListeners();
@@ -80,7 +91,7 @@ public class HelpScreen implements Screen {
 
     }
 
-    private void setupHelpTable() {
+    private void setupScoreTable(){
 
         table = new Table();
         table.setFillParent(true);
@@ -89,28 +100,30 @@ public class HelpScreen implements Screen {
 
         table.row().width(500);
         table.add(heading);
+
         table.row().padTop(50);
-        table.add(tutorialText);
+        table.add(txtScoresWinner);
+        table.row().padTop(25);
+        table.add(txtScoresSecond);
+        table.row().padTop(25);
+        table.add(txtScoresThird);
+        table.row().padTop(25);
+        table.add(txtScoresFourth);
+        table.row().padTop(25);
+        table.add(txtScoresFifth);
 
         table.row();
-        table.add(backButton).padTop(50);
+        table.add(returnMenuButton).padTop(50);
         table.add();
 
     }
 
     private void addMenuButtonListeners() {
 
-        backButton.addListener(new ClickListener() {
+        returnMenuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
-                Timer.schedule((new Timer.Task() {
-                    @Override
-                    public void run() {
-                        app.setMenuScreen();
-
-                    }
-                }), 1);
+                app.setMenuScreen();
 
             }
         });
@@ -154,5 +167,4 @@ public class HelpScreen implements Screen {
         stage.dispose();
         skin.dispose();
     }
-
 }

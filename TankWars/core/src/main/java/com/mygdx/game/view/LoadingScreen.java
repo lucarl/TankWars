@@ -5,14 +5,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.Application;
 import com.mygdx.game.services.Assets;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class LoadingScreen implements Screen {
 
     private final Application app;
     private float progress;
+    private Label loadProg;
 
     private ShapeRenderer shapeRenderer;
 
@@ -26,6 +30,15 @@ public class LoadingScreen implements Screen {
     public void show() {
         progress = 0f;
         Assets.loadAssets();
+
+        /*
+        loadProg = new Label("TANK WARS", new Label.LabelStyle(
+                new BitmapFont(Gdx.files.internal("hudFont.fnt")), Color.BLACK));
+
+        loadProg.setFontScale(1.0f);
+        loadProg.setAlignment(Align.bottom);
+        */
+
     }
 
     private void update(float delta) {

@@ -9,7 +9,7 @@ import com.mygdx.game.view.*;
 public class Application extends Game{
     public static final String TITLE = "TANK WARS";
     public static final int GAME_WIDTH = 1000;
-    public static final int GAME_HEIGHT = 600;
+    public static final int GAME_HEIGHT = 625;
 
 
     private Screen screen;
@@ -46,10 +46,23 @@ public class Application extends Game{
         setScreen(screen);
     }
 
-    public void setHelpScreen(){
+    public void setScoreScreen() {
+        screen.dispose();
+        screen = new ScoreScreen(this);
+        setScreen(screen);
+    }
+
+    public void setHelpScreen() {
         screen.dispose();
         screen = new HelpScreen(this);
         setScreen(screen);
     }
+
+    public void setCreditsScreen() {
+        screen.dispose();
+        screen = new CreditsScreen(this);
+        setScreen(screen);
+    }
+
 }
 

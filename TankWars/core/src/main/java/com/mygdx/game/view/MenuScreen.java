@@ -11,9 +11,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Application;
 import com.mygdx.game.services.Assets;
@@ -33,6 +37,7 @@ public class MenuScreen implements Screen, IEventHandler {
     private TextButton startButton;
     private TextButton optionsButton;
     private TextButton helpButton;
+    private TextButton creditsButton;
     private TextButton exitButton;
 
     private Skin skin;
@@ -59,15 +64,15 @@ public class MenuScreen implements Screen, IEventHandler {
     public void show() {
         viewport = new FitViewport(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         stage = new Stage(viewport, app.batch);
+
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
 
-        //background size
         background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
         //Button style setup
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
-        bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("screen.fnt"));
+        bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         bigTextButtonStyle.fontColor = Color.WHITE;
         bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
         bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
@@ -75,10 +80,9 @@ public class MenuScreen implements Screen, IEventHandler {
         //create buttons
         startButton = new TextButton("START", bigTextButtonStyle);
         optionsButton = new TextButton("OPTIONS", bigTextButtonStyle);
-        helpButton = new TextButton("HELP", bigTextButtonStyle);
+        creditsButton = new TextButton("CREDITS", bigTextButtonStyle);
+        helpButton= new TextButton("HELP", bigTextButtonStyle);
         exitButton = new TextButton("EXIT", bigTextButtonStyle);
-        //add listeners for buttons
-        addMenuButtonListeners();
 
         //heading label setup
         heading = new Label("TANK WARS", new Label.LabelStyle(
@@ -90,6 +94,7 @@ public class MenuScreen implements Screen, IEventHandler {
         setupMenuTable();
         stage.addActor(table);
 
+        addMenuButtonListeners();
         // Take input from ui
         Gdx.input.setInputProcessor(stage);
     }
@@ -108,6 +113,8 @@ public class MenuScreen implements Screen, IEventHandler {
         table.row().pad(10);
         table.add(optionsButton);
         table.row().pad(10);
+        table.add(creditsButton);
+        table.row().pad(10);
         table.add(helpButton);
         table.row();
         table.add(exitButton);
@@ -121,21 +128,55 @@ public class MenuScreen implements Screen, IEventHandler {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                app.setPlayScreen();
+
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setPlayScreen();
+                        PlaySounds.stopTheme();
+
+                    }
+                }), 1);
             }
         });
-
         optionsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                app.setOptionScreen();
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setOptionScreen();
+
+                    }
+                }), 1);
             }
         });
 
         helpButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                app.setHelpScreen();
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setHelpScreen();
+
+                    }
+                }), 1);
+
+            }
+        });
+
+        creditsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setCreditsScreen();
+
+                    }
+                }), 1);
+
             }
         });
 
@@ -147,6 +188,7 @@ public class MenuScreen implements Screen, IEventHandler {
             }
         });
     }
+
 
     @Override
     public void onEvent(Event evt) {

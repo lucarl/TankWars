@@ -22,10 +22,15 @@ import com.mygdx.game.services.Assets;
 /**
  * Created by marianarale on 2018-05-12.
  */
-public class HelpScreen implements Screen {
+public class CreditsScreen implements Screen {
 
     private Application app;
     private TextButton backButton;
+    private TextButton showCredits;
+    private Label creditPerson1;
+    private Label creditPerson2;
+    private Label creditPerson3;
+    private Label creditPerson4;
 
     private Skin skin;
     private Skin skin2;
@@ -33,12 +38,11 @@ public class HelpScreen implements Screen {
     private FitViewport viewport;
     private Stage stage;
     private SpriteBatch batch;
-    private TextureAtlas atlas;
-
     private Label heading;
-    private Label tutorialText;
+    private TextureAtlas atlas;
+    private Boolean clicked = false;
 
-    public HelpScreen(Application app) {
+    public CreditsScreen(Application app) {
         this.app = app;
 
     }
@@ -58,21 +62,44 @@ public class HelpScreen implements Screen {
         bigTextButtonStyle.down = skin2.getDrawable("bigButton.down");
 
         backButton = new TextButton("BACK", bigTextButtonStyle);
+        showCredits = new TextButton("MVP", bigTextButtonStyle);
+
 
         //TextArea.TextFieldStyle txtScoresStyle = new TextField.TextFieldStyle();
         //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
 
-        heading = new Label("TUTORIAL",
+
+        heading = new Label("CREDITS",
                 new Label.LabelStyle(new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
         heading.setFontScale(1.4f);
         heading.setAlignment(Align.center);
 
-        tutorialText = new Label("Basic instructions for how to play Tank Wars:",
+        creditPerson1 = new Label("Adam Kjäll",
                 new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
-        tutorialText.setFontScale(0.8f);
-        tutorialText.setAlignment(Align.center);
+        creditPerson1.setFontScale(0.1f);
+        creditPerson1.setColor(Color.GRAY);
+        creditPerson1.setAlignment(Align.center);
 
-        setupHelpTable();
+        creditPerson2 = new Label("Thomas Jinton",
+                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
+        creditPerson2.setFontScale(0.1f);
+        creditPerson2.setColor(Color.GRAY);
+        creditPerson2.setAlignment(Align.center);
+
+        creditPerson3 = new Label("Patricia Zabecka",
+                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
+        creditPerson3.setFontScale(0.1f);
+        creditPerson3.setColor(Color.GRAY);
+        creditPerson3.setAlignment(Align.center);
+
+        creditPerson4 = new Label("Carl Lundborg",
+                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
+        creditPerson4.setFontScale(0.1f);
+        creditPerson4.setColor(Color.GRAY);
+        creditPerson4.setAlignment(Align.center);
+
+
+        setupCreditsTable();
         stage.addActor(table);
 
         addMenuButtonListeners();
@@ -80,20 +107,29 @@ public class HelpScreen implements Screen {
 
     }
 
-    private void setupHelpTable() {
+    private void setupCreditsTable() {
 
         table = new Table();
         table.setFillParent(true);
         table.top();
         table.padTop(25);
 
+        //button setup in table
         table.row().width(500);
         table.add(heading);
+        table.row().padTop(25);
+        table.add(showCredits);
         table.row().padTop(50);
-        table.add(tutorialText);
+        table.add(creditPerson1);
+        table.row().padTop(10);
+        table.add(creditPerson2);
+        table.row().padTop(10);
+        table.add(creditPerson3);
+        table.row().padTop(10);
+        table.add(creditPerson4);
 
         table.row();
-        table.add(backButton).padTop(50);
+        table.add(backButton).padTop(100);
         table.add();
 
     }
@@ -103,7 +139,6 @@ public class HelpScreen implements Screen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
                 Timer.schedule((new Timer.Task() {
                     @Override
                     public void run() {
@@ -114,6 +149,57 @@ public class HelpScreen implements Screen {
 
             }
         });
+
+        showCredits.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                clicked = !clicked;
+                if(clicked){
+
+                    Timer.schedule((new Timer.Task() {
+                        @Override
+                        public void run() {
+
+                            creditPerson1.setColor(Color.WHITE);
+                            creditPerson1.setFontScale(0.9f);
+                            creditPerson2.setColor(Color.WHITE);
+                            creditPerson2.setFontScale(0.9f);
+                            creditPerson3.setColor(Color.WHITE);
+                            creditPerson3.setFontScale(0.9f);
+                            creditPerson4.setColor(Color.WHITE);
+                            creditPerson4.setFontScale(0.9f);
+
+                        }
+                    }), 1);
+
+                }
+                else {
+
+                    Timer.schedule((new Timer.Task() {
+                        @Override
+                        public void run() {
+
+                            creditPerson1.setColor(Color.GRAY);
+                            creditPerson1.setFontScale(0.1f);
+                            creditPerson2.setColor(Color.GRAY);
+                            creditPerson2.setFontScale(0.1f);
+                            creditPerson3.setColor(Color.GRAY);
+                            creditPerson3.setFontScale(0.1f);
+                            creditPerson4.setColor(Color.GRAY);
+                            creditPerson4.setFontScale(0.1f);
+
+                        }
+                    }), 1);
+
+                }
+
+
+
+            }
+        });
+
+
 
     }
 
@@ -154,5 +240,4 @@ public class HelpScreen implements Screen {
         stage.dispose();
         skin.dispose();
     }
-
 }

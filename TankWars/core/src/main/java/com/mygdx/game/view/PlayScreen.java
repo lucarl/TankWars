@@ -8,8 +8,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
 
 import com.mygdx.game.ctrl.PlayController;
@@ -37,9 +42,11 @@ public class PlayScreen implements Screen, IEventHandler {
     private Renderer renderer;
     private Skin skin;
     private Stage stage;
-    private TextButton menuButton;
-    private TankWarsFactory tankWarsFactory;
 
+    private TextButton scoreButton;
+    private TextButton menuButton;
+    private Table table;
+    private TankWarsFactory tankWarsFactory;
     private List<Explosion> explosions;
 
     public PlayScreen(Application app) {
@@ -65,9 +72,19 @@ public class PlayScreen implements Screen, IEventHandler {
     public void show() {
         renderer.loadResources(tankWars.getTiles());
         renderer.loadResources(tankWars.getObjects());
+        renderer.loadResources(tankWars.getTanks());
+        renderer.loadResources(tankWars.getGun());
         background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         InputMultiplexer im = new InputMultiplexer(stage, controller);
         Gdx.input.setInputProcessor(im);
+        //viewport = new FitViewport(Application.GAME_WIDTH, Application.GAME_HEIGHT);
+        //stage = new Stage(viewport, app.batch);
+
+        table = new Table(skin);
+        table.setWidth(stage.getWidth());
+        table.align(Align.center|Align.bottom);
+        table.setPosition(0, Gdx.graphics.getHeight());
+
 
         //return to menu button
         menuButton = new TextButton("Return to Menu", skin);
@@ -75,13 +92,36 @@ public class PlayScreen implements Screen, IEventHandler {
         menuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+
                 app.setMenuScreen();
                 PlaySounds.playThemeReturn();
+                PlaySounds.stopFire();
+                PlaySounds.stopMove();
+                PlaySounds.stopAim();
+                PlaySounds.stopExplosion();
+                PlaySounds.stopNuke();
+                PlaySounds.stopMissile();
+                PlaySounds.stopTankDestroy();
 
             }
         });
 
+        //score
+        scoreButton = new TextButton("Show Leaderboards",skin);
+        scoreButton.getLabel().setFontScale(0.9f);
+        scoreButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setScoreScreen();
+                PlaySounds.playThemeReturn();
+            }
+        });
+
+        table.add(menuButton);
+        table.add(scoreButton).padLeft(50);
+        stage.addActor(scoreButton);
         stage.addActor(menuButton);
+        stage.addActor(table);
 
     }
 

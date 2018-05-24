@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 /**
  * An assets class whose purpose is to load and manage
@@ -68,6 +69,18 @@ public class Assets {
     private static final AssetDescriptor<BitmapFont> headingFont =
             new AssetDescriptor<>("myfont.fnt", BitmapFont.class);
 
+    //tank wars font 2
+    private static final AssetDescriptor<BitmapFont> headingFont2 =
+            new AssetDescriptor<>("tankWarsFont.fnt", BitmapFont.class);
+
+    //Menu font
+    private static final AssetDescriptor<BitmapFont> menuFont =
+            new AssetDescriptor<>("tankWarsFont.fnt", BitmapFont.class);
+
+    // Skin font
+    private static final AssetDescriptor<Skin> skinFont =
+            new AssetDescriptor<Skin>("uiskin.json", Skin.class);
+
     //------------------- SOUNDS ----------------------------
     private static final AssetDescriptor<Sound> soundShoot =
             new AssetDescriptor<Sound>("cannon.mp3", Sound.class);
@@ -85,8 +98,6 @@ public class Assets {
             new AssetDescriptor<Sound>("nuke.mp3",Sound.class);
     private static final AssetDescriptor<Sound> soundMissile =
             new AssetDescriptor<Sound>("missile.mp3",Sound.class);
-
-
 
 
     //skin
@@ -109,6 +120,9 @@ public class Assets {
         manager.load(menuImg);
         manager.load(hudFont);
         manager.load(headingFont);
+        manager.load(headingFont2);
+        manager.load(menuFont);
+        manager.load(skinFont);
         manager.load(soundAim);
         manager.load(soundBoom);
         manager.load(soundShoot);
