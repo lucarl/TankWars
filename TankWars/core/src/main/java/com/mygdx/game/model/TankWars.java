@@ -54,7 +54,14 @@ public class TankWars {
             round++;
             currentPlayer.addScore();
             if (round < OptionsScreen.NUMBER_OF_ROUNDS) {
-                terrain = new Terrain();
+                for (int i = 0; i < tiles.size(); i++) {
+                    TerrainTile tile = (TerrainTile) tiles.get(i);
+                    tile.setAlive(true);
+                }
+                /*for(int i = 0; i < tanks.size(); i++) {
+                    Tank tank = tanks.get(i);
+                    tank.setAlive(true);
+                }*/
                 /**
                  * TODO make a new tank for every player
                  * and a new terrain
