@@ -29,6 +29,7 @@ public class TankWars {
     private boolean gameOver = false;
 
     public TankWars(Terrain terrain, List<Player> players, List<IDrawable> objects, List<IDrawable> shots, List<IDrawable> tiles, Wind wind) {
+
         this.terrain = terrain;
         this.players = players;
         this.objects = objects;
@@ -38,7 +39,6 @@ public class TankWars {
       
         currentPlayer = players.get(playerIndex);
     }
-
     /**
      * Updates the world one frame
      *
@@ -83,7 +83,6 @@ public class TankWars {
                         tank.getGun().setAlive(false);
                         EventBus.BUS.publish(new Event(Event.Tag.PLAY_ANIMATION_EXPLOSION, tank));
                     }
-
                     // Send explosion event
                     EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_EXPLOSION, null));
                 } else if (hasCollidedWithWorld(shot)) {
@@ -148,7 +147,6 @@ public class TankWars {
 
                         }
                     }
-
                     //}
                 }
             }

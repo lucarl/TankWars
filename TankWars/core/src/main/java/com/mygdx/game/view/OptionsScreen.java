@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -59,6 +60,10 @@ public class OptionsScreen implements Screen, IEventHandler {
     public OptionsScreen(Application app) {
         this.app = app;
 
+        //background setup
+        Texture texture = Assets.manager.get("menuscreen.jpg");
+        background = new Sprite(texture);
+
         //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
         initEvent();
     }
@@ -72,6 +77,9 @@ public class OptionsScreen implements Screen, IEventHandler {
         skin = new Skin(atlas);
         //skin = new Skin(Gdx.files.internal("uiskin.json"));
 
+        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
+
+        //button style setup
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
         BitmapFont font = Assets.manager.get("myfont.fnt");
         bigTextButtonStyle.font = font;
@@ -199,6 +207,7 @@ public class OptionsScreen implements Screen, IEventHandler {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         app.batch.begin();
+        background.draw(app.batch);
         app.batch.end();
         stage.act(delta);
         stage.draw();

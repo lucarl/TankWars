@@ -45,5 +45,11 @@ public class Application extends Game{
         screen = new SplashScreen(this);
         setScreen(screen);
     }
+
+    public void setHelpScreen(){
+        screen.dispose();
+        screen = new HelpScreen(this);
+        setScreen(screen);
+    }
 }
 

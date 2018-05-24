@@ -3,372 +3,380 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="260.9655544235012" y="567.0">com.mygdx.game.model.Terrain</node>
-    <node x="516.2292834097466" y="874.0">com.mygdx.game.model.Tank</node>
-    <node x="387.04247750042424" y="199.0">com.mygdx.game.model.CollisionRect</node>
-    <node x="724.7934981684981" y="567.0">com.mygdx.game.model.Missile</node>
-    <node x="446.6178162069719" y="567.0">com.mygdx.game.model.AngryShot</node>
-    <node x="753.0106660723384" y="0.0">com.mygdx.game.model.Position</node>
-    <node x="0.0" y="874.0">com.mygdx.game.model.Difficulty</node>
-    <node x="696.3446680251313" y="646.0">com.mygdx.game.model.factorys.ShotFactory</node>
-    <node x="704.8446680251313" y="745.0">com.mygdx.game.model.TankGun</node>
-    <node x="555.5627289377288" y="408.0">com.mygdx.game.model.Shot</node>
-    <node x="827.7934981684981" y="567.0">com.mygdx.game.model.StandardShot</node>
-    <node x="73.24829251873928" y="408.0">com.mygdx.game.model.Upgrade</node>
-    <node x="604.7934981684981" y="567.0">com.mygdx.game.model.NukeShot</node>
-    <node x="237.63222109016783" y="408.0">com.mygdx.game.model.TerrainTile</node>
-    <node x="27.083333333333258" y="953.0">com.mygdx.game.model.Wind</node>
-    <node x="512.7292834097466" y="953.0">com.mygdx.game.model.Player</node>
-    <node x="220.61962223758553" y="1112.0">com.mygdx.game.model.factorys.TankWarsFactory</node>
-    <node x="151.8465068044536" y="199.0">com.mygdx.game.model.IDrawable</node>
+    <node x="410.81410286733205" y="844.0">com.mygdx.game.model.Tank</node>
+    <node x="634.6619911821082" y="537.0">com.mygdx.game.model.Terrain</node>
+    <node x="491.5996609902246" y="189.0">com.mygdx.game.model.CollisionRect</node>
+    <node x="985.3649998180636" y="0.0">com.google.gwt.emul.javaemul</node>
+    <node x="60.775961538461615" y="537.0">com.mygdx.game.model.Missile</node>
+    <node x="452.93703666642455" y="537.0">com.mygdx.game.model.AngryShot</node>
+    <node x="0.0" y="1136.0">com.badlogic.gdx.backends.gwt.emu.java</node>
+    <node x="293.04761358950145" y="0.0">com.mygdx.game.model.Position</node>
+    <node x="292.2099362006654" y="844.0">com.mygdx.game.model.Difficulty</node>
+    <node x="381.0067307692308" y="358.0">com.mygdx.game.model.Shot</node>
+    <node x="181.6987182519474" y="715.0">com.mygdx.game.model.TankGun</node>
+    <node x="173.1987182519474" y="616.0">com.mygdx.game.model.factorys.ShotFactory</node>
+    <node x="163.77596153846162" y="537.0">com.mygdx.game.model.StandardShot</node>
+    <node x="810.3649998180634" y="358.0">com.mygdx.game.model.Upgrade</node>
+    <node x="303.7759615384616" y="537.0">com.mygdx.game.model.NukeShot</node>
+    <node x="639.9953245154416" y="328.1582792207792">com.mygdx.game.model.TerrainTile</node>
+    <node x="315.9599362006654" y="923.0">com.mygdx.game.model.Wind</node>
+    <node x="426.75160286733205" y="923.0">com.mygdx.game.model.Player</node>
+    <node x="725.7810388011558" y="189.0">com.mygdx.game.model.IDrawable</node>
+    <node x="540.0668501200794" y="1062.0">com.mygdx.game.model.factorys.TankWarsFactory</node>
   </nodes>
   <notes />
   <edges>
     <edge source="com.mygdx.game.model.factorys.ShotFactory" target="com.mygdx.game.model.Missile">
-      <point x="0.0" y="-14.5" />
-      <point x="751.8446680251313" y="626.0" />
-      <point x="766.2934981684981" y="626.0" />
+      <point x="-22.200000000000045" y="-14.5" />
+      <point x="206.49871825194737" y="586.0" />
+      <point x="102.27596153846162" y="586.0" />
       <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="com.mygdx.game.model.factorys.TankWarsFactory" target="com.mygdx.game.model.Upgrade">
+      <point x="56.0625" y="-14.5" />
+      <point x="665.1293501200794" y="1032.0" />
+      <point x="873.9833791208791" y="1032.0" />
+      <point x="873.9833791208791" y="517.0" />
+      <point x="880.8649998180634" y="517.0" />
+      <point x="23.5" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Tank" target="com.mygdx.game.model.Shot">
       <point x="0.0" y="-14.5" />
-      <point x="552.2292834097466" y="794.0" />
-      <point x="561.1178162069718" y="794.0" />
-      <point x="561.1178162069718" y="527.0" />
-      <point x="569.4088827838827" y="527.0" />
-      <point x="-22.153846153846132" y="14.5" />
-    </edge>
-    <edge source="com.mygdx.game.model.factorys.TankWarsFactory" target="com.mygdx.game.model.Upgrade">
-      <point x="-30.1875" y="-14.5" />
-      <point x="259.43212223758553" y="1052.0" />
-      <point x="122.20833333333326" y="1052.0" />
-      <point x="122.20833333333326" y="547.0" />
-      <point x="143.74829251873928" y="547.0" />
-      <point x="23.5" y="14.5" />
+      <point x="446.81410286733205" y="764.0" />
+      <point x="442.43703666642455" y="764.0" />
+      <point x="442.43703666642455" y="497.0" />
+      <point x="439.160576923077" y="497.0" />
+      <point x="22.15384615384619" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Missile" target="com.mygdx.game.model.Position">
-      <point x="33.200000000000045" y="-14.5" />
-      <point x="799.4934981684981" y="537.0" />
-      <point x="919.2732394537027" y="537.0" />
-      <point x="919.2732394537027" y="139.0" />
-      <point x="807.3856660723384" y="139.0" />
-      <point x="9.375" y="14.5" />
+      <point x="-33.200000000000045" y="-14.5" />
+      <point x="69.07596153846157" y="517.0" />
+      <point x="72.07371825194741" y="517.0" />
+      <point x="72.07371825194741" y="119.0" />
+      <point x="317.42261358950145" y="119.0" />
+      <point x="-20.625" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.factorys.TankWarsFactory" target="com.mygdx.game.model.TerrainTile">
-      <point x="-4.3125" y="-14.5" />
-      <point x="285.30712223758553" y="1022.0" />
-      <point x="243.4940476190476" y="1022.0" />
-      <point x="243.4940476190476" y="547.0" />
-      <point x="250.13222109016783" y="547.0" />
-      <point x="-37.5" y="14.5" />
+      <point x="21.5625" y="-14.5" />
+      <point x="630.6293501200794" y="992.0" />
+      <point x="743.2810388011558" y="992.0" />
+      <point x="743.2810388011558" y="517.0" />
+      <point x="727.4953245154416" y="517.0" />
+      <point x="37.5" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.NukeShot" target="com.mygdx.game.model.Position">
-      <point x="40.0" y="-14.5" />
-      <point x="694.7934981684981" y="517.0" />
-      <point x="904.5232394537027" y="517.0" />
-      <point x="904.5232394537027" y="159.0" />
-      <point x="799.8856660723384" y="159.0" />
-      <point x="1.875" y="14.5" />
+      <point x="-40.0" y="-14.5" />
+      <point x="313.7759615384616" y="417.0" />
+      <point x="169.8237182519474" y="417.0" />
+      <point x="169.8237182519474" y="159.0" />
+      <point x="332.42261358950145" y="159.0" />
+      <point x="-5.625" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.factorys.TankWarsFactory" target="com.mygdx.game.model.IDrawable">
-      <point x="-21.5625" y="-14.5" />
-      <point x="268.05712223758553" y="1042.0" />
-      <point x="177.74829251873928" y="1042.0" />
-      <point x="177.74829251873928" y="308.0" />
-      <point x="173.27507823302506" y="308.0" />
-      <point x="-28.571428571428555" y="14.5" />
-    </edge>
-    <edge source="com.mygdx.game.model.Tank" target="com.mygdx.game.model.Terrain">
-      <point x="-27.69230769230768" y="-14.5" />
-      <point x="524.536975717439" y="844.0" />
-      <point x="323.25586565752144" y="844.0" />
-      <point x="323.25586565752144" y="626.0" />
-      <point x="330.1322210901679" y="626.0" />
-      <point x="27.666666666666686" y="14.5" />
+      <point x="30.1875" y="-14.5" />
+      <point x="639.2543501200794" y="1002.0" />
+      <point x="791.2399998180634" y="1002.0" />
+      <point x="791.2399998180634" y="338.0" />
+      <point x="790.0667530868701" y="338.0" />
+      <point x="14.285714285714278" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Tank" target="com.mygdx.game.model.Position">
-      <point x="33.23076923076928" y="-14.5" />
-      <point x="585.4600526405159" y="854.0" />
-      <point x="1008.5694597069596" y="854.0" />
-      <point x="1008.5694597069596" y="59.0" />
-      <point x="837.3856660723384" y="59.0" />
-      <point x="39.375" y="14.5" />
+      <point x="22.15384615384619" y="-14.5" />
+      <point x="468.96794902117824" y="804.0" />
+      <point x="621.8639142590313" y="804.0" />
+      <point x="621.8639142590313" y="129.0" />
+      <point x="351.17261358950145" y="129.0" />
+      <point x="13.125" y="14.5" />
+    </edge>
+    <edge source="com.mygdx.game.model.Tank" target="com.mygdx.game.model.Terrain">
+      <point x="27.692307692307736" y="-14.5" />
+      <point x="474.5064105596398" y="814.0" />
+      <point x="656.022815539869" y="814.0" />
+      <point x="656.022815539869" y="596.0" />
+      <point x="648.4953245154416" y="596.0" />
+      <point x="-27.666666666666686" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Upgrade" target="com.mygdx.game.model.Position">
-      <point x="-7.833333333333314" y="-14.5" />
-      <point x="112.41495918540596" y="388.0" />
-      <point x="110.06249999999994" y="388.0" />
-      <point x="110.06249999999994" y="99.0" />
-      <point x="762.3856660723384" y="99.0" />
-      <point x="-35.625" y="14.5" />
+      <point x="23.5" y="-14.5" />
+      <point x="880.8649998180634" y="328.0" />
+      <point x="892.8233331513967" y="328.0" />
+      <point x="892.8233331513967" y="69.0" />
+      <point x="373.67261358950145" y="69.0" />
+      <point x="35.625" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.TerrainTile" target="com.mygdx.game.model.Position">
-      <point x="-14.285714285714278" y="-14.5" />
-      <point x="273.3465068044536" y="129.0" />
-      <point x="773.6356660723384" y="129.0" />
-      <point x="-24.375" y="14.5" />
+      <point x="14.285714285714278" y="-14.5" />
+      <point x="704.2810388011558" y="109.0" />
+      <point x="358.67261358950145" y="109.0" />
+      <point x="20.625" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.NukeShot" target="com.mygdx.game.model.CollisionRect">
       <point x="0.0" y="-14.5" />
-      <point x="655.5792124542124" y="268.0" />
-      <point x="481.50676321470996" y="268.0" />
-      <point x="36.96428571428572" y="14.5" />
+      <point x="353.7759615384616" y="437.0" />
+      <point x="348.88310439560445" y="437.0" />
+      <point x="348.88310439560445" y="288.0" />
+      <point x="512.1353752759389" y="288.0" />
+      <point x="-36.96428571428572" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.StandardShot" target="com.mygdx.game.model.Position">
-      <point x="48.0" y="-14.5" />
-      <point x="935.7934981684981" y="547.0" />
-      <point x="937.5434981684981" y="547.0" />
-      <point x="937.5434981684981" y="119.0" />
-      <point x="814.8856660723384" y="119.0" />
-      <point x="16.875" y="14.5" />
+      <point x="-48.0" y="-14.5" />
+      <point x="175.77596153846162" y="437.0" />
+      <point x="155.0737182519474" y="437.0" />
+      <point x="155.0737182519474" y="139.0" />
+      <point x="324.92261358950145" y="139.0" />
+      <point x="-13.125" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.TerrainTile" target="com.mygdx.game.model.IDrawable">
-      <point x="-42.85714285714286" y="-14.5" />
-      <point x="244.77507823302494" y="308.0" />
-      <point x="230.41793537588217" y="308.0" />
-      <point x="28.571428571428555" y="14.5" />
+      <point x="42.85714285714283" y="-14.5" />
+      <point x="732.8524673725844" y="338.0" />
+      <point x="747.2096102297272" y="338.0" />
+      <point x="-28.571428571428584" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Player" target="com.mygdx.game.model.Tank">
       <point x="-19.75" y="-14.5" />
-      <point x="532.4792834097466" y="928.0" />
-      <point x="543.2292834097466" y="928.0" />
-      <point x="-9.0" y="14.5" />
+      <point x="446.50160286733205" y="903.0" />
+      <point x="455.81410286733205" y="903.0" />
+      <point x="9.0" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Missile" target="com.mygdx.game.model.CollisionRect">
       <point x="0.0" y="-14.5" />
-      <point x="766.2934981684981" y="477.0" />
-      <point x="751.8446680251313" y="477.0" />
-      <point x="751.8446680251313" y="258.0" />
-      <point x="489.72104892899563" y="258.0" />
-      <point x="45.17857142857139" y="14.5" />
-    </edge>
-    <edge source="com.mygdx.game.model.Upgrade" target="com.mygdx.game.model.CollisionRect">
-      <point x="23.5" y="-14.5" />
-      <point x="143.74829251873928" y="318.0" />
-      <point x="391.1496203575671" y="318.0" />
+      <point x="102.27596153846162" y="517.0" />
+      <point x="96.67596153846159" y="517.0" />
+      <point x="96.67596153846159" y="268.0" />
+      <point x="495.70680384736744" y="268.0" />
       <point x="-53.39285714285717" y="14.5" />
     </edge>
-    <edge source="com.mygdx.game.model.Upgrade" target="com.mygdx.game.model.IDrawable">
-      <point x="7.833333333333343" y="-14.5" />
-      <point x="128.08162585207265" y="308.0" />
-      <point x="158.98936394731072" y="308.0" />
-      <point x="-42.85714285714286" y="14.5" />
+    <edge source="com.mygdx.game.model.Upgrade" target="com.mygdx.game.model.CollisionRect">
+      <point x="-23.499999999999986" y="-14.5" />
+      <point x="833.8649998180634" y="248.0" />
+      <point x="602.4925181330817" y="248.0" />
+      <point x="53.39285714285711" y="14.5" />
     </edge>
-    <edge source="com.mygdx.game.model.TankGun" target="com.mygdx.game.model.factorys.ShotFactory">
-      <point x="-5.875" y="-14.5" />
-      <point x="745.9696680251313" y="695.0" />
-      <point x="724.0946680251313" y="695.0" />
-      <point x="-27.75" y="14.5" />
+    <edge source="com.mygdx.game.model.Upgrade" target="com.mygdx.game.model.IDrawable">
+      <point x="-7.833333333333329" y="-14.5" />
+      <point x="849.5316664847301" y="238.0" />
+      <point x="818.6381816582987" y="238.0" />
+      <point x="42.85714285714286" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.TerrainTile" target="com.mygdx.game.model.CollisionRect">
-      <point x="42.85714285714286" y="-14.5" />
-      <point x="330.4893639473107" y="358.0" />
-      <point x="424.00676321470996" y="358.0" />
-      <point x="-20.535714285714278" y="14.5" />
+      <point x="-42.85714285714286" y="-14.5" />
+      <point x="647.1381816582987" y="288.0" />
+      <point x="569.6353752759389" y="288.0" />
+      <point x="20.535714285714278" y="14.5" />
+    </edge>
+    <edge source="com.mygdx.game.model.TankGun" target="com.mygdx.game.model.factorys.ShotFactory">
+      <point x="5.875" y="-14.5" />
+      <point x="234.5737182519474" y="665.0" />
+      <point x="256.4487182519474" y="665.0" />
+      <point x="27.75" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Wind" target="com.mygdx.game.model.Difficulty">
       <point x="19.0" y="-14.5" />
-      <point x="84.08333333333326" y="928.0" />
-      <point x="78.33333333333337" y="928.0" />
-      <point x="31.33333333333337" y="14.5" />
+      <point x="372.9599362006654" y="903.0" />
+      <point x="370.54326953399874" y="903.0" />
+      <point x="31.33333333333333" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.factorys.ShotFactory" target="com.mygdx.game.model.NukeShot">
-      <point x="-22.200000000000045" y="-14.5" />
-      <point x="729.6446680251313" y="616.0" />
-      <point x="654.7934981684981" y="616.0" />
+      <point x="22.200000000000045" y="-14.5" />
+      <point x="250.89871825194746" y="586.0" />
+      <point x="353.7759615384616" y="586.0" />
       <point x="0.0" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.StandardShot" target="com.mygdx.game.model.CollisionRect">
       <point x="0.0" y="-14.5" />
-      <point x="887.7934981684981" y="497.0" />
-      <point x="873.3446680251313" y="497.0" />
-      <point x="873.3446680251313" y="248.0" />
-      <point x="497.93533464328135" y="248.0" />
-      <point x="53.39285714285711" y="14.5" />
+      <point x="223.77596153846162" y="437.0" />
+      <point x="228.6987182519474" y="437.0" />
+      <point x="228.6987182519474" y="278.0" />
+      <point x="503.92108956165316" y="278.0" />
+      <point x="-45.178571428571445" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.TankGun" target="com.mygdx.game.model.IDrawable">
-      <point x="-41.125" y="-14.5" />
-      <point x="710.7196680251313" y="725.0" />
-      <point x="211.52083333333326" y="725.0" />
-      <point x="211.52083333333326" y="308.0" />
-      <point x="216.1322210901679" y="308.0" />
-      <point x="14.285714285714278" y="14.5" />
+      <point x="41.125" y="-14.5" />
+      <point x="269.8237182519474" y="695.0" />
+      <point x="769.2399998180634" y="695.0" />
+      <point x="769.2399998180634" y="338.0" />
+      <point x="761.4953245154416" y="338.0" />
+      <point x="-14.285714285714278" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Terrain" target="com.mygdx.game.model.TerrainTile">
-      <point x="0.0" y="-14.5" />
-      <point x="302.4655544235012" y="547.0" />
-      <point x="300.13222109016783" y="547.0" />
+      <point x="27.666666666666686" y="-14.5" />
+      <point x="703.8286578487749" y="517.0" />
+      <point x="702.4953245154416" y="517.0" />
       <point x="12.5" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.AngryShot" target="com.mygdx.game.model.Shot">
-      <point x="39.0" y="-14.5" />
-      <point x="537.6178162069718" y="517.0" />
-      <point x="563.8704212454212" y="517.0" />
-      <point x="-27.69230769230768" y="14.5" />
+      <point x="-12.999999999999943" y="-14.5" />
+      <point x="491.9370366664246" y="477.0" />
+      <point x="450.23749999999995" y="477.0" />
+      <point x="33.23076923076917" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Tank" target="com.mygdx.game.model.TankGun">
-      <point x="11.076923076923094" y="-14.5" />
-      <point x="563.3062064866697" y="814.0" />
-      <point x="720.5113346917979" y="814.0" />
+      <point x="-22.15384615384619" y="-14.5" />
+      <point x="424.66025671348586" y="804.0" />
+      <point x="197.36538491861404" y="804.0" />
       <point x="-31.33333333333337" y="14.5" />
     </edge>
-    <edge source="com.mygdx.game.model.factorys.TankWarsFactory" target="com.mygdx.game.model.Player">
-      <point x="30.1875" y="-14.5" />
-      <point x="319.80712223758553" y="1052.0" />
-      <point x="525.8959500764133" y="1052.0" />
-      <point x="-26.333333333333314" y="14.5" />
-    </edge>
     <edge source="com.mygdx.game.model.factorys.TankWarsFactory" target="com.mygdx.game.model.Wind">
-      <point x="-56.0625" y="-14.5" />
-      <point x="233.55712223758553" y="1082.0" />
-      <point x="46.08333333333326" y="1082.0" />
-      <point x="-19.0" y="14.5" />
+      <point x="-47.4375" y="-14.5" />
+      <point x="561.6293501200794" y="1022.0" />
+      <point x="372.9599362006654" y="1022.0" />
+      <point x="19.0" y="14.5" />
+    </edge>
+    <edge source="com.mygdx.game.model.factorys.TankWarsFactory" target="com.mygdx.game.model.Player">
+      <point x="-21.5625" y="-14.5" />
+      <point x="587.5043501200794" y="992.0" />
+      <point x="439.9182695339987" y="992.0" />
+      <point x="-26.33333333333337" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.TankGun" target="com.mygdx.game.model.Position">
-      <point x="41.125" y="-14.5" />
-      <point x="792.9696680251313" y="725.0" />
-      <point x="992.9684981684982" y="725.0" />
-      <point x="992.9684981684982" y="79.0" />
-      <point x="829.8856660723384" y="79.0" />
-      <point x="31.875" y="14.5" />
+      <point x="-17.625" y="-14.5" />
+      <point x="211.0737182519474" y="675.0" />
+      <point x="37.60096153846155" y="675.0" />
+      <point x="37.60096153846155" y="99.0" />
+      <point x="309.92261358950145" y="99.0" />
+      <point x="-28.125" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.factorys.ShotFactory" target="com.mygdx.game.model.Position">
-      <point x="44.39999999999998" y="-14.5" />
-      <point x="796.2446680251312" y="626.0" />
-      <point x="958.2934981684981" y="626.0" />
-      <point x="958.2934981684981" y="109.0" />
-      <point x="818.6356660723384" y="109.0" />
-      <point x="20.625" y="14.5" />
+      <point x="-44.39999999999998" y="-14.5" />
+      <point x="184.29871825194743" y="596.0" />
+      <point x="50.275961538461615" y="596.0" />
+      <point x="50.275961538461615" y="109.0" />
+      <point x="313.67261358950145" y="109.0" />
+      <point x="-24.375" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.TankGun" target="com.mygdx.game.model.Shot">
-      <point x="-17.625" y="-14.5" />
-      <point x="734.2196680251313" y="705.0" />
-      <point x="588.7550366300366" y="705.0" />
-      <point x="588.7550366300366" y="547.0" />
-      <point x="586.0242673992673" y="547.0" />
-      <point x="-5.538461538461547" y="14.5" />
-    </edge>
-    <edge source="com.mygdx.game.model.NukeShot" target="com.mygdx.game.model.Shot">
-      <point x="-40.0" y="-14.5" />
-      <point x="614.7934981684981" y="527.0" />
-      <point x="597.1011904761904" y="527.0" />
+      <point x="17.625" y="-14.5" />
+      <point x="246.3237182519474" y="675.0" />
+      <point x="419.81442307692316" y="675.0" />
+      <point x="419.81442307692316" y="517.0" />
+      <point x="422.54519230769233" y="517.0" />
       <point x="5.538461538461547" y="14.5" />
     </edge>
+    <edge source="com.mygdx.game.model.NukeShot" target="com.mygdx.game.model.Shot">
+      <point x="40.0" y="-14.5" />
+      <point x="393.7759615384616" y="497.0" />
+      <point x="411.46826923076924" y="497.0" />
+      <point x="-5.538461538461547" y="14.5" />
+    </edge>
     <edge source="com.mygdx.game.model.factorys.ShotFactory" target="com.mygdx.game.model.Shot">
-      <point x="-44.39999999999998" y="-14.5" />
-      <point x="707.4446680251313" y="626.0" />
-      <point x="594.2934981684981" y="626.0" />
-      <point x="594.2934981684981" y="537.0" />
-      <point x="591.5627289377288" y="537.0" />
+      <point x="44.39999999999998" y="-14.5" />
+      <point x="273.0987182519474" y="596.0" />
+      <point x="414.2759615384616" y="596.0" />
+      <point x="414.2759615384616" y="507.0" />
+      <point x="417.0067307692308" y="507.0" />
       <point x="0.0" y="14.5" />
     </edge>
+    <edge source="com.mygdx.game.model.Shot" target="com.mygdx.game.model.IDrawable">
+      <point x="28.799999999999955" y="-14.5" />
+      <point x="445.80673076923074" y="328.0" />
+      <point x="732.923895944013" y="328.0" />
+      <point x="-42.85714285714286" y="14.5" />
+    </edge>
     <edge source="com.mygdx.game.model.Tank" target="com.mygdx.game.model.CollisionRect">
-      <point x="-11.076923076923094" y="-14.5" />
-      <point x="541.1523603328235" y="814.0" />
-      <point x="365.54247750042424" y="814.0" />
-      <point x="365.54247750042424" y="378.0" />
-      <point x="440.4353346432814" y="378.0" />
+      <point x="5.538461538461547" y="-14.5" />
+      <point x="452.3525644057936" y="774.0" />
+      <point x="567.4370366664245" y="774.0" />
+      <point x="567.4370366664245" y="318.0" />
+      <point x="544.9925181330818" y="318.0" />
       <point x="-4.107142857142833" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.factorys.TankWarsFactory" target="com.mygdx.game.model.Difficulty">
       <point x="-64.6875" y="-14.5" />
-      <point x="224.93212223758553" y="1092.0" />
-      <point x="16.583333333333258" y="1092.0" />
-      <point x="-31.33333333333337" y="14.5" />
-    </edge>
-    <edge source="com.mygdx.game.model.Shot" target="com.mygdx.game.model.IDrawable">
-      <point x="-28.80000000000001" y="-14.5" />
-      <point x="562.7627289377289" y="298.0" />
-      <point x="244.70364966159644" y="298.0" />
-      <point x="42.85714285714283" y="14.5" />
+      <point x="544.3793501200794" y="1042.0" />
+      <point x="305.4599362006654" y="1042.0" />
+      <point x="305.4599362006654" y="903.0" />
+      <point x="307.87660286733205" y="903.0" />
+      <point x="-31.333333333333343" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.factorys.TankWarsFactory" target="com.mygdx.game.model.Position">
       <point x="64.6875" y="-14.5" />
-      <point x="354.30712223758553" y="1092.0" />
-      <point x="1017.7665750915751" y="1092.0" />
-      <point x="1017.7665750915751" y="49.0" />
-      <point x="841.1356660723384" y="49.0" />
+      <point x="673.7543501200794" y="1042.0" />
+      <point x="914.8649998180634" y="1042.0" />
+      <point x="914.8649998180634" y="49.0" />
+      <point x="381.17261358950145" y="49.0" />
       <point x="43.125" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.AngryShot" target="com.mygdx.game.model.Position">
-      <point x="-39.0" y="-14.5" />
-      <point x="459.6178162069719" y="547.0" />
-      <point x="376.54247750042424" y="547.0" />
-      <point x="376.54247750042424" y="159.0" />
-      <point x="784.8856660723384" y="159.0" />
-      <point x="-13.125" y="14.5" />
+      <point x="39.00000000000006" y="-14.5" />
+      <point x="543.9370366664245" y="517.0" />
+      <point x="618.1139142590313" y="517.0" />
+      <point x="618.1139142590313" y="139.0" />
+      <point x="347.42261358950145" y="139.0" />
+      <point x="9.375" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.IDrawable" target="com.mygdx.game.model.Position">
       <point x="0.0" y="-14.5" />
-      <point x="201.8465068044536" y="109.0" />
-      <point x="766.1356660723384" y="109.0" />
-      <point x="-31.875" y="14.5" />
+      <point x="775.7810388011558" y="89.0" />
+      <point x="366.17261358950145" y="89.0" />
+      <point x="28.125" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.factorys.TankWarsFactory" target="com.mygdx.game.model.Tank">
-      <point x="21.5625" y="-14.5" />
-      <point x="311.18212223758553" y="1042.0" />
-      <point x="502.22928340974664" y="1042.0" />
-      <point x="502.22928340974664" y="928.0" />
-      <point x="525.2292834097466" y="928.0" />
+      <point x="-38.8125" y="-14.5" />
+      <point x="570.2543501200794" y="1012.0" />
+      <point x="407.62660286733205" y="1012.0" />
+      <point x="407.62660286733205" y="893.0" />
+      <point x="419.81410286733205" y="893.0" />
       <point x="-27.0" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Missile" target="com.mygdx.game.model.Shot">
-      <point x="-16.600000000000023" y="-14.5" />
-      <point x="749.6934981684981" y="487.0" />
-      <point x="613.716575091575" y="487.0" />
-      <point x="22.15384615384619" y="14.5" />
+      <point x="16.600000000000023" y="-14.5" />
+      <point x="118.87596153846164" y="447.0" />
+      <point x="383.7759615384616" y="447.0" />
+      <point x="-33.23076923076917" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.factorys.TankWarsFactory" target="com.mygdx.game.model.Terrain">
       <point x="4.3125" y="-14.5" />
-      <point x="293.93212223758553" y="1012.0" />
-      <point x="277.3482142857143" y="1012.0" />
-      <point x="277.3482142857143" y="626.0" />
-      <point x="274.7988877568346" y="626.0" />
-      <point x="-27.666666666666657" y="14.5" />
+      <point x="613.3793501200794" y="972.0" />
+      <point x="684.6685712466349" y="972.0" />
+      <point x="684.6685712466349" y="596.0" />
+      <point x="676.1619911821082" y="596.0" />
+      <point x="0.0" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Tank" target="com.mygdx.game.model.IDrawable">
-      <point x="-33.230769230769226" y="-14.5" />
-      <point x="518.9985141789774" y="854.0" />
-      <point x="197.37329251873928" y="854.0" />
-      <point x="197.37329251873928" y="308.0" />
-      <point x="201.8465068044536" y="308.0" />
+      <point x="33.23076923076928" y="-14.5" />
+      <point x="480.04487209810134" y="824.0" />
+      <point x="780.2399998180634" y="824.0" />
+      <point x="780.2399998180634" y="338.0" />
+      <point x="775.7810388011558" y="338.0" />
       <point x="0.0" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Shot" target="com.mygdx.game.model.Position">
-      <point x="28.799999999999955" y="-14.5" />
-      <point x="620.3627289377288" y="388.0" />
-      <point x="635.1572392838949" y="388.0" />
-      <point x="635.1572392838949" y="179.0" />
-      <point x="792.3856660723384" y="179.0" />
-      <point x="-5.625" y="14.5" />
+      <point x="-28.799999999999955" y="-14.5" />
+      <point x="388.20673076923083" y="258.0" />
+      <point x="368.3976135895015" y="258.0" />
+      <point x="368.3976135895015" y="159.0" />
+      <point x="339.92261358950145" y="159.0" />
+      <point x="1.875" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.AngryShot" target="com.mygdx.game.model.CollisionRect">
-      <point x="-13.0" y="-14.5" />
-      <point x="485.6178162069719" y="388.0" />
-      <point x="456.8639060718528" y="388.0" />
-      <point x="12.321428571428555" y="14.5" />
+      <point x="13.000000000000057" y="-14.5" />
+      <point x="517.9370366664247" y="318.0" />
+      <point x="536.778232418796" y="318.0" />
+      <point x="-12.321428571428555" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.factorys.ShotFactory" target="com.mygdx.game.model.StandardShot">
-      <point x="22.200000000000045" y="-14.5" />
-      <point x="774.0446680251314" y="616.0" />
-      <point x="887.7934981684981" y="616.0" />
+      <point x="0.0" y="-14.5" />
+      <point x="228.6987182519474" y="596.0" />
+      <point x="223.77596153846162" y="596.0" />
       <point x="0.0" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.Shot" target="com.mygdx.game.model.CollisionRect">
-      <point x="-14.399999999999977" y="-14.5" />
-      <point x="577.1627289377288" y="288.0" />
-      <point x="465.0781917861385" y="288.0" />
-      <point x="20.535714285714278" y="14.5" />
+      <point x="0.0" y="-14.5" />
+      <point x="417.0067307692308" y="298.0" />
+      <point x="520.3496609902246" y="298.0" />
+      <point x="-28.75" y="14.5" />
     </edge>
     <edge source="com.mygdx.game.model.StandardShot" target="com.mygdx.game.model.Shot">
-      <point x="-48.0" y="-14.5" />
-      <point x="839.7934981684981" y="467.0" />
-      <point x="619.2550366300366" y="467.0" />
-      <point x="27.692307692307736" y="14.5" />
+      <point x="48.0" y="-14.5" />
+      <point x="271.7759615384616" y="477.0" />
+      <point x="400.39134615384614" y="477.0" />
+      <point x="-16.61538461538464" y="14.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.1" x="779.9404761904761" y="241.75" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="0.6366925064599483" x="507.0489005608017" y="433.46174611077413" />
+  <SelectedNodes>
+    <node>com.mygdx.game.model.TerrainTile</node>
+  </SelectedNodes>
   <Categories />
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>

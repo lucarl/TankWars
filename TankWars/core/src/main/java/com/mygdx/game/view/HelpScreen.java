@@ -16,35 +16,29 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Application;
-import com.mygdx.game.services.Assets;
-import com.mygdx.game.events.EventBus;
 import com.mygdx.game.events.Event;
-import com.mygdx.game.view.PlaySounds;
+import com.mygdx.game.events.EventBus;
 import com.mygdx.game.events.IEventHandler;
+import com.mygdx.game.services.Assets;
 
-
-/**
- * Created by marianarale on 2018-05-12.
- */
-public class MenuScreen implements Screen, IEventHandler {
+public class HelpScreen implements Screen, IEventHandler {
 
     private Application app;
-
-    private TextButton startButton;
-    private TextButton optionsButton;
-    private TextButton helpButton;
-    private TextButton exitButton;
-
+    private Sprite background;
     private Skin skin;
+    private Skin skinText;
     private Table table;
     private FitViewport viewport;
     private Stage stage;
     private SpriteBatch batch;
     private TextureAtlas atlas;
     private Label heading;
-    private Sprite background;
+    private Label helpText;
+    private TextButton backButton;
 
-    public MenuScreen(Application app) {
+
+
+    public HelpScreen(Application app){
         this.app = app;
 
         //background setup
@@ -61,40 +55,46 @@ public class MenuScreen implements Screen, IEventHandler {
         stage = new Stage(viewport, app.batch);
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
+        //skinText =  new Skin(Gdx.files.internal("screen.fnt"));
 
-        //background size
+        //size for background
         background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
-        //Button style setup
+        //button style setup
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("screen.fnt"));
         bigTextButtonStyle.fontColor = Color.WHITE;
         bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
         bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
 
-        //create buttons
-        startButton = new TextButton("START", bigTextButtonStyle);
-        optionsButton = new TextButton("OPTIONS", bigTextButtonStyle);
-        helpButton = new TextButton("HELP", bigTextButtonStyle);
-        exitButton = new TextButton("EXIT", bigTextButtonStyle);
-        //add listeners for buttons
-        addMenuButtonListeners();
+        //create back button
+        backButton = new TextButton("Back", bigTextButtonStyle);
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                app.setMenuScreen();
+            }
+        });
 
-        //heading label setup
-        heading = new Label("TANK WARS", new Label.LabelStyle(
-                new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
-        heading.setFontScale(1.4f);
+        //Label setup
+        heading = new Label("How to play", new Label.LabelStyle(
+                new BitmapFont(Gdx.files.internal("menu.fnt")), Color.WHITE));
+        heading.setFontScale(1f);
         heading.setAlignment(Align.center);
 
-        //create table
-        setupMenuTable();
+        //help text
+        String help = "";
+
+        helpText = new Label(help, new Label.LabelStyle(
+                new BitmapFont(Gdx.files.internal("screen.fnt")), Color.WHITE));
+        heading.setAlignment(Align.center);
+
+        setupHelpScreenTable();
         stage.addActor(table);
 
-        // Take input from ui
-        Gdx.input.setInputProcessor(stage);
     }
 
-    private void setupMenuTable(){
+    private void setupHelpScreenTable(){
         table = new Table(skin);
         table.setFillParent(true);
         table.top();
@@ -104,57 +104,22 @@ public class MenuScreen implements Screen, IEventHandler {
         table.row().width(500);
         table.add(heading);
         table.row().padTop(50);
-        table.add(startButton);
+        table.add(helpText);
         table.row().pad(10);
-        table.add(optionsButton);
-        table.row().pad(10);
-        table.add(helpButton);
+        table.add();
+        table.row().pad(260);
+        table.add(backButton);
         table.row();
-        table.add(exitButton);
+        table.add();
 
         //display layouts for debugging
-        //table.setDebug(true);
+        table.setDebug(true);
     }
-
-    private void addMenuButtonListeners(){
-
-        startButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                app.setPlayScreen();
-            }
-        });
-
-        optionsButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                app.setOptionScreen();
-            }
-        });
-
-        helpButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                app.setHelpScreen();
-            }
-        });
-
-        exitButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
-                PlaySounds.stopTheme();
-            }
-        });
-    }
-
     @Override
     public void onEvent(Event evt) {
-
         if(evt.getTag() == Event.Tag.PLAY_SOUND_THEME){
             PlaySounds.stopTheme();
         }
-
     }
 
     private void initEvent() {

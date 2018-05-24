@@ -23,13 +23,11 @@ public class TestShot {
      *
      */
     @Test
-    public void testShot(){
+    public void testUpgrade(){
         Shot shot = new StandardShot(new Position(Application.GAME_WIDTH +1,10), 90, 0.1f, 50);
         shot.update(System.nanoTime());
         assertTrue(!shot.isAlive());
     }
-
-
 }
 
 
