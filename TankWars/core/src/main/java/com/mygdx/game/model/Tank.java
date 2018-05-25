@@ -194,6 +194,9 @@ public class Tank implements IDrawable {
     }
 
     public void setAlive(boolean bool) {
+        if(!bool){
+            EventBus.BUS.publish(new Event(Event.Tag.PLAY_ANIMATION_EXPLOSION, this));
+        }
         isAlive = bool;
     }
 

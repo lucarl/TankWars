@@ -1,6 +1,8 @@
 package com.mygdx.game.model;
 
 import com.mygdx.game.Application;
+import com.mygdx.game.events.Event;
+import com.mygdx.game.events.EventBus;
 
 /**
  * An abstract class used by each ammunition
@@ -94,6 +96,10 @@ public abstract class Shot implements IDrawable {
     }
 
     public void setAlive(boolean bool){
+        if(!bool){
+            // Send explosion event
+            EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_EXPLOSION, null));
+        }
         isAlive = bool;
     }
 

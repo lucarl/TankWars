@@ -64,10 +64,11 @@ public class PlayScreen implements Screen, IEventHandler {
     }
 
     public void show() {
-        renderer.loadResources(tankWars.getTiles());
         renderer.loadResources(tankWars.getObjects());
+        renderer.loadResources(tankWars.getTiles());
         renderer.loadResources(tankWars.getTanks());
         renderer.loadResources(tankWars.getGun());
+
         background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         InputMultiplexer im = new InputMultiplexer(stage, controller);
         Gdx.input.setInputProcessor(im);
@@ -131,9 +132,8 @@ public class PlayScreen implements Screen, IEventHandler {
 
         app.batch.begin();
         background.draw(app.batch);
-        renderer.render(tankWars.getTiles());
-        renderer.render(tankWars.getObjects());
-        renderer.render(tankWars.getShots());
+        renderer.render();
+
 
         explosions.forEach(explosion -> {
             explosion.render(app.batch);
@@ -163,7 +163,7 @@ public class PlayScreen implements Screen, IEventHandler {
         else if(evt.getTag() == Event.Tag.PLAY_SOUND_MOVE){
             PlaySounds.playMove();
         }
-        else if (evt.getTag() == Event.Tag.PLAY_ANIMATION_EXPLOSION || evt.getTag() == Event.Tag.PLAY_SOUND_ANIMATION_EXPLOSION) {
+        else if (evt.getTag() == Event.Tag.PLAY_ANIMATION_EXPLOSION) {
             Tank tank = (Tank) evt.getValue();
             explosions.add(new Explosion(tank.getPos()));
             PlaySounds.playTankDestroy();
