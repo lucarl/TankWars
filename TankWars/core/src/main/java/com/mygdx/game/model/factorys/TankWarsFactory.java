@@ -32,7 +32,11 @@ public class TankWarsFactory {
     private Terrain terrain = new Terrain();
     private TankWars tankWars;
 
-
+    /**
+     * This constructor creates all objects and then pass these to a new TankWars
+     * object.
+     * @return tankWars
+     */
     public TankWars makeTankWars() {
         wind = new Wind(difficulty);
         //upgrade = new ArrayList<>();
@@ -48,6 +52,10 @@ public class TankWarsFactory {
         return tankWars;
     }
 
+    /**
+     * Set up the amount of objects according to the number of players in the game.
+     * @param nPlayers Number of players in the game
+     */
     public void setupObjects(int nPlayers, List<Player> players, List<IDrawable> objects, List<IDrawable> tanks, List<IDrawable> gun) {
         int xPos1 = 5;
         int xPos2 = 900;
@@ -56,6 +64,7 @@ public class TankWarsFactory {
             // Just nu sätts tanksen en bit ovanför marken å faller ner på marken,
             // Vill få dom att spawna på marken
             //Place tanks evenly on map
+
             if (i % 2 == 0) {
                 tank = new Tank(xPos1, 0);
                 xPos1 += 200;

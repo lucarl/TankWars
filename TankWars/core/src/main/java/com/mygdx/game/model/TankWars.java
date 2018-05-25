@@ -67,6 +67,7 @@ public class TankWars {
                     TankGun gun = (TankGun) getGun().get(i);
                     tank.setAlive(true);
                     gun.setAlive(true);
+
                 }
 
                 /**
