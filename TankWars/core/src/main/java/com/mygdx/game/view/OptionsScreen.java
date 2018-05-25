@@ -44,7 +44,7 @@ public class OptionsScreen implements Screen, IEventHandler {
     private TextButton nextButton;
     private TextButton backButton;
     private TextButton muteButton;
-    private TextButton muteButton2;
+    private TextButton getHelpButton;
 
     private Label optionsLabel;
     private Label roundsLabel;
@@ -100,7 +100,7 @@ public class OptionsScreen implements Screen, IEventHandler {
         //create buttons
         nextButton = new TextButton("START GAME", bigTextButtonStyle);
         muteButton = new TextButton("MUTE THEME", bigTextButtonStyle);
-        muteButton2 = new TextButton("MUTE GAME", bigTextButtonStyle);
+        getHelpButton = new TextButton("TUTORIAL", bigTextButtonStyle);
         backButton = new TextButton("BACK", bigTextButtonStyle);
 
         arrowButtonLeft1 = new TextButton("<", smallTextButtonStyle);
@@ -189,7 +189,7 @@ public class OptionsScreen implements Screen, IEventHandler {
         table.add();
 
         table.row();
-        table.add(muteButton2).center().padTop(5);
+        table.add(getHelpButton).center().padTop(5);
         table.add();
         table.add(nextButton).center().padTop(5);
         table.add();
@@ -267,19 +267,16 @@ public class OptionsScreen implements Screen, IEventHandler {
             }
         });
 
-        muteButton2.addListener(new ClickListener() {
+        getHelpButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 
-                clicked = !clicked;
-                if(clicked){
-
-
-                }
-
-                else {
-
-                }
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setHelpScreen();
+                    }
+                }), 1);
 
             }
         });

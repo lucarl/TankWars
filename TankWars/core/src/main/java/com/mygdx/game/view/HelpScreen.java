@@ -26,6 +26,7 @@ public class HelpScreen implements Screen {
 
     private Application app;
     private TextButton backButton;
+    private TextButton getOptionsButton;
 
     private Skin skin;
     private Skin skin2;
@@ -58,6 +59,7 @@ public class HelpScreen implements Screen {
         bigTextButtonStyle.down = skin2.getDrawable("bigButton.down");
 
         backButton = new TextButton("BACK", bigTextButtonStyle);
+        getOptionsButton = new TextButton("CHANGE OPTIONS", bigTextButtonStyle);
 
         //TextArea.TextFieldStyle txtScoresStyle = new TextField.TextFieldStyle();
         //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
@@ -93,6 +95,10 @@ public class HelpScreen implements Screen {
         table.add(tutorialText);
 
         table.row();
+        table.add(getOptionsButton).padTop(50);
+        table.add();
+
+        table.row();
         table.add(backButton).padTop(50);
         table.add();
 
@@ -108,6 +114,21 @@ public class HelpScreen implements Screen {
                     @Override
                     public void run() {
                         app.setMenuScreen();
+
+                    }
+                }), 1);
+
+            }
+        });
+
+        getOptionsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setOptionScreen();
 
                     }
                 }), 1);
