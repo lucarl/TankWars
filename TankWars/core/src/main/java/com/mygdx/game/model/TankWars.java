@@ -141,8 +141,8 @@ public class TankWars {
         int endRow = (int) (shot.getPos().getY() + shot.getHeight() + shot.getRadius()) / terrain.getTileSize() < terrain.getRows() ?
                 (int) (shot.getPos().getY() + shot.getHeight() + shot.getRadius()) / terrain.getTileSize() : terrain.getRows();
 
-        int startX = (int) (shot.getPos().getX() / terrain.getTileSize());
-        int startY = (int) (shot.getPos().getY() / terrain.getTileSize());
+        int startX = (int) ((shot.getPos().getX() - shot.getWidth()/2) / terrain.getTileSize());
+        int startY = (int) ((shot.getPos().getY() + shot.getWidth()/2) / terrain.getTileSize());
 
         TerrainTile terrainMatrix[][] = terrain.getTerrainMatrix();
 

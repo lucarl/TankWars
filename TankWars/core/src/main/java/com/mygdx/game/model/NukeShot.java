@@ -12,8 +12,8 @@ public class NukeShot extends Shot{
     private float[] vector = getVector();
 
     public NukeShot(Position pos, float angle, float power, int windSpeed) {
-        setWidth(50);
-        setHeight(50);
+        setWidth(25);
+        setHeight(25);
         setPos(new Position(pos.getX() - getWidth() /2, pos.getY()));
         setAngle(angle);
         this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -getSpeed(); // x speed
@@ -24,6 +24,6 @@ public class NukeShot extends Shot{
         setDamage(100);
         setName("Nuke");
         setImgSrc("nuke.png");
-        setRadius(50);
+        setRadius(30);
     }
 }
