@@ -57,6 +57,11 @@ public class PlayController implements InputProcessor {
             if (keycode == Input.Keys.NUM_3) {
                 tank.getGun().changeMissile();
             }
+        } else { // Make sure you can't move the tank when turn is over
+            tank.setLeftMove(false);
+            tank.setRightMove(false);
+            tank.getGun().setLeftAim(false);
+            tank.getGun().setRightAim(false);
         }
 
         // FOR TESTING

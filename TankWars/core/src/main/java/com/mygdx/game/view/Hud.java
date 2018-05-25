@@ -1,4 +1,4 @@
-package com.mygdx.game.utils;
+package com.mygdx.game.view;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
 import com.mygdx.game.services.Assets;
 import com.mygdx.game.model.TankWars;
+import com.mygdx.game.utils.Bar;
 
 // Heads up display, is used for showing information about the game during gameplay.
 // It polls the model for data

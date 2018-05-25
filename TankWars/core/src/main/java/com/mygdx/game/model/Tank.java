@@ -1,10 +1,6 @@
 package com.mygdx.game.model;
 
-
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.Application;
-import com.mygdx.game.services.Assets;
 import com.mygdx.game.events.Event;
 import com.mygdx.game.events.EventBus;
 
@@ -14,9 +10,9 @@ public class Tank implements IDrawable {
     private static int height = 20;
     private static int originX = width / 2;
     private static int originY = height / 2;
-    private static final float gravity = 4f;
-    private static final int speed = 100;
-    private static final int roatationSpeed = 5;
+    private static final float GRAVITY = 4f;
+    private static final int SPEED = 100;
+    private static final int ROTATION_SPEED = 5;
 
 
     private Position pos;
@@ -49,17 +45,13 @@ public class Tank implements IDrawable {
         rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
     }
 
-    public Shot fire(int windSpeed) {
-        shot = gun.fire(windSpeed);
-        return shot;
-    }
 
     public Position moveTank(float delta, Terrain terrain) {
         // Get grounds yPos
         float currentGroundHeight = terrain.getActualHeightAtPos(
                 (int) (pos.getX() + width / 2) / terrain.getTileSize(),
                 (int) (pos.getY() + height) / terrain.getTileSize());
-        float newXPos = rightMove ? pos.getX()  + speed * delta : pos.getX() - speed * delta;
+        float newXPos = rightMove ? pos.getX()  + SPEED * delta : pos.getX() - SPEED * delta;
         float newYPos = terrain.getActualHeightAtPos(
                 (int) (newXPos + width / 2) / terrain.getTileSize(),
                 (int) ((pos.getY() + height) / terrain.getTileSize()));
@@ -70,7 +62,7 @@ public class Tank implements IDrawable {
         boolean canMoveThere = newAngle <= maxAngle;
 
         if (pos.getY() > currentGroundHeight) {
-            pos.setY(pos.getY() - gravity);
+            pos.setY(pos.getY() - GRAVITY);
         } else {
             pos.setY(currentGroundHeight);
         }
@@ -79,13 +71,13 @@ public class Tank implements IDrawable {
             if (rightMove) {
                 pos.setX(newXPos);
 
-                angle = angle < newAngle ? Math.min(angle + roatationSpeed, newAngle) : Math.max(angle - roatationSpeed, newAngle);
+                angle = angle < newAngle ? Math.min(angle + ROTATION_SPEED, newAngle) : Math.max(angle - ROTATION_SPEED, newAngle);
 
                 decreaseFuel();
             } else if (leftMove) {
                 pos.setX(newXPos);
 
-                angle = angle < -newAngle ? Math.min(angle + roatationSpeed, -newAngle) : Math.max(angle - roatationSpeed, -newAngle);
+                angle = angle < -newAngle ? Math.min(angle + ROTATION_SPEED, -newAngle) : Math.max(angle - ROTATION_SPEED, -newAngle);
 
                 decreaseFuel();
             }

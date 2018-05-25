@@ -12,9 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
 
 import com.mygdx.game.ctrl.PlayController;
@@ -26,11 +23,8 @@ import com.mygdx.game.model.factorys.TankWarsFactory;
 import com.mygdx.game.services.Assets;
 
 import com.mygdx.game.model.TankWars;
-import com.mygdx.game.utils.Hud;
 
 import java.util.ArrayList;
-import com.mygdx.game.view.PlaySounds;
-import com.mygdx.game.view.Explosion;
 import java.util.List;
 
 public class PlayScreen implements Screen, IEventHandler {

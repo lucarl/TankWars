@@ -125,7 +125,7 @@ public class TestTank {
     @Test
     public void testFire(){
         Shot shot = new StandardShot(new Position(10,10), 10, 10,10);
-        Shot fireShot = tank.fire(newWindspeed);
+        Shot fireShot = tank.getGun().fire(newWindspeed);
         //When a shot is fired the visibility is set to false
         assertFalse(fireShot.isAlive()); //BLIR INTE FALSE!! VARFÖR???
         //A new shot with the windspeed parameter is created
