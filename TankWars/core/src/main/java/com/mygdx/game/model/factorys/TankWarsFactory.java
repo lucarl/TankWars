@@ -12,7 +12,7 @@ import java.util.List;
 
 
 /**
- * A factory class for creating all dynamic objects
+ * A factory class for creating all objects
  * during the start of the program
  *
  * @author Carl Lundborg, Adam Kjäll
@@ -61,9 +61,6 @@ public class TankWarsFactory {
         int xPos2 = 900;
         Tank tank;
         for (int i = 0; i < nPlayers; i++) {
-            // Just nu sätts tanksen en bit ovanför marken å faller ner på marken,
-            // Vill få dom att spawna på marken
-            //Place tanks evenly on map
 
             if (i % 2 == 0) {
                 tank = new Tank(xPos1, 0);
@@ -79,12 +76,15 @@ public class TankWarsFactory {
             tank.setPos(new Position(tank.getPos().getX(), yPos));
             players.add(new Player(tank));
             objects.add(new Upgrade(upgrade.getPos().getX(), upgrade.getPos().getY()));
-            //objects.add(players.get(i).getTank().getGun().getShot());
             gun.add(players.get(i).getTank().getGun());
             tanks.add(players.get(i).getTank());
         }
     }
 
+    /**
+     * Sets up the terrain matrix with tiles
+     * @param tiles individual tiles for the terrain
+     */
     public void setupTerrainTiles(List<IDrawable> tiles) {
         TerrainTile[][] terrainMatrix = terrain.getTerrainMatrix();
         for (int i = 0; i < terrainMatrix.length; i++) {

@@ -4,7 +4,7 @@ import com.mygdx.game.Application;
 
 /**
  * An abstract class used by each ammunition
- * extention, TankGun and ShotFactory
+ * extension, TankGun and ShotFactory
  * to form a factory pattern
  *
  * @author  Carl Lundborg, Adam Kjäll
@@ -20,19 +20,19 @@ public abstract class Shot implements IDrawable {
 
     private float angle = 0;
     private float radius;
-    private float weight = 100;
     private int damage;
     private String name;
-
     private float[] vector = new float[2]; // speed
-    private Position pos;
     private int speed = 15;
-
     private boolean isAlive;
     private int windSpeed;
-
     private CollisionRect rect;
+    private Position pos;
 
+    /**
+     * Update shots position and movement according to windSpeed and placement
+     * @param delta the delta value for update
+     */
     public void update(float delta) {
         if (pos.getX() > 0 && pos.getX() < Application.GAME_WIDTH && pos.getY() > 0) {
             pos.setX(pos.getX() + vector[0] * delta * speed);

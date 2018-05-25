@@ -1,9 +1,10 @@
 package com.mygdx.game.model;
 
 /**
- * A class for the standard shot
+ * A class for the standard shot containing the specific
+ * values for this shot
  *
- * @author  Carl Lundborg, Adam Kjäll
+ * @author  Carl Lundborg
  */
 public class StandardShot extends Shot {
     private float[] vector = getVector();
@@ -21,7 +22,6 @@ public class StandardShot extends Shot {
         setDamage(50);
         setName("Gun");
         setImgSrc("cannonBall.png");
-
         setRadius(20);
     }
 }

@@ -32,8 +32,6 @@ public class TestTankGun {
         tankGun.setSpecialShot(true);
         //The shot created by the method
         Shot actualShot = tankGun.fire(testWindSpeed);
-        //check if actualShot is of type AngryShot
-        assertTrue(actualShot instanceof AngryShot);
         //test if correct interval
         assertTrue(actualShot.getPos().getX() > 0 &&
                 actualShot.getPos().getX() < Application.GAME_WIDTH &&
