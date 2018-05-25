@@ -2,14 +2,18 @@ package com.mygdx.game.model;
 
 //implementeras av alla objekt som måste ritas ut
 
-public interface IDrawable {
+/**
+ * This interface is implemented by all objects in the model that
+ * needs to be drawn by the Renderer class in the view package
+ */
 
-    public Position getPos();
-    public String getImgSrc();
-    public int getWidth();
-    public int getHeight();
-    public float getAngle();
-    public int getOriginX();
-    public int getOriginY();
-    public boolean isAlive();
+public interface IDrawable {
+    Position getPos();
+    String getImgSrc();
+    int getWidth();
+    int getHeight();
+    float getAngle();
+    int getOriginX();
+    int getOriginY();
+    boolean isAlive();
 }

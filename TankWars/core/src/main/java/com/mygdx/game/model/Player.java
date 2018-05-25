@@ -12,8 +12,10 @@ public class Player {
     private int score;
     private String name;
 
-
-
+    /**
+     * 
+     * @param tank
+     */
     public Player(Tank tank) {
         this.tank = tank;
         score = 0;
