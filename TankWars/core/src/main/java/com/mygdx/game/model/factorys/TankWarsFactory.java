@@ -32,6 +32,8 @@ public class TankWarsFactory {
     private Wind wind;
     private Terrain terrain = new Terrain();
     private TankWars tankWars;
+    private int xPos1;
+    private int xPos2;
 
     /**
      * This constructor creates all objects and then pass these to a new TankWars
@@ -58,29 +60,40 @@ public class TankWarsFactory {
      * @param nPlayers Number of players in the game
      */
     public void setupObjects(int nPlayers, List<Player> players, List<IDrawable> objects, List<IDrawable> tanks, List<IDrawable> gun) {
-        int xPos1 = 5;
-        int xPos2 = 900;
+        int xPos;
         Tank tank;
         for (int i = 0; i < nPlayers; i++) {
-
-            if (i % 2 == 0) {
-                tank = new Tank(xPos1, 0);
-                xPos1 += 200;
-            } else {
-                tank = new Tank(xPos2, 0);
-                xPos2 -= 200;
-            }
-
+            xPos = setupTanks(xPos1, xPos2, i);
+            tank = new Tank(xPos, 0);
             Upgrade upgrade = new Upgrade(10, 1000);
-            int yPos = terrain.getMaxHeightOfCol((int) tank.getPos().getX() / terrain.getTileSize());
-
-            tank.setPos(new Position(tank.getPos().getX(), yPos));
             players.add(new Player(tank));
             objects.add(new Upgrade(upgrade.getPos().getX(), upgrade.getPos().getY()));
             gun.add(players.get(i).getTank().getGun());
             tanks.add(players.get(i).getTank());
         }
     }
+
+    public int setupTanks(int xPos1, int xPos2, int i) {
+        int xPos;
+        if(i == 0) {
+            return 5;
+        }
+        if(i == 1) {
+            return 900;
+        }
+        if (i % 2 == 0) {
+            this.xPos1 = 5;
+            xPos = xPos1;
+            this.xPos1 += 200;
+        } else {
+            this.xPos2 = 900;
+            xPos = xPos2;
+            this.xPos2 -= 200;
+        }
+        return xPos;
+    }
+
+
 
     /**
      * Sets up the terrain matrix with tiles
