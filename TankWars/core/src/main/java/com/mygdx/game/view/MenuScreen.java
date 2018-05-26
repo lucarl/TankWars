@@ -65,7 +65,12 @@ public class MenuScreen implements Screen, IEventHandler {
         //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
         initEvent();
     }
-
+    /**
+     * The different screen properties are created here such as labels,
+     * buttons and their style. Also the listeners for the buttons and the
+     * table that the properties are fit according to are invoked in this
+     * method.
+     */
     @Override
     public void show() {
         viewport = new FitViewport(Application.GAME_WIDTH, Application.GAME_HEIGHT);
@@ -95,6 +100,9 @@ public class MenuScreen implements Screen, IEventHandler {
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * A table with labels and buttons is created.
+     */
     private void setupMenuTable(){
         table = new Table(skin);
         table.setFillParent(true);
@@ -118,7 +126,11 @@ public class MenuScreen implements Screen, IEventHandler {
         //display layouts for debugging
         //table.setDebug(true);
     }
-
+    /**
+     * Creates a style for the button with a specific font.
+     * @param path for the font.
+     * @return the style for the buttons
+     */
     public TextButton.TextButtonStyle setButtonStyle(String path){
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal(path));
@@ -127,7 +139,10 @@ public class MenuScreen implements Screen, IEventHandler {
         bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
         return bigTextButtonStyle;
     }
-
+    /**
+     * Listeners for the menu buttons are added.
+     * Each button changes the screen when clicked.
+     */
     private void addMenuButtonListeners(){
 
         startButton.addListener(new ClickListener() {
@@ -194,7 +209,6 @@ public class MenuScreen implements Screen, IEventHandler {
         });
     }
 
-
     @Override
     public void onEvent(Event evt) {
 
@@ -240,7 +254,9 @@ public class MenuScreen implements Screen, IEventHandler {
     public void hide() {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void dispose() {
         stage.dispose();

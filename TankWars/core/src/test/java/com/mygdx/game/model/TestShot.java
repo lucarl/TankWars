@@ -3,6 +3,7 @@ package com.mygdx.game.model;
 import com.mygdx.game.Application;
 import org.junit.Test;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /**
  * A test class for Shot where the updateObjects()
@@ -20,10 +21,10 @@ public class TestShot {
      *
      */
     @Test
-    public void testUpgrade(){
-        Shot shot = new StandardShot(new Position(Application.GAME_WIDTH +1,10), 90, 0.1f, 50);
+    public void testUpdate(){
+        Shot shot = new StandardShot(new Position(Application.GAME_WIDTH +1,0), 90, 0.1f, 50);
         shot.update(System.nanoTime());
-        assertTrue(!shot.isAlive());
+        assertFalse(shot.isAlive());
     }
 }
 

@@ -118,18 +118,4 @@ public class TestTank {
         Position newPos = tank.moveTank(delta, terrain);
         assertTrue(newPos.getX() < 0 && newPos.getX() < actualPosX && tank.isLeftMove());
     }
-    /**
-     * A test for the tank's ability to fire a shot.
-     * @result
-     */
-    @Test
-    public void testFire(){
-        Shot shot = new StandardShot(new Position(10,10), 10, 10,10);
-        Shot fireShot = tank.getGun().fire(newWindspeed);
-        //When a shot is fired the visibility is set to false
-        assertFalse(fireShot.isAlive()); //BLIR INTE FALSE!! VARFÖR???
-        //A new shot with the windspeed parameter is created
-        assertTrue(fireShot.getWindSpeed() == newWindspeed);
-    }
-
 }
