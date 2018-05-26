@@ -6,6 +6,7 @@ package com.mygdx.game.model;
  * values for this shot
  *
  * @author  Carl Lundborg
+ * revised by Carl Lundborg
  */
 
 public class NukeShot extends Shot{

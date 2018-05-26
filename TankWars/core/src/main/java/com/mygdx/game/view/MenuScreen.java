@@ -242,5 +242,6 @@ public class MenuScreen implements Screen, IEventHandler {
     public void dispose() {
         stage.dispose();
         skin.dispose();
+
     }
 }

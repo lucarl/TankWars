@@ -4,6 +4,13 @@ import com.mygdx.game.model.factorys.ShotFactory;
 import com.mygdx.game.events.Event;
 import com.mygdx.game.events.EventBus;
 
+/**
+ * A class representing the tanks gun
+ *
+ * @author ?
+ * revised by Carl Lundborg
+ */
+
 public class TankGun implements IDrawable {
     private static String imgSrc = "tankGun.png";
     private static int width = 5;
@@ -37,6 +44,13 @@ public class TankGun implements IDrawable {
     }
 
     // fires a new shot at the end of the gun
+
+    /**
+     * fired a new shot at the end of the gun using the
+     * TankGun factory to create the shot
+     * @param windSpeed wind speed that influences the direction of the shot
+     * @return the specific shot
+     */
     public Shot fire(int windSpeed) {
         shotFactory = new ShotFactory();
 
@@ -72,6 +86,9 @@ public class TankGun implements IDrawable {
         return shot;
     }
 
+    /**
+     * increase/decrease the power of the shot
+     */
     public void increasePower() {
         power = power < 1 ? power + 0.05f : this.power;
     }
@@ -80,7 +97,11 @@ public class TankGun implements IDrawable {
         power = power > 0.1f ? power - 0.05f : this.power;
     }
 
-
+    /**
+     * Setting the angle for the shot
+     * @param delta delta value for update
+     * @return
+     */
     public float aimTank(float delta) {
         if (rightAim) {
             angle = angle < 110 ? angle + speed * delta : 110;
@@ -92,6 +113,10 @@ public class TankGun implements IDrawable {
         return angle;
     }
 
+    /**
+     * left/right aim of the gun
+     * @param b if either left or right aim has occurred
+     */
     public void setLeftAim(boolean b) {
 
         EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_AIM, null));

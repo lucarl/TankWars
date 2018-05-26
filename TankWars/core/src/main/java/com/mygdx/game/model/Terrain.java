@@ -10,6 +10,7 @@ import static java.lang.Math.*;
  * matrix of the class
  *
  * @author Carl Lundborg, Adam Kjäll
+ * revised by Carl Lundborg
  */
 
 public class Terrain {
@@ -18,33 +19,32 @@ public class Terrain {
     private int x, y;
     private int tileSize;
 
+    /**
+     * Creates a matrix of TerrainTile and gives it its values for each tile
+     */
     public Terrain() {
         tileSize = 2;
         x = 0;
         y = 0;
         cols = Application.GAME_WIDTH / tileSize;
         rows = Application.GAME_HEIGHT / tileSize;
-
         terrainMatrix = new TerrainTile[rows][cols];
 
-        // TODO Out of bounds sometimes
         for (int col = 0; col < cols; col++) {
             for (int row = 0; row < min(abs(cos(toRadians(col)) * 50 + 50), rows); row++) {
                 terrainMatrix[row][col] = new TerrainTile(x + col * tileSize,
                         y + row * tileSize, true, tileSize);
-
             }
         }
-
     }
 
     /**
+     * Finds the highest point of the ground at a given column and converts
+     * by converting x pos to column pos
      *
-     * @param col
-     * @return
+     * @param col column
+     * @return height of column
      */
-
-    // Finds the heighest point of the ground at a given column (convert float x pos to column pos first)
     public int getMaxHeightOfCol(int col) {
         int colHeight = 0;
         if (col >= 0 && col <= cols) {
@@ -58,12 +58,12 @@ public class Terrain {
     }
 
     /**
+     * Finds the height of the ground at a point
      *
-     * @param col
-     * @param rows
-     * @return
+     * @param col column
+     * @param rows rows
+     * @return height of column
      */
-    // Finds the height of the ground at a point (e.g. could be a hole or a tunnel in the terrain)
     public int getActualHeightAtPos(int col, int rows) {
         int colHeight = 0;
         if (col >= 0 && col <= cols) {
