@@ -38,6 +38,12 @@ public class Terrain {
 
     }
 
+    /**
+     *
+     * @param col
+     * @return
+     */
+
     // Finds the heighest point of the ground at a given column (convert float x pos to column pos first)
     public int getMaxHeightOfCol(int col) {
         int colHeight = 0;
@@ -51,6 +57,12 @@ public class Terrain {
         return colHeight;
     }
 
+    /**
+     *
+     * @param col
+     * @param rows
+     * @return
+     */
     // Finds the height of the ground at a point (e.g. could be a hole or a tunnel in the terrain)
     public int getActualHeightAtPos(int col, int rows) {
         int colHeight = 0;

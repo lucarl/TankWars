@@ -12,4 +12,9 @@ public class TestShotFactory {
 
     }
 
+    @Test
+    public void testMakeTankGun(){
+
+    }
+
 }

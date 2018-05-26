@@ -11,9 +11,6 @@ import static junit.framework.TestCase.assertTrue;
  * @author Patricia Zabecka
  *
  */
-
-
-
 public class TestShot {
 
     /**

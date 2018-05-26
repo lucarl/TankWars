@@ -80,7 +80,6 @@ public class TankWars {
                 gameOver = true;
             }
         }
-
         // While shooting, update shot and check for collisions
         if (shooting) {
             shots.forEach(drawableShot -> {
@@ -243,6 +242,10 @@ public class TankWars {
         }
         isTurnOver = false;
     }
+
+    /**
+     *
+     */
 
     public void fire() {
         if (!isTurnOver) {

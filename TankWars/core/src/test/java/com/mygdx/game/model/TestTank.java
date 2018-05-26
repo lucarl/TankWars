@@ -30,7 +30,7 @@ public class TestTank {
      * damage and a wind speed for the testing.
      */
     @Before
-    public void setUp(){
+    public void setup(){
         tank = new Tank(0,0);
         terrain = new Terrain();
         damage = 10;
