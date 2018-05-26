@@ -1,16 +1,17 @@
 package com.mygdx.game.model;
 
 /**
- * A class for the standard shot
+ * A class for the standard shot containing the specific
+ * values for this shot
  *
- * @author  Carl Lundborg, Adam Kjäll
+ * @author  Carl Lundborg
  */
 public class StandardShot extends Shot {
     private float[] vector = getVector();
 
     public StandardShot(Position pos, float angle, float power, int windSpeed) {
-        setWidth(20);
-        setHeight(20);
+        setWidth(15);
+        setHeight(15);
         setPos(new Position(pos.getX() - getWidth() /2, pos.getY()));
         setAngle(angle);
         this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -getSpeed(); // x speed
@@ -18,11 +19,9 @@ public class StandardShot extends Shot {
         setAlive(true);
         setWindSpeed(windSpeed);
         setRect(new CollisionRect(pos.getX(), pos.getY(), getWidth(), getHeight()));
-        setDamage(20);
+        setDamage(50);
         setName("Gun");
         setImgSrc("cannonBall.png");
-        setWidth(20);
-        setHeight(20);
-        setRadius(100);
+        setRadius(20);
     }
 }

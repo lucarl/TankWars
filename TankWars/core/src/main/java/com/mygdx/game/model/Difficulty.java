@@ -1,7 +1,8 @@
 package com.mygdx.game.model;
 
-import java.util.stream.Stream;
-
+/**
+ * Enum class with toString methods for each enum
+ */
 public enum Difficulty {
     EASY {
         public String toString() {

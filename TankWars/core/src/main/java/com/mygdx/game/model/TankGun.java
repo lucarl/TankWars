@@ -38,39 +38,36 @@ public class TankGun implements IDrawable {
 
     // fires a new shot at the end of the gun
     public Shot fire(int windSpeed) {
-        shot = null;
         shotFactory = new ShotFactory();
-        if (standard) {
-            changeWeapon = 1;
-            shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
-                    angle, power, windSpeed);
-            standard = false;
-            return shot;
-        }
-        if (nuke) {
 
-            EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_NUKE, null));
+        if (nuke) {
 
             changeWeapon = 2;
             shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
                     angle, power, windSpeed);
             nuke = false;
+
+            EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_NUKE, null));
+
             return shot;
         }
         if (missile) {
-
-            EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_MISSILE, null));
-
             changeWeapon = 3;
             shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
                     angle, power, windSpeed);
             missile = false;
+
+            EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_MISSILE, null));
+
             return shot;
         } else {
             changeWeapon = 1;
             shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
                     angle, power, windSpeed);
             standard = false;
+
+            EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_FIRE, null));
+
         }
         return shot;
     }

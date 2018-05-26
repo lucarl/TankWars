@@ -1,5 +1,13 @@
 package com.mygdx.game.model;
 
+/**
+ * A class representing a shot upgrade
+ * to a missile shot, containing specific
+ * values for this shot
+ *
+ * @author  Carl Lundborg, Adam Kjäll
+ */
+
 public class Missile extends Shot {
 
     private float[] vector = getVector();
@@ -17,7 +25,6 @@ public class Missile extends Shot {
         setDamage(20);
         setName("Nuke");
         setImgSrc("nuke.png");
-
         setRadius(20);
     }
 

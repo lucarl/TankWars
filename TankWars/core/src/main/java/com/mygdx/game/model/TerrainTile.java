@@ -1,5 +1,5 @@
 package com.mygdx.game.model;
-import java.util.Random;
+
 /**
  * A class for each tile in the terrain
  * @author  Carl Lundborg

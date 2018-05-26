@@ -2,9 +2,10 @@ package com.mygdx.game.model;
 
 /**
  * A class representing a shot upgrade
- * to a nuke shot
+ * to a nuke shot, containing specific
+ * values for this shot
  *
- * @author  Carl Lundborg, Adam Kjäll
+ * @author  Carl Lundborg
  */
 
 public class NukeShot extends Shot{
@@ -12,8 +13,8 @@ public class NukeShot extends Shot{
     private float[] vector = getVector();
 
     public NukeShot(Position pos, float angle, float power, int windSpeed) {
-        setWidth(50);
-        setHeight(50);
+        setWidth(25);
+        setHeight(25);
         setPos(new Position(pos.getX() - getWidth() /2, pos.getY()));
         setAngle(angle);
         this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -getSpeed(); // x speed
@@ -24,6 +25,6 @@ public class NukeShot extends Shot{
         setDamage(100);
         setName("Nuke");
         setImgSrc("nuke.png");
-        setRadius(50);
+        setRadius(30);
     }
 }

@@ -3,7 +3,6 @@ package com.mygdx.game.model;
 import com.badlogic.gdx.Gdx;
 
 import com.mygdx.game.Application;
-import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
@@ -18,44 +17,30 @@ import static org.junit.Assert.assertFalse;
  * @author Patricia Zabecka
  *
  */
+
+
 public class TestTankGun {
 
-    private TankGun tankGun;
-    private int testWindSpeed;
+    private TankGun tankGun = new TankGun(new Position(0.1f, 0.1f));
+    private int testWindSpeed = 100;
 
-    @Before
-    public void setup(){
-        tankGun = new TankGun(new Position(0.1f, 0.1f));
-        testWindSpeed = 100;
-    }
-
-    /**
-     * Tests the fire() method in TankGun, the test checks
-     * if the method creates a shot of type NukeShot.
-     * @result test is past if the correct instance is craeted and
-     * if the correct windspeed is set.
-     *
-     */
+    //A test for the fire() method in TankGun
+    //Checks if the fire method creates a shot of type AngryShot
     @Test
-    public void testFireNukeShot() {
-        //Change weapon to nuke
-        tankGun.changeNuke();
+    public void testFireAngryShot() {
+        //Set to true in order to test if fire returns AngryShot
+        tankGun.setSpecialShot(true);
         //The shot created by the method
         Shot actualShot = tankGun.fire(testWindSpeed);
-        //check if actualShot is of type AngryShot
-        assertTrue(actualShot instanceof NukeShot);
         //test if correct interval
+        assertTrue(actualShot.getPos().getX() > 0 &&
+                actualShot.getPos().getX() < Application.GAME_WIDTH &&
+                actualShot.getPos().getY() > 0);
         //correct windspeed?
         assertTrue(testWindSpeed == actualShot.getWindSpeed());
     }
 
     //Checks if the fire method creates a shot of type Shot
-    /**
-     * Tests if the fire() in TankGun creates a shot of type Shot.
-     * @result test is past if the correct instance is craeted and
-     * if the correct windspeed is set.
-     *
-     */
     @Test
     public void testFireShot() {
         //Set to false in order to test if fire method returns Shot object
@@ -64,14 +49,14 @@ public class TestTankGun {
         Shot actualShot = tankGun.fire(testWindSpeed);
         //check if Shot type
         assertTrue(actualShot instanceof Shot);
+        //test if correct interval
+        assertTrue(actualShot.getPos().getX() > 0 &&
+                actualShot.getPos().getX() < Application.GAME_WIDTH &&
+                actualShot.getPos().getY() > 0);
         //correct windspeed?
         assertTrue(testWindSpeed == actualShot.getWindSpeed());
 
     }
-    /**
-     * Tests for the aimRight() method in TankGun.
-     * @result the tast is passed if the tank is aimed right.
-     */
     @Test
     public void testAimTankRight() {
         float startAngle = tankGun.getAngle(); // 0
@@ -82,10 +67,7 @@ public class TestTankGun {
 
         assertTrue(startAngle < endAngle);
     }
-    /**
-     * Tests for the aimLeft() method in TankGun.
-     * @result the tast is passed if the tank is aimed left.
-     */
+
     @Test
     public void testAimTankLeft() {
         float startAngle = tankGun.getAngle(); // 0
@@ -96,11 +78,7 @@ public class TestTankGun {
 
         assertTrue(startAngle >= endAngle);
     }
-    /**
-     * Tests for the increasePower() method.
-     * @result the test is passed if the increased power
-     * is bigger than the actual power.
-     */
+
     @Test
     public void testIncreasePower() {
         float actualPower = tankGun.getPower();
@@ -109,11 +87,7 @@ public class TestTankGun {
         float increasedPower = tankGun.getPower();
         assertTrue(actualPower < increasedPower);
     }
-    /**
-     * Tests for the decreasePower() method.
-     * @result the test is passed if the decrease power
-     * is smaller  than the actual power.
-     */
+
     @Test
     public void testDecreasePower() {
         float actualPower = tankGun.getPower();
@@ -122,40 +96,25 @@ public class TestTankGun {
         float decreasedPower = tankGun.getPower();
         assertTrue(actualPower > decreasedPower);
     }
-    /**
-     * Test for the setLeftAim() method
-     * @result the test is passed if the boolean parameters
-     * have the expected values for a left aim.
-     */
+
     @Test
-    public void testSetLeftAim() {
+    public void testSetAimLeft() {
         tankGun.setLeftAim(true);
         assertTrue(tankGun.isLeftAim());
         assertFalse(tankGun.isRightAim());
     }
-    /**
-     * Test for the setRightAim() method
-     * @result the test is passed if the boolean parameters
-     * have the expected values for a right aim.
-     */
+
     @Test
-    public void testSetRightAim() {
+    public void testSetAimRight() {
         tankGun.setRightAim(true);
         assertTrue(tankGun.isRightAim());
         assertFalse(tankGun.isLeftAim());
     }
-    /**
-     *
-     * Tests the change weapon ability.
-     * @result the test is passed when the value
-     * of the boolean currentSpecialShot is chnaged after
-     * a change weapon method is called.
-     *
-     */
+
     @Test
     public void testChangeWeapon() {
         boolean cuurentSpecialShot = tankGun.hasSpecialShot();
-        tankGun.changeMissile();
+        tankGun.changeNuke();
         assertTrue(!cuurentSpecialShot);
     }
 

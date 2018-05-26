@@ -12,9 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Application;
 
 import com.mygdx.game.ctrl.PlayController;
@@ -26,12 +23,7 @@ import com.mygdx.game.model.factorys.TankWarsFactory;
 import com.mygdx.game.services.Assets;
 
 import com.mygdx.game.model.TankWars;
-import com.mygdx.game.utils.Hud;
-
 import java.util.ArrayList;
-import com.mygdx.game.view.PlaySounds;
-import com.mygdx.game.view.Explosion;
-import java.util.List;
 
 public class PlayScreen implements Screen, IEventHandler {
     private Sprite background;
@@ -65,15 +57,15 @@ public class PlayScreen implements Screen, IEventHandler {
 
         explosions = new ArrayList<>();
 
-        // Register to the eventBus
         initEvent();
     }
 
     public void show() {
-        renderer.loadResources(tankWars.getTiles());
         renderer.loadResources(tankWars.getObjects());
+        renderer.loadResources(tankWars.getTiles());
         renderer.loadResources(tankWars.getTanks());
         renderer.loadResources(tankWars.getGun());
+
         background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         InputMultiplexer im = new InputMultiplexer(stage, controller);
         Gdx.input.setInputProcessor(im);
@@ -136,9 +128,8 @@ public class PlayScreen implements Screen, IEventHandler {
 
         app.batch.begin();
         background.draw(app.batch);
-        renderer.render(tankWars.getTiles());
-        renderer.render(tankWars.getObjects());
-        renderer.render(tankWars.getShots());
+        renderer.render();
+
 
         explosions.forEach(explosion -> {
             explosion.render(app.batch);
@@ -168,7 +159,7 @@ public class PlayScreen implements Screen, IEventHandler {
         else if(evt.getTag() == Event.Tag.PLAY_SOUND_MOVE){
             PlaySounds.playMove();
         }
-        else if (evt.getTag() == Event.Tag.PLAY_ANIMATION_EXPLOSION || evt.getTag() == Event.Tag.PLAY_SOUND_ANIMATION_EXPLOSION) {
+        else if (evt.getTag() == Event.Tag.PLAY_ANIMATION_EXPLOSION) {
             Tank tank = (Tank) evt.getValue();
             explosions.add(new Explosion(tank.getPos()));
             PlaySounds.playTankDestroy();

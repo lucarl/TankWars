@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Application;
 import com.mygdx.game.model.Player;
 import com.mygdx.game.services.Assets;
+import com.mygdx.game.view.PlaySounds;
 
 
 /**
@@ -27,11 +28,8 @@ public class ScoreScreen implements Screen {
 
     private Application app;
     private TextButton returnMenuButton;
+    private TextButton playAgainButton;
     private TextArea txtScoresWinner;
-    private TextArea txtScoresSecond;
-    private TextArea txtScoresThird;
-    private TextArea txtScoresFourth;
-    private TextArea txtScoresFifth;
 
     private Label heading;
 
@@ -63,25 +61,18 @@ public class ScoreScreen implements Screen {
         bigTextButtonStyle.down = skin2.getDrawable("bigButton.down");
 
         returnMenuButton = new TextButton("RETURN TO MENU", bigTextButtonStyle);
+        playAgainButton = new TextButton("PLAY AGAIN?", bigTextButtonStyle);
 
         //TextArea.TextFieldStyle txtScoresStyle = new TextField.TextFieldStyle();
         //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
 
-        heading = new Label("LEADERBOARDS",
+        heading = new Label("GAME OVER!",
                 new Label.LabelStyle(new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
         heading.setFontScale(1.4f);
         heading.setAlignment(Align.center);
 
         txtScoresWinner = new TextArea("",skin);
         txtScoresWinner.setSize(210,210);
-        txtScoresSecond = new TextArea("",skin);
-        txtScoresSecond.setSize(210,210);
-        txtScoresThird = new TextArea("",skin);
-        txtScoresThird.setSize(210,210);
-        txtScoresFourth = new TextArea("",skin);
-        txtScoresFourth.setSize(210,210);
-        txtScoresFifth = new TextArea("",skin);
-        txtScoresFifth.setSize(210,210);
 
         setupScoreTable();
         stage.addActor(table);
@@ -104,13 +95,11 @@ public class ScoreScreen implements Screen {
         table.row().padTop(50);
         table.add(txtScoresWinner);
         table.row().padTop(25);
-        table.add(txtScoresSecond);
-        table.row().padTop(25);
-        table.add(txtScoresThird);
-        table.row().padTop(25);
-        table.add(txtScoresFourth);
-        table.row().padTop(25);
-        table.add(txtScoresFifth);
+        table.add();
+
+        table.row();
+        table.add(playAgainButton).padTop(50);
+        table.add();
 
         table.row();
         table.add(returnMenuButton).padTop(50);
@@ -123,7 +112,26 @@ public class ScoreScreen implements Screen {
         returnMenuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                app.setMenuScreen();
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setMenuScreen();
+                    }
+                }), 1);
+
+            }
+        });
+
+        playAgainButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Timer.schedule((new Timer.Task() {
+                    @Override
+                    public void run() {
+                        app.setPlayScreen();
+                        PlaySounds.stopTheme();
+                    }
+                }), 1);
 
             }
         });
