@@ -70,19 +70,12 @@ public class MenuScreen implements Screen, IEventHandler {
 
         background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
-        //Button style setup
-        TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
-        bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
-        bigTextButtonStyle.fontColor = Color.WHITE;
-        bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
-        bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
-
         //create buttons
-        startButton = new TextButton("START", bigTextButtonStyle);
-        optionsButton = new TextButton("OPTIONS", bigTextButtonStyle);
-        creditsButton = new TextButton("CREDITS", bigTextButtonStyle);
-        helpButton= new TextButton("HELP", bigTextButtonStyle);
-        exitButton = new TextButton("EXIT", bigTextButtonStyle);
+        startButton = new TextButton("START", setButtonStyle("myfont.fnt"));
+        optionsButton = new TextButton("OPTIONS", setButtonStyle("myfont.fnt"));
+        creditsButton = new TextButton("CREDITS", setButtonStyle("myfont.fnt"));
+        helpButton= new TextButton("HELP", setButtonStyle("myfont.fnt"));
+        exitButton = new TextButton("EXIT", setButtonStyle("myfont.fnt"));
 
         //heading label setup
         heading = new Label("TANK WARS", new Label.LabelStyle(
@@ -121,6 +114,15 @@ public class MenuScreen implements Screen, IEventHandler {
 
         //display layouts for debugging
         //table.setDebug(true);
+    }
+
+    public TextButton.TextButtonStyle setButtonStyle(String path){
+        TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
+        bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal(path));
+        bigTextButtonStyle.fontColor = Color.WHITE;
+        bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
+        bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
+        return bigTextButtonStyle;
     }
 
     private void addMenuButtonListeners(){

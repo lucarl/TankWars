@@ -21,7 +21,14 @@ import com.mygdx.game.model.Difficulty;
 import com.mygdx.game.events.Event;
 import com.mygdx.game.events.IEventHandler;
 import com.mygdx.game.events.EventBus;
-import com.mygdx.game.view.PlayScreen;
+
+/**
+ *
+ * View class for the screen with the different
+ * game options.
+ *
+ * @author Patricia Zabecka, Adam Kjäll, Thomas Jinton
+ */
 
 public class OptionsScreen implements Screen, IEventHandler {
 
@@ -52,7 +59,7 @@ public class OptionsScreen implements Screen, IEventHandler {
     private Label difficultyLabel;
     private Label nRoundsLabel;
     private Label nPlayersLabel;
-    private Label nDiffLabel; // TODO kom på bättre namn
+    private Label nDiffLabel;
 
     private TextureAtlas atlas;
     private Skin skin;
@@ -68,11 +75,18 @@ public class OptionsScreen implements Screen, IEventHandler {
         //background setup
         Texture texture = Assets.manager.get("menuscreen.jpg");
         background = new Sprite(texture);
+        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
         //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
         initEvent();
     }
 
+    /**
+     * The different screen properties are created here such as labels,
+     * buttons and their style. Also the listeners for the buttons and the
+     * table that the properties are fit according to are invoked in this
+     * method.
+     */
     @Override
     public void show() {
         viewport = new ScreenViewport();
@@ -80,9 +94,6 @@ public class OptionsScreen implements Screen, IEventHandler {
 
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
-        //skin = new Skin(Gdx.files.internal("uiskin.json"));
-
-        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
         //button style setup
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
@@ -111,6 +122,7 @@ public class OptionsScreen implements Screen, IEventHandler {
         arrowButtonRight3 = new TextButton(">", smallTextButtonStyle);
         //add listeners to the buttons
         addButtonListeners();
+        addArrowButtonListeners();
 
         // OptionsScreen big header and sub headers for the options
         optionsLabel = new Label("Options",
@@ -138,7 +150,9 @@ public class OptionsScreen implements Screen, IEventHandler {
         Gdx.input.setInputProcessor(stage);
     }
 
-    // Creates a 8x3 table with labels and buttons
+    /**
+     * Creates a 8x3 table with labels and buttons
+     */
     private void setupTable(){
         table = new Table(skin);
         table.setFillParent(true);
@@ -223,6 +237,10 @@ public class OptionsScreen implements Screen, IEventHandler {
         stage.draw();
     }
 
+    /**
+     * Listeners for the buttons of the options screen
+     * Each button has its own listener.
+     */
     private void addButtonListeners() {
         // If next button is clicked change screen
         nextButton.addListener(new ClickListener() {
@@ -257,10 +275,9 @@ public class OptionsScreen implements Screen, IEventHandler {
             public void clicked(InputEvent event, float x, float y) {
 
                 clicked = !clicked;
-                if(clicked){
+                if (clicked) {
                     PlaySounds.pauseTheme();
-                }
-                else {
+                } else {
                     //PlaySounds.playThemeReturn();
                     PlaySounds.resumeTheme();
                 }
@@ -280,6 +297,13 @@ public class OptionsScreen implements Screen, IEventHandler {
 
             }
         });
+
+    }
+
+    /**
+     *
+     */
+    private void addArrowButtonListeners() {
 
         arrowButtonLeft1.addListener(new ClickListener() {
             @Override
