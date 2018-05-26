@@ -16,6 +16,7 @@ import java.util.List;
  * during the start of the program
  *
  * @author Carl Lundborg, Adam Kjäll
+ * revised by Carl Lundborg
  */
 
 public class TankWarsFactory {

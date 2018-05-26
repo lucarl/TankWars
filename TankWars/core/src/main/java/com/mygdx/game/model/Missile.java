@@ -5,7 +5,8 @@ package com.mygdx.game.model;
  * to a missile shot, containing specific
  * values for this shot
  *
- * @author  Carl Lundborg, Adam Kjäll
+ * @author  Carl Lundborg
+ * revised by Carl Lundborg
  */
 
 public class Missile extends Shot {

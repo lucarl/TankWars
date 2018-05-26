@@ -2,9 +2,11 @@ package com.mygdx.game.model;
 
 /**
  * A class representing the upgrade
- * loot box for a tank
+ * loot box for a tank that gives the player
+ * a certain type of Shot
  *
  * @author  Carl Lundborg
+ * revised by Carl Lundborg
  */
 public class Upgrade implements IDrawable{
     private static final String imageSource = "upgradeBox.png";

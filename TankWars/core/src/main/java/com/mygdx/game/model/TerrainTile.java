@@ -1,8 +1,10 @@
 package com.mygdx.game.model;
 
 /**
- * A class for each tile in the terrain
+ * A class representing each tile in the terrain
+ *
  * @author  Carl Lundborg
+ * revised by Carl Lundborg
  */
 public class TerrainTile implements IDrawable{
     private static final String imageSource = "terrainTile.png";

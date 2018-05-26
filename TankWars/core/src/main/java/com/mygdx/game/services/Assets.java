@@ -133,7 +133,8 @@ public class Assets {
         manager.load(soundDestroy);
     }
 
-    public static void disposeAssets(){
+    public static void dispose(){
         manager.dispose();
+        Assets.dispose();
     }
 }

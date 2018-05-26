@@ -10,6 +10,7 @@ import com.mygdx.game.events.EventBus;
  * to form a factory pattern
  *
  * @author  Carl Lundborg, Adam Kjäll
+ * revised by Carl Lundborg
  */
 
 public abstract class Shot implements IDrawable {
