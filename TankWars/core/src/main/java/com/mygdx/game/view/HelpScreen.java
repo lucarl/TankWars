@@ -5,7 +5,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -33,7 +35,7 @@ public class HelpScreen implements Screen {
     private Table table;
     private FitViewport viewport;
     private Stage stage;
-    private SpriteBatch batch;
+    private Sprite background;
     private TextureAtlas atlas;
 
     private Label heading;
@@ -41,6 +43,11 @@ public class HelpScreen implements Screen {
 
     public HelpScreen(Application app) {
         this.app = app;
+
+        //background setup
+        Texture texture = Assets.manager.get("menuscreen.jpg");
+        background = new Sprite(texture);
+        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
     }
 
@@ -135,7 +142,6 @@ public class HelpScreen implements Screen {
 
             }
         });
-
     }
 
     @Override

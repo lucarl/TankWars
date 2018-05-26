@@ -28,7 +28,12 @@ import com.mygdx.game.events.IEventHandler;
 
 
 /**
- * Created by marianarale on 2018-05-12.
+ *
+ * View class for the menu screen that appears
+ * after the splash screen is loaded.
+ *
+ * @author Patricia Zabecka, Adam Kjäll, Thomas Jinton
+ *
  */
 public class MenuScreen implements Screen, IEventHandler {
 
@@ -55,6 +60,7 @@ public class MenuScreen implements Screen, IEventHandler {
         //background setup
         Texture texture = Assets.manager.get("menuscreen.jpg");
         background = new Sprite(texture);
+        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
         //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
         initEvent();
@@ -64,11 +70,8 @@ public class MenuScreen implements Screen, IEventHandler {
     public void show() {
         viewport = new FitViewport(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         stage = new Stage(viewport, app.batch);
-
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
-
-        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
         //create buttons
         startButton = new TextButton("START", setButtonStyle("myfont.fnt"));

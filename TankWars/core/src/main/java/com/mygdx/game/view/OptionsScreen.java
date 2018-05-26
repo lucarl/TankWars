@@ -28,8 +28,8 @@ import com.mygdx.game.events.EventBus;
  * game options.
  *
  * @author Patricia Zabecka, Adam Kjäll, Thomas Jinton
+ *
  */
-
 public class OptionsScreen implements Screen, IEventHandler {
 
     public static int NUMBER_OF_PLAYERS = 2;
@@ -301,7 +301,9 @@ public class OptionsScreen implements Screen, IEventHandler {
     }
 
     /**
-     *
+     *Listeners for the arrow buttons.
+     * Each button has its own listener that changes
+     * the option when clcked.
      */
     private void addArrowButtonListeners() {
 
