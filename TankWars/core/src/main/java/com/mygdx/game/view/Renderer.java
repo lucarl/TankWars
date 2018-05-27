@@ -49,8 +49,9 @@ public class Renderer {
                 sprites.put(obj, sprite);
             }
         });
+    }
 
-
-
+    public void dispose() {
+        batch.dispose();
     }
 }

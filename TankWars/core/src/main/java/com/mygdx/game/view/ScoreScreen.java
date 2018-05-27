@@ -174,5 +174,6 @@ public class ScoreScreen implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
+        atlas.dispose();
     }
 }

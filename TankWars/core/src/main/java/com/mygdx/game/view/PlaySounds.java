@@ -130,61 +130,68 @@ public class PlaySounds {
     }
 
     public static void stopTheme(){
-
         Sound soundTheme = Assets.manager.get("TankWarsTheme.mp3", Sound.class);
         soundTheme.stop();
+
     }
 
 
     public static void pauseTheme(){
-
         Sound soundTheme = Assets.manager.get("TankWarsTheme.mp3", Sound.class);
         soundTheme.pause();
+
     }
 
     public static void resumeTheme(){
-
         Sound soundTheme = Assets.manager.get("TankWarsTheme.mp3", Sound.class);
         soundTheme.resume();
+
     }
 
     public static void stopFire(){
         Sound soundShoot = Assets.manager.get("cannon.mp3", Sound.class);
         soundShoot.stop();
+        soundShoot.dispose();
     }
 
     public static void stopAim(){
         Sound soundAim = Assets.manager.get("badaim.mp3", Sound.class);
         soundAim.stop();
+        soundAim.dispose();
 
     }
 
     public static void stopMove(){
         Sound soundMove = Assets.manager.get("tanker.mp3", Sound.class);
         soundMove.stop();
+        soundMove.dispose();
 
     }
 
     public static void stopExplosion(){
         Sound soundBoom = Assets.manager.get("boom.mp3", Sound.class);
         soundBoom.stop();
+        soundBoom.dispose();
 
     }
     public static void stopTankDestroy(){
         Sound soundDestroy = Assets.manager.get("destroy.mp3", Sound.class);
         soundDestroy.stop();
+        soundDestroy.dispose();
 
     }
 
     public static void stopNuke(){
         Sound soundNuke = Assets.manager.get("nuke.mp3", Sound.class);
         soundNuke.stop();
+        soundNuke.dispose();
 
     }
 
     public static void stopMissile(){
         Sound soundMissile = Assets.manager.get("missile.mp3", Sound.class);
         soundMissile.stop();
+        soundMissile.dispose();
 
     }
 
