@@ -124,6 +124,7 @@ public class ScoreScreen implements Screen {
                     public void run() {
                         app.setMenuScreen();
                         PlaySounds.stopVictory();
+                        PlaySounds.playThemeReturn();
                     }
                 }), 1);
 

@@ -168,6 +168,7 @@ public class PlayScreen implements Screen, IEventHandler {
             PlaySounds.playTankDestroy();
         } else if (evt.getTag() == Event.Tag.GAME_OVER){
             app.setScoreScreen();
+            PlaySounds.stopExplosion();
             PlaySounds.playVictory();
         }
 
