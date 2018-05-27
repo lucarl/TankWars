@@ -5,6 +5,9 @@ import com.badlogic.gdx.InputProcessor;
 import com.mygdx.game.model.Tank;
 import com.mygdx.game.model.TankWars;
 
+/**
+ * Controller which listens to the playScreen in the view package
+ */
 public class PlayController implements InputProcessor {
 
     private TankWars tankWars;
@@ -17,7 +20,7 @@ public class PlayController implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         Tank tank = tankWars.getPlayer().getTank();
-        if (!tankWars.isTurnOver() && !tankWars.isShooting()) {
+        if (!tankWars.isTurnOver() || !tankWars.isShooting()) {
             if (keycode == Input.Keys.LEFT) {
                 tank.setLeftMove(true);
             }

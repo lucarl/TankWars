@@ -1,5 +1,6 @@
 package com.mygdx.game.model.factorys;
 
+import com.mygdx.game.Application;
 import com.mygdx.game.model.*;
 
 
@@ -31,18 +32,15 @@ public class TankWarsFactory {
     private Wind wind;
     private Terrain terrain = new Terrain();
     private TankWars tankWars;
-    private int xPos1;
-    private int xPos2;
 
     /**
      * This constructor creates all objects and then pass these to a new TankWars
      * object.
+     *
      * @return tankWars
      */
     public TankWars makeTankWars() {
         wind = new Wind(difficulty);
-        //upgrade = new ArrayList<>();
-        shots = new ArrayList<>();
         players = new ArrayList<>();
         tanks = new ArrayList<>();
         objects = new ArrayList<>();
@@ -56,46 +54,39 @@ public class TankWarsFactory {
 
     /**
      * Set up the amount of objects according to the number of players in the game.
+     *
      * @param nPlayers Number of players in the game
      */
     public void setupObjects(int nPlayers, List<Player> players, List<IDrawable> objects, List<IDrawable> tanks, List<IDrawable> gun) {
         int xPos;
         Tank tank;
         for (int i = 0; i < nPlayers; i++) {
-            xPos = setupTanks(xPos1, xPos2, i);
+            xPos = generateXPos(i);
             tank = new Tank(xPos, 0);
             Upgrade upgrade = new Upgrade(10, 1000);
-            players.add(new Player(tank));
+            players.add(new Player(tank, "Player " + (i+1)));
             objects.add(new Upgrade(upgrade.getPos().getX(), upgrade.getPos().getY()));
             gun.add(players.get(i).getTank().getGun());
             tanks.add(players.get(i).getTank());
         }
     }
 
-    public int setupTanks(int xPos1, int xPos2, int i) {
-        int xPos;
-        if(i == 0) {
-            return 5;
-        }
-        if(i == 1) {
-            return 900;
-        }
+    public int generateXPos(int i) {
+        int xPos = 50; // start value acts as padding for both sides
+        int offset = Application.GAME_WIDTH / OptionsScreen.NUMBER_OF_PLAYERS / 2;
+
         if (i % 2 == 0) {
-            this.xPos1 = 5;
-            xPos = xPos1;
-            this.xPos1 += 200;
+            xPos = xPos + offset * i;
         } else {
-            this.xPos2 = 900;
-            xPos = xPos2;
-            this.xPos2 -= 200;
+            xPos = Application.GAME_WIDTH - xPos - offset * (i-1) - 40; // - 40 for tank width
         }
         return xPos;
     }
 
 
-
     /**
      * Sets up the terrain matrix with tiles
+     *
      * @param tiles individual tiles for the terrain
      */
     public void setupTerrainTiles(List<IDrawable> tiles) {

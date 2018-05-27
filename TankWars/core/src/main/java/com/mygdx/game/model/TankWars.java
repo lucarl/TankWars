@@ -32,7 +32,6 @@ public class TankWars {
 
     private boolean isTurnOver = false;
     private boolean shooting = false;
-    private boolean gameOver = false;
 
     /**
      * @param terrain
@@ -82,9 +81,8 @@ public class TankWars {
                     tank.resetTank();
                 }
 
-                // Game Over
+                // Send game over event
             } else {
-                gameOver = true;
                 EventBus.BUS.publish(new Event(Event.Tag.GAME_OVER, this));
             }
         }
