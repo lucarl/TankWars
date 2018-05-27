@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * This is the Tank Wars main class, this class updates the model
  * and sends events about state changes in the model.
+ *
  * @author Adam Kjäll
  */
 public class TankWars {
@@ -34,18 +35,6 @@ public class TankWars {
     // Game states
     private boolean isTurnOver = false, shooting = false;
 
-    // Timer to delay events
-    private float timer = 0;
-
-    /** TankWars constructor
-     * @param terrain
-     * @param players
-     * @param objects
-     * @param tiles
-     * @param wind
-     * @param tanks
-     * @param guns
-     */
     public TankWars(Terrain terrain, List<Player> players, List<IDrawable> objects,
                     List<IDrawable> tiles, Wind wind, List<IDrawable> tanks, List<IDrawable> guns) {
         this.terrain = terrain;
@@ -82,7 +71,7 @@ public class TankWars {
 
         // While shooting, update shot and check for collisions
         if (shooting) {
-           handleShooting(delta);
+            handleShooting(delta);
         }
 
         if (isTurnOver && !shooting) {
@@ -92,7 +81,13 @@ public class TankWars {
         }
     }
 
-    private void handleShooting(float delta){
+    /**
+     * Shooting algorithm, that updates the shots position and checks for collisions
+     * and handles what will happen when we have a collision
+     *
+     * @param delta
+     */
+    private void handleShooting(float delta) {
         // This list will be of length one, future implementations could use more shots,
         // like a cluster bomb or a machine gun
         shots.forEach(drawableShot -> {
@@ -118,6 +113,9 @@ public class TankWars {
         });
     }
 
+    /**
+     * Resets the terrain and the tanks
+     */
     private void resetRound() {
         // Reset the terrain
         for (IDrawable drawableTile : tiles) {
@@ -135,6 +133,8 @@ public class TankWars {
 
 
     /**
+     * Updates objects and removes dead shots
+     *
      * @param delta
      */
     private void updateObjects(float delta) {
@@ -147,16 +147,18 @@ public class TankWars {
     }
 
     /**
+     * Sets the terrainTiles within the shots explosion area to dead
+     * and send back a list with the tanks that were within that area.
+     *
      * @param shot
      */
-
     private ArrayList<Tank> removeTerrain(Shot shot) {
 
-        // Check collision with terrain
+        // Find center of explosion
         float xCenter = shot.getPos().getX() + shot.getWidth() / 2;
         float yCenter = shot.getPos().getY() + shot.getHeight() / 2;
 
-
+        // Find the x and y ranges
         int startX = (int) (xCenter - shot.getRadius()) / terrain.getTileSize() > 0 ?
                 (int) (xCenter - shot.getRadius()) / terrain.getTileSize() : 0;
         int endX = (int) (xCenter + shot.getRadius()) / terrain.getTileSize() < terrain.getCols() ?
@@ -169,9 +171,10 @@ public class TankWars {
         TerrainTile terrainMatrix[][] = terrain.getTerrainMatrix();
         ArrayList<Tank> tanksThatGotHit = new ArrayList<>();
 
+        // Loop through the section in the terrain that corresponds to the explosions area
+        // and set every alive tile within the area to dead
         for (int x = startX; x < endX; x++) {
             for (int y = startY; y < endY; y++) {
-
                 // TODO Not working properly, this should check a circular area
                 //if (Math.pow(x - xCenter, 2) + Math.pow(y - yCenter, 2) <= Math.pow((int) shot.getRadius(), 2)) {
                 if (terrainMatrix[y][x] != null) {
@@ -195,25 +198,23 @@ public class TankWars {
                                 tanksThatGotHit.add(tank);
                             }
                         }
-
                     }
                 }
-
                 //}
-
             }
         }
         return tanksThatGotHit;
     }
 
     /**
+     * Check if a shot has collided with the world
+     *
      * @param shot
      * @return
      */
     protected boolean hasCollidedWithWorld(Shot shot) {
         // Return true if shot is NOT within the range [0, screenWidth]
         if (shot.getPos().getX() <= 0 || shot.getPos().getX() >= Application.GAME_WIDTH) {
-
             return true;
         }
 
@@ -228,7 +229,7 @@ public class TankWars {
     }
 
     /**
-     * If a tank and shot collided, return that tank else returns null
+     * Check if a shot has collided with any tank in the game
      *
      * @param shot
      * @return
@@ -236,7 +237,9 @@ public class TankWars {
     private boolean hasCollidedWithTank(Shot shot) {
         for (Player player : players) {
             Tank tank = player.getTank();
-            return (shot.getRect().collidesWith(tank.getRect()) && tank != currentPlayer.getTank() && tank.isAlive());
+            if (shot.getRect().collidesWith(tank.getRect()) && tank != currentPlayer.getTank() && tank.isAlive()){
+                return true;
+            }
         }
         return false;
     }
@@ -253,6 +256,7 @@ public class TankWars {
     }
 
     /**
+     * Check is the current round is over
      * @return
      */
     protected boolean isRoundOver() {
@@ -262,13 +266,13 @@ public class TankWars {
                 nTanks++;
             }
         }
-
-        //if only one tank is left on the field we have a winner and the round is over
+        // If only one tank is left on the field the round is over
         return nTanks == 1;
     }
 
     /**
-     *
+     * Updates the current player to next player in line,
+     * player has to have an alive tank to be considered to be in line
      */
     public void nextPlayer() {
         playerIndex++;
@@ -281,7 +285,8 @@ public class TankWars {
     }
 
     /**
-     *
+     * Fires a shot with the current players tank
+     * and changes the games state
      */
     public void fire() {
         Shot shot = currentPlayer.getTank().getGun().fire(wind.getWindSpeed());
@@ -341,9 +346,11 @@ public class TankWars {
     public List<IDrawable> getShots() {
         return shots;
     }
+
     public List<Player> getPlayers() {
         return players;
     }
+
     public boolean isTurnOver() {
         return isTurnOver;
     }

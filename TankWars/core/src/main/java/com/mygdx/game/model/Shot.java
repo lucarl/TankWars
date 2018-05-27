@@ -9,17 +9,18 @@ import com.mygdx.game.events.EventBus;
  * extension, TankGun and ShotFactory
  * to form a factory pattern
  *
- * @author  Carl Lundborg, Adam Kjäll
+ * @author Carl Lundborg, Adam Kjäll
  * revised by Carl Lundborg
  */
 
 public abstract class Shot implements IDrawable {
     private static final float GRAVITY = -9.8f;
     private static String imgSrc;
-    private static int width = 15;
-    private static int height = 15;
-    private static int originX = width / 2;
-    private static int originY = height / 2;
+
+    private int width = 15;
+    private int height = 15;
+    private int originX = width / 2;
+    private int originY = height / 2;
 
     private float angle = 0;
     private float radius;
@@ -34,26 +35,24 @@ public abstract class Shot implements IDrawable {
 
     /**
      * Update shots position and movement according to windSpeed and placement
+     *
      * @param delta the delta value for update
      */
     public void update(float delta) {
         if (pos.getX() > 0 && pos.getX() < Application.GAME_WIDTH && pos.getY() > 0) {
             pos.setX(pos.getX() + vector[0] * delta * speed);
             pos.setY(pos.getY() + vector[1] * delta * speed);
-            vector[0] += windSpeed/3 * delta; // /3 because windspeed was to strong
+            vector[0] += windSpeed / 3 * delta; // /3 because windspeed was to strong
             vector[1] += GRAVITY * delta;
             rect.move(pos.getX(), pos.getY());
             // TODO not working, want shot to rotate according to vector direction
             //angle = (float) Math.atan(vector[1] / vector[0]);
-        } else {
-            //if the shot object is outside the screen x-wise it's marked as dead and will get removed
-            isAlive = false;
         }
     }
 
     @Override
     public String toString() {
-        return name ;
+        return name;
     }
 
     @Override
@@ -96,7 +95,7 @@ public abstract class Shot implements IDrawable {
         return isAlive;
     }
 
-    public void setAlive(boolean bool){
+    public void setAlive(boolean bool) {
         if (!bool && isAlive) {
             EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_EXPLOSION, this));
         }
