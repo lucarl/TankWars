@@ -240,6 +240,17 @@ public class MenuScreen implements Screen, IEventHandler {
         stage.draw();
     }
 
+    /**
+     * Called when the application is shot down
+     * and disposes resources.
+     */
+    @Override
+    public void dispose() {
+        stage.dispose();
+        skin.dispose();
+
+    }
+
     @Override
     public void resize(int width, int height) {
 
@@ -259,14 +270,5 @@ public class MenuScreen implements Screen, IEventHandler {
     public void hide() {
 
     }
-    /**
-     * Called when the application is shot down
-     * and disposes resources.
-     */
-    @Override
-    public void dispose() {
-        stage.dispose();
-        skin.dispose();
 
-    }
 }

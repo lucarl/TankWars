@@ -5,7 +5,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -41,11 +43,17 @@ public class ScoreScreen implements Screen {
     private Table table;
     private FitViewport viewport;
     private Stage stage;
+    private Sprite background;
     private SpriteBatch batch;
     private TextureAtlas atlas;
 
     public ScoreScreen(Application app) {
         this.app = app;
+
+        //background setup
+        Texture texture = Assets.manager.get("menuscreen.jpg");
+        background = new Sprite(texture);
+        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
     }
 
@@ -71,7 +79,7 @@ public class ScoreScreen implements Screen {
         heading.setFontScale(1.4f);
         heading.setAlignment(Align.center);
 
-        txtScoresWinner = new TextArea("",skin);
+        txtScoresWinner = new TextArea("Thank you \n  for playing \n Tank Wars",skin);
         txtScoresWinner.setSize(210,210);
 
         setupScoreTable();
@@ -148,13 +156,16 @@ public class ScoreScreen implements Screen {
         });
 
     }
-
+    /**
+     * @see MenuScreen
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         app.batch.begin();
+        background.draw(app.batch);
         app.batch.end();
         stage.act(delta);
         stage.draw();
@@ -180,7 +191,9 @@ public class ScoreScreen implements Screen {
     public void hide() {
 
     }
-
+    /**
+     * @see MenuScreen
+     */
     @Override
     public void dispose() {
         stage.dispose();

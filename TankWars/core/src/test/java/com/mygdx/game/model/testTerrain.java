@@ -19,19 +19,15 @@ public class testTerrain {
     private Terrain terrain;
     private TerrainTile[][] terrainTiles;
 
+    /**
+     * Creates objects for testing.
+     */
     @Before
     public void setUp(){
         terrain = new Terrain();
         terrainTiles = terrain.getTerrainMatrix();
     }
 
-    @Test
-    public void testCoordinates() {
-        assertTrue(terrainTiles[0][0].getPos().getX() == 0);
-        assertTrue(terrainTiles[0][0].getPos().getY() == 195);
-        assertTrue(terrainTiles[0][1].getPos().getX() == 5);
-        assertTrue(terrainTiles[2][0].getPos().getY() == 185);
-        assertTrue(terrainTiles[2][2].getPos().getX() == 10);
-        assertTrue(terrainTiles[2][2].isAlive());
-    }
+    //TODO - test methods of the Terrain class here.
+
 }
