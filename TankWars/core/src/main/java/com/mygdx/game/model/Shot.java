@@ -26,7 +26,7 @@ public abstract class Shot implements IDrawable {
     private int damage;
     private String name;
     private float[] vector = new float[2]; // speed
-    private int speed = 15;
+    private int speed = 25;
     private boolean isAlive;
     private int windSpeed;
     private CollisionRect rect;
