@@ -5,7 +5,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.view.*;
 
-
+/**
+ * The class for enabling the game. All the
+ * relevant setScreen methods are included for
+ * setting a new screen in the application.
+ *
+ * @author Adam Kjäll, Thomas Jinton
+ */
 public class Application extends Game{
     public static final String TITLE = "TANK WARS";
     public static final int GAME_WIDTH = 1000;
@@ -62,6 +68,12 @@ public class Application extends Game{
         screen.dispose();
         screen = new CreditsScreen(this);
         setScreen(screen);
+    }
+
+    @Override
+    public void dispose() {
+        screen.dispose();
+        batch.dispose();
     }
 
 }

@@ -17,9 +17,8 @@ public class TankWars {
     private Player currentPlayer;
     private Wind wind;
     private Terrain terrain;
-    private TankWarsFactory tankWarsFactory;
 
-    private List<IDrawable> upgrade;
+    // List for keeeping track of game objects
     private List<Player> players;
     private List<IDrawable> objects;
     private List<IDrawable> tiles;
@@ -27,14 +26,13 @@ public class TankWars {
     private List<IDrawable> tanks;
     private List<IDrawable> guns;
 
-    private int playerIndex = 0;
-    private int round = 0;
+    // Ints for keeping track of the current player and which round it is
+    private int playerIndex = 0, round = 0;
 
-    private boolean isTurnOver = false;
-    private boolean shooting = false;
-    private boolean gameOver = false;
+    // Game states
+    private boolean isTurnOver = false, shooting = false;
 
-    /**
+    /** TankWars constructor
      * @param terrain
      * @param players
      * @param objects
@@ -58,67 +56,75 @@ public class TankWars {
     }
 
     /**
-     * Updates the world one frame
+     * Updates the world
      *
-     * @param delta is the time since the last call to update
+     * @param delta is the time since the last frame
      */
     public void updateWorld(float delta) {
-        // Update objects positions
         updateObjects(delta);
 
         if (isRoundOver()) {
             round++;
             currentPlayer.addScore();
+
             if (round < OptionsScreen.NUMBER_OF_ROUNDS) {
-                for (IDrawable drawableTile : tiles) {
-                    if (drawableTile instanceof TerrainTile) {
-                        TerrainTile tile = (TerrainTile) drawableTile;
-                        tile.setAlive(true);
-                    }
-                }
+                resetRound();
 
-                for (Player player : players) {
-                    Tank tank = player.getTank();
-                    tank.resetTank();
-                }
-
-                // Game Over
-            } else {
-                gameOver = true;
+            } else { // Send game over event
                 EventBus.BUS.publish(new Event(Event.Tag.GAME_OVER, this));
             }
         }
 
         // While shooting, update shot and check for collisions
         if (shooting) {
-            // This list will be of length one, future implementations could use more shots,
-            // like a cluster bomb or a machine gun
-            shots.forEach(drawableShot -> {
-                if (drawableShot instanceof Shot) {
-                    Shot shot = (Shot) drawableShot;
-                    shot.update(delta);
-
-                    if (hasCollidedWithTank(shot) || hasCollidedWithWorld(shot)) {
-                        // Removes terrain around the collision and return a list with the tanks that got hit
-                        ArrayList<Tank> tanksThatGotHit = removeTerrain(shot);
-                        tanksThatGotHit.forEach(tankToHit -> {
-                            tankToHit.decreaseHealth(shot.getDamage());
-                            // If hp < 0, kill the tank
-                            if (tankToHit.getHealthPoints() <= 0) {
-                                tankToHit.setAlive(false);
-                            }
-                        });
-
-                        shot.setAlive(false);
-                        shooting = false;
-                        isTurnOver = true;
-                    }
-                }
-            });
+           handleShooting(delta);
         }
 
         if (isTurnOver && !shooting) {
             nextPlayer();
+            // New wind for every player to make it more fun
+            wind = new Wind(OptionsScreen.DIFFICULTY);
+        }
+    }
+
+    private void handleShooting(float delta){
+        // This list will be of length one, future implementations could use more shots,
+        // like a cluster bomb or a machine gun
+        shots.forEach(drawableShot -> {
+            if (drawableShot instanceof Shot) {
+                Shot shot = (Shot) drawableShot;
+                shot.update(delta);
+
+                if (hasCollidedWithTank(shot) || hasCollidedWithWorld(shot)) {
+                    // Removes terrain around the collision and return a list with the tanks that got hit
+                    ArrayList<Tank> tanksThatGotHit = removeTerrain(shot);
+                    tanksThatGotHit.forEach(tankToHit -> {
+                        tankToHit.decreaseHealth(shot.getDamage());
+                        // If hp < 0, kill the tank
+                        if (tankToHit.getHealthPoints() <= 0) {
+                            tankToHit.setAlive(false);
+                        }
+                    });
+                    shot.setAlive(false);
+                    shooting = false;
+                    isTurnOver = true;
+                }
+            }
+        });
+    }
+
+    private void resetRound() {
+        // Reset the terrain
+        for (IDrawable drawableTile : tiles) {
+            if (drawableTile instanceof TerrainTile) {
+                TerrainTile tile = (TerrainTile) drawableTile;
+                tile.setAlive(true);
+            }
+        }
+        // Reset the tanks
+        for (Player player : players) {
+            Tank tank = player.getTank();
+            tank.resetTank();
         }
     }
 

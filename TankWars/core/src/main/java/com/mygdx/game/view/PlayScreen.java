@@ -25,6 +25,7 @@ import com.mygdx.game.services.Assets;
 import com.mygdx.game.model.TankWars;
 import java.util.ArrayList;
 import java.util.List;
+import com.mygdx.game.view.PlaySounds;
 
 public class PlayScreen implements Screen, IEventHandler {
     private Sprite background;
@@ -36,7 +37,7 @@ public class PlayScreen implements Screen, IEventHandler {
     private Skin skin;
     private Stage stage;
 
-    private TextButton scoreButton;
+    //private TextButton scoreButton;
     private TextButton menuButton;
     private Table table;
     private TankWarsFactory tankWarsFactory;
@@ -99,7 +100,7 @@ public class PlayScreen implements Screen, IEventHandler {
             }
         });
 
-        //score
+        /*
         scoreButton = new TextButton("Show Leaderboards", skin);
         scoreButton.getLabel().setFontScale(0.9f);
         scoreButton.addListener(new ClickListener() {
@@ -109,10 +110,11 @@ public class PlayScreen implements Screen, IEventHandler {
                 PlaySounds.playThemeReturn();
             }
         });
+        */
 
         table.add(menuButton);
-        table.add(scoreButton).padLeft(50);
-        stage.addActor(scoreButton);
+        //table.add(scoreButton).padLeft(50);
+        //stage.addActor(scoreButton);
         stage.addActor(menuButton);
         stage.addActor(table);
 
@@ -166,6 +168,7 @@ public class PlayScreen implements Screen, IEventHandler {
             PlaySounds.playTankDestroy();
         } else if (evt.getTag() == Event.Tag.GAME_OVER){
             app.setScoreScreen();
+            PlaySounds.playVictory();
         }
 
     }

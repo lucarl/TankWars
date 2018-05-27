@@ -14,10 +14,15 @@ import com.mygdx.game.events.Event;
 import com.mygdx.game.view.PlaySounds;
 import com.mygdx.game.events.IEventHandler;
 
+/**
+ * This screen is the introduction to the game. The game
+ * "logo" is presented with an animation/effect.
+ *
+ * * @author Thomas Jinton
+ */
 public class SplashScreen implements Screen, IEventHandler {
 
     private Application app;
-
     private Stage stage;
     private Image splashImage;
 
@@ -30,6 +35,11 @@ public class SplashScreen implements Screen, IEventHandler {
 
     }
 
+    /**
+     * The logo image is used and the splash properties
+     * are applied so that the transition effect can
+     * happen and the Menuscreen will follow after the effect.
+     */
     @Override
     public void show() {
         Runnable transitionRunnable = new Runnable() {
@@ -43,7 +53,7 @@ public class SplashScreen implements Screen, IEventHandler {
         Texture texture = Assets.manager.get("tanks.jpg", Texture.class);
         splashImage = new Image(texture);
         splashImage.setBounds(0, 0, Application.GAME_WIDTH, Application.GAME_HEIGHT);
-        splashImage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(1.0f),Actions.delay(1,
+        splashImage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(2.0f),Actions.delay(1,
                 Actions.run(transitionRunnable))));
 
         stage.addActor(splashImage);
@@ -68,7 +78,6 @@ public class SplashScreen implements Screen, IEventHandler {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         update(delta);
-
         stage.draw();
     }
 

@@ -2,8 +2,7 @@
 package com.mygdx.game.events;
 
 /**
-
- @author hajo
+ * IEventHandler interface.
  */
 public interface IEventHandler {
     public void onEvent(Event evt);

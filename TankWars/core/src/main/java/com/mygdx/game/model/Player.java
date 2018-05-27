@@ -7,20 +7,20 @@ package com.mygdx.game.model;
  * @author  Carl Lundborg, Adam Kjäll
  */
 public class Player {
-    private static int nPlayers = 1;
+
     private Tank tank;
     private int score;
     private String name;
 
     /**
      * Construktor for Player
-     * @param tank 
+     * @param tank
+     * @param name
      */
-    public Player(Tank tank) {
+    public Player(Tank tank, String name) {
         this.tank = tank;
+        this.name = name;
         score = 0;
-        name = "Player" + nPlayers;
-        nPlayers++;
     }
 
     public void setTank(Tank tank) {

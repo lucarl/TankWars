@@ -1,7 +1,7 @@
 package com.mygdx.game.events;
 
 /**
- A single event
+ A single event.
 
  */
 public class Event {
@@ -16,9 +16,7 @@ public class Event {
         PLAY_SOUND_THEME,
         PLAY_SOUND_NUKE,
         PLAY_SOUND_MISSILE,
-
         PLAY_ANIMATION_EXPLOSION,
-
         GAME_OVER
     }
 
