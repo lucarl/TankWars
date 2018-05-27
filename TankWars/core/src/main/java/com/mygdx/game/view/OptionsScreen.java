@@ -81,7 +81,6 @@ public class OptionsScreen implements Screen, IEventHandler {
         //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
         initEvent();
     }
-
     /**
      * The different screen properties are created here such as labels,
      * buttons and their style. Also the listeners for the buttons and the
@@ -373,11 +372,17 @@ public class OptionsScreen implements Screen, IEventHandler {
         });
     }
 
+    /**
+     *
+     * Resize of the screen.
+     *
+     * @param width of the screen
+     * @param height of the screen
+     */
     @Override
     public void resize(int width, int height) {
         viewport.setScreenSize(width, height);
     }
-
     /**
      * @see MenuScreen
      */
