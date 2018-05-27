@@ -26,7 +26,8 @@ import com.mygdx.game.services.Assets;
  * View class for the menu screen that appears
  * after the splash screen is loaded.
  *
- * @author Patricia Zabecka, Thomas Jinton
+ * @author Patricia Zabecka
+ * Revised by: Patricia Zabecka, Thomas Jinton.
  *
  */
 public class HelpScreen implements Screen {
@@ -76,12 +77,19 @@ public class HelpScreen implements Screen {
 
         heading = new Label("TUTORIAL",
                 new Label.LabelStyle(new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
-        heading.setFontScale(1.4f);
+        heading.setFontScale(1.2f);
         heading.setAlignment(Align.center);
 
-        tutorialText = new Label("Basic instructions for how to play Tank Wars:",
+        tutorialText = new Label("Basic instructions for how to play Tank Wars: \n" +
+                "Press the left arrow key <- to move the tank to the left. \n" +
+                "Press the right arrow key -> to move the tank to the right. \n" +
+                "Press the up and down arrow keys to aim the tank and to fire press space. \n" +
+                "Change ammunition with the keys 1-3. \n" +
+                "A round is ended when only one tank is left on the field. \n" +
+                "The last standing tank's score is increased. When all the rounds are finished \n " +
+                "the tank with highest score wins.",
                 new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
-        tutorialText.setFontScale(0.8f);
+        tutorialText.setFontScale(0.5f);
         tutorialText.setAlignment(Align.center);
 
         setupHelpTable();
@@ -89,9 +97,9 @@ public class HelpScreen implements Screen {
 
         addMenuButtonListeners();
         Gdx.input.setInputProcessor(stage);
-
     }
     /**
+     * Sets up a table for buttons and labels.
      * @see MenuScreen
      */
     private void setupHelpTable() {
@@ -148,7 +156,9 @@ public class HelpScreen implements Screen {
             }
         });
     }
-
+     /**
+     * @see MenuScreen
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -159,6 +169,14 @@ public class HelpScreen implements Screen {
         stage.act(delta);
         stage.draw();
 
+    }
+    /**
+     * @see MenuScreen
+     */
+    @Override
+    public void dispose() {
+        stage.dispose();
+        skin.dispose();
     }
 
     @Override
@@ -180,11 +198,4 @@ public class HelpScreen implements Screen {
     public void hide() {
 
     }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
-        skin.dispose();
-    }
-
 }
