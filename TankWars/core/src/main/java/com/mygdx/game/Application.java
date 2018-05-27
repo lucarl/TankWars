@@ -6,6 +6,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.view.*;
 
 
+/**
+ * The application is responsible for changing between between screens
+ * @author Adam Kjäll
+ */
+
 public class Application extends Game{
     public static final String TITLE = "TANK WARS";
     public static final int GAME_WIDTH = 1000;

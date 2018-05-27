@@ -4,7 +4,13 @@ import com.mygdx.game.Application;
 import com.mygdx.game.events.Event;
 import com.mygdx.game.events.EventBus;
 
+/**
+ * This class represents a tank object and its behavior.
+ *
+ * @author Adam Kjäll
+ */
 public class Tank implements IDrawable {
+    // Shared variables
     private static String tankImgSrc = "tank1.png";
     private static int width = 40;
     private static int height = 20;
@@ -14,85 +20,100 @@ public class Tank implements IDrawable {
     private static final int SPEED = 100;
     private static final int ROTATION_SPEED = 5;
 
-
     private Position pos;
-    private Position resetPosition;
+    private Position resetPosition; // only used for resetting the tank
     private float angle;
     private int healthPoints;
     private float fuel;
     private TankGun gun;
 
-    private boolean isAlive;
-    private boolean rightMove;
-    private boolean leftMove;
+    private boolean isAlive, rightMove, leftMove;
 
     private CollisionRect rect;
 
-
+    /**
+     * Creates a new tank at the (x,y) position given,
+     * but if there is no ground directly under the tank
+     * it will fall until it collides with the ground.
+     *
+     * @param x
+     * @param y
+     */
     public Tank(float x, float y) {
         pos = new Position(x, y);
         resetPosition = new Position(x, y);
         angle = 0;
         healthPoints = 100;
         fuel = 100;
-        // Place the gun on the tank
+        // Place the gun on the top middle part of the tank
         gun = new TankGun(new Position(pos.getX() + width / 2, pos.getY() + height));
 
         isAlive = true;
         rightMove = false;
         leftMove = false;
 
-
+        // Sets the CollisionRect to the same position and boundaries as the tank
         rect = new CollisionRect(pos.getX(), pos.getY(), width, height);
     }
 
 
+    /**
+     * Updates the tanks position according to its boolean states (rightMove, leftMove, isAlive)
+     * and by gravity.
+     *
+     * @param delta
+     * @param terrain
+     * @return
+     */
     public Position moveTank(float delta, Terrain terrain) {
-        // Get grounds yPos
+        // Get height of ground at the middle of the tank
         float currentGroundHeight = terrain.getActualHeightAtPos(
                 (int) (pos.getX() + width / 2) / terrain.getTileSize(),
                 (int) (pos.getY() + height) / terrain.getTileSize());
-        float newXPos = rightMove ? pos.getX()  + SPEED * delta : pos.getX() - SPEED * delta;
+        // Calculate where the new x, y position would be
+        float newXPos = rightMove ? pos.getX() + SPEED * delta : pos.getX() - SPEED * delta;
         float newYPos = terrain.getActualHeightAtPos(
                 (int) (newXPos + width / 2) / terrain.getTileSize(),
                 (int) ((pos.getY() + height) / terrain.getTileSize()));
 
-        float newAngle = 5 * (newYPos - currentGroundHeight) * terrain.getTileSize();
-        float maxAngle = 125; // Not degrees
-
-        boolean canMoveThere = newAngle <= maxAngle;
-
+        // Apply "gravity" to the tank if the tank is above the ground
         if (pos.getY() > currentGroundHeight) {
             pos.setY(pos.getY() - GRAVITY);
         } else {
             pos.setY(currentGroundHeight);
         }
 
-        if (canMoveThere && isAlive && fuel > 0 && newXPos > 0 && newXPos + width < Application.GAME_WIDTH) {
+        // Calculate the difference in tiles
+        float difference = newYPos - currentGroundHeight;
+        float maxDifference = 12;
+
+        // Limits how steep hills the tank can climb
+        boolean okHeightDifference = difference <= maxDifference;
+        boolean canMoveThere = okHeightDifference && isAlive && fuel > 0 && newXPos > 0 && newXPos + width < Application.GAME_WIDTH;
+
+        if ( canMoveThere) {
             if (rightMove) {
                 pos.setX(newXPos);
-
-                angle = angle < newAngle ? Math.min(angle + ROTATION_SPEED, newAngle) : Math.max(angle - ROTATION_SPEED, newAngle);
-
+                angle = angle < difference ? Math.min(angle + ROTATION_SPEED, difference) : Math.max(angle - ROTATION_SPEED, difference);
                 decreaseFuel();
+
             } else if (leftMove) {
                 pos.setX(newXPos);
-
-                angle = angle < -newAngle ? Math.min(angle + ROTATION_SPEED, -newAngle) : Math.max(angle - ROTATION_SPEED, -newAngle);
-
+                angle = angle < -difference ? Math.min(angle + ROTATION_SPEED, -difference) : Math.max(angle - ROTATION_SPEED, -difference);
                 decreaseFuel();
             }
         }
-
+        // Update the CollisionRects position to the tanks position
         rect.move(pos.getX(), pos.getY());
-        // Gör så tankGun följer med tanken
+        // Update the guns position to the tanks position + offset
         gun.setPos(new Position(pos.getX() + width / 2, pos.getY()));
+
         return pos;
     }
 
 
     /**
-     * If the tanks go left then they will move and make a sound.
+     * Set the tank state to move left and a sound event is published
      *
      * @param b boolean variable
      */
@@ -109,7 +130,7 @@ public class Tank implements IDrawable {
     }
 
     /**
-     * If the tanks go right then they will move and make a sound.
+     * Set the tank state to move right and a sound event is published
      *
      * @param b boolean variable
      */
@@ -125,7 +146,10 @@ public class Tank implements IDrawable {
 
     }
 
-    //sätter till public för att göra ett test!!!
+    /**
+     * If leftMove or rightMove are true decrease the fuel
+     * @return
+     */
     public double decreaseFuel() {
         if (leftMove || rightMove) {
             fuel = fuel >= 0.1f ? fuel - 0.1f : 0;
@@ -133,14 +157,22 @@ public class Tank implements IDrawable {
         return fuel;
     }
 
+    /**
+     *
+     * @param damage
+     * @return
+     */
     public int decreaseHealth(int damage) {
         healthPoints = healthPoints >= damage ? healthPoints - damage : 0;
         return healthPoints;
     }
 
-    public void resetTank(){
+    /**
+     *
+     */
+    public void resetTank() {
         pos = new Position(resetPosition.getX(), resetPosition.getY());
-        gun.setPos(new Position(resetPosition.getX() + width/2, resetPosition.getY() + height));
+        gun.setPos(new Position(resetPosition.getX() + width / 2, resetPosition.getY() + height));
         gun.setAngle(0);
         setAlive(true);
         healthPoints = 100;
@@ -167,7 +199,6 @@ public class Tank implements IDrawable {
     public int getHealthPoints() {
         return healthPoints;
     }
-
 
 
     public float getFuel() {

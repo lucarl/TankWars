@@ -4,8 +4,11 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.services.Assets;
 
-public class PlaySounds {
-
+/**
+ * Abstract class that plays sounds
+ * @author Adam Kjäll
+ */
+public abstract class PlaySounds {
 
     public static void playFire(){
         Sound soundShoot = Assets.manager.get("cannon.mp3", Sound.class);

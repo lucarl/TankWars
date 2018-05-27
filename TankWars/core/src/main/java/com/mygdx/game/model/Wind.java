@@ -1,26 +1,23 @@
 package com.mygdx.game.model;
 
-
 import java.util.Random;
 
 /**
- *
+ * Wind is an integer that scales the shots speed, the difficulty will
+ * decide which range the windSpeed will be randomly set to .
+ * @author Adam Kjäll
  */
 public class Wind {
     private int windSpeed;
     private Difficulty difficulty;
 
-    /**
-     *
-     * @param difficulty
-     */
     public Wind(Difficulty difficulty) {
         this.difficulty = difficulty;
         setWindSpeed();
     }
 
     /**
-     * Sets the windspeed to a random value within a range
+     * Sets the winds peed to a random value within a range
      * depending on the current difficulty
      */
     private void setWindSpeed() {

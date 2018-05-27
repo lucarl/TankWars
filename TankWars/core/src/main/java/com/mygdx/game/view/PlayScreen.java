@@ -48,7 +48,7 @@ public class PlayScreen implements Screen, IEventHandler {
         tankWars = tankWarsFactory.makeTankWars();
         controller = new PlayController(tankWars);
         renderer = new Renderer(app.batch);
-        hud = new Hud(app.batch, tankWars);
+        hud = new Hud(tankWars);
         stage = new Stage();
 
         skin = new Skin(Gdx.files.internal("uiskin.json"));
@@ -161,9 +161,11 @@ public class PlayScreen implements Screen, IEventHandler {
         } else if (evt.getTag() == Event.Tag.PLAY_SOUND_MISSILE) {
             PlaySounds.playMissile();
         } else if (evt.getTag() == Event.Tag.PLAY_ANIMATION_EXPLOSION) {
-            Tank tank = (Tank) evt.getValue();
-            explosions.add(new Explosion(tank.getPos()));
-            PlaySounds.playTankDestroy();
+            if(evt.getValue() instanceof Tank){
+                Tank tank = (Tank) evt.getValue();
+                explosions.add(new Explosion(tank.getPos()));
+                PlaySounds.playTankDestroy();
+            }
         } else if (evt.getTag() == Event.Tag.GAME_OVER){
             app.setScoreScreen();
         }

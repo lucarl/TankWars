@@ -1,8 +1,7 @@
 package com.mygdx.game.model;
 
 /**
- * A class representing each player
- * for a certain tank
+ * A class for representing a player
  *
  * @author  Carl Lundborg, Adam Kjäll
  */
@@ -12,11 +11,6 @@ public class Player {
     private int score;
     private String name;
 
-    /**
-     * Construktor for Player
-     * @param tank
-     * @param name
-     */
     public Player(Tank tank, String name) {
         this.tank = tank;
         this.name = name;

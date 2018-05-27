@@ -7,12 +7,23 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+/**
+ * A progress bar widget
+ * @author Adam Kjäll
+ */
 public class Bar extends ProgressBar {
 
     private int width;
     private int height;
     private Color color;
 
+    /**
+     * Constructor for bar, created a ProgressBar configured according
+     * to the given parameters.
+     * @param width
+     * @param height
+     * @param color
+     */
     public Bar(int width, int height, Color color) {
         super(0f, 1f, 0.01f, false, new ProgressBarStyle());
         this.width = width;
@@ -20,36 +31,22 @@ public class Bar extends ProgressBar {
         this.color = color;
 
         setupBar();
-
-        setAnimateDuration(0.0f);
         setValue(1f);
-
         setAnimateDuration(0.25f);
     }
 
     private void setupBar() {
-
-        // Setup the background part of the hp bar
-        //Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-        //pixmap.setColor(color);
-        //pixmap.fill();
-        //TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
-        //pixmap.dispose();
-
-        // Setup the style
-        //getStyle().background = drawable;
-
-        // Setup the vertical part of the hp bar
+        // Setup the empty bar
         Pixmap pixmap = new Pixmap(0, height, Pixmap.Format.RGBA8888);
         pixmap.setColor(color);
         pixmap.fill();
         TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
         pixmap.dispose();
 
-        // Knob controlls the width of the green region
+        // Knob controls the width of the green region
         getStyle().knob = drawable;
 
-        // Setup the horizontal part of the hp bar
+        // Setup the full bar
         pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
         pixmap.setColor(color);
         pixmap.fill();
@@ -57,7 +54,5 @@ public class Bar extends ProgressBar {
         pixmap.dispose();
 
         getStyle().knobBefore = drawable;
-
-
     }
 }

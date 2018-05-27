@@ -1,7 +1,7 @@
 package com.mygdx.game.model;
 
 /**
- * Enum class with toString methods for each enum
+ * Enum class for difficulty setting with toString methods for each enum
  */
 public enum Difficulty {
     EASY {

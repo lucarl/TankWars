@@ -2,18 +2,12 @@ package com.mygdx.game.model;
 
 /**
  * This class can make rectangles and check if two rectangles have overlapped (collided)
+ * @author Adam Kjäll
  */
 public class CollisionRect {
     private float x, y;
     private int width, height;
 
-    /**
-     * Constructor for a CollisionRect
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     */
     public CollisionRect(float x, float y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -22,7 +16,7 @@ public class CollisionRect {
     }
 
     /**
-     * Updates the rectangles position according to the given parameters
+     * Updates the rectangles position according to the given position
      * @param x
      * @param y
      */
@@ -33,8 +27,8 @@ public class CollisionRect {
 
     /**
      * Check is this rectangle overlaps the other rectangle
-     * @param other
-     * @return
+     * @param other CollisionRect
+     * @return true if they collide
      */
     public boolean collidesWith(CollisionRect other) {
         return this.x < other.x + other.width && this.y < other.y + other.height

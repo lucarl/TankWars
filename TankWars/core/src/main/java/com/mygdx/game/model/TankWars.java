@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * This is the Tank Wars main class, this class updates the model
+ * and sends events about state changes in the model.
+ * @author Adam Kjäll
  */
 public class TankWars {
 
@@ -18,7 +20,7 @@ public class TankWars {
     private Wind wind;
     private Terrain terrain;
 
-    // List for keeeping track of game objects
+    // List for keeping track of game objects
     private List<Player> players;
     private List<IDrawable> objects;
     private List<IDrawable> tiles;
@@ -31,6 +33,9 @@ public class TankWars {
 
     // Game states
     private boolean isTurnOver = false, shooting = false;
+
+    // Timer to delay events
+    private float timer = 0;
 
     /** TankWars constructor
      * @param terrain

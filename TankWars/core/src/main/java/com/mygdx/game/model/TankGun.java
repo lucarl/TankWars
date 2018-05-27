@@ -7,7 +7,7 @@ import com.mygdx.game.events.EventBus;
 /**
  * A class representing the tanks gun
  *
- * @author ?
+ * @author Adam Kjäll
  * revised by Carl Lundborg
  */
 
