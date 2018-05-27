@@ -97,9 +97,8 @@ public abstract class Shot implements IDrawable {
     }
 
     public void setAlive(boolean bool){
-        if(!bool){
-            // Send explosion event
-            EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_EXPLOSION, null));
+        if (!bool && isAlive) {
+            EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_EXPLOSION, this));
         }
         isAlive = bool;
     }

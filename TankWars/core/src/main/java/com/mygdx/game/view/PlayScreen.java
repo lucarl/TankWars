@@ -65,7 +65,7 @@ public class PlayScreen implements Screen, IEventHandler {
         renderer.loadResources(tankWars.getObjects());
         renderer.loadResources(tankWars.getTiles());
         renderer.loadResources(tankWars.getTanks());
-        renderer.loadResources(tankWars.getGun());
+        renderer.loadResources(tankWars.getGuns());
 
         background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         InputMultiplexer im = new InputMultiplexer(stage, controller);
@@ -75,7 +75,7 @@ public class PlayScreen implements Screen, IEventHandler {
 
         table = new Table(skin);
         table.setWidth(stage.getWidth());
-        table.align(Align.center|Align.bottom);
+        table.align(Align.center | Align.bottom);
         table.setPosition(0, Gdx.graphics.getHeight());
 
 
@@ -100,7 +100,7 @@ public class PlayScreen implements Screen, IEventHandler {
         });
 
         //score
-        scoreButton = new TextButton("Show Leaderboards",skin);
+        scoreButton = new TextButton("Show Leaderboards", skin);
         scoreButton.getLabel().setFontScale(0.9f);
         scoreButton.addListener(new ClickListener() {
             @Override
@@ -151,26 +151,21 @@ public class PlayScreen implements Screen, IEventHandler {
         if (evt.getTag() == Event.Tag.PLAY_SOUND_FIRE) {
             PlaySounds.playFire();
         } else if (evt.getTag() == Event.Tag.PLAY_SOUND_EXPLOSION) {
-            //PlaySounds.playFire();
             PlaySounds.playExplosion();
-        }
-        else if (evt.getTag() == Event.Tag.PLAY_SOUND_AIM){
+        } else if (evt.getTag() == Event.Tag.PLAY_SOUND_AIM) {
             PlaySounds.playAim();
-        }
-        else if(evt.getTag() == Event.Tag.PLAY_SOUND_MOVE){
+        } else if (evt.getTag() == Event.Tag.PLAY_SOUND_MOVE) {
             PlaySounds.playMove();
-        }
-        else if (evt.getTag() == Event.Tag.PLAY_ANIMATION_EXPLOSION) {
+        } else if (evt.getTag() == Event.Tag.PLAY_SOUND_NUKE) {
+            PlaySounds.playNuke();
+        } else if (evt.getTag() == Event.Tag.PLAY_SOUND_MISSILE) {
+            PlaySounds.playMissile();
+        } else if (evt.getTag() == Event.Tag.PLAY_ANIMATION_EXPLOSION) {
             Tank tank = (Tank) evt.getValue();
             explosions.add(new Explosion(tank.getPos()));
             PlaySounds.playTankDestroy();
-        }
-
-        else if(evt.getTag() == Event.Tag.PLAY_SOUND_NUKE){
-            PlaySounds.playNuke();
-        }
-        else if(evt.getTag() == Event.Tag.PLAY_SOUND_MISSILE){
-            PlaySounds.playMissile();
+        } else if (evt.getTag() == Event.Tag.GAME_OVER){
+            app.setScoreScreen();
         }
 
     }
@@ -179,7 +174,7 @@ public class PlayScreen implements Screen, IEventHandler {
         EventBus.BUS.register(this);
     }
 
-    private void updateExplosions(float delta){
+    private void updateExplosions(float delta) {
         List<Explosion> explosionsToRemove = new ArrayList<>();
         for (Explosion explosion : explosions) {
             explosion.update(delta);

@@ -23,6 +23,10 @@ public class Player {
         nPlayers++;
     }
 
+    public void setTank(Tank tank) {
+        this.tank = tank;
+    }
+
     public Tank getTank() {
         return tank;
     }

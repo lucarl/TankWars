@@ -4,7 +4,6 @@ import com.mygdx.game.model.*;
 
 
 import com.mygdx.game.view.OptionsScreen;
-import com.mygdx.game.view.OptionsScreen.*;
 
 
 import java.util.ArrayList;
@@ -51,7 +50,7 @@ public class TankWarsFactory {
         gun = new ArrayList<>();
         setupObjects(nPlayers, players, objects, tanks, gun);
         setupTerrainTiles(tiles);
-        tankWars = new TankWars(terrain, players, objects, shots, tiles, wind, tanks, gun);
+        tankWars = new TankWars(terrain, players, objects, tiles, wind, tanks, gun);
         return tankWars;
     }
 

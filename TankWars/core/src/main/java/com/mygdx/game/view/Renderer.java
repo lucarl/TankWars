@@ -42,11 +42,11 @@ public class Renderer {
             if(obj != null) {
                 Texture texture = Assets.manager.get(obj.getImgSrc(), Texture.class);
                 Sprite sprite = new Sprite(texture);
-                sprites.put(obj, sprite);
                 sprite.setOrigin(obj.getOriginX(), obj.getOriginY());
                 // Sets position of sprite and its width and height
                 sprite.setBounds(obj.getPos().getX(), obj.getPos().getY(),
                         obj.getWidth(), obj.getHeight());
+                sprites.put(obj, sprite);
             }
         });
 

@@ -17,7 +17,7 @@ public class PlayController implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         Tank tank = tankWars.getPlayer().getTank();
-        if (!tankWars.isTurnOver()) {
+        if (!tankWars.isTurnOver() && !tankWars.isShooting()) {
             if (keycode == Input.Keys.LEFT) {
                 tank.setLeftMove(true);
             }
@@ -65,9 +65,9 @@ public class PlayController implements InputProcessor {
         }
 
         // FOR TESTING
-        //if (keycode == Input.Keys.N) {
-        //   tankWars.nextPlayer();
-        //}
+        if (keycode == Input.Keys.N) {
+           tankWars.nextPlayer();
+        }
 
 
         return true;

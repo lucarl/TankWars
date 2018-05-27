@@ -16,7 +16,7 @@ public class Missile extends Shot {
     public Missile (Position pos, float angle, float power, int windSpeed) {
         setWidth(10);
         setHeight(50);
-        setPos(new Position(pos.getX() + getWidth() /2, pos.getY() + getHeight() /2));
+        setPos(new Position(pos.getX(), pos.getY()));
         setAngle(angle);
         this.vector[0] = (float) Math.sin(Math.toRadians(angle)) * power * -getSpeed(); // x speed
         this.vector[1] = (float) Math.cos(Math.toRadians(angle)) * power * getSpeed(); // y speed
