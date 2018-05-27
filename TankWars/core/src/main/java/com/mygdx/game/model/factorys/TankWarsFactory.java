@@ -71,6 +71,11 @@ public class TankWarsFactory {
         }
     }
 
+    /**
+     * Placing objects evenly on map
+     * @param i
+     * @return x position for placement
+     */
     public int generateXPos(int i) {
         int xPos = 50; // start value acts as padding for both sides
         int offset = Application.GAME_WIDTH / OptionsScreen.NUMBER_OF_PLAYERS / 2;
