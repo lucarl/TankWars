@@ -27,7 +27,7 @@ import com.mygdx.game.events.EventBus;
  * View class for the screen with the different
  * game options.
  *
- * @author Patricia Zabecka, Adam Kjäll, Thomas Jinton
+ * @author Patricia Zabecka (Revised by Adam Kjäll, Thomas Jinton).
  *
  */
 public class OptionsScreen implements Screen, IEventHandler {

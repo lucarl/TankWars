@@ -32,7 +32,7 @@ import com.mygdx.game.events.IEventHandler;
  * View class for the menu screen that appears
  * after the splash screen is loaded.
  *
- * @author Patricia Zabecka, Adam Kjäll, Thomas Jinton
+ * @author Adam Kjäll (Revised by Patricia Zabecka, Thomas Jinton)
  *
  */
 public class MenuScreen implements Screen, IEventHandler {
