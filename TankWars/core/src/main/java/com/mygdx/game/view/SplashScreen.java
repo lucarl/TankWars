@@ -18,7 +18,8 @@ import com.mygdx.game.events.IEventHandler;
  * This screen is the introduction to the game. The game
  * "logo" is presented with an animation/effect.
  *
- * * @author Thomas Jinton
+ * @author Thomas Jinton
+ * Revised by: Thomas Jinton
  */
 public class SplashScreen implements Screen, IEventHandler {
 

@@ -17,7 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
  * the loading image is drawn out the assets are being
  * loaded as well.
  *
- * @author Thomas Jinton, Adam Kjäll
+ * @author Thomas Jinton
+ * Revised by: Thomas Jinton, Adam Kjäll
  */
 public class LoadingScreen implements Screen {
 
