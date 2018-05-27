@@ -26,6 +26,7 @@ import com.mygdx.game.view.PlaySounds;
  * choose to play again or go back to the menu.
  *
  * @author Thomas Jinton
+ * Revised by: Thomas Jinton.
  */
 public class ScoreScreen implements Screen {
 

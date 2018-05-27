@@ -10,6 +10,7 @@ import com.mygdx.game.services.Assets;
  * is needed and how that sound will behave.
  *
  * @author Adam Kjäll, Thomas Jinton
+ * Revised by: Thomas Jinton, Adam Kjäll
  */
 public class PlaySounds {
 

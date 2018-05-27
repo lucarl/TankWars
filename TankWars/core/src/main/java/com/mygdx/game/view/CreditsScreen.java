@@ -25,6 +25,7 @@ import com.mygdx.game.services.Assets;
  * if the user is interested.
  *
  * @author Thomas Jinton
+ * Revised by: Thomas Jinton.
  */
 public class CreditsScreen implements Screen {
 

@@ -11,6 +11,7 @@ import com.mygdx.game.view.*;
  * setting a new screen in the application.
  *
  * @author Adam Kjäll, Thomas Jinton
+ * Revised by: Thomas Jinton, Adam Kjäll
  */
 public class Application extends Game{
     public static final String TITLE = "TANK WARS";

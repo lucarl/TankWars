@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  * all the assets that are used in the game.
  *
  * @author Patricia Zabecka, Thomas Jinton
+ * Revised by: Patricia Zabecka, Thomas Jinton
  *
  */
 public class Assets {

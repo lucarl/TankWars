@@ -80,10 +80,10 @@ public class HelpScreen implements Screen {
         heading.setFontScale(1.2f);
         heading.setAlignment(Align.center);
 
-        tutorialText = new Label("Basic instructions for how to play Tank Wars: \n" +
+        tutorialText = new Label("Basic instructions for how to play Tank Wars: \n \n" +
                 "Press the left arrow key <- to move the tank to the left. \n" +
                 "Press the right arrow key -> to move the tank to the right. \n" +
-                "Press the up and down arrow keys to aim the tank and to fire press space. \n" +
+                "Press the up and down arrow keys to aim the tank and to fire press space. \n \n" +
                 "Change ammunition with the keys 1-3. \n" +
                 "A round is ended when only one tank is left on the field. \n" +
                 "The last standing tank's score is increased. When all the rounds are finished \n " +

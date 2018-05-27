@@ -8,7 +8,7 @@ import com.mygdx.game.events.EventBus;
  * A class representing the tanks gun
  *
  * @author ?
- * revised by Carl Lundborg
+ * revised by Carl Lundborg, Thomas Jinton
  */
 
 public class TankGun implements IDrawable {

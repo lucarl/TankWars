@@ -27,6 +27,15 @@ import java.util.ArrayList;
 import java.util.List;
 import com.mygdx.game.view.PlaySounds;
 
+
+/**
+ * View screen for the playing screen. All the
+ * events and actions that are happening when
+ * you play the game are shown here.
+ *
+ * @author Thomas Jinton
+ * Revised by: Adam Kjäll, Thomas Jinton
+ */
 public class PlayScreen implements Screen, IEventHandler {
     private Sprite background;
     private TankWars tankWars;
@@ -53,15 +62,16 @@ public class PlayScreen implements Screen, IEventHandler {
         stage = new Stage();
 
         skin = new Skin(Gdx.files.internal("uiskin.json"));
-
         Texture texture = Assets.manager.get("background.jpg");
         background = new Sprite(texture);
-
         explosions = new ArrayList<>();
 
         initEvent();
     }
 
+    /**
+     * @see MenuScreen
+     */
     public void show() {
         renderer.loadResources(tankWars.getObjects());
         renderer.loadResources(tankWars.getTiles());
@@ -148,6 +158,11 @@ public class PlayScreen implements Screen, IEventHandler {
         hud.stage.act();
     }
 
+    /**
+     * Given the event a sound or animation
+     * will happen in the game.
+     * @param evt the event
+     */
     @Override
     public void onEvent(Event evt) {
         if (evt.getTag() == Event.Tag.PLAY_SOUND_FIRE) {
@@ -178,6 +193,10 @@ public class PlayScreen implements Screen, IEventHandler {
         EventBus.BUS.register(this);
     }
 
+    /**
+     * Updates the explosions.
+     * @param delta
+     */
     private void updateExplosions(float delta) {
         List<Explosion> explosionsToRemove = new ArrayList<>();
         for (Explosion explosion : explosions) {
