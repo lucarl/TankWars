@@ -8,6 +8,7 @@ import com.mygdx.game.events.EventBus;
  * This class represents a tank object and its behavior.
  *
  * @author Adam Kjäll
+ * Revised by: Adam Kjäll, Thomas Jinton
  */
 public class Tank implements IDrawable {
     // Shared variables

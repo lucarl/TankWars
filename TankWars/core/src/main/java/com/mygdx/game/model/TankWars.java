@@ -14,6 +14,7 @@ import java.util.List;
  * and sends events about state changes in the model.
  *
  * @author Adam Kjäll
+ * Revised by: Adam Kjäll
  */
 public class TankWars {
 

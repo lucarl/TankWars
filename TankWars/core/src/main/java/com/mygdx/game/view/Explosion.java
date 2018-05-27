@@ -11,6 +11,7 @@ import com.mygdx.game.services.Assets;
  * Explosion handles an animation, its position and configuration and renders it
  *
  * @author Adam Kjäll
+ * Revised by: Adam Kjäll
  */
 
 public class Explosion {

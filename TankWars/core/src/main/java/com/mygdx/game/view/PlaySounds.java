@@ -9,7 +9,7 @@ import com.mygdx.game.services.Assets;
  * contains special properties depending on what sound
  * is needed and how that sound will behave.
  *
- * @author Adam Kjäll, Thomas Jinton
+ * @author Thomas Jinton
  * Revised by: Thomas Jinton, Adam Kjäll
  */
 
