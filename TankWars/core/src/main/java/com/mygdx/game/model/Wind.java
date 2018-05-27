@@ -3,15 +3,26 @@ package com.mygdx.game.model;
 
 import java.util.Random;
 
+/**
+ *
+ */
 public class Wind {
     private int windSpeed;
     private Difficulty difficulty;
 
+    /**
+     *
+     * @param difficulty
+     */
     public Wind(Difficulty difficulty) {
         this.difficulty = difficulty;
         setWindSpeed();
     }
 
+    /**
+     * Sets the windspeed to a random value within a range
+     * depending on the current difficulty
+     */
     private void setWindSpeed() {
         Random r = new Random();
         int randomSign = r.nextBoolean() ? -1 : 1;

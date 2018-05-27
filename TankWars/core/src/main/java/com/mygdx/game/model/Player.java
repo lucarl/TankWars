@@ -13,8 +13,8 @@ public class Player {
     private String name;
 
     /**
-     * 
-     * @param tank
+     * Construktor for Player
+     * @param tank 
      */
     public Player(Tank tank) {
         this.tank = tank;
