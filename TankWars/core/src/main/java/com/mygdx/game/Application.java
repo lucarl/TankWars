@@ -64,5 +64,11 @@ public class Application extends Game{
         setScreen(screen);
     }
 
+    @Override
+    public void dispose() {
+        screen.dispose();
+        batch.dispose();
+    }
+
 }
 
