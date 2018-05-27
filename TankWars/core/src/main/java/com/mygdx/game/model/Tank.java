@@ -31,7 +31,7 @@ public class Tank implements IDrawable {
 
     public Tank(float x, float y) {
         pos = new Position(x, y);
-        resetPosition = pos;
+        resetPosition = new Position(x, y);
         angle = 0;
         healthPoints = 100;
         fuel = 100;
@@ -139,8 +139,9 @@ public class Tank implements IDrawable {
     }
 
     public void resetTank(){
-        pos = resetPosition;
+        pos = new Position(resetPosition.getX(), resetPosition.getY());
         gun.setPos(new Position(resetPosition.getX() + width/2, resetPosition.getY() + height));
+        gun.setAngle(0);
         setAlive(true);
         healthPoints = 100;
         fuel = 100;

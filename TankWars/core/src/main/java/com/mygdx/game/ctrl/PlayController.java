@@ -65,9 +65,9 @@ public class PlayController implements InputProcessor {
         }
 
         // FOR TESTING
-        //if (keycode == Input.Keys.N) {
-        //   tankWars.nextPlayer();
-        //}
+        if (keycode == Input.Keys.N) {
+           tankWars.nextPlayer();
+        }
 
 
         return true;

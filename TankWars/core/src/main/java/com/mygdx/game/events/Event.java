@@ -12,12 +12,14 @@ public class Event {
         PLAY_SOUND_MOVE,
         PLAY_SOUND_AIM,
         PLAY_SOUND_EXPLOSION,
-        PLAY_ANIMATION_EXPLOSION,
         PLAY_SOUND_ANIMATION_EXPLOSION,
         PLAY_SOUND_THEME,
         PLAY_SOUND_NUKE,
         PLAY_SOUND_MISSILE,
 
+        PLAY_ANIMATION_EXPLOSION,
+
+        GAME_OVER
     }
 
     private final Tag tag;
