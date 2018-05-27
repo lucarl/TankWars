@@ -85,22 +85,22 @@ public class Tank implements IDrawable {
         }
 
         // Calculate the difference in tiles
-        float difference = newYPos - currentGroundHeight;
-        float maxDifference = 12;
+        float newAngle = 5 * (newYPos - currentGroundHeight) * terrain.getTileSize();
+        float maxAngle = 125; // Not degrees
 
         // Limits how steep hills the tank can climb
-        boolean okHeightDifference = difference <= maxDifference;
+        boolean okHeightDifference = newAngle <= maxAngle;
         boolean canMoveThere = okHeightDifference && isAlive && fuel > 0 && newXPos > 0 && newXPos + width < Application.GAME_WIDTH;
 
         if ( canMoveThere) {
             if (rightMove) {
                 pos.setX(newXPos);
-                angle = angle < difference ? Math.min(angle + ROTATION_SPEED, difference) : Math.max(angle - ROTATION_SPEED, difference);
+                angle = angle < newAngle ? Math.min(angle + ROTATION_SPEED, newAngle) : Math.max(angle - ROTATION_SPEED, newAngle);
                 decreaseFuel();
 
             } else if (leftMove) {
                 pos.setX(newXPos);
-                angle = angle < -difference ? Math.min(angle + ROTATION_SPEED, -difference) : Math.max(angle - ROTATION_SPEED, -difference);
+                angle = angle < -newAngle ? Math.min(angle + ROTATION_SPEED, -newAngle) : Math.max(angle - ROTATION_SPEED, -newAngle);
                 decreaseFuel();
             }
         }
