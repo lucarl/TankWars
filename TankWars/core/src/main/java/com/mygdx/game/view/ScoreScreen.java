@@ -71,7 +71,7 @@ public class ScoreScreen implements Screen {
         heading.setFontScale(1.4f);
         heading.setAlignment(Align.center);
 
-        txtScoresWinner = new TextArea("",skin);
+        txtScoresWinner = new TextArea("Thank you \n  for playing \n Tank Wars",skin);
         txtScoresWinner.setSize(210,210);
 
         setupScoreTable();
