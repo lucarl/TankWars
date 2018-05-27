@@ -26,7 +26,7 @@ import com.mygdx.game.services.Assets;
  * View class for the menu screen that appears
  * after the splash screen is loaded.
  *
- * @author Patricia Zabecka, Thomas Jinton
+ * @author Patricia Zabecka (Revised by Thomas Jinton).
  *
  */
 public class HelpScreen implements Screen {
@@ -45,6 +45,7 @@ public class HelpScreen implements Screen {
 
     private Label heading;
     private Label tutorialText;
+    private Label instructions;
 
     public HelpScreen(Application app) {
         this.app = app;
@@ -65,18 +66,21 @@ public class HelpScreen implements Screen {
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         skin2 = new Skin(atlas);
 
+        //buttonstyle
         TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
         bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         bigTextButtonStyle.fontColor = Color.WHITE;
         bigTextButtonStyle.up = skin2.getDrawable("bigButton.up");
         bigTextButtonStyle.down = skin2.getDrawable("bigButton.down");
 
+        //create button
         backButton = new TextButton("BACK", bigTextButtonStyle);
         getOptionsButton = new TextButton("CHANGE OPTIONS", bigTextButtonStyle);
 
+        //create labels
         heading = new Label("TUTORIAL",
                 new Label.LabelStyle(new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
-        heading.setFontScale(1.4f);
+        heading.setFontScale(1.2f);
         heading.setAlignment(Align.center);
 
         tutorialText = new Label("Basic instructions for how to play Tank Wars:",
@@ -84,39 +88,50 @@ public class HelpScreen implements Screen {
         tutorialText.setFontScale(0.8f);
         tutorialText.setAlignment(Align.center);
 
+        instructions = tutorialText = new Label("Press right key -> to move the tank to the right. \n" +
+                "Press left key <- to move the tank to the left. \n" +
+                "Press up or down key to aim the tank. In order to shoot press space.\n" +
+                "The keys 1-3 change the type of shot. \n" + "\n" +
+                "A game round when only one tank is left on the field. \n" +
+                "The player who has won the most rounds, by killing the other tanks, wins the game.",
+                new Label.LabelStyle(new BitmapFont(Gdx.files.internal("myfont.fnt")), Color.WHITE));
+        tutorialText.setFontScale(0.55f);
+        tutorialText.setAlignment(Align.center);
+
         setupHelpTable();
         stage.addActor(table);
 
         addMenuButtonListeners();
         Gdx.input.setInputProcessor(stage);
-
     }
     /**
+     * Sets up a table with buttons and labels.
      * @see MenuScreen
      */
     private void setupHelpTable() {
-
         table = new Table();
         table.setFillParent(true);
         table.top();
-        table.padTop(25);
+        table.padTop(10);
 
         table.row().width(500);
         table.add(heading);
-        table.row().padTop(50);
-        table.add(tutorialText);
+        table.row();
+        table.add(instructions).padTop(30);
+        table.row().padTop(10);
+        table.add(tutorialText).padTop(20);
 
         table.row();
-        table.add(getOptionsButton).padTop(50);
+        table.add(getOptionsButton).padTop(10);
         table.add();
 
         table.row();
-        table.add(backButton).padTop(50);
+        table.add(backButton).padTop(10);
+        table.row();
         table.add();
-
     }
     /**
-     * Listeners fro the buttons are added,
+     * Listeners for the buttons are added,
      * each button changes the screen.
      */
     private void addMenuButtonListeners() {
@@ -144,7 +159,6 @@ public class HelpScreen implements Screen {
 
                     }
                 }), 1);
-
             }
         });
     }

@@ -8,11 +8,10 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
-
 /**
  *
  * A test class for some of the core methods
- * included in the TankWars class.
+ * included in TankWars.
  *
  * @author Patricia Zabecka
  *
@@ -89,7 +88,6 @@ public class TestTankWars {
      * The test checks if
      * @result
      */
-    //isRoundOver
     @Test
     public void testIsRoundOver(){
         tank.setAlive(true);
@@ -100,7 +98,6 @@ public class TestTankWars {
      * The test checks if
      * @result
      */
-    //nextPlayer
     @Test
     public void testNextPlayerTurnOver(){
         boolean actualTurnOver = tankWarsTest.isTurnOver(); //returns true
@@ -121,7 +118,6 @@ public class TestTankWars {
      * The test checks if
      * @result
      */
-    //move
     @Test
     public void testMove(){
         Position actualPos = tankWarsTest.getPlayer().getTank().getPos();
