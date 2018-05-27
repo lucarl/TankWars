@@ -210,7 +210,7 @@ public class TankWars {
      * @param shot
      * @return
      */
-    private boolean hasCollidedWithWorld(Shot shot) {
+    protected boolean hasCollidedWithWorld(Shot shot) {
         // Return true if shot is NOT within the range [0, screenWidth]
         if (shot.getPos().getX() <= 0 || shot.getPos().getX() >= Application.GAME_WIDTH) {
 
@@ -341,7 +341,9 @@ public class TankWars {
     public List<IDrawable> getShots() {
         return shots;
     }
-
+    public List<Player> getPlayers() {
+        return players;
+    }
     public boolean isTurnOver() {
         return isTurnOver;
     }

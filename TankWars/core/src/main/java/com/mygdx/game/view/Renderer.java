@@ -26,7 +26,6 @@ public class Renderer {
     public Renderer(SpriteBatch batch) {
         this.batch = batch;
         sprites = new HashMap<>();
-
     }
 
     /**
@@ -55,7 +54,10 @@ public class Renderer {
             sprite.setBounds(obj.getPos().getX(), obj.getPos().getY(),
                     obj.getWidth(), obj.getHeight());
             sprites.put(obj, sprite);
-
         });
+    }
+
+    public void dispose() {
+        batch.dispose();
     }
 }

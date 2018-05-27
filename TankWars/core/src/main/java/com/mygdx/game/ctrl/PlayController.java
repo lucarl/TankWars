@@ -6,7 +6,13 @@ import com.mygdx.game.model.Tank;
 import com.mygdx.game.model.TankWars;
 
 /**
- * Controller which listens to the playScreen in the view package
+ * Controller which listens to the playScreen in the view package.
+ * When the uses presses a key the controller will listen to the
+ * given input.
+ *
+ * @author Adam Kjäll, Thomas Jinton
+ * Revised by: Adam Kjäll
+ *
  */
 public class PlayController implements InputProcessor {
 

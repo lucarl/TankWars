@@ -22,7 +22,11 @@ import com.mygdx.game.view.PlaySounds;
 
 
 /**
- * Created by marianarale on 2018-05-12.
+ * View class for when the game is over. The user can
+ * choose to play again or go back to the menu.
+ *
+ * @author Thomas Jinton
+ * Revised by: Thomas Jinton.
  */
 public class ScoreScreen implements Screen {
 
@@ -30,7 +34,6 @@ public class ScoreScreen implements Screen {
     private TextButton returnMenuButton;
     private TextButton playAgainButton;
     private TextArea txtScoresWinner;
-
     private Label heading;
 
     private Skin skin;
@@ -63,9 +66,6 @@ public class ScoreScreen implements Screen {
         returnMenuButton = new TextButton("RETURN TO MENU", bigTextButtonStyle);
         playAgainButton = new TextButton("PLAY AGAIN?", bigTextButtonStyle);
 
-        //TextArea.TextFieldStyle txtScoresStyle = new TextField.TextFieldStyle();
-        //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
-
         heading = new Label("GAME OVER!",
                 new Label.LabelStyle(new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
         heading.setFontScale(1.4f);
@@ -82,6 +82,9 @@ public class ScoreScreen implements Screen {
 
     }
 
+    /**
+     * A table with labels, text and buttons is created.
+     */
     private void setupScoreTable(){
 
         table = new Table();
@@ -107,6 +110,11 @@ public class ScoreScreen implements Screen {
 
     }
 
+    /**
+     * Listeners for the different buttons.
+     * When a button is clicked the screen
+     * changes.
+     */
     private void addMenuButtonListeners() {
 
         returnMenuButton.addListener(new ClickListener() {
@@ -116,6 +124,8 @@ public class ScoreScreen implements Screen {
                     @Override
                     public void run() {
                         app.setMenuScreen();
+                        PlaySounds.stopVictory();
+                        PlaySounds.playThemeReturn();
                     }
                 }), 1);
 
@@ -129,7 +139,8 @@ public class ScoreScreen implements Screen {
                     @Override
                     public void run() {
                         app.setPlayScreen();
-                        PlaySounds.stopTheme();
+                        //PlaySounds.stopTheme();
+                        PlaySounds.stopVictory();
                     }
                 }), 1);
 
@@ -174,5 +185,6 @@ public class ScoreScreen implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
+        atlas.dispose();
     }
 }

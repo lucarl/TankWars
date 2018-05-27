@@ -25,7 +25,17 @@ import com.mygdx.game.services.Assets;
 import com.mygdx.game.model.TankWars;
 import java.util.ArrayList;
 import java.util.List;
+import com.mygdx.game.view.PlaySounds;
 
+
+/**
+ * View screen for the playing screen. All the
+ * events and actions that are happening when
+ * you play the game are shown here.
+ *
+ * @author Thomas Jinton
+ * Revised by: Adam Kjäll, Thomas Jinton
+ */
 public class PlayScreen implements Screen, IEventHandler {
     private Sprite background;
     private TankWars tankWars;
@@ -36,7 +46,7 @@ public class PlayScreen implements Screen, IEventHandler {
     private Skin skin;
     private Stage stage;
 
-    private TextButton scoreButton;
+    //private TextButton scoreButton;
     private TextButton menuButton;
     private Table table;
     private TankWarsFactory tankWarsFactory;
@@ -52,15 +62,16 @@ public class PlayScreen implements Screen, IEventHandler {
         stage = new Stage();
 
         skin = new Skin(Gdx.files.internal("uiskin.json"));
-
         Texture texture = Assets.manager.get("background.jpg");
         background = new Sprite(texture);
-
         explosions = new ArrayList<>();
 
         initEvent();
     }
 
+    /**
+     * @see MenuScreen
+     */
     public void show() {
         renderer.loadResources(tankWars.getObjects());
         renderer.loadResources(tankWars.getTiles());
@@ -99,7 +110,7 @@ public class PlayScreen implements Screen, IEventHandler {
             }
         });
 
-        //score
+        /*
         scoreButton = new TextButton("Show Leaderboards", skin);
         scoreButton.getLabel().setFontScale(0.9f);
         scoreButton.addListener(new ClickListener() {
@@ -109,10 +120,11 @@ public class PlayScreen implements Screen, IEventHandler {
                 PlaySounds.playThemeReturn();
             }
         });
+        */
 
         table.add(menuButton);
-        table.add(scoreButton).padLeft(50);
-        stage.addActor(scoreButton);
+        //table.add(scoreButton).padLeft(50);
+        //stage.addActor(scoreButton);
         stage.addActor(menuButton);
         stage.addActor(table);
 
@@ -146,6 +158,11 @@ public class PlayScreen implements Screen, IEventHandler {
         hud.stage.act();
     }
 
+    /**
+     * Given the event a sound or animation
+     * will happen in the game.
+     * @param evt the event
+     */
     @Override
     public void onEvent(Event evt) {
         if (evt.getTag() == Event.Tag.PLAY_SOUND_FIRE) {
@@ -168,6 +185,8 @@ public class PlayScreen implements Screen, IEventHandler {
             }
         } else if (evt.getTag() == Event.Tag.GAME_OVER){
             app.setScoreScreen();
+            PlaySounds.stopExplosion();
+            PlaySounds.playVictory();
         }
 
     }
@@ -176,6 +195,10 @@ public class PlayScreen implements Screen, IEventHandler {
         EventBus.BUS.register(this);
     }
 
+    /**
+     * Updates the explosions.
+     * @param delta
+     */
     private void updateExplosions(float delta) {
         List<Explosion> explosionsToRemove = new ArrayList<>();
         for (Explosion explosion : explosions) {

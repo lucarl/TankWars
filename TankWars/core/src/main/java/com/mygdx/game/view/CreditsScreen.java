@@ -20,7 +20,12 @@ import com.mygdx.game.services.Assets;
 
 
 /**
- * Created by marianarale on 2018-05-12.
+ * View class for the credits. In this class
+ * the user can find out who the creators are,
+ * if the user is interested.
+ *
+ * @author Thomas Jinton
+ * Revised by: Thomas Jinton.
  */
 public class CreditsScreen implements Screen {
 
@@ -47,6 +52,9 @@ public class CreditsScreen implements Screen {
 
     }
 
+    /**
+     * @see MenuScreen
+     */
     @Override
     public void show() {
         viewport = new FitViewport(Application.GAME_WIDTH, Application.GAME_HEIGHT);
@@ -63,11 +71,6 @@ public class CreditsScreen implements Screen {
 
         backButton = new TextButton("BACK", bigTextButtonStyle);
         showCredits = new TextButton("MVP", bigTextButtonStyle);
-
-
-        //TextArea.TextFieldStyle txtScoresStyle = new TextField.TextFieldStyle();
-        //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
-
 
         heading = new Label("CREDITS",
                 new Label.LabelStyle(new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
@@ -107,6 +110,9 @@ public class CreditsScreen implements Screen {
 
     }
 
+    /**
+     * A table with labels and buttons is created.
+     */
     private void setupCreditsTable() {
 
         table = new Table();
@@ -114,7 +120,6 @@ public class CreditsScreen implements Screen {
         table.top();
         table.padTop(25);
 
-        //button setup in table
         table.row().width(500);
         table.add(heading);
         table.row().padTop(25);
@@ -134,6 +139,11 @@ public class CreditsScreen implements Screen {
 
     }
 
+    /**
+     * Listener for the buttons, when the buttons
+     * are clicked an action happens. The credit button
+     * enables an effect to show the group members.
+     */
     private void addMenuButtonListeners() {
 
         backButton.addListener(new ClickListener() {

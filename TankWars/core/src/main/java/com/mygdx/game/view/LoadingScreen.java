@@ -12,8 +12,13 @@ import com.mygdx.game.services.Assets;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 /**
- * A simple loading screen showing the progress of loading the resources
- * @author Adam Kjäll
+
+ * The class that display our loading screen. While
+ * the loading image is drawn out the assets are being
+ * loaded as well.
+ *
+ * @author Thomas Jinton
+ * Revised by: Thomas Jinton, Adam Kjäll
  */
 
 public class LoadingScreen implements Screen {
@@ -23,36 +28,43 @@ public class LoadingScreen implements Screen {
 
     private ShapeRenderer shapeRenderer;
 
-    /**
-     *
-     * @param app
-     */
     public LoadingScreen(Application app) {
         this.app = app;
         this.shapeRenderer = new ShapeRenderer();
     }
 
 
+    /**
+     * Loading the assets.
+     */
     @Override
     public void show() {
         progress = 0f;
         Assets.loadAssets();
     }
 
-    private void update(float delta) {
+    /**
+     * Setting the next screen.
+     */
+    private void update() {
         progress = Assets.manager.getProgress();
         if(Assets.manager.update() && progress >= 1f){
             app.setSplashScreen();
         }
     }
 
+    /**
+     * The loading bar is being rendered so that the
+     * shape-animation can happen.
+     *
+     * @param delta update
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        update(delta);
-
+        update();
         app.batch.begin();
 
         // Draw a black bar

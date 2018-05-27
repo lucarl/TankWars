@@ -7,8 +7,12 @@ import com.mygdx.game.view.*;
 
 
 /**
- * The application is responsible for changing between between screens
- * @author Adam Kjäll
+ * The class for enabling the game. All the
+ * relevant setScreen methods are included for
+ * setting a new screen in the application.
+ *
+ * @author Adam Kjäll, Thomas Jinton
+ * Revised by: Thomas Jinton, Adam Kjäll
  */
 
 public class Application extends Game{

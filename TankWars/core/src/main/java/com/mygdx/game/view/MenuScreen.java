@@ -32,7 +32,8 @@ import com.mygdx.game.events.IEventHandler;
  * View class for the menu screen that appears
  * after the splash screen is loaded.
  *
- * @author Patricia Zabecka, Adam Kjäll, Thomas Jinton
+ * @author Adam Kjäll
+ * Revised by: Patricia Zabecka, Adam Kjäll, Thomas Jinton
  *
  */
 public class MenuScreen implements Screen, IEventHandler {
@@ -222,7 +223,11 @@ public class MenuScreen implements Screen, IEventHandler {
         EventBus.BUS.register(this);
     }
 
-
+    /**
+     * Method called by the game loop from
+     * the application every time rendering should be performed.
+     * @param delta the time rendering should be performed.
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -255,7 +260,8 @@ public class MenuScreen implements Screen, IEventHandler {
 
     }
     /**
-     * {@inheritDoc}
+     * Called when the application is shot down
+     * and disposes resources.
      */
     @Override
     public void dispose() {

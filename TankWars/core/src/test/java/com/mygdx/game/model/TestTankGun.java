@@ -15,7 +15,8 @@ import static org.junit.Assert.assertFalse;
  * A test class for some of the core methods
  * included in the TankGun class.
  *
- * @author Patricia Zabecka, Adam Kjäll
+ * @author Patricia Zabecka
+ * Revised by: Patricia Zabecka, Adam Kjäll
  *
  */
 

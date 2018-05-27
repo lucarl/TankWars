@@ -9,7 +9,8 @@ import static junit.framework.TestCase.assertTrue;
  * A test class for some of the methods
  * included in the Taerrain class.
  *
- * @author Patricia Zabecka, Adam Kjäll
+ * @author Adam Kjäll
+ * Revised by: Patricia Zabecka, Adam Kjäll
  *
  */
 

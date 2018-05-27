@@ -27,7 +27,8 @@ import com.mygdx.game.events.EventBus;
  * View class for the screen with the different
  * game options.
  *
- * @author Patricia Zabecka, Adam Kjäll, Thomas Jinton
+ * @author Patricia Zabecka.
+ * Revised by: Patricia Zabecka, Adam Kjäll, Thomas Jinton
  *
  */
 public class OptionsScreen implements Screen, IEventHandler {
@@ -210,7 +211,9 @@ public class OptionsScreen implements Screen, IEventHandler {
         table.row();
 
     }
-
+    /**
+     * @see MenuScreen
+     */
     @Override
     public void onEvent(com.mygdx.game.events.Event evt) {
 
@@ -219,12 +222,16 @@ public class OptionsScreen implements Screen, IEventHandler {
         }
 
     }
-
+    /**
+     * @see MenuScreen
+     */
     private void initEvent() {
         EventBus.BUS.register(this);
     }
 
-
+    /**
+     * @see MenuScreen
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -371,6 +378,14 @@ public class OptionsScreen implements Screen, IEventHandler {
         viewport.setScreenSize(width, height);
     }
 
+    /**
+     * @see MenuScreen
+     */
+    @Override
+    public void dispose() {
+        stage.dispose();
+        skin.dispose();
+    }
     @Override
     public void pause() { }
 
@@ -380,9 +395,4 @@ public class OptionsScreen implements Screen, IEventHandler {
     @Override
     public void hide() { }
 
-    @Override
-    public void dispose() {
-        stage.dispose();
-        skin.dispose();
-    }
 }
