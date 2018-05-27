@@ -23,7 +23,6 @@ import com.mygdx.game.model.factorys.TankWarsFactory;
 import com.mygdx.game.services.Assets;
 
 import com.mygdx.game.model.TankWars;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,15 +58,15 @@ public class PlayScreen implements Screen, IEventHandler {
 
         explosions = new ArrayList<>();
 
-        // Register to the eventBus
         initEvent();
     }
 
     public void show() {
-        renderer.loadResources(tankWars.getTiles());
         renderer.loadResources(tankWars.getObjects());
+        renderer.loadResources(tankWars.getTiles());
         renderer.loadResources(tankWars.getTanks());
         renderer.loadResources(tankWars.getGuns());
+
         background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         InputMultiplexer im = new InputMultiplexer(stage, controller);
         Gdx.input.setInputProcessor(im);
@@ -118,7 +117,6 @@ public class PlayScreen implements Screen, IEventHandler {
         stage.addActor(table);
 
     }
-
 
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 1, 1);

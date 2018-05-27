@@ -2,9 +2,11 @@ package com.mygdx.game.model;
 
 /**
  * A class representing a shot upgrade
- * to a nuke shot
+ * to a nuke shot, containing specific
+ * values for this shot
  *
- * @author  Carl Lundborg, Adam Kjäll
+ * @author  Carl Lundborg
+ * revised by Carl Lundborg
  */
 
 public class NukeShot extends Shot{

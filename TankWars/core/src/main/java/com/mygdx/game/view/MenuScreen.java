@@ -28,7 +28,12 @@ import com.mygdx.game.events.IEventHandler;
 
 
 /**
- * Created by marianarale on 2018-05-12.
+ *
+ * View class for the menu screen that appears
+ * after the splash screen is loaded.
+ *
+ * @author Patricia Zabecka, Adam Kjäll, Thomas Jinton
+ *
  */
 public class MenuScreen implements Screen, IEventHandler {
 
@@ -55,34 +60,30 @@ public class MenuScreen implements Screen, IEventHandler {
         //background setup
         Texture texture = Assets.manager.get("menuscreen.jpg");
         background = new Sprite(texture);
+        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
 
         //EventBus.BUS.publish(new Event(Event.Tag.PLAY_SOUND_THEME, null));
         initEvent();
     }
-
+    /**
+     * The different screen properties are created here such as labels,
+     * buttons and their style. Also the listeners for the buttons and the
+     * table that the properties are fit according to are invoked in this
+     * method.
+     */
     @Override
     public void show() {
         viewport = new FitViewport(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         stage = new Stage(viewport, app.batch);
-
         atlas = new TextureAtlas(Gdx.files.internal("button-pack.atlas"));
         skin = new Skin(atlas);
 
-        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
-
-        //Button style setup
-        TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
-        bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
-        bigTextButtonStyle.fontColor = Color.WHITE;
-        bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
-        bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
-
         //create buttons
-        startButton = new TextButton("START", bigTextButtonStyle);
-        optionsButton = new TextButton("OPTIONS", bigTextButtonStyle);
-        creditsButton = new TextButton("CREDITS", bigTextButtonStyle);
-        helpButton= new TextButton("HELP", bigTextButtonStyle);
-        exitButton = new TextButton("EXIT", bigTextButtonStyle);
+        startButton = new TextButton("START", setButtonStyle("myfont.fnt"));
+        optionsButton = new TextButton("OPTIONS", setButtonStyle("myfont.fnt"));
+        creditsButton = new TextButton("CREDITS", setButtonStyle("myfont.fnt"));
+        helpButton= new TextButton("HELP", setButtonStyle("myfont.fnt"));
+        exitButton = new TextButton("EXIT", setButtonStyle("myfont.fnt"));
 
         //heading label setup
         heading = new Label("TANK WARS", new Label.LabelStyle(
@@ -99,6 +100,9 @@ public class MenuScreen implements Screen, IEventHandler {
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * A table with labels and buttons is created.
+     */
     private void setupMenuTable(){
         table = new Table(skin);
         table.setFillParent(true);
@@ -122,7 +126,23 @@ public class MenuScreen implements Screen, IEventHandler {
         //display layouts for debugging
         //table.setDebug(true);
     }
-
+    /**
+     * Creates a style for the button with a specific font.
+     * @param path for the font.
+     * @return the style for the buttons
+     */
+    public TextButton.TextButtonStyle setButtonStyle(String path){
+        TextButton.TextButtonStyle bigTextButtonStyle = new TextButton.TextButtonStyle();
+        bigTextButtonStyle.font = new BitmapFont(Gdx.files.internal(path));
+        bigTextButtonStyle.fontColor = Color.WHITE;
+        bigTextButtonStyle.up = skin.getDrawable("bigButton.up");
+        bigTextButtonStyle.down = skin.getDrawable("bigButton.down");
+        return bigTextButtonStyle;
+    }
+    /**
+     * Listeners for the menu buttons are added.
+     * Each button changes the screen when clicked.
+     */
     private void addMenuButtonListeners(){
 
         startButton.addListener(new ClickListener() {
@@ -189,7 +209,6 @@ public class MenuScreen implements Screen, IEventHandler {
         });
     }
 
-
     @Override
     public void onEvent(Event evt) {
 
@@ -235,10 +254,13 @@ public class MenuScreen implements Screen, IEventHandler {
     public void hide() {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void dispose() {
         stage.dispose();
         skin.dispose();
+
     }
 }

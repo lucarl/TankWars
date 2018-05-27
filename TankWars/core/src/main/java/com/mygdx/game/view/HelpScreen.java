@@ -5,7 +5,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -20,7 +22,12 @@ import com.mygdx.game.services.Assets;
 
 
 /**
- * Created by marianarale on 2018-05-12.
+ *
+ * View class for the menu screen that appears
+ * after the splash screen is loaded.
+ *
+ * @author Patricia Zabecka, Thomas Jinton
+ *
  */
 public class HelpScreen implements Screen {
 
@@ -33,7 +40,7 @@ public class HelpScreen implements Screen {
     private Table table;
     private FitViewport viewport;
     private Stage stage;
-    private SpriteBatch batch;
+    private Sprite background;
     private TextureAtlas atlas;
 
     private Label heading;
@@ -42,8 +49,14 @@ public class HelpScreen implements Screen {
     public HelpScreen(Application app) {
         this.app = app;
 
+        //background setup
+        Texture texture = Assets.manager.get("menuscreen.jpg");
+        background = new Sprite(texture);
+        background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
     }
-
+    /**
+     * @see MenuScreen
+     */
     @Override
     public void show() {
         viewport = new FitViewport(Application.GAME_WIDTH, Application.GAME_HEIGHT);
@@ -60,9 +73,6 @@ public class HelpScreen implements Screen {
 
         backButton = new TextButton("BACK", bigTextButtonStyle);
         getOptionsButton = new TextButton("CHANGE OPTIONS", bigTextButtonStyle);
-
-        //TextArea.TextFieldStyle txtScoresStyle = new TextField.TextFieldStyle();
-        //BitmapFont menuFont = new BitmapFont(Gdx.files.internal("menu.fnt"));
 
         heading = new Label("TUTORIAL",
                 new Label.LabelStyle(new BitmapFont(Gdx.files.internal("tankWarsFont.fnt")), Color.WHITE));
@@ -81,7 +91,9 @@ public class HelpScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
     }
-
+    /**
+     * @see MenuScreen
+     */
     private void setupHelpTable() {
 
         table = new Table();
@@ -103,9 +115,11 @@ public class HelpScreen implements Screen {
         table.add();
 
     }
-
+    /**
+     * Listeners fro the buttons are added,
+     * each button changes the screen.
+     */
     private void addMenuButtonListeners() {
-
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -114,10 +128,8 @@ public class HelpScreen implements Screen {
                     @Override
                     public void run() {
                         app.setMenuScreen();
-
                     }
                 }), 1);
-
             }
         });
 
@@ -135,7 +147,6 @@ public class HelpScreen implements Screen {
 
             }
         });
-
     }
 
     @Override

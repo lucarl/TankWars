@@ -91,8 +91,7 @@ public class TestTankWars {
     //isRoundOver
     @Test
     public void testIsRoundOver(){
-        //two players in the game, one of them is not alive, this test won't work for more than 2 palyers
-        tankWarsTest.getPlayer().getTank().setAlive(false);
+        tank.setAlive(true);
         //should return true becuase only one player is alive
         assertTrue(tankWarsTest.isRoundOver());
     }

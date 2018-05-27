@@ -113,7 +113,6 @@ public class TankWars {
                         shooting = false;
                         isTurnOver = true;
                     }
-
                 }
             });
         }
@@ -139,7 +138,9 @@ public class TankWars {
     /**
      * @param shot
      */
+
     private ArrayList<Tank> removeTerrain(Shot shot) {
+
         // Check collision with terrain
         float xCenter = shot.getPos().getX() + shot.getWidth() / 2;
         float yCenter = shot.getPos().getY() + shot.getHeight() / 2;
@@ -258,7 +259,7 @@ public class TankWars {
     /**
      *
      */
-    public void nextPlayer() {
+    protected void nextPlayer() {
         playerIndex++;
         currentPlayer = players.get(playerIndex % players.size());
 
@@ -283,9 +284,8 @@ public class TankWars {
      *
      * @param delta is the time since the last frame
      */
-    public void aim(float delta) {
+    protected void aim(float delta) {
         currentPlayer.getTank().getGun().aimTank(delta);
-
     }
 
     /**
@@ -293,7 +293,7 @@ public class TankWars {
      *
      * @param delta is the time since the last frame
      */
-    public void move(float delta) {
+    protected void move(float delta) {
         players.forEach(player -> {
             player.getTank().moveTank(delta, terrain);
         });
@@ -334,6 +334,4 @@ public class TankWars {
     public boolean isTurnOver() {
         return isTurnOver;
     }
-
-
 }
