@@ -61,12 +61,12 @@ public class Terrain {
      * Finds the height of the ground at a point
      *
      * @param col column
-     * @param rows rows
+     * @param rows checks the height of the terrain up to this row
      * @return height of column
      */
     public int getActualHeightAtPos(int col, int rows) {
         int colHeight = 0;
-        if (col >= 0 && col <= cols) {
+        if (col >= 0 && col < cols && rows >= 0 && rows < this.rows ) {
             for (int row = 0; row <= rows; row++) {
                 if (terrainMatrix[row][col] != null && terrainMatrix[row][col].isAlive()) {
                     colHeight = row * tileSize;
