@@ -259,7 +259,7 @@ public class TankWars {
     /**
      *
      */
-    protected void nextPlayer() {
+    public void nextPlayer() {
         playerIndex++;
         currentPlayer = players.get(playerIndex % players.size());
 
