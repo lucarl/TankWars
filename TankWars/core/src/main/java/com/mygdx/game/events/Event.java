@@ -1,7 +1,9 @@
 package com.mygdx.game.events;
 
 /**
- A single event.
+ A single event
+
+ @author hajo
 
  */
 public class Event {

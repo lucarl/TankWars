@@ -6,9 +6,10 @@ import com.mygdx.game.events.EventBus;
 
 /**
  * A class representing the tanks gun
+ *
  * @author Adam Kjäll
  * revised by Carl Lundborg, Thomas Jinton
-*/
+ */
 
 public class TankGun implements IDrawable {
     private static String imgSrc = "tankGun.png";
@@ -28,7 +29,6 @@ public class TankGun implements IDrawable {
     private boolean isVisible;
     private boolean rightAim;
     private boolean leftAim;
-    private ShotFactory shotFactory;
     private int changeWeapon;
     private Shot shot;
 
@@ -36,25 +36,22 @@ public class TankGun implements IDrawable {
         this.pos = pos;
         angle = 0;
         power = 0.5f;
-        //shot = new Shot(new Position(-100, -100), angle, 0, 0);
         isVisible = true;
         rightAim = false;
         leftAim = false;
     }
 
-    // fires a new shot at the end of the gun
-
     /**
      * fired a new shot at the end of the gun using the
      * TankGun factory to create the shot
+     *
      * @param windSpeed wind speed that influences the direction of the shot
      * @return the specific shot
      */
     public Shot fire(int windSpeed) {
-        shotFactory = new ShotFactory();
+        ShotFactory shotFactory = new ShotFactory();
 
         if (nuke) {
-
             changeWeapon = 2;
             shot = shotFactory.makeTankGun(changeWeapon, new Position(pos.getX() - width / 2, pos.getY() - width / 2),
                     angle, power, windSpeed);
@@ -98,6 +95,7 @@ public class TankGun implements IDrawable {
 
     /**
      * Setting the angle for the shot
+     *
      * @param delta delta value for update
      * @return
      */
@@ -114,6 +112,7 @@ public class TankGun implements IDrawable {
 
     /**
      * left/right aim of the gun
+     *
      * @param b if either left or right aim has occurred
      */
     public void setLeftAim(boolean b) {

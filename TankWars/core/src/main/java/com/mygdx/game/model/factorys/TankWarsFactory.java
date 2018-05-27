@@ -22,13 +22,14 @@ import java.util.List;
 public class TankWarsFactory {
     private int nPlayers = OptionsScreen.NUMBER_OF_PLAYERS;
     private Difficulty difficulty = OptionsScreen.DIFFICULTY;
+
     private List<Player> players;
     private List<IDrawable> objects;
     private List<IDrawable> tiles;
     private List<IDrawable> shots;
     private List<IDrawable> tanks;
     private List<IDrawable> gun;
-    //private List<IDrawable> upgrade;
+
     private Wind wind;
     private Terrain terrain = new Terrain();
     private TankWars tankWars;
