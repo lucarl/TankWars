@@ -27,7 +27,7 @@ public class TestTank {
 
     /**
      * Creates objects, a tank amd a terrain, and sets up a fixed
-     * damage and a wind speed for the testing.
+     * damage and a fixed wind speed for testing.
      */
     @Before
     public void setup(){

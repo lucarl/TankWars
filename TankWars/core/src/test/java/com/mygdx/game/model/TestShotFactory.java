@@ -5,7 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 import static junit.framework.TestCase.assertTrue;
 /**
- * Test class for ShotFactory.
+ * A test class for ShotFactory.
+ *
+ * @author Patricia Zabecka
+ *
  */
 public class TestShotFactory {
 
@@ -14,18 +17,17 @@ public class TestShotFactory {
     private Shot shot;
 
     /**
-     * Create objects for testing.
+     * Creates objects for testing.
      */
     @Before
     public void setUp(){
         shotFactory = new ShotFactory();
         pos = new Position(1, 1);
     }
-
     /**
-     * Test for makeTankGun().
-     * @result test is passed if the correct instance of a weapon is created
-     * with the appropriate properties such as angle, power etc.
+     * Test for the makeTankGun() method.
+     * @result the test is passed if the correct type of shot is created
+     * with the appropriate properties that are equal to the parameters.
      */
     @Test
     public void testMakeTankGun(){
@@ -33,7 +35,7 @@ public class TestShotFactory {
         assertTrue(shot instanceof Missile);
         assertTrue(shot.getAngle() == 1);
         assertTrue(shot.getWindSpeed() == 10);
-        //TODO - test more parameters and test if the method can do other types od shots
+        //TODO - test more parameters and test if the method can do other types of shots
     }
 
 }
