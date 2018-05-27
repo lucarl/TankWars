@@ -1,6 +1,5 @@
 package com.mygdx.game.model;
 
-import com.mygdx.game.services.Assets;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,7 +47,7 @@ public class TestTankWars {
 
     //updateObjects
 
-    //removeObjects
+    //removeShots
     /**
      * The test checks if
      * @result
@@ -59,7 +58,7 @@ public class TestTankWars {
         tankWarsTest.getObjects().add(0,tank);
         //sets the added object to not alive
         tank.setAlive(false);
-        tankWarsTest.removeObjects();
+        tankWarsTest.removeShots();
         //test if object tank is removed by checking if the list is empty
         assertTrue(tankWarsTest.getObjects().isEmpty());
     }
@@ -70,7 +69,7 @@ public class TestTankWars {
     @Test
     public void testRemoveObjectTile(){
         tankWarsTest.getTiles().add(0,testTile);
-        tankWarsTest.removeObjects();
+        tankWarsTest.removeShots();
         assertTrue(tankWarsTest.getTiles().isEmpty());
 
     }
@@ -82,7 +81,7 @@ public class TestTankWars {
     public void testRemoveObjectShot(){
         tankWarsTest.getShots().add(0,shot);
         shot.setAlive(false);
-        tankWarsTest.removeObjects();
+        tankWarsTest.removeShots();
         assertTrue(tankWarsTest.getShots().isEmpty());
     }
     /**

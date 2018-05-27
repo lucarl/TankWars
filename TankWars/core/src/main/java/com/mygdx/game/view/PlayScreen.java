@@ -67,7 +67,7 @@ public class PlayScreen implements Screen, IEventHandler {
         renderer.loadResources(tankWars.getTiles());
         renderer.loadResources(tankWars.getObjects());
         renderer.loadResources(tankWars.getTanks());
-        renderer.loadResources(tankWars.getGun());
+        renderer.loadResources(tankWars.getGuns());
         background.setSize(Application.GAME_WIDTH, Application.GAME_HEIGHT);
         InputMultiplexer im = new InputMultiplexer(stage, controller);
         Gdx.input.setInputProcessor(im);

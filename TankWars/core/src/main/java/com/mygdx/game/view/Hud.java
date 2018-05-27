@@ -138,7 +138,7 @@ public class Hud implements Disposable {
         hp = tankWars.getPlayer().getTank().getHealthPoints();
         fuel = tankWars.getPlayer().getTank().getFuel();
         wind = tankWars.getWind().getWindSpeed();
-        //shot = tankWars.getPlayer().getTank().getGun().getShot().getName();
+        //shot = tankWars.getPlayer().getTank().getGuns().getShot().getName();
 
         scoreLabel.setText(String.format("Score: %02d", score));
         nameLabel.setText("Player: " + name);

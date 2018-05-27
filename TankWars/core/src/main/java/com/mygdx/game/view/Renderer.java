@@ -20,7 +20,7 @@ public class Renderer {
         sprites = new HashMap<>();
     }
 
-    public void render(List<IDrawable> objects) {
+    public void render() {
         // For each object updateObjects it's corresponding sprite with the objects state
         sprites.forEach((obj, sprite) -> {
             if (obj.isAlive()) {

@@ -16,11 +16,11 @@ public class Tank implements IDrawable {
 
 
     private Position pos;
+    private Position resetPosition;
     private float angle;
     private int healthPoints;
     private float fuel;
     private TankGun gun;
-    private Shot shot;
 
     private boolean isAlive;
     private boolean rightMove;
@@ -30,12 +30,13 @@ public class Tank implements IDrawable {
 
 
     public Tank(float x, float y) {
-        this.pos = new Position(x + width / 2, y);
-        this.angle = 0;
-        this.healthPoints = 100;
-        this.fuel = 100;
+        pos = new Position(x, y);
+        resetPosition = pos;
+        angle = 0;
+        healthPoints = 100;
+        fuel = 100;
         // Place the gun on the tank
-        this.gun = new TankGun(new Position(pos.getX() + width / 2, pos.getY() + height));
+        gun = new TankGun(new Position(pos.getX() + width / 2, pos.getY() + height));
 
         isAlive = true;
         rightMove = false;
@@ -57,7 +58,7 @@ public class Tank implements IDrawable {
                 (int) ((pos.getY() + height) / terrain.getTileSize()));
 
         float newAngle = 5 * (newYPos - currentGroundHeight) * terrain.getTileSize();
-        float maxAngle = 150; // Not degrees
+        float maxAngle = 125; // Not degrees
 
         boolean canMoveThere = newAngle <= maxAngle;
 
@@ -137,6 +138,17 @@ public class Tank implements IDrawable {
         return healthPoints;
     }
 
+    public void resetTank(){
+        pos = resetPosition;
+        gun.setPos(new Position(resetPosition.getX() + width/2, resetPosition.getY() + height));
+        setAlive(true);
+        healthPoints = 100;
+        fuel = 100;
+        rightMove = false;
+        leftMove = false;
+        rect.move(pos.getX(), pos.getY());
+    }
+
     public TankGun getGun() {
         return gun;
     }
@@ -155,9 +167,6 @@ public class Tank implements IDrawable {
         return healthPoints;
     }
 
-    public Shot getShot() {
-        return shot;
-    }
 
 
     public float getFuel() {
@@ -194,7 +203,11 @@ public class Tank implements IDrawable {
     }
 
     public void setAlive(boolean bool) {
+        if (!bool && isAlive) {
+            EventBus.BUS.publish(new Event(Event.Tag.PLAY_ANIMATION_EXPLOSION, this));
+        }
         isAlive = bool;
+        gun.setAlive(bool);
     }
 
     public CollisionRect getRect() {
