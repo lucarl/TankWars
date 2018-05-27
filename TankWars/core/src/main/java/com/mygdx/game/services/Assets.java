@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  */
 public class Assets {
 
+    //The AssetsManager
     public static final AssetManager manager = new AssetManager();
 
     //------------------- TEXTURES ----------------------------
@@ -98,15 +99,13 @@ public class Assets {
             new AssetDescriptor<Sound>("nuke.mp3",Sound.class);
     private static final AssetDescriptor<Sound> soundMissile =
             new AssetDescriptor<Sound>("missile.mp3",Sound.class);
+    private static final AssetDescriptor<Sound> soundVictory =
+            new AssetDescriptor<Sound>("victory.mp3",Sound.class);
 
 
-    //skin
-    /*
-    public static final AssetDescriptor<Skin> uiSkin =
-            new AssetDescriptor<Skin>("ui/uiskin.json", Skin.class,
-                    new SkinLoader.SkinParameter("ui/uiskin.pack"));
-                    */
-
+    /**
+     * Method for loading all of our assets.
+     */
     public static void loadAssets(){
         manager.load(tankImg);
         manager.load(shotBirdImg);
@@ -131,6 +130,7 @@ public class Assets {
         manager.load(soundMissile);
         manager.load(soundNuke);
         manager.load(soundDestroy);
+        manager.load(soundVictory);
     }
 
     public static void dispose(){

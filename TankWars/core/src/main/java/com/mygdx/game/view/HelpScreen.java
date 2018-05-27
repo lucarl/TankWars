@@ -23,8 +23,9 @@ import com.mygdx.game.services.Assets;
 
 /**
  *
- * View class for the menu screen that appears
- * after the splash screen is loaded.
+ * View class for the help screen. This screen
+ * gives the user help information about
+ * Tank Wars.
  *
  * @author Patricia Zabecka, Thomas Jinton
  *
@@ -92,7 +93,7 @@ public class HelpScreen implements Screen {
 
     }
     /**
-     * @see MenuScreen
+     * A table with labels and buttons is created.
      */
     private void setupHelpTable() {
 
@@ -116,7 +117,7 @@ public class HelpScreen implements Screen {
 
     }
     /**
-     * Listeners fro the buttons are added,
+     * Listeners for the buttons are added,
      * each button changes the screen.
      */
     private void addMenuButtonListeners() {

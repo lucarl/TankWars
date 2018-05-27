@@ -109,7 +109,6 @@ public class MenuScreen implements Screen, IEventHandler {
         table.top();
         table.padTop(25);
 
-        //button setup in table
         table.row().width(500);
         table.add(heading);
         table.row().padTop(50);

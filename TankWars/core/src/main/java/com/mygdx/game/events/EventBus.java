@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  Very simple event bus. All observers can register for events and an
- observable can publish (send) events.
+ observable can publish(send) events.
 
  */
 public enum EventBus {
@@ -33,7 +33,6 @@ public enum EventBus {
         synchronized (handlers) {
             handlers.stream().forEach((evh) -> {
                 evh.onEvent(evt);
-                //evh.onEventMenu(evt);
             });
         }
     }

@@ -4,8 +4,14 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.services.Assets;
 
+/**
+ * This class has all the sound methods and each method
+ * contains special properties depending on what sound
+ * is needed and how that sound will behave.
+ *
+ * @author Adam Kjäll, Thomas Jinton
+ */
 public class PlaySounds {
-
 
     public static void playFire(){
         Sound soundShoot = Assets.manager.get("cannon.mp3", Sound.class);
@@ -98,14 +104,12 @@ public class PlaySounds {
     public static void playTheme(){
         Sound soundTheme = Assets.manager.get("TankWarsTheme.mp3", Sound.class);
         final long soundThemeID = soundTheme.loop(5.0f, 1.0f, 0.0f);
-        //soundTheme.play();
 
         Timer.schedule((new Timer.Task() {
             @Override
             public void run() {
 
                 soundTheme.loop(soundThemeID);
-                //soundTheme.stop();
             }
         }), 1);
 
@@ -123,7 +127,6 @@ public class PlaySounds {
                 soundTheme.stop();
                 soundTheme.loop(soundThemeID);
 
-                //soundTheme.stop();
             }
         }), 1);
 
@@ -195,29 +198,22 @@ public class PlaySounds {
 
     }
 
+    public static void playVictory(){
+        Sound soundVictory = Assets.manager.get("victory.mp3", Sound.class);
+        final long soundVictoryID = soundVictory.loop(5.0f, 1.0f, 0.0f);
 
-
-    /*
-    public static void stopAudio(){
-
-        Sound soundShoot = Assets.manager.get("cannon.mp3", Sound.class);
-        Sound soundAim = Assets.manager.get("badaim.mp3", Sound.class);
-        Sound soundMove = Assets.manager.get("tanker.mp3", Sound.class);
-        Sound soundBoom = Assets.manager.get("boom.mp3", Sound.class);
-        Sound soundDestroy = Assets.manager.get("destroy.mp3", Sound.class);
-        Sound soundNuke = Assets.manager.get("nuke.mp3", Sound.class);
-        Sound soundMissile = Assets.manager.get("missile.mp3", Sound.class);
-
-        soundAim.pause();
-        soundBoom.pause();
-        soundShoot.stop();
-        soundDestroy.pause();
-        soundMissile.pause();
-        soundNuke.pause();
-        soundMove.pause();
+        Timer.schedule((new Timer.Task() {
+            @Override
+            public void run() {
+                soundVictory.loop(soundVictoryID);
+            }
+        }), 1);
 
     }
-*/
 
+    public static void stopVictory(){
+        Sound soundVictory = Assets.manager.get("victory.mp3", Sound.class);
+        soundVictory.stop();
+    }
 
 }
