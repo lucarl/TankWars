@@ -38,7 +38,6 @@ public class TestTankWars {
         delta = System.nanoTime();
 
     }
-
     /**
      * Test for hasCollidedWithWorld(Shot shot) method
      * @result
